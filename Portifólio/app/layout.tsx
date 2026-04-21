@@ -15,10 +15,6 @@ export const metadata: Metadata = {
   description:
     "Portfolio de Gabriel Madureira. 15+ produtos digitais. Cripto, IA, marketing e automacao.",
   metadataBase: new URL("https://madureira.xyz"),
-  icons: {
-    icon: [{ url: "/avatar.png", type: "image/png" }],
-    apple: [{ url: "/avatar.png", type: "image/png" }],
-  },
   openGraph: {
     title: "Gabriel Madureira — Portfolio",
     description:
@@ -35,7 +31,7 @@ export const metadata: Metadata = {
     description:
       "Fundador da Kaleidos. Produtos digitais em cripto, IA e marketing.",
     creator: "@madureira_eth",
-    images: ["/avatar.png"],
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
