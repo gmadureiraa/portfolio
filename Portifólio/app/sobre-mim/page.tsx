@@ -93,7 +93,7 @@ export default function SobreMim() {
         <div className="bg-background rounded-xl shadow-lg p-8 border border-neutral-800">
           <div className="flex flex-col md:flex-row gap-8">
             <div className="flex-1">
-              <h6 className="text-sm font-light text-neutral-100/50 mb-2">sobre mim</h6>
+              <span className="block text-sm font-light text-neutral-100/50 mb-2">sobre mim</span>
               <h1 className="text-3xl font-bold text-neutral-100 mb-4">
                 Gabriel <span className="text-neutral-300">Madureira</span>
               </h1>
@@ -124,18 +124,13 @@ export default function SobreMim() {
                     </svg>
                   </button>
                 </a>
-                <button className="bg-neutral-800 hover:bg-neutral-700 rounded-lg p-3 transition-all duration-200 hover:scale-105 border border-neutral-700">
-                  <svg className="w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                  </svg>
-                </button>
               </div>
             </div>
             
             <div className="relative w-48 h-48 md:w-64 md:h-64">
               <Image
                 src="https://avatars.githubusercontent.com/u/129111669?v=4"
-                alt="Gabriel Madureira profile image"
+                alt="Foto de Gabriel Madureira"
                 fill
                 className="object-cover rounded-lg"
               />
@@ -216,7 +211,7 @@ export default function SobreMim() {
                   <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                   <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                 </svg>
-                email me
+                Enviar e-mail
               </a>
             </div>
 

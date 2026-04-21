@@ -38,7 +38,7 @@ export default function Hero() {
                   size="lg"
                   className="flex items-center gap-2 w-full group/Mail"
                 >
-                  <div>Conversar sobre meu projeto</div>
+                  <div>Falar sobre seu projeto</div>
                   <Mail className="h-5 w-5 lg:group-hover/Mail:translate-x-1 transition-all duration-300" />
                 </Button>
               </a>
