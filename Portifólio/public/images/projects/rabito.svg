@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" width="1440" height="900" role="img" aria-label="Rabito cover">
+  <defs>
+    <filter id="rgrain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="29"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.18 0"/>
+      <feComposite in2="SourceGraphic" operator="in"/>
+    </filter>
+    <linearGradient id="rbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2b0b0b"/>
+      <stop offset="1" stop-color="#0a0a0a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1440" height="900" fill="url(#rbg)"/>
+  <g transform="translate(90 130)">
+    <text x="0" y="0" font-family="ui-monospace, monospace" font-size="20" fill="#fca5a5" letter-spacing="8">HABIT TRACKER // STREAKS</text>
+    <text x="0" y="240" font-family="Georgia, serif" font-weight="700" font-size="300" fill="#fafafa" letter-spacing="-12">Rabito.</text>
+    <text x="0" y="360" font-family="Georgia, serif" font-size="36" fill="#fecaca">Consistencia vira jogo. Voce volta todo dia.</text>
+  </g>
+  <g transform="translate(90 550)">
+    <g opacity="0.9">
+      <rect x="0" y="0" width="44" height="44" rx="8" fill="#ef4444"/>
+      <rect x="60" y="0" width="44" height="44" rx="8" fill="#ef4444"/>
+      <rect x="120" y="0" width="44" height="44" rx="8" fill="#ef4444"/>
+      <rect x="180" y="0" width="44" height="44" rx="8" fill="#ef4444"/>
+      <rect x="240" y="0" width="44" height="44" rx="8" fill="#ef4444"/>
+      <rect x="300" y="0" width="44" height="44" rx="8" fill="#ef4444"/>
+      <rect x="360" y="0" width="44" height="44" rx="8" fill="#ef4444"/>
+      <rect x="420" y="0" width="44" height="44" rx="8" fill="#ef4444" opacity="0.85"/>
+      <rect x="480" y="0" width="44" height="44" rx="8" fill="#ef4444" opacity="0.7"/>
+      <rect x="540" y="0" width="44" height="44" rx="8" fill="#ef4444" opacity="0.55"/>
+      <rect x="600" y="0" width="44" height="44" rx="8" fill="#ef4444" opacity="0.4"/>
+      <rect x="660" y="0" width="44" height="44" rx="8" fill="#3f1111" stroke="#ef4444" stroke-width="2"/>
+      <rect x="720" y="0" width="44" height="44" rx="8" fill="#3f1111" stroke="#ef4444" stroke-width="2"/>
+    </g>
+    <text x="0" y="108" font-family="ui-monospace, monospace" font-size="20" fill="#fca5a5" letter-spacing="3">STREAK 7 DIAS // MOOD 4.2/5</text>
+  </g>
+  <g transform="translate(1120 720)" opacity="0.85">
+    <rect x="0" y="0" width="220" height="60" fill="#ef4444"/>
+    <text x="20" y="40" font-family="Georgia, serif" font-weight="700" font-size="22" fill="#fafafa" letter-spacing="2">RABITO.APP</text>
+  </g>
+  <rect width="1440" height="900" fill="#ffffff" filter="url(#rgrain)" opacity="0.04"/>
+</svg>

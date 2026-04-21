@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" width="1440" height="900" role="img" aria-label="AutoBlogger cover">
+  <defs>
+    <filter id="abgrain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="1" numOctaves="2" seed="43"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.22 0"/>
+      <feComposite in2="SourceGraphic" operator="in"/>
+    </filter>
+  </defs>
+  <rect width="1440" height="900" fill="#fafaf5"/>
+  <g opacity="0.08" stroke="#0a0a0a" stroke-width="1">
+    <line x1="0" y1="225" x2="1440" y2="225"/>
+    <line x1="0" y1="450" x2="1440" y2="450"/>
+    <line x1="0" y1="675" x2="1440" y2="675"/>
+  </g>
+  <g opacity="0.1" fill="#0a0a0a">
+    <circle cx="80" cy="80" r="2"/>
+    <circle cx="140" cy="80" r="2"/>
+    <circle cx="200" cy="80" r="2"/>
+    <circle cx="80" cy="140" r="2"/>
+    <circle cx="140" cy="140" r="2"/>
+    <circle cx="200" cy="140" r="2"/>
+    <circle cx="80" cy="200" r="2"/>
+    <circle cx="140" cy="200" r="2"/>
+    <circle cx="200" cy="200" r="2"/>
+  </g>
+  <g transform="translate(90 140)">
+    <text x="0" y="0" font-family="ui-monospace, monospace" font-size="20" fill="#0a0a0a" letter-spacing="8">BLOG ENGINE // IA</text>
+    <text x="0" y="230" font-family="Georgia, serif" font-weight="900" font-size="230" fill="#0a0a0a" letter-spacing="-10">Auto</text>
+    <text x="0" y="400" font-family="Georgia, serif" font-weight="900" font-size="230" fill="#f97316" letter-spacing="-10" font-style="italic">Blogger.</text>
+    <text x="0" y="520" font-family="Georgia, serif" font-size="34" fill="#171717">Artigos em escala. SEO validado.</text>
+    <text x="0" y="564" font-family="Georgia, serif" font-size="34" fill="#171717" font-style="italic">Gera, agenda e publica sozinho.</text>
+  </g>
+  <g transform="translate(1120 760)" opacity="0.9">
+    <rect x="0" y="0" width="220" height="56" fill="#0a0a0a"/>
+    <text x="20" y="38" font-family="ui-monospace, monospace" font-weight="700" font-size="18" fill="#fafaf5" letter-spacing="2">GEMINI 2.5 FLASH</text>
+  </g>
+  <rect width="1440" height="900" fill="#0a0a0a" filter="url(#abgrain)" opacity="0.06"/>
+</svg>

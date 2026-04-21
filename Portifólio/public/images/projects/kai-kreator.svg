@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" width="1440" height="900" role="img" aria-label="KAI Kreator cover">
+  <defs>
+    <filter id="kaigrain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="3"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.15 0"/>
+      <feComposite in2="SourceGraphic" operator="in"/>
+    </filter>
+  </defs>
+  <rect width="1440" height="900" fill="#0b0b0b"/>
+  <g opacity="0.35">
+    <circle cx="1150" cy="220" r="280" fill="#f97316" opacity="0.25"/>
+    <circle cx="1150" cy="220" r="180" fill="#f97316" opacity="0.45"/>
+    <circle cx="1150" cy="220" r="90" fill="#f97316"/>
+  </g>
+  <g transform="translate(90 120)">
+    <text x="0" y="0" font-family="ui-monospace, monospace" font-size="20" fill="#f97316" letter-spacing="8">KALEIDOS // INTERNO</text>
+    <text x="0" y="220" font-family="Georgia, serif" font-weight="700" font-size="230" fill="#fafafa" letter-spacing="-10">KAI</text>
+    <text x="0" y="420" font-family="Georgia, serif" font-weight="700" font-size="160" fill="#f97316" letter-spacing="-6" font-style="italic">Kreator</text>
+    <text x="0" y="540" font-family="ui-monospace, monospace" font-size="26" fill="#a3a3a3" letter-spacing="2">&gt; gestao editorial com IA</text>
+    <text x="0" y="580" font-family="ui-monospace, monospace" font-size="26" fill="#a3a3a3" letter-spacing="2">&gt; pipeline de conteudo dos clientes</text>
+  </g>
+  <g transform="translate(90 780)" opacity="0.7">
+    <rect x="0" y="0" width="12" height="12" fill="#f97316"/>
+    <text x="28" y="12" font-family="ui-monospace, monospace" font-size="16" fill="#737373" letter-spacing="2">v2.0 // PRODUCAO</text>
+  </g>
+  <rect width="1440" height="900" fill="#ffffff" filter="url(#kaigrain)" opacity="0.04"/>
+</svg>
