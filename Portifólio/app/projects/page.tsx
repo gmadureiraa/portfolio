@@ -27,9 +27,9 @@ interface ContentItem {
 
 const projects: ContentItem[] = [
   {
-    id: 7,
+    id: 1,
     title: "Kaleidos Digital",
-    description: "Minha agência de marketing digital para cripto e fintech. Clientes incluem projetos de crypto, DeFi e fintech. O negócio que sustenta tudo.",
+    description: "Minha agência de marketing digital para cripto, web3 e fintech. O negócio que sustenta tudo: time distribuído, automações de IA no centro da operação e clientes em produção.",
     technologies: ["Marketing", "IA", "Growth", "Copywriting"],
     area: ["Marketing", "Crypto"],
     status: "Ativo",
@@ -40,58 +40,20 @@ const projects: ContentItem[] = [
     externalUrl: "https://kaleidos.com.br",
   },
   {
-    id: 6,
-    title: "KAI Kreator",
-    description: "Criadores de conteúdo perdem horas organizando posts em planilhas. KAI automatiza o pipeline inteiro: da ideia à publicação, com IA que sugere horários, formatos e copy.",
-    technologies: ["React", "TypeScript", "Supabase", "IA"],
-    area: ["Programacao e Dev", "IA e Automacoes"],
-    status: "Em desenvolvimento",
-    slug: "kai-kreator",
-    image: "/images/projects/kai-kreator.png",
-    type: "Projeto",
-    date: "2026-03-17",
-  },
-  {
-    id: 4,
-    title: "DeFi Radar",
-    description: "Investidores cripto precisam de dados em tempo real para tomar decisões rápidas. DeFi Radar consolida preços, gas, movimentação de baleias e alertas em 16 páginas — tudo em um dashboard único.",
-    technologies: ["React", "Three.js", "CoinGecko", "Recharts"],
-    area: ["Programacao e Dev", "Crypto"],
+    id: 2,
+    title: "Sequência Viral",
+    description: "SaaS de carrosséis com IA para Instagram, LinkedIn e X. Gera conceito, copy e imagens em dois cliques, integrando Content Machine 5.4 para manter voz e marca consistentes.",
+    technologies: ["Next.js 16", "Gemini 2.5 Pro", "Imagen 4", "Supabase", "Stripe"],
+    area: ["Programação e Dev", "IA e Automações", "Marketing"],
     status: "Ativo",
-    slug: "defi-radar",
-    image: "/images/projects/defi-radar.png",
+    slug: "sequencia-viral",
+    image: "/images/projects/sequencia-viral.png",
     type: "Projeto",
-    date: "2026-03-25",
-    externalUrl: "https://radar-blond-zeta.vercel.app",
+    date: "2026-04-15",
+    externalUrl: "https://viral.kaleidos.com.br",
   },
   {
     id: 3,
-    title: "Kaleidos Pay",
-    description: "Agências perdem tempo cobrando manualmente. Kaleidos Pay unifica PIX, cartão e cripto em um dashboard — cobranças recorrentes, gráficos de receita, zero planilha.",
-    technologies: ["Next.js", "Supabase", "Asaas API", "MetaMask", "Recharts"],
-    area: ["Programacao e Dev", "Crypto"],
-    status: "Ativo",
-    slug: "kaleidos-pay",
-    image: "/images/projects/kaleidos-pay.png",
-    type: "Projeto",
-    date: "2026-03-28",
-    externalUrl: "https://pay.kaleidos.com.br",
-  },
-  {
-    id: 1,
-    title: "Stable Vault",
-    description: "Onde colocar stablecoins para render com segurança? Stable Vault compara rendimentos reais de dezenas de protocolos via DeFiLlama e sugere a estratégia ideal para seu perfil de risco.",
-    technologies: ["Next.js", "TypeScript", "Recharts", "DeFiLlama API"],
-    area: ["Programacao e Dev", "Crypto"],
-    status: "Ativo",
-    slug: "stable-vault",
-    image: "/images/projects/stable-vault.png",
-    type: "Projeto",
-    date: "2026-04-05",
-    externalUrl: "https://stable-vault.vercel.app",
-  },
-  {
-    id: 9,
     title: "Jornal Cripto",
     description: "Portal de análise cripto que atingiu 10k visitas/mês organicamente. Newsletter 2x/semana com insights em tempo real. O projeto que me colocou no mapa do mercado cripto.",
     technologies: ["Next.js", "SEO", "Email Marketing", "n8n"],
@@ -101,38 +63,39 @@ const projects: ContentItem[] = [
     image: "/images/thumbnail.png",
     type: "Projeto",
     date: "2023-10-01",
+    externalUrl: "https://jornal-cripto.vercel.app",
   },
   {
-    id: 2,
-    title: "Folio — Wallet Tracker",
-    description: "Gerenciar carteiras em 16 blockchains diferentes é caótico. Folio escaneia tudo, consolida preços reais, gráficos históricos, PnL e NFTs em um tracker com Smart Allocator por IA.",
-    technologies: ["React", "TypeScript", "CoinGecko", "DeFiLlama", "Recharts"],
-    area: ["Programacao e Dev", "Crypto"],
+    id: 4,
+    title: "DeFi Radar",
+    description: "Investidores cripto precisam de dados em tempo real para tomar decisões rápidas. DeFi Radar consolida preços, gas, movimentação de baleias e alertas em um dashboard único.",
+    technologies: ["React", "Three.js", "CoinGecko", "Recharts"],
+    area: ["Programação e Dev", "Crypto"],
     status: "Ativo",
+    slug: "defi-radar",
+    image: "/images/projects/defi-radar.png",
+    type: "Projeto",
+    date: "2026-03-25",
+    externalUrl: "https://defi-radar-eta.vercel.app",
+  },
+  {
+    id: 5,
+    title: "Folio",
+    description: "Portfolio tracker e wallet tracker cripto multi-chain. Consolida preços reais, gráficos históricos, PnL e NFTs em uma interface simples. Em soft launch.",
+    technologies: ["React", "TypeScript", "CoinGecko", "DeFiLlama"],
+    area: ["Programação e Dev", "Crypto"],
+    status: "Soft launch",
     slug: "wallet-tracker",
     image: "/images/projects/wallet-tracker.png",
     type: "Projeto",
     date: "2026-04-01",
-    externalUrl: "https://wallet-tracker-orcin.vercel.app",
   },
   {
-    id: 13,
-    title: "Viral Hunter",
-    description: "Encontrar tendências no YouTube antes da concorrência. Viral Hunter descobre vídeos virais por nicho, analisa thumbnails, sugere temas e monitora o que seus competidores estão fazendo.",
-    technologies: ["React", "Supabase", "YouTube API", "Recharts"],
-    area: ["Programacao e Dev", "Marketing"],
-    status: "Ativo",
-    slug: "viral-hunter",
-    image: "/images/projects/viral-hunter.png",
-    type: "Projeto",
-    date: "2026-03-01",
-  },
-  {
-    id: 5,
+    id: 6,
     title: "Rabito",
     description: "Manter hábitos é difícil sem feedback visual. Rabito transforma consistência em jogo: streaks, mood tracking, analytics e gamificação que fazem você voltar todo dia.",
     technologies: ["Next.js", "Zustand", "Recharts", "Framer Motion"],
-    area: ["Programacao e Dev"],
+    area: ["Programação e Dev"],
     status: "Ativo",
     slug: "rabito",
     image: "/images/projects/rabito.png",
@@ -141,7 +104,58 @@ const projects: ContentItem[] = [
     externalUrl: "https://rabito-ashen.vercel.app",
   },
   {
+    id: 7,
+    title: "Aegis Yield",
+    description: "Stablecoin yield scanner focado em risco real. Compara rendimentos DeFi de protocolos, classifica por segurança e mostra o que vale a pena.",
+    technologies: ["Next.js", "DeFiLlama", "TypeScript", "Recharts"],
+    area: ["Programação e Dev", "Crypto"],
+    status: "Ativo",
+    slug: "aegis-yield",
+    image: "/images/projects/aegis-yield.png",
+    type: "Projeto",
+    date: "2026-04-02",
+    externalUrl:
+      "https://aegis-yield-app-gfmadureiraa-3391s-projects.vercel.app",
+  },
+  {
     id: 8,
+    title: "AutoBlogger",
+    description: "Blog engine com IA para publicar em escala. Gera artigos com Gemini 2.5, valida SEO, agenda e publica. Ideal para quem precisa de volume com qualidade editorial.",
+    technologies: ["Next.js", "Gemini 2.5 Flash", "Supabase", "SEO"],
+    area: ["Programação e Dev", "IA e Automações", "Marketing"],
+    status: "Ativo",
+    slug: "autoblogger",
+    image: "/images/projects/autoblogger.png",
+    type: "Projeto",
+    date: "2026-04-08",
+    externalUrl: "https://autoblogger-rosy.vercel.app",
+  },
+  {
+    id: 9,
+    title: "AdFlow / Möbius",
+    description: "IA que cria, publica e otimiza campanhas de anúncios sozinha. Gera criativos, monitora performance e ajusta bids em tempo real. Em soft launch.",
+    technologies: ["Next.js", "IA", "Meta Ads", "Google Ads"],
+    area: ["Programação e Dev", "IA e Automações", "Marketing"],
+    status: "Soft launch",
+    slug: "adflow",
+    image: "/images/projects/adflow.png",
+    type: "Projeto",
+    date: "2026-04-10",
+  },
+  {
+    id: 10,
+    title: "KAI 2.0 + Viral Hunter",
+    description: "Ferramentas internas da Kaleidos. KAI orquestra pipeline de conteúdo dos clientes; Viral Hunter monitora YouTube e tendências para alimentar o planejamento.",
+    technologies: ["React 18", "Vite", "Supabase", "YouTube API"],
+    area: ["Programação e Dev", "IA e Automações", "Marketing"],
+    status: "Interno",
+    slug: "kai-2",
+    image: "/images/projects/kai-kreator.png",
+    type: "Projeto",
+    date: "2026-03-17",
+  },
+  {
+    id: 11,
     title: "O Futuro do Trabalho Automático",
     description: "Um manifesto sobre o que acontece quando IA faz 90% do trabalho operacional. Escalabilidade, criação humana e por que Renda Básica Universal vai ser inevitável.",
     technologies: ["Ensaio", "IA", "Futuro", "UBI"],
@@ -151,44 +165,6 @@ const projects: ContentItem[] = [
     image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80",
     type: "Artigo",
     date: "2026-04-10",
-  },
-  {
-    id: 10,
-    title: "Defiverso Hub",
-    description: "DeFi é complicado para quem está começando. Defiverso Hub é um portal educacional imersivo com shaders GLSL, comunidade ativa e conteúdo que traduz finanças descentralizadas para linguagem humana.",
-    technologies: ["Next.js", "Three.js", "GLSL", "Tailwind"],
-    area: ["Programacao e Dev", "Crypto"],
-    status: "Ativo",
-    slug: "defiverso",
-    image: "/images/projects/defiverso-hub.png",
-    type: "Projeto",
-    date: "2025-11-01",
-    externalUrl: "https://defiverso-hub.vercel.app",
-  },
-  {
-    id: 11,
-    title: "DePay",
-    description: "Receber pagamentos em cripto deveria ser tão simples quanto PIX. DePay é um gateway global que aceita USDT, Bitcoin e PIX de qualquer lugar do mundo, com landing interativa e globe 3D.",
-    technologies: ["React", "COBE", "Tailwind", "Vite"],
-    area: ["Programacao e Dev", "Crypto"],
-    status: "Ativo",
-    slug: "depay",
-    image: "/images/projects/depay.png",
-    type: "Projeto",
-    date: "2025-12-15",
-    externalUrl: "https://depay-rho.vercel.app",
-  },
-  {
-    id: 12,
-    title: "Mentoria Defiverso",
-    description: "Plataforma completa para mentorias: dashboard do aluno, QR codes de acesso, acompanhamento de progresso e comunicação integrada. Construído para escalar o atendimento 1:1.",
-    technologies: ["React", "Supabase", "QR Code", "React Query"],
-    area: ["Programacao e Dev"],
-    status: "Ativo",
-    slug: "mentoria",
-    image: "/images/projects/mentoria.png",
-    type: "Projeto",
-    date: "2026-02-01",
   },
 ];
 
@@ -244,6 +220,11 @@ function ProjectsContent() {
   }, [selectedAreas, selectedType]);
 
   const areas = ["Marketing", "IA e Automações", "Crypto", "Programação e Dev"];
+
+  // Count updated dynamically based on the projects array
+  const totalCount = projects.length;
+  const projetoCount = projects.filter((p) => p.type === "Projeto").length;
+  const artigoCount = projects.filter((p) => p.type === "Artigo").length;
 
   const getItemHref = (item: ContentItem) =>
     item.externalUrl ? item.externalUrl : `/projects/${item.slug}`;
@@ -360,7 +341,7 @@ function ProjectsContent() {
     </a>
   );
 
-  const projectCount = projects.length;
+  const projectCount = totalCount;
 
   return (
     <div className="w-full flex items-center justify-center max-w-7xl mx-auto">
@@ -379,9 +360,9 @@ function ProjectsContent() {
 
           {/* Header */}
           <FadeIn direction="down" className="text-center mb-10">
-            <h1 className="text-4xl md:text-5xl font-bold text-neutral-100 mb-4">15+ produtos. Todos funcionando.</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-neutral-100 mb-4">Produtos que construí. Todos em produção.</h1>
             <p className="text-lg text-neutral-400 max-w-2xl mx-auto">
-              De dashboards DeFi a gateways de pagamento — cada projeto tem demo ao vivo e código real.
+              De SaaS com IA a scanners DeFi — cada projeto tem demo ao vivo ou está em soft launch.
             </p>
           </FadeIn>
 
@@ -390,9 +371,9 @@ function ProjectsContent() {
             {/* Type pills */}
             <div className="flex gap-2 flex-wrap">
               {[
-                { label: "Tudo", value: "Todos", count: projectCount },
-                { label: "Projetos", value: "Projeto", count: projectCount - 1 },
-                { label: "Artigos", value: "Artigo", count: 1 },
+                { label: "Tudo", value: "Todos", count: totalCount },
+                { label: "Projetos", value: "Projeto", count: projetoCount },
+                { label: "Artigos", value: "Artigo", count: artigoCount },
               ].map(({ label, value, count }) => (
                 <button
                   key={value}
