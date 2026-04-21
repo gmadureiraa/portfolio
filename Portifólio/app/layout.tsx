@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
   description:
     "Portfolio de Gabriel Madureira. 15+ produtos digitais. Cripto, IA, marketing e automacao.",
-  metadataBase: new URL("https://madureira.me"),
+  metadataBase: new URL("https://madureira.xyz"),
   icons: {
     icon: [{ url: "/avatar.png", type: "image/png" }],
     apple: [{ url: "/avatar.png", type: "image/png" }],
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
       "Fundador da Kaleidos. Produtos digitais em cripto, IA e marketing.",
     type: "website",
     locale: "pt_BR",
-    url: "https://madureira.me",
+    url: "https://madureira.xyz",
     siteName: "Gabriel Madureira",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Gabriel Madureira — Portfolio de Produtos Digitais" }],
   },
@@ -59,7 +59,7 @@ export default function RootLayout({
               "@type": "Person",
               "name": "Gabriel Madureira",
               "jobTitle": "Fundador da Kaleidos",
-              "url": "https://madureira.me",
+              "url": "https://madureira.xyz",
               "sameAs": [
                 "https://github.com/gmadureiraa",
                 "https://linkedin.com/in/gabrielmadureira",
