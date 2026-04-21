@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" width="1440" height="900" role="img" aria-label="Folio cover">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="Folio cover">
   <defs>
-    <filter id="fgrain" x="0" y="0" width="100%" height="100%">
+    <filter id="fgrain">
       <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="23"/>
       <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.15 0"/>
       <feComposite in2="SourceGraphic" operator="in"/>
@@ -10,28 +10,30 @@
       <stop offset="1" stop-color="#0a0a18"/>
     </linearGradient>
   </defs>
-  <rect width="1440" height="900" fill="url(#fbg)"/>
-  <g opacity="0.18" stroke="#6366f1" stroke-width="1">
-    <path d="M0 700 L120 640 L240 660 L360 580 L480 610 L600 540 L720 500 L840 520 L960 440 L1080 420 L1200 380 L1320 340 L1440 300" fill="none"/>
-    <path d="M0 740 L120 700 L240 720 L360 660 L480 680 L600 620 L720 600 L840 640 L960 560 L1080 540 L1200 520 L1320 500 L1440 460" fill="none" opacity="0.5"/>
+  <rect width="1600" height="1000" fill="url(#fbg)"/>
+  <g opacity="0.2" stroke="#6366f1" stroke-width="1.5" fill="none">
+    <path d="M0 780 L130 720 L260 740 L390 650 L520 680 L650 600 L780 560 L910 580 L1040 490 L1170 470 L1300 420 L1430 380 L1600 340"/>
+    <path d="M0 820 L130 760 L260 780 L390 720 L520 740 L650 680 L780 660 L910 700 L1040 620 L1170 600 L1300 580 L1430 560 L1600 520" opacity="0.4"/>
   </g>
-  <g transform="translate(90 130)">
-    <text x="0" y="0" font-family="ui-monospace, monospace" font-size="20" fill="#818cf8" letter-spacing="8">SOFT LAUNCH // WALLET TRACKER</text>
-    <text x="0" y="230" font-family="Georgia, serif" font-weight="700" font-size="280" fill="#fafafa" letter-spacing="-10">Folio.</text>
-    <text x="0" y="360" font-family="Georgia, serif" font-size="34" fill="#a5b4fc">Portfolio multi-chain + PnL real.</text>
-    <text x="0" y="404" font-family="Georgia, serif" font-size="34" fill="#a5b4fc" font-style="italic">Tudo consolidado num lugar so.</text>
+  <g transform="translate(110 150)">
+    <text x="0" y="0" font-family="ui-monospace, monospace" font-size="22" fill="#818cf8" letter-spacing="10">WALLET TRACKER // SOFT LAUNCH</text>
+    <text x="0" y="260" font-family="Georgia, serif" font-weight="700" font-size="320" fill="#fafafa" letter-spacing="-14">Folio.</text>
+    <text x="0" y="400" font-family="Georgia, serif" font-size="38" fill="#a5b4fc">Portfolio multi-chain + PnL real.</text>
+    <text x="0" y="448" font-family="Georgia, serif" font-size="38" fill="#a5b4fc" font-style="italic">Tudo consolidado num lugar so.</text>
   </g>
-  <g transform="translate(90 540)" opacity="0.92">
-    <rect x="0" y="0" width="520" height="220" rx="14" fill="#0f0f22" stroke="#6366f1" stroke-width="2"/>
-    <text x="28" y="48" font-family="ui-monospace, monospace" font-size="13" fill="#818cf8" letter-spacing="3">TOTAL_BALANCE</text>
-    <text x="28" y="118" font-family="Georgia, serif" font-weight="700" font-size="62" fill="#fafafa">$ 48.290</text>
-    <g transform="translate(28 146)">
-      <rect x="0" y="0" width="14" height="14" fill="#22c55e"/>
-      <text x="22" y="12" font-family="ui-monospace, monospace" font-size="14" fill="#22c55e">+ 12.4% / 7d</text>
+  <g transform="translate(110 600)" opacity="0.92">
+    <rect x="0" y="0" width="580" height="240" rx="16" fill="#0f0f22" stroke="#6366f1" stroke-width="2"/>
+    <text x="32" y="54" font-family="ui-monospace, monospace" font-size="15" fill="#818cf8" letter-spacing="4">TOTAL_BALANCE</text>
+    <text x="32" y="134" font-family="Georgia, serif" font-weight="700" font-size="72" fill="#fafafa">$ 48.290</text>
+    <g transform="translate(32 162)">
+      <rect x="0" y="0" width="16" height="16" fill="#22c55e"/>
+      <text x="26" y="14" font-family="ui-monospace, monospace" font-size="16" fill="#22c55e">+ 12.4% / 7d</text>
     </g>
-    <g transform="translate(28 180)" opacity="0.75">
-      <text x="0" y="0" font-family="ui-monospace, monospace" font-size="12" fill="#737373">ETH .  SOL .  BASE .  ARB .  OP</text>
-    </g>
+    <text x="32" y="210" font-family="ui-monospace, monospace" font-size="13" fill="#737373" letter-spacing="3">ETH . SOL . BASE . ARB . OP</text>
   </g>
-  <rect width="1440" height="900" fill="#ffffff" filter="url(#fgrain)" opacity="0.04"/>
+  <g transform="translate(110 870)" opacity="0.9">
+    <rect x="0" y="0" width="14" height="14" fill="#6366f1"/>
+    <text x="30" y="14" font-family="ui-monospace, monospace" font-size="18" fill="#a3a3a3" letter-spacing="4">FOLIO.APP</text>
+  </g>
+  <rect width="1600" height="1000" fill="#ffffff" filter="url(#fgrain)" opacity="0.04"/>
 </svg>
