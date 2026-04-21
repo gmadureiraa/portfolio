@@ -15,11 +15,11 @@ import Orbit from "@/components/orbit";
 import RetroGrid from "@/components/magicui/retro-grid";
 
 import { cn } from "@/lib/utils";
-import { RippleCard } from "./ui/ripper-card";
 import { motion } from "framer-motion";
 import GitHubStars from "@/components/github-stars";
 import ProjectPosts from "@/components/project-posts";
 import Link from "next/link";
+import { NewsletterSignup } from "@/components/newsletter-signup";
 
 const features = [
   {
@@ -64,7 +64,7 @@ const features = [
                 process.env.AVATAR_URL ||
                 "https://avatars.githubusercontent.com/u/129111669?v=4"
               }
-              alt="imagem do avatar"
+              alt="Foto de Gabriel Madureira"
               width={200}
               height={200}
               priority // Load image immediately
@@ -289,15 +289,16 @@ const features = [
     name: "",
     description: "",
     className: "col-span-3 md:col-span-1",
-    href: "/now",
-    cta: "Ideias",
+    href: "/newsletter",
+    cta: "Ver todas as edicoes",
     background: (
-      <div className="absolute h-full w-full left-0 top-0 origin-top rounded-md transition-all duration-300 ease-out group-hover:scale-[105%]">
-        <div className="absolute h-full w-full [mask-image:linear-gradient(to_top,transparent_20%,#000_70%)]">
-          <div className="absolute h-full w-full [mask-image:linear-gradient(to_bottom,transparent_2%,#000_10%)]">
-            <RippleCard />
-          </div>
-        </div>
+      <div className="absolute inset-0 flex items-center justify-center p-3 z-20 pointer-events-auto">
+        <NewsletterSignup
+          className="border-neutral-800/70 bg-background/80 backdrop-blur-sm"
+          variant="compact"
+          title="Newsletter"
+          description="Bastidores dos produtos que construo. Semanal."
+        />
       </div>
     ),
   },
