@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="Kaleidos Finance cover">
+  <defs>
+    <linearGradient id="kfbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#041a14"/>
+      <stop offset="1" stop-color="#0a0a0a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#kfbg)"/>
+  <g transform="translate(110 140)">
+    <text x="0" y="0" font-family="ui-monospace, monospace" font-size="22" fill="#10b981" letter-spacing="10">INTERNO // KALEIDOS</text>
+    <text x="0" y="280" font-family="Georgia, serif" font-weight="700" font-size="210" fill="#fafafa" letter-spacing="-8">Kaleidos</text>
+    <text x="0" y="490" font-family="Georgia, serif" font-weight="700" font-size="210" fill="#10b981" letter-spacing="-8" font-style="italic">Finance.</text>
+    <text x="0" y="620" font-family="Georgia, serif" font-size="38" fill="#d4d4d4">Transacoes, orcamentos, investimentos.</text>
+    <text x="0" y="668" font-family="Georgia, serif" font-size="38" fill="#d4d4d4" font-style="italic">Operacao financeira da agencia, em PWA.</text>
+  </g>
+  <g transform="translate(1100 200)">
+    <rect x="0" y="0" width="400" height="200" fill="#0a0a0a" stroke="#10b981" stroke-width="2"/>
+    <text x="22" y="44" font-family="ui-monospace, monospace" font-size="14" fill="#10b981" letter-spacing="3">SALDO // OUT 2026</text>
+    <text x="22" y="116" font-family="Georgia, serif" font-weight="700" font-size="62" fill="#fafafa">R$ 87.420</text>
+    <text x="22" y="156" font-family="ui-monospace, monospace" font-size="14" fill="#10b981">↑ 12% mes-a-mes</text>
+    <rect x="0" y="220" width="400" height="120" fill="#0a0a0a" stroke="#10b981" stroke-width="2"/>
+    <text x="22" y="260" font-family="ui-monospace, monospace" font-size="13" fill="#737373" letter-spacing="3">RECEITAS RECORRENTES</text>
+    <text x="22" y="300" font-family="Georgia, serif" font-weight="700" font-size="36" fill="#fafafa">R$ 42.000 <tspan font-size="14" fill="#737373">/mes</tspan></text>
+  </g>
+  <g transform="translate(110 890)">
+    <rect x="0" y="0" width="14" height="14" fill="#10b981"/>
+    <text x="30" y="13" font-family="ui-monospace, monospace" font-size="18" fill="#a3a3a3" letter-spacing="4">FINANCEKALEIDOS.VERCEL.APP</text>
+  </g>
+</svg>

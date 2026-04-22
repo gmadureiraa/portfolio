@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="Ensina AI cover">
+  <defs>
+    <linearGradient id="eaibg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0a1f"/>
+      <stop offset="1" stop-color="#0a0a0a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#eaibg)"/>
+  <g transform="translate(110 140)">
+    <text x="0" y="0" font-family="ui-monospace, monospace" font-size="22" fill="#fbbf24" letter-spacing="10">LEARNING PATH // 2026</text>
+    <text x="0" y="280" font-family="Georgia, serif" font-weight="700" font-size="240" fill="#fafafa" letter-spacing="-8">Ensina</text>
+    <text x="0" y="490" font-family="Georgia, serif" font-weight="700" font-size="240" fill="#fbbf24" letter-spacing="-8" font-style="italic">AI.</text>
+    <text x="0" y="620" font-family="Georgia, serif" font-size="38" fill="#d4d4d4">Trilhas personalizadas com YouTube curado.</text>
+    <text x="0" y="668" font-family="Georgia, serif" font-size="38" fill="#d4d4d4" font-style="italic">Iniciante, intermediario, expert.</text>
+  </g>
+  <g transform="translate(1120 180)">
+    <rect x="0" y="0" width="380" height="80" fill="#0a0a0a" stroke="#fbbf24" stroke-width="2"/>
+    <polygon points="18,30 18,58 40,44" fill="#fbbf24"/>
+    <text x="60" y="34" font-family="ui-monospace, monospace" font-size="14" fill="#fbbf24" letter-spacing="2">LESSON 01 // 12min</text>
+    <text x="60" y="56" font-family="Georgia, serif" font-size="18" fill="#fafafa">O que e React server component</text>
+    <rect x="0" y="100" width="380" height="80" fill="#0a0a0a" stroke="#fbbf24" stroke-width="2"/>
+    <polygon points="18,130 18,158 40,144" fill="#fbbf24"/>
+    <text x="60" y="134" font-family="ui-monospace, monospace" font-size="14" fill="#fbbf24" letter-spacing="2">LESSON 02 // 18min</text>
+    <text x="60" y="156" font-family="Georgia, serif" font-size="18" fill="#fafafa">Hydration sem dor de cabeca</text>
+    <rect x="0" y="200" width="380" height="80" fill="#0a0a0a" stroke="#fbbf24" stroke-width="2"/>
+    <polygon points="18,230 18,258 40,244" fill="#fbbf24"/>
+    <text x="60" y="234" font-family="ui-monospace, monospace" font-size="14" fill="#fbbf24" letter-spacing="2">LESSON 03 // 22min</text>
+    <text x="60" y="256" font-family="Georgia, serif" font-size="18" fill="#fafafa">Streaming de UI com Suspense</text>
+  </g>
+  <g transform="translate(110 890)">
+    <rect x="0" y="0" width="14" height="14" fill="#fbbf24"/>
+    <text x="30" y="13" font-family="ui-monospace, monospace" font-size="18" fill="#a3a3a3" letter-spacing="4">VIDY-PATHWAYS.VERCEL.APP</text>
+  </g>
+</svg>

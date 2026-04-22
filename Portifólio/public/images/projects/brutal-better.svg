@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="Brutal Better cover">
+  <rect width="1600" height="1000" fill="#0a0a0a"/>
+  <g transform="translate(110 140)">
+    <text x="0" y="0" font-family="ui-monospace, monospace" font-size="22" fill="#ef4444" letter-spacing="10">ROAST MODE // 2026</text>
+    <text x="0" y="280" font-family="Georgia, serif" font-weight="700" font-size="240" fill="#fafafa" letter-spacing="-8">Brutal</text>
+    <text x="0" y="490" font-family="Georgia, serif" font-weight="700" font-size="240" fill="#ef4444" letter-spacing="-8" font-style="italic">Better.</text>
+    <text x="0" y="620" font-family="Georgia, serif" font-size="38" fill="#d4d4d4">Feedback sem piedade pra startup crua.</text>
+    <text x="0" y="668" font-family="Georgia, serif" font-size="38" fill="#d4d4d4" font-style="italic">Cole sua URL. Receba o roast.</text>
+  </g>
+  <g transform="translate(1180 220)" opacity="0.9">
+    <rect x="0" y="0" width="320" height="260" fill="#0a0a0a" stroke="#ef4444" stroke-width="3"/>
+    <text x="22" y="44" font-family="ui-monospace, monospace" font-size="14" fill="#ef4444" letter-spacing="3">DIAGNOSTIC</text>
+    <text x="22" y="100" font-family="Georgia, serif" font-weight="700" font-size="44" fill="#fafafa">6.2/10</text>
+    <text x="22" y="145" font-family="ui-monospace, monospace" font-size="12" fill="#737373">proposta: 4/10 • design: 7/10</text>
+    <text x="22" y="165" font-family="ui-monospace, monospace" font-size="12" fill="#737373">copy: 5/10 • cta: 8/10</text>
+    <text x="22" y="220" font-family="ui-monospace, monospace" font-size="13" fill="#ef4444" letter-spacing="2">→ 14 CORRECOES</text>
+  </g>
+  <g transform="translate(110 890)">
+    <rect x="0" y="0" width="14" height="14" fill="#ef4444"/>
+    <text x="30" y="13" font-family="ui-monospace, monospace" font-size="18" fill="#a3a3a3" letter-spacing="4">BRUTAL-BETTER.VERCEL.APP</text>
+  </g>
+</svg>

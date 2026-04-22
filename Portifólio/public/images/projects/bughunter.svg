@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="BugHunter cover">
+  <rect width="1600" height="1000" fill="#0a0a0a"/>
+  <g transform="translate(110 140)">
+    <text x="0" y="0" font-family="ui-monospace, monospace" font-size="22" fill="#d62edc" letter-spacing="10">BUG SCANNER // 2026</text>
+    <text x="0" y="280" font-family="Georgia, serif" font-weight="700" font-size="210" fill="#fafafa" letter-spacing="-8">Bug</text>
+    <text x="0" y="490" font-family="Georgia, serif" font-weight="700" font-size="210" fill="#d62edc" letter-spacing="-8" font-style="italic">Hunter.</text>
+    <text x="0" y="620" font-family="Georgia, serif" font-size="38" fill="#d4d4d4">UX, performance e code quality, scan em 1 clique.</text>
+    <text x="0" y="668" font-family="Georgia, serif" font-size="38" fill="#d4d4d4" font-style="italic">Relatorio em PDF + colecao de bugs.</text>
+  </g>
+  <g transform="translate(1120 200)">
+    <rect x="0" y="0" width="360" height="340" fill="#0a0a0a" stroke="#d62edc" stroke-width="2"/>
+    <text x="22" y="44" font-family="ui-monospace, monospace" font-size="14" fill="#d62edc" letter-spacing="3">SCAN REPORT</text>
+    <text x="22" y="100" font-family="Georgia, serif" font-weight="700" font-size="68" fill="#fafafa">47</text>
+    <text x="110" y="100" font-family="ui-monospace, monospace" font-size="16" fill="#737373">bugs</text>
+    <g transform="translate(22 140)">
+      <circle cx="8" cy="8" r="6" fill="#ef4444"/>
+      <text x="28" y="14" font-family="ui-monospace, monospace" font-size="13" fill="#d4d4d4">CRITICAL · 3</text>
+    </g>
+    <g transform="translate(22 175)">
+      <circle cx="8" cy="8" r="6" fill="#fbbf24"/>
+      <text x="28" y="14" font-family="ui-monospace, monospace" font-size="13" fill="#d4d4d4">MAJOR · 12</text>
+    </g>
+    <g transform="translate(22 210)">
+      <circle cx="8" cy="8" r="6" fill="#06b6d4"/>
+      <text x="28" y="14" font-family="ui-monospace, monospace" font-size="13" fill="#d4d4d4">MINOR · 32</text>
+    </g>
+    <text x="22" y="282" font-family="ui-monospace, monospace" font-size="13" fill="#d62edc" letter-spacing="2">→ EXPORT PDF</text>
+  </g>
+  <g transform="translate(110 890)">
+    <rect x="0" y="0" width="14" height="14" fill="#d62edc"/>
+    <text x="30" y="13" font-family="ui-monospace, monospace" font-size="18" fill="#a3a3a3" letter-spacing="4">CODE-CRITTER-SCANNER.VERCEL.APP</text>
+  </g>
+</svg>

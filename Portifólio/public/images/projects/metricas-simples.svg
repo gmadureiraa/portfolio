@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="Metricas Simples cover">
+  <rect width="1600" height="1000" fill="#0a0a0a"/>
+  <g transform="translate(110 140)">
+    <text x="0" y="0" font-family="ui-monospace, monospace" font-size="22" fill="#06b6d4" letter-spacing="10">OBSERVABILITY // 2026</text>
+    <text x="0" y="280" font-family="Georgia, serif" font-weight="700" font-size="230" fill="#fafafa" letter-spacing="-8">Metricas</text>
+    <text x="0" y="490" font-family="Georgia, serif" font-weight="700" font-size="230" fill="#06b6d4" letter-spacing="-8" font-style="italic">Simples.</text>
+    <text x="0" y="620" font-family="Georgia, serif" font-size="38" fill="#d4d4d4">Latencia, happy paths, alertas.</text>
+    <text x="0" y="668" font-family="Georgia, serif" font-size="38" fill="#d4d4d4" font-style="italic">Sem Datadog, sem Grafana.</text>
+  </g>
+  <g transform="translate(1100 200)" opacity="0.9">
+    <polyline fill="none" stroke="#06b6d4" stroke-width="3" points="0,240 40,210 80,230 120,180 160,200 200,150 240,170 280,120 320,100 360,130 400,80"/>
+    <circle cx="400" cy="80" r="8" fill="#06b6d4"/>
+    <text x="0" y="290" font-family="ui-monospace, monospace" font-size="14" fill="#737373" letter-spacing="3">P99 LATENCY</text>
+    <text x="0" y="330" font-family="Georgia, serif" font-weight="700" font-size="56" fill="#fafafa">42ms</text>
+    <text x="0" y="368" font-family="ui-monospace, monospace" font-size="13" fill="#06b6d4" letter-spacing="2">↓ 18% esta semana</text>
+  </g>
+  <g transform="translate(110 890)">
+    <rect x="0" y="0" width="14" height="14" fill="#06b6d4"/>
+    <text x="30" y="13" font-family="ui-monospace, monospace" font-size="18" fill="#a3a3a3" letter-spacing="4">SIMPLE-SAAS-PULSE.VERCEL.APP</text>
+  </g>
+</svg>
