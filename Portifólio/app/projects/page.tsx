@@ -309,12 +309,12 @@ function ProjectsContent() {
       "border-neutral-800 hover:border-neutral-700"
     )}>
       {item.image && (
-        <div className="relative w-full aspect-video overflow-hidden border-b border-neutral-800">
+        <div className="relative w-full aspect-[5/4] overflow-hidden border-b border-neutral-800 bg-neutral-950">
           <Image
             src={item.image}
             alt={item.title}
             fill
-            className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+            className="object-contain object-top group-hover:scale-[1.03] transition-transform duration-500"
           />
         </div>
       )}
