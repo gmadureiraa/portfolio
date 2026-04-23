@@ -12,7 +12,10 @@ export default function Hero() {
   return (
     <div className="relative flex h-full w-full mx-auto items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
       <div className="flex flex-col items-start justify-center h-full overflow-hidden p-6 z-50">
-        <WordPullUp words="Do código ao conteúdo." />
+        <WordPullUp
+          words="Do código ao conteúdo."
+          className="!text-2xl sm:!text-3xl md:!text-4xl lg:!text-5xl !leading-[1.1] !text-left w-full break-words"
+        />
 
         <div className="text-lg text-neutral-500 dark:text-neutral-400 lg:px-1 w-full ">
           <BlurIn className="w-3/4 sm:w-2/3">

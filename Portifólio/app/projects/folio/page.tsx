@@ -34,7 +34,7 @@ export default function FolioPage() {
           className="relative w-full aspect-video overflow-hidden rounded-xl border border-neutral-800 mb-10"
         >
           <Image
-            src="/images/projects/folio.svg"
+            src="/images/projects/folio.png"
             alt="Capa do projeto Folio"
             fill
             sizes="(max-width: 768px) 100vw, 800px"

@@ -34,7 +34,7 @@ export default function KaleidosPayPage() {
           className="relative w-full aspect-video overflow-hidden rounded-xl border border-neutral-800 mb-10"
         >
           <Image
-            src="/images/projects/kaleidos-pay.svg"
+            src="/images/projects/kaleidos-pay.png"
             alt="Capa do Kaleidos Pay"
             fill
             sizes="(max-width: 768px) 100vw, 800px"

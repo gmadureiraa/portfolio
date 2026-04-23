@@ -34,7 +34,7 @@ export default function KaiKreatorPage() {
           className="relative w-full aspect-video overflow-hidden rounded-xl border border-neutral-800 mb-10"
         >
           <Image
-            src="/images/projects/kai-kreator.svg"
+            src="/images/projects/kai-kreator.png"
             alt="Capa do KAI Kreator"
             fill
             sizes="(max-width: 768px) 100vw, 800px"
