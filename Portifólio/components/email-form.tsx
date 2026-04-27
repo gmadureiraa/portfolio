@@ -13,13 +13,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
-import PocketBase from "pocketbase";
 import { SendHorizonal, LoaderCircle } from "lucide-react";
 
 import { useState } from "react";
-
-// Initialize PocketBase client
-const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 
 // Define the form schema with email validation
 const FormSchema = z.object({
