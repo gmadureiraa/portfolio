@@ -30,7 +30,8 @@ export const metadata: Metadata = {
     title: "Gabriel Madureira — Portfolio",
     description:
       "Fundador da Kaleidos. Produtos digitais em cripto, IA e marketing.",
-    creator: "@madureira_eth",
+    creator: "@madureira0x",
+    site: "@madureira0x",
     images: ["/og-image.png"],
   },
   robots: {
@@ -54,12 +55,31 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Person",
               "name": "Gabriel Madureira",
+              "alternateName": "madureira0x",
               "jobTitle": "Fundador da Kaleidos",
+              "description":
+                "Fundador da Kaleidos — agência de marketing digital. Construo produtos digitais e sistemas de marketing baseados em IA e automação.",
               "url": "https://madureira.xyz",
+              "image": "https://madureira.xyz/og-image.png",
+              "worksFor": {
+                "@type": "Organization",
+                "name": "Kaleidos",
+                "url": "https://kaleidos.com.br"
+              },
+              "knowsAbout": [
+                "Marketing Digital",
+                "Inteligência Artificial",
+                "Automação",
+                "Web3",
+                "Criptomoedas",
+                "Next.js",
+                "TypeScript"
+              ],
               "sameAs": [
                 "https://github.com/gmadureiraa",
-                "https://linkedin.com/in/gabrielmadureira",
-                "https://x.com/madureira"
+                "https://www.linkedin.com/in/gabriel-madureira/",
+                "https://x.com/madureira0x",
+                "https://www.instagram.com/ogabrielmadureira/"
               ]
             })
           }}

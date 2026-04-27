@@ -174,7 +174,7 @@ export default function PostPage({ params }: PostPageProps) {
               </p>
               <div className="flex gap-4 mt-3">
                 <a
-                  href="https://twitter.com/madureira"
+                  href="https://x.com/madureira0x"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-neutral-500 hover:text-neutral-300 text-sm transition-colors"
