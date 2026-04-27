@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Redis } from "@upstash/redis";
 import { newsletterSchema } from "@/lib/schema";
+import { rateLimit, getClientIp } from "@/lib/rate-limit";
 
 const KV_URL =
   process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || "";
@@ -13,10 +14,23 @@ const redis = IS_CONFIGURED
   ? new Redis({ url: KV_URL, token: KV_TOKEN })
   : null;
 
-const EMAIL_LIST_KEY = "newsletter:emails";
+// Hash set keeps O(1) "already subscribed" lookups even at 100k+ inscritos.
+const EMAIL_SET_KEY = "newsletter:emails:set";
 
 export async function POST(request: NextRequest) {
   try {
+    const ip = getClientIp(request);
+    const limit = await rateLimit("newsletter", ip, 5, 60 * 10); // 5 / 10min
+    if (!limit.ok) {
+      return NextResponse.json(
+        {
+          ok: false,
+          message: "Muitas tentativas. Tenta de novo daqui a pouco.",
+        },
+        { status: 429, headers: { "Retry-After": "600" } },
+      );
+    }
+
     const body = await request.json().catch(() => ({}));
     const parsed = newsletterSchema.safeParse({ email: body?.email });
 
@@ -42,16 +56,15 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    const emailList = (await redis.get<string[]>(EMAIL_LIST_KEY)) || [];
+    // sadd retorna 1 se foi adicionado, 0 se já existia.
+    const added = await redis.sadd(EMAIL_SET_KEY, email);
 
-    if (emailList.includes(email)) {
+    if (added === 0) {
       return NextResponse.json({
         ok: true,
         message: "Voce ja estava inscrito. Valeu!",
       });
     }
-
-    await redis.set(EMAIL_LIST_KEY, [...emailList, email]);
 
     return NextResponse.json({
       ok: true,
