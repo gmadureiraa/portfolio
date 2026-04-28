@@ -54,7 +54,7 @@ export function AnimatedBeamMultipleOutputs({
         <div className="flex flex-col justify-center">
           <Circle ref={div6Ref} className="h-16 w-16">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/Logos-11.svg" className="h-10 w-10 brightness-0 dark:invert rounded-full" alt="Kaleidos" />
+            <img src="/Logos-11.svg" className="h-10 w-10 brightness-0 rounded-full" alt="Kaleidos" />
           </Circle>
         </div>
         <div className="flex flex-col justify-center gap-2">

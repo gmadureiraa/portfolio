@@ -40,30 +40,6 @@ const projects: ContentItem[] = [
     externalUrl: "https://kaleidos.com.br",
   },
   {
-    id: 2,
-    title: "KAI Kreator",
-    description: "Ferramenta interna da Kaleidos para gestão editorial com IA. Orquestra pipeline de conteúdo dos clientes, detecta tendências no YouTube e automatiza briefings, roteiros e publicação.",
-    technologies: ["React 18", "Vite", "Supabase", "YouTube API", "IA"],
-    area: ["Programação e Dev", "IA e Automações", "Marketing"],
-    status: "Interno",
-    slug: "kai-kreator",
-    image: "/images/projects/kai-kreator.png",
-    type: "Projeto",
-    date: "2026-03-17",
-  },
-  {
-    id: 3,
-    title: "Kaleidos Pay",
-    description: "Gateway de pagamentos para agências com PIX e cripto. Unifica cobrança recorrente, split de comissão e conciliação num painel só. Landing em desenvolvimento, produto em soft launch.",
-    technologies: ["Next.js", "Supabase", "Stripe", "PIX"],
-    area: ["Programação e Dev", "Marketing"],
-    status: "Soft launch",
-    slug: "kaleidos-pay",
-    image: "/images/projects/kaleidos-pay.png",
-    type: "Projeto",
-    date: "2026-04-12",
-  },
-  {
     id: 4,
     title: "Jornal Cripto",
     description: "Portal de análise cripto que atingiu 10k visitas/mês organicamente. Newsletter 2x/semana com insights em tempo real. O projeto que me colocou no mapa do mercado cripto.",
@@ -87,19 +63,6 @@ const projects: ContentItem[] = [
     image: "/images/projects/folio.png",
     type: "Projeto",
     date: "2026-04-01",
-  },
-  {
-    id: 6,
-    title: "Rabito",
-    description: "Manter hábitos é difícil sem feedback visual. Rabito transforma consistência em jogo: streaks, mood tracking, analytics e gamificação que fazem você voltar todo dia.",
-    technologies: ["Next.js", "Zustand", "Recharts", "Framer Motion"],
-    area: ["Programação e Dev"],
-    status: "Ativo",
-    slug: "rabito",
-    image: "/images/projects/rabito.png",
-    type: "Projeto",
-    date: "2026-04-05",
-    externalUrl: "https://rabito-ashen.vercel.app",
   },
   {
     id: 7,
@@ -152,83 +115,6 @@ const projects: ContentItem[] = [
     type: "Projeto",
     date: "2026-04-10",
     externalUrl: "https://app-alpha-jet-10.vercel.app",
-  },
-  {
-    id: 12,
-    title: "Brutal Better",
-    description: "Landing de feedback brutalmente honesto: cola URL da sua startup e recebe um roast sem piedade sobre proposta de valor, design, copy e CTA. Sátira com propósito — expor o óbvio que founders ignoram.",
-    technologies: ["Vite", "React", "Tailwind", "Brutalist"],
-    area: ["Programação e Dev", "Marketing"],
-    status: "Soft launch",
-    slug: "brutal-better",
-    image: "/images/projects/brutal-better.png",
-    type: "Projeto",
-    date: "2026-04-21",
-    externalUrl: "https://brutal-better.vercel.app",
-  },
-  {
-    id: 13,
-    title: "Ensina AI",
-    description: "Gera trilhas de aprendizado com IA a partir de vídeos do YouTube. Três níveis (iniciante, intermediário, expert), quiz por módulo e tracking de progresso. De 0 a expert em qualquer tema.",
-    technologies: ["Vite", "Supabase", "YouTube API", "Gemini"],
-    area: ["IA e Automações", "Programação e Dev"],
-    status: "Soft launch",
-    slug: "ensina-ai",
-    image: "/images/projects/ensina-ai.png",
-    type: "Projeto",
-    date: "2026-04-21",
-    externalUrl: "https://vidy-pathways.vercel.app",
-  },
-  {
-    id: 14,
-    title: "Métricas Simples",
-    description: "Observabilidade minimalista pra indie hackers. Dashboard de latência, happy paths e alertas via endpoint, sem Datadog nem Grafana. Feito pra quem quer monitorar sem virar SRE.",
-    technologies: ["Vite", "Supabase", "Stripe", "Recharts"],
-    area: ["Programação e Dev"],
-    status: "Soft launch",
-    slug: "metricas-simples",
-    image: "/images/projects/metricas-simples.png",
-    type: "Projeto",
-    date: "2026-04-21",
-    externalUrl: "https://simple-saas-pulse.vercel.app",
-  },
-  {
-    id: 15,
-    title: "BugHunter",
-    description: "Scanner gamificado de SaaS: varre bugs, UX falho, performance e code quality. IA classifica os achados e gera relatório exportável em PDF. Catálogo de bugs vira coleção.",
-    technologies: ["Vite", "Supabase", "IA", "jsPDF"],
-    area: ["Programação e Dev", "IA e Automações"],
-    status: "Soft launch",
-    slug: "bughunter",
-    image: "/images/projects/bughunter.png",
-    type: "Projeto",
-    date: "2026-04-21",
-    externalUrl: "https://code-critter-scanner.vercel.app",
-  },
-  {
-    id: 16,
-    title: "Portfolio madureira.xyz",
-    description: "Este próprio site. Bento grid em Next.js 16 com hero animado, filtros por área, listagem de projetos e newsletter integrada. Construído do zero para ser minha vitrine de produtos.",
-    technologies: ["Next.js 16", "Tailwind", "Framer Motion", "Magic UI"],
-    area: ["Programação e Dev", "Marketing"],
-    status: "Ativo",
-    slug: "madureira-portfolio",
-    image: "/images/projects/madureira-portfolio.png",
-    type: "Projeto",
-    date: "2026-04-22",
-    externalUrl: "https://madureira.xyz",
-  },
-  {
-    id: 17,
-    title: "O Futuro do Trabalho Automático",
-    description: "Um manifesto sobre o que acontece quando IA faz 90% do trabalho operacional. Escalabilidade, criação humana e por que Renda Básica Universal vai ser inevitável.",
-    technologies: ["Ensaio", "IA", "Futuro", "UBI"],
-    area: ["IA e Automações", "Programação e Dev"],
-    status: "Publicado",
-    slug: "manifesto-ia",
-    image: "/images/projects/manifesto-ia.svg",
-    type: "Artigo",
-    date: "2026-04-10",
   },
 ];
 
@@ -309,12 +195,13 @@ function ProjectsContent() {
       "border-neutral-800 hover:border-neutral-700"
     )}>
       {item.image && (
-        <div className="relative w-full aspect-[5/4] overflow-hidden border-b border-neutral-800 bg-neutral-950">
+        <div className="relative w-full aspect-[16/10] overflow-hidden border-b border-neutral-800 bg-neutral-950">
           <Image
             src={item.image}
             alt={item.title}
             fill
-            className="object-contain object-top group-hover:scale-[1.03] transition-transform duration-500"
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+            className="object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
           />
         </div>
       )}
