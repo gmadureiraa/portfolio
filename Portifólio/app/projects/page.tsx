@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, Suspense } from "react";
-import { BentoGrid } from "@/components/magicui/bento-grid";
 import { FadeIn } from "@/components/magicui/fade-in";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -195,7 +194,7 @@ function ProjectsContent() {
       "border-neutral-800 hover:border-neutral-700"
     )}>
       {item.image && (
-        <div className="relative w-full aspect-[16/10] overflow-hidden border-b border-neutral-800 bg-neutral-950">
+        <div className="relative w-full aspect-[500/360] overflow-hidden border-b border-neutral-800 bg-neutral-950">
           <Image
             src={item.image}
             alt={item.title}
@@ -401,11 +400,11 @@ function ProjectsContent() {
           {/* Content */}
           <FadeIn direction="up">
             {viewMode === "grid" ? (
-              <BentoGrid className="max-w-7xl mx-auto">
+              <div className="grid w-full max-w-7xl mx-auto grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
                 {filteredItems.map((item) => (
                   <GridCard key={item.id} item={item} />
                 ))}
-              </BentoGrid>
+              </div>
             ) : (
               <div className="flex flex-col gap-2 max-w-4xl mx-auto">
                 {filteredItems.map((item) => (

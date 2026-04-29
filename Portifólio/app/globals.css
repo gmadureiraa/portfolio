@@ -41,6 +41,13 @@
       --chart-3: 197 37% 24%;
       --chart-4: 43 74% 66%;
       --chart-5: 27 87% 67%;
+
+      /* Synecdoche newsletter template tokens */
+      --success: 99 100% 70%;
+      --success-foreground: 99 100% 70%;
+      --inset: min(2vw, 1.5rem);
+      --sides: 1rem;
+      --footer-safe-area: calc(var(--inset) * 2 + 1.5rem + 2.25rem);
     }
 
     .dark {
@@ -88,5 +95,19 @@
     }
     body {
       @apply bg-background text-foreground;
+    }
+  }
+
+  @keyframes shine {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(200%);
+      opacity: 0;
     }
   }

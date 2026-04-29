@@ -19,7 +19,6 @@ import { motion } from "framer-motion";
 import GitHubStars from "@/components/github-stars";
 import ProjectPosts from "@/components/project-posts";
 import Link from "next/link";
-import { NewsletterSignup } from "@/components/newsletter-signup";
 
 const features = [
   {
@@ -52,8 +51,8 @@ const features = [
     description:
       "Fundador da Kaleidos. Construo produtos digitais e estratégias de marketing para empresas cripto.",
     className: "col-span-3 md:col-span-1",
-    href: "",
-    cta: "",
+    href: "/eu",
+    cta: "Mentoria, consultoria & newsletter →",
     background: (
       <div>
         <div className="absolute right-0 top-0 h-3/4 w-full border-none transition-all duration-300 ease-out [mask-image:linear-gradient(to_top,transparent_5%,#000_50%)] group-hover:scale-105">
@@ -166,7 +165,7 @@ const features = [
   {
     Icon: "",
     name: "Marketing + Código",
-    description: "Estratégia, copy, SEO e desenvolvimento. Tudo no mesmo lugar, sem terceirizar.",
+    description: "Estratégia, copy, SEO e desenvolvimento juntos no mesmo lugar.",
     href: "/projects?area=Marketing",
     cta: "Ver projetos",
     className: "col-span-3 md:col-span-2",
@@ -288,26 +287,7 @@ const features = [
     Icon: "",
     name: "",
     description: "",
-    className: "col-span-3 md:col-span-1",
-    href: "/newsletter",
-    cta: "Ver todas as edicoes",
-    background: (
-      <div className="absolute inset-0 flex items-center justify-center p-3 z-20 pointer-events-auto">
-        <NewsletterSignup
-          className="border-neutral-800/70 bg-background/80 backdrop-blur-sm"
-          variant="compact"
-          title="Newsletter"
-          description="Bastidores dos produtos que construo. Semanal."
-        />
-      </div>
-    ),
-  },
-
-  {
-    Icon: "",
-    name: "",
-    description: "",
-    className: "col-span-3 md:col-span-2",
+    className: "col-span-3 md:col-span-3",
     href: "",
     cta: "",
     background: (

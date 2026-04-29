@@ -1,11 +1,14 @@
 import type { ActionResult } from "./utils";
 
-export async function subscribe(email: string): Promise<ActionResult<string>> {
+export async function subscribe(
+  email: string,
+  source: string = "madureira_unknown",
+): Promise<ActionResult<string>> {
   try {
     const res = await fetch("/api/newsletter/subscribe", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
+      body: JSON.stringify({ email, source }),
     });
 
     const data = await res.json();
