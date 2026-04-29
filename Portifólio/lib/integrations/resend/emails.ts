@@ -53,9 +53,9 @@ interface WelcomeContent {
 const WELCOME_COPY: Record<ResendProduct, WelcomeContent> = {
   madureira: {
     subject: "Tá feito. Bem-vindo.",
-    title: "Tá feito.",
+    title: "Prazer, Gabriel Madureira.",
     subtitle: "Você está dentro.",
-    body: `Toda semana cai um email aqui sobre <strong>marketing, IA e automação</strong>. Coisa que eu testo na prática, com bastidores reais e exemplos concretos. Sem hype, sem fórmula mágica.<br/><br/>Se quiser puxar papo no meio da semana, me acha no Twitter: <a href="https://x.com/madureira0x" style="color:#fff;text-decoration:underline;">@madureira0x</a>.`,
+    body: `Sou fundador da <strong>Kaleidos</strong>, agência de marketing digital com foco em cripto, web3 e fintech. Construo produtos digitais e sistemas que integram <strong>IA na operação real</strong> de agências, SaaS e founders — automações, agentes, pipelines de conteúdo, growth.<br/><br/>Em breve começo a mandar emails por aqui — bastidores do que tô construindo, IA aplicada na prática, sem hype.<br/><br/>Se já quiser puxar papo, falar de algum projeto ou só trocar ideia: <a href="https://wa.me/5512997796835?text=Vim%20da%20newsletter%20-%20gostaria%20de%20conversar" style="color:#fff;text-decoration:underline;">manda um whats</a>.`,
     signature: "— Gabriel Madureira",
   },
   viral: {
