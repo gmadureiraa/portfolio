@@ -109,9 +109,11 @@ const features = [
     className: "col-span-3 md:col-span-1",
     background: (() => {
       const buildingItems = [
-        { name: "DeFi Radar", body: "Dashboard cripto com DeFiLlama e on-chain tracker.", href: "https://radar-blond-zeta.vercel.app/", type: "Projeto" },
+        { name: "Sequência Viral", body: "Carrosséis com IA pra Instagram, LinkedIn e X em 2 cliques.", href: "https://viral.kaleidos.com.br", type: "Projeto" },
+        { name: "Reels Viral", body: "Cole um reel viral, IA extrai a estrutura e devolve roteiro.", href: "https://reels.kaleidos.com.br", type: "Projeto" },
+        { name: "DeFi Radar", body: "Dashboard cripto com DeFiLlama e on-chain tracker.", href: "https://radar.kaleidos.com.br", type: "Projeto" },
         { name: "Kaleidos Pay", body: "Gateway de pagamentos para agências com PIX e Cripto.", href: "https://pay.kaleidos.com.br", type: "Projeto" },
-        { name: "Folio", body: "Portfolio tracker multi-chain.", href: "https://folio-landing.vercel.app/", type: "Projeto" },
+        { name: "Folio", body: "Portfolio tracker multi-chain.", href: "https://folio-landing.vercel.app/app", type: "Projeto" },
         { name: "Rabito", body: "App de hábitos com streak system e gamificação.", href: "https://rabito-ashen.vercel.app/", type: "Projeto" },
       ];
       return (
