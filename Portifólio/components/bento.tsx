@@ -170,9 +170,9 @@ const features = [
     cta: "Ver projetos",
     className: "col-span-3 md:col-span-2",
     background: (
-      <div className="absolute right-0 top-0 w-[80%] origin-top translate-x-0 transition-all duration-300 ease-out [mask-image:linear-gradient(to_top,transparent_40%,#000_70%)] md:[mask-image:linear-gradient(to_top,transparent_50%,#000_70%)] group-hover:-translate-y-5 group-hover:scale-105">
+      <div className="absolute right-0 top-0 h-full w-[80%] origin-top translate-x-0 transition-all duration-300 ease-out [mask-image:linear-gradient(to_top,transparent_25%,#000_70%)] md:[mask-image:linear-gradient(to_top,transparent_35%,#000_70%)] group-hover:-translate-y-5 group-hover:scale-105">
         <FadeIn direction="up">
-          <div className="flex flex-wrap gap-4 justify-center items-center p-4">
+          <div className="relative h-[320px] w-full">
             <Technologies
               customSlugs={[
                 "bitcoin",
