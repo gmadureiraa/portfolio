@@ -9,7 +9,6 @@ import { FadeIn } from "@/components/magicui/fade-in";
 const Globe = dynamic(() => import("@/components/magicui/globe"), { ssr: false });
 import Hero from "@/components/hero";
 import Marquee from "@/components/magicui/marquee";
-import Technologies from "@/components/technologies";
 import ThemeToggle from "@/components/theme-toggle";
 import Orbit from "@/components/orbit";
 import RetroGrid from "@/components/magicui/retro-grid";
@@ -170,53 +169,9 @@ const features = [
     cta: "Ver projetos",
     className: "col-span-3 md:col-span-2",
     background: (
-      <div className="absolute right-0 top-0 h-full w-[80%] origin-top translate-x-0 transition-all duration-300 ease-out [mask-image:linear-gradient(to_top,transparent_25%,#000_70%)] md:[mask-image:linear-gradient(to_top,transparent_35%,#000_70%)] group-hover:-translate-y-5 group-hover:scale-105">
+      <div className="absolute inset-0 origin-top transition-all duration-300 ease-out [mask-image:linear-gradient(to_top,transparent_15%,#000_70%)] group-hover:scale-105">
         <FadeIn direction="up">
-          <div className="relative h-[320px] w-full">
-            <Technologies
-              customSlugs={[
-                "bitcoin",
-                "ethereum",
-                "solana",
-                "openai",
-                "canva",
-                "html5",
-                "css3",
-                "javascript",
-                "react",
-                "nextdotjs",
-                "beehiiv",
-                "medium",
-                "substack",
-                "notion",
-                "googleanalytics",
-                "obsidian",
-                "linkedin",
-                "x",
-                "instagram",
-                "youtube",
-                "docker",
-                "github",
-                "gitlab",
-                "mysql",
-                "postgresql",
-                "typescript",
-                "tailwindcss",
-                "vercel",
-                "digitalocean",
-                "amazonaws",
-                "stripe",
-                "svelte",
-                "python",
-                "django",
-                "mongodb",
-                "prisma",
-                "huggingface",
-                "tensorflow",
-                "nodedotjs"
-              ]}
-            />
-          </div>
+          <TechStackMarquee />
         </FadeIn>
       </div>
     ),
@@ -364,6 +319,77 @@ const features = [
     ),
   },
 ];
+
+type Tech = { slug: string; label: string };
+
+const TECH_ROW_TOP: Tech[] = [
+  { slug: "bitcoin", label: "Bitcoin" },
+  { slug: "ethereum", label: "Ethereum" },
+  { slug: "solana", label: "Solana" },
+  { slug: "openai", label: "OpenAI" },
+  { slug: "googlegemini", label: "Gemini" },
+  { slug: "anthropic", label: "Claude" },
+  { slug: "n8n", label: "n8n" },
+  { slug: "supabase", label: "Supabase" },
+  { slug: "vercel", label: "Vercel" },
+  { slug: "stripe", label: "Stripe" },
+];
+
+const TECH_ROW_BOTTOM: Tech[] = [
+  { slug: "nextdotjs", label: "Next.js" },
+  { slug: "react", label: "React" },
+  { slug: "typescript", label: "TypeScript" },
+  { slug: "tailwindcss", label: "Tailwind" },
+  { slug: "python", label: "Python" },
+  { slug: "notion", label: "Notion" },
+  { slug: "substack", label: "Substack" },
+  { slug: "googleanalytics", label: "GA" },
+  { slug: "linkedin", label: "LinkedIn" },
+  { slug: "x", label: "X" },
+];
+
+function TechBadge({ tech }: { tech: Tech }) {
+  return (
+    <div className="flex shrink-0 items-center gap-2 rounded-full border border-neutral-700/60 bg-neutral-900/80 px-3 py-2 backdrop-blur-sm">
+      <span className="grid h-6 w-6 place-items-center rounded-full bg-white/95">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={`https://cdn.simpleicons.org/${tech.slug}`}
+          alt={tech.label}
+          width={14}
+          height={14}
+          loading="lazy"
+          className="h-3.5 w-3.5"
+        />
+      </span>
+      <span className="text-xs font-medium text-neutral-300 whitespace-nowrap">
+        {tech.label}
+      </span>
+    </div>
+  );
+}
+
+function TechStackMarquee() {
+  return (
+    <div className="absolute inset-0 flex flex-col justify-center gap-3 [mask-image:linear-gradient(to_right,transparent,#000_15%,#000_85%,transparent)]">
+      <Marquee className="[--duration:35s] [--gap:0.75rem]" pauseOnHover repeat={3}>
+        {TECH_ROW_TOP.map((tech) => (
+          <TechBadge key={tech.slug} tech={tech} />
+        ))}
+      </Marquee>
+      <Marquee
+        className="[--duration:40s] [--gap:0.75rem]"
+        pauseOnHover
+        reverse
+        repeat={3}
+      >
+        {TECH_ROW_BOTTOM.map((tech) => (
+          <TechBadge key={tech.slug} tech={tech} />
+        ))}
+      </Marquee>
+    </div>
+  );
+}
 
 export function Bento() {
   return (

@@ -29,14 +29,12 @@ export const cloudProps: Omit<ICloud, "children"> = {
     imageScale: 2,
     activeCursor: "pointer",
     tooltip: "native",
-    initial: [0.1, -0.1],
+    initial: [0.05, -0.05],
     clickToFront: 700,
     tooltipDelay: 0,
     outlineColour: "#0000",
-    maxSpeed: 0.05,
-    minSpeed: 0.03,
-    dragControl: true,
-    decel: 0.95,
+    maxSpeed: 0.02,
+    minSpeed: 0.01,
   },
 };
 
