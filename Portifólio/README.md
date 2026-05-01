@@ -1,101 +1,95 @@
-# cook
+# Madureira Portfolio (madureira.xyz)
 
-## Description:
+Portfolio pessoal de **Gabriel Madureira** — fundador da Kaleidos, criador de
+produtos digitais em IA, marketing e cripto. Site público em
+[madureira.xyz](https://madureira.xyz) com layout bento, lista de produtos,
+landing de mentoria (`/eu`) e newsletter (`/newsletter`).
 
-An ultra-modern, bento-box styled portfolio landing page for developers, designers, and other creatives.
+## Stack
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fengageintellect%2Fcook.git)
-[![Cook Portfolio Preview](/public/images/thumbnail.png)](https://cook.engage-dev.com)
+- **Next.js 16** (App Router) + **React 19**
+- **Tailwind CSS 3.4** + Magic UI / Shadcn
+- **Framer Motion** + COBE (globe interativo)
+- **Resend** pra newsletter / contato
+- Hospedagem **Vercel** (região GRU1, São Paulo)
 
-**NOTE:** If you would like to contribute, please check out the issues tab for a list of tasks that need to be completed.
+## Rotas principais
 
-## Current Lighthouse Scores:
+| Rota | Conteúdo |
+|------|----------|
+| `/` | Bento grid — hero, projetos, marketing+código, automação & IA, Kaleidos |
+| `/projects` | Lista filtrável de produtos (grid/list, filtros por área e tipo) |
+| `/projects/<slug>` | Pages internas dos produtos com case studies |
+| `/eu` | Landing de mentoria 1:1 + consultoria + newsletter (em refator) |
+| `/newsletter` | Página da newsletter (Resend, layout Synecdoche) |
+| `/sobre-mim` | About page |
+| `/posts/[slug]` | Posts vindos do PocketBase (legado) |
 
-If you would like to help improve the performance, accessibility, best practices, and SEO of this project, please check out the issues tab for a list of tasks that need to be completed.
+## Estrutura
 
-| Metric         | Score                                        |
-| -------------- | -------------------------------------------- |
-| Performance    | 98% <-- help improve this by submitting a PR |
-| Accessibility  | 100%                                         |
-| Best Practices | 100%                                         |
-| SEO            | 100%                                         |
-
-## Technologies:
-
-| Name                                                                       | Description                                                                           |
-| -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| [next.js](https://nextjs.org/)                                             | React framework                                                                       |
-| [magic-ui](https://magicui.design)                                         | A modern, minimalistic UI library                                                     |
-| [shadcn/ui](https://ui.shadcn.com/)                                        | A modern, minimalistic UI library                                                     |
-| [tailwind css](https://tailwindcss.com)                                    | A utility-first CSS framework                                                         |
-| [zod](https://zod.dev)                                                     | TypeScript-first schema declaration and validation                                    |
-| [pocketbase](https://pocketbase.io)                                        | A modern, minimalistic database                                                       |
-| [react-hook-form](https://www.react-hook-form.com/)                        | Performant, flexible and extensible forms with easy-to-use validation                 |
-| [github public api](https://docs.github.com/en/rest?apiVersion=2022-11-28) | A REST API for accessing public Github repo, star, and user image data                |
-| [vercel](https://vercel.com)                                               | Deploy web projects with ease                                                         |
-| [umami analytics](https://umami.is/)                                       | A simple, fast, and privacy-focused website analytics alternative to Google Analytics |
-
-## Getting Started
-
-### Pocketbase Setup
-
-First, we need to install Pocketbase. You can download the latest release from the [Pocketbase GitHub releases page](https://github.com/pocketbase/pocketbase/releases)
-
-```bash
-wget https://github.com/pocketbase/pocketbase/releases/download/v0.8.0/pocketbase_0.8.0_linux_amd64.zip
-unzip pocketbase_0.8.0_linux_amd64.zip
+```
+Portifólio/
+├── app/                # Next.js App Router (pages)
+├── components/         # bento, hero, technologies, magic UI helpers
+│   ├── magicui/        # bento-grid, marquee, particles, retro-grid, etc.
+│   └── newsletter-synecdoche/  # módulo da página /newsletter
+├── lib/
+│   ├── constants.ts    # socialLinks, profile (handles, email, domínio)
+│   ├── posts.ts        # fetcher PocketBase (posts/comments/projects)
+│   ├── integrations/   # resend, telegram, whatsapp
+│   └── server/         # rate-limit, auth helpers
+├── public/             # OG image, favicon, /images/projects/*.png
+└── docs/audits/        # AUDIT-COMPLETO-PORTFOLIO.md, AUDIT-PORTFOLIO.md
 ```
 
-```bash
-chmod +x pocketbase
-```
+## Desenvolvimento
 
 ```bash
-./pocketbase serve
+bun install
+bun run dev        # http://localhost:3000
+bun run typecheck
+bun run build      # next build
 ```
 
-Go to [http://localhost:8080](http://localhost:8080) to see the Pocketbase dashboard. From there, you can import the schema from the `/pb/pb_schema.json` file in the root of this repository by using the "import collections" tab in the settings menu.
+## Variáveis de ambiente
 
-### Client Setup
+Copie `.env.example` para `.env.local` e preencha. Mínimo pra dev:
+
+- `NEXT_PUBLIC_AVAILABLE_FOR_FREELANCE=true|false` — bolinha verde/amarela no bento
+- `RESEND_API_KEY` — pra `/api/newsletter/subscribe` e contato
+
+Em produção (Vercel), as vars críticas estão configuradas no dashboard.
+
+## Deploy
 
 ```bash
-git clone https://github.com/engageintellect/cook.git
-cd cook
+vercel --prod
 ```
 
-Now, let's set our environment variables. Copy `/.env.example` to either `.env` (for prod) or `.env.local` (for dev) in the root of the project and add replace the values with your own.:
+Ou push pra `main` que dispara CI automático no Vercel.
 
-Finally, we can install the dependencies and start the development server:
+## Convenções
 
-### Run the development server:
+- **Idioma**: português brasileiro em copy e UI.
+- **Design**: dark theme default, cream secondary, accent verde/lime.
+- **Tipografia**: Inter (sans), Instrument Serif (display nas pages legais e
+  newsletter). Mono para badges/labels.
+- **Tom**: informal, direto, exemplos concretos. Sem hashtags.
+- **Twitter handle**: `@madureira0x` (em transição pra `@ogmadureira` —
+  lib/constants.ts é a fonte da verdade).
 
-```bash
-pnpm i && pnpm run dev
-```
+## Páginas legais
 
-### Umami Analytics Setup (Optional)
+- `/privacy` — Política de Privacidade (a criar)
+- `/terms` — Termos de uso (a criar)
 
-If you would like to use Umami Analytics, you can sign up for a free account at [umami.is](https://umami.is/). Once you have signed up, you can add your Umami Analytics tracking code to the `app/layout.tsx` file.
+> Para os produtos do ecossistema (Sequência Viral, Reels Viral, DeFi Radar,
+> KAI), as políticas legais ficam em cada subdomínio.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Histórico
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `2026-04-23` Reorganização: separação `vault/` ↔ `code/` ↔ `media/`
+- `2026-04-30` Fix icon cloud + URLs canônicas Kaleidos no bento
+- `2026-05-01` Privacy/Terms publicados nos 4 produtos foco do ecossistema
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Auditorias técnicas detalhadas estão em `docs/audits/`.
