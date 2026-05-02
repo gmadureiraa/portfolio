@@ -7,6 +7,8 @@ import {
   sendWelcomeEmail,
   notifyOwner,
 } from "@/lib/server/resend";
+import { upsertSubscriber, isDbConfigured } from "@/lib/db/newsletter";
+import { sendConfirmationEmail } from "@/lib/server/newsletter-emails";
 
 const KV_URL =
   process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || "";
@@ -29,6 +31,7 @@ const ALLOWED_SOURCES = new Set([
   "madureira_home",
   "madureira_footer",
   "madureira_popup",
+  "madureira_post_footer",
 ]);
 const DEFAULT_SOURCE = "madureira_unknown";
 
@@ -36,7 +39,6 @@ function normalizeSource(raw: unknown): string {
   if (typeof raw !== "string") return DEFAULT_SOURCE;
   const trimmed = raw.trim().toLowerCase().slice(0, 64);
   if (!trimmed) return DEFAULT_SOURCE;
-  // Aceita conhecidos diretos. Senão, prefixa "madureira_" se ainda não tiver.
   if (ALLOWED_SOURCES.has(trimmed)) return trimmed;
   if (trimmed.startsWith("madureira_")) return trimmed;
   return `madureira_${trimmed.replace(/[^a-z0-9_]/g, "_")}`;
@@ -80,40 +82,65 @@ export async function POST(request: NextRequest) {
 
     const email = parsed.data.email.toLowerCase();
     const source = normalizeSource(body?.source);
+    const name =
+      typeof body?.name === "string" ? body.name.trim().slice(0, 80) : null;
 
+    // Persiste no Neon (se configurado) e dispara double opt-in.
+    let isNewSubscriber = true;
+    let confirmationToken: string | null = null;
+    if (isDbConfigured) {
+      try {
+        const upsert = await upsertSubscriber({ email, name, source });
+        if (upsert) {
+          isNewSubscriber = upsert.isNew;
+          confirmationToken = upsert.subscriber.confirmation_token;
+          // Se ainda não foi confirmado, manda confirmation email.
+          if (!upsert.subscriber.confirmed && confirmationToken) {
+            // Fire-and-forget; falha não bloqueia subscribe
+            sendConfirmationEmail(email, confirmationToken).catch((err) =>
+              console.warn("[subscribe] confirmation send falhou:", err),
+            );
+          }
+        }
+      } catch (err) {
+        console.warn("[subscribe] upsert no Neon falhou:", err);
+      }
+    }
+
+    // Upstash dedupe + Resend audience (legacy path mantido)
     if (!redis) {
-      // Fallback: log to stdout when KV is not configured. Keeps the
-      // form working in preview/local environments without blocking deploy.
       console.log(
         "[newsletter] novo inscrito (KV nao configurado):",
         email,
         "source=",
         source,
       );
-      // Mesmo sem Upstash, ainda tenta o Resend (fail-safe interno se sem key).
       await fanoutResend(email, source);
       return NextResponse.json({
         ok: true,
-        message: "Inscricao recebida! Em breve voce recebe novidades.",
+        message: isDbConfigured
+          ? "Inscrição recebida! Confira seu email pra confirmar."
+          : "Inscrição recebida! Em breve você recebe novidades.",
       });
     }
 
-    // sadd retorna 1 se foi adicionado, 0 se já existia.
     const added = await redis.sadd(EMAIL_SET_KEY, email);
 
-    if (added === 0) {
+    if (added === 0 && !isNewSubscriber) {
       return NextResponse.json({
         ok: true,
-        message: "Voce ja estava inscrito. Valeu!",
+        message: "Você já estava inscrito. Valeu!",
       });
     }
 
-    // Lead novo: dispara Resend (audience + welcome + owner notify) sem bloquear o response em caso de erro.
+    // Lead novo: dispara Resend (audience + welcome + owner notify) sem bloquear.
     await fanoutResend(email, source);
 
     return NextResponse.json({
       ok: true,
-      message: "Inscricao feita. Bem-vindo.",
+      message: isDbConfigured
+        ? "Inscrição feita. Confere seu email pra confirmar."
+        : "Inscrição feita. Bem-vindo.",
     });
   } catch (err) {
     const message =
