@@ -31,26 +31,57 @@ const WA_LP = `${WHATSAPP_BASE}?text=${encodeURIComponent(
   "Olá Gabriel, vim da página /lp e quero conversar sobre consultoria de IA.",
 )}`;
 
-const proofProducts = [
+// ─────────────────────────────────────────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────────────────────────────────────────
+
+const painPoints = [
+  {
+    title: "2h/dia copy-pasting prompts",
+    body: "Time perde tempo todo dia procurando o prompt certo num Notion bagunçado. Em 30 dias, ninguém lembra mais qual era a versão boa.",
+  },
+  {
+    title: "Cada projeto vira pesquisa de ferramenta",
+    body: "Em vez de executar, o time abre 4 abas pra decidir qual IA usar. Sai cara, sai lento, sai sem padrão.",
+  },
+  {
+    title: "Cliente paga estratégia, recebe rascunho",
+    body: "IA entrega o primeiro draft, mas a entrega final precisa de curadoria humana — e isso some no orçamento se ninguém desenhar o fluxo.",
+  },
+  {
+    title: "Tooling viral no Twitter, zero pipeline",
+    body: "Aquele agente que viralizou virou demo de stand. Não tem retenção, não tem versionamento, não tem custo controlado.",
+  },
+];
+
+const builtProducts = [
   {
     name: "Sequência Viral",
-    metric: "Carrosséis IA com voz",
     href: "https://viral.kaleidos.com.br",
+    role: "Carrosséis IA com voz",
+    learning:
+      "Template vence prompt. IA precisa de contexto fixo, não de criatividade infinita.",
   },
   {
     name: "Reels Viral",
-    metric: "Engenharia reversa de Reels",
     href: "https://reels.kaleidos.com.br",
+    role: "Engenharia reversa de viral",
+    learning:
+      "Estrutura é replicável, copy é único. Engenharia reversa entrega esqueleto, não atalho.",
   },
   {
     name: "Radar Viral",
-    metric: "Brief diário cross-platform",
     href: "https://radar.kaleidos.com.br",
+    role: "Brief diário cross-platform",
+    learning:
+      "Tendência sem síntese é só ruído. Cruzar 4 fontes filtra o que vira pauta.",
   },
   {
     name: "Kaleidos Pay",
-    metric: "Cobrança Asaas + IA",
     href: "https://pay.kaleidos.com.br",
+    role: "Cobrança Asaas + IA",
+    learning:
+      "Infra interna libera mais tempo da equipe que SaaS pago. Construir é mais barato que se imagina.",
   },
 ];
 
@@ -60,6 +91,9 @@ type OfferProps = {
   price: string;
   description: string;
   bullets: string[];
+  fitFor: string;
+  notFor: string;
+  deliverable: string;
   badge?: string;
 };
 
@@ -69,6 +103,9 @@ function OfferCard({
   price,
   description,
   bullets,
+  fitFor,
+  notFor,
+  deliverable,
   badge,
 }: OfferProps) {
   return (
@@ -106,6 +143,25 @@ function OfferCard({
         ))}
       </ul>
 
+      <div className="flex flex-col gap-3 border-t border-emerald-500/15 pt-4">
+        <div>
+          <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400">
+            Entregável
+          </span>
+          <p className="mt-1 font-mono text-[11px] leading-relaxed text-neutral-300">
+            {deliverable}
+          </p>
+        </div>
+        <div className="grid grid-cols-1 gap-2">
+          <p className="font-mono text-[11px] leading-relaxed text-emerald-300">
+            <span className="text-emerald-400">+</span> certo se {fitFor}
+          </p>
+          <p className="font-mono text-[11px] leading-relaxed text-neutral-500">
+            <span className="text-red-400/80">×</span> errado se {notFor}
+          </p>
+        </div>
+      </div>
+
       <div className="mt-auto border-t border-emerald-500/15 pt-4">
         <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400">
           Investimento
@@ -141,6 +197,19 @@ const steps = [
   },
 ];
 
+const credibility = [
+  "Fundador da Kaleidos há 5+ anos — agência focada em cripto, web3 e fintech",
+  "8 clientes ativos rodando estratégia de conteúdo + IA na operação",
+  "4 produtos shipados em 6 meses — todos em produção, gerando uso real",
+  "Construo em público no X (@madureira0x) e LinkedIn — processo aberto, não promessa",
+];
+
+const notForList = [
+  "Empresa grande com 6 meses de comitê pra aprovar prompt — velocidade é meio do trabalho",
+  "Briefing vago do tipo 'quero usar IA' sem problema concreto — não vendo IA, vendo solução",
+  "Cliente que quer só 'aquele prompt mágico' — se fosse só prompt, já tinha resolvido",
+];
+
 const faq = [
   {
     q: "Tem vagas agora?",
@@ -159,14 +228,56 @@ const faq = [
     a: "Vai mudar. Os sistemas que construo são modulares com camadas trocáveis — provider de IA, prompt, integração e UI separados. Atualizar é trocar peça, não refazer tudo.",
   },
   {
+    q: "Funciona com time pequeno?",
+    a: "Funciona melhor, na real. O foco da consultoria é destravar 1 a 3 pessoas que já operam. Sistema bom é o que cabe no time que tem, não o que precisa de mais 5 contratações.",
+  },
+  {
+    q: "Faz integração com meu stack atual?",
+    a: "Notion, Slack, Airtable, Asana, ClickUp, Supabase, Linear e webhook genérico — cobertura via n8n/Make. Stack mais exótico a gente avalia no brief.",
+  },
+  {
+    q: "Quanto tempo até primeiro resultado?",
+    a: "Workshop entrega no mesmo dia (time saindo aplicando). Consultoria mensal mostra ganho mensurável em 2 a 4 semanas. Sistema customizado fica pronto em 4 a 8 semanas.",
+  },
+  {
     q: "Atende fora do Brasil?",
     a: "Sim, em PT-BR ou EN. Consultoria mensal funciona melhor com gente do mesmo fuso (Américas), mas workshop e sistemas custom não têm restrição.",
   },
-  {
-    q: "Não tenho time técnico. Adianta?",
-    a: "Adianta — boa parte da consultoria é justamente desenhar fluxos onde quem opera não precisa programar. Mas se for sistema customizado complexo, a gente alinha um dev seu (ou meu time) pra manutenção.",
-  },
 ];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// REUSABLE BLOCKS
+// ─────────────────────────────────────────────────────────────────────────────
+
+function SectionHeader({
+  eyebrow,
+  title,
+  intro,
+}: {
+  eyebrow: string;
+  title: React.ReactNode;
+  intro?: string;
+}) {
+  return (
+    <div className="mb-8 flex flex-col gap-3">
+      <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400">
+        {eyebrow}
+      </span>
+      <h2 className="text-2xl font-bold uppercase tracking-tight text-white lg:text-3xl">
+        {title}
+      </h2>
+      {intro ? (
+        <p className="max-w-3xl text-sm leading-relaxed text-neutral-300 lg:text-base">
+          {intro}
+        </p>
+      ) : null}
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PAGE
+// ─────────────────────────────────────────────────────────────────────────────
 
 export default function LandingPage() {
   return (
@@ -204,7 +315,9 @@ export default function LandingPage() {
             </a>
           </div>
 
-          {/* HERO */}
+          {/* ════════════════════════════════════════════════════════════ */}
+          {/* DOBRA 1 — HERO */}
+          {/* ════════════════════════════════════════════════════════════ */}
           <section className="grid grid-cols-1 lg:grid-cols-5 lg:divide-x lg:divide-emerald-500/20">
             <div className="flex flex-col gap-8 px-4 py-8 sm:px-6 sm:py-10 lg:col-span-3 lg:px-10 lg:py-12">
               <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400">
@@ -251,55 +364,125 @@ export default function LandingPage() {
             </div>
           </section>
 
-          {/* PROVA SOCIAL — 4 produtos */}
-          <section className="border-t border-emerald-500/20 px-4 py-10 sm:px-6 lg:px-10 lg:py-14">
-            <div className="mb-8 flex flex-col gap-2">
-              <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400">
-                Construído (e construindo) em público
-              </span>
-              <h2 className="text-2xl font-bold uppercase tracking-tight text-white lg:text-3xl">
-                4 produtos shipados. Centenas de criadores usando.
-              </h2>
-              <p className="max-w-2xl font-mono text-xs text-neutral-400">
-                Não falo de IA por teoria. Falo do que tá rodando em produção,
-                gerando receita e errando junto com a gente.
-              </p>
-            </div>
+          {/* ════════════════════════════════════════════════════════════ */}
+          {/* DOBRA 2 — PROBLEMA */}
+          {/* ════════════════════════════════════════════════════════════ */}
+          <section className="border-t border-emerald-500/20 px-4 py-14 sm:px-6 lg:px-10 lg:py-20">
+            <SectionHeader
+              eyebrow="O Problema"
+              title={
+                <>
+                  Tem 1.000 prompts circulando, mas tua agência não fica mais
+                  rápida. Tem 50 ferramentas IA, mas o cliente continua
+                  reclamando.
+                </>
+              }
+              intro="A maioria dos times tá empilhando ferramenta sem desenhar fluxo. IA virou commodity, mas operação não. Esses são os 4 sintomas que mais aparecem quando começo um brief."
+            />
 
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {proofProducts.map((p) => (
-                <a
-                  key={p.name}
-                  href={p.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex flex-col gap-2 border border-emerald-500/20 p-4 transition-colors hover:border-emerald-500/50 hover:bg-emerald-500/[0.03]"
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+              {painPoints.map((p, i) => (
+                <div
+                  key={i}
+                  className="group relative flex gap-4 border border-emerald-500/20 p-5 transition-colors hover:border-emerald-500/45 hover:bg-emerald-500/[0.02] lg:p-6"
                 >
-                  <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400">
-                    Live
+                  <span
+                    aria-hidden
+                    className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full border border-red-500/40 bg-red-500/10 font-mono text-[11px] font-bold text-red-400"
+                  >
+                    ×
                   </span>
-                  <h3 className="text-lg font-bold text-white">{p.name}</h3>
-                  <p className="font-mono text-[11px] text-neutral-400">
-                    {p.metric}
-                  </p>
-                  <span className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-emerald-400 transition-transform group-hover:translate-x-0.5">
-                    Abrir ↗
-                  </span>
-                </a>
+                  <div className="flex flex-col gap-2">
+                    <h3 className="text-base font-bold uppercase tracking-tight text-white lg:text-lg">
+                      {p.title}
+                    </h3>
+                    <p className="font-mono text-[11px] leading-relaxed text-neutral-400 lg:text-xs">
+                      {p.body}
+                    </p>
+                  </div>
+                </div>
               ))}
             </div>
           </section>
 
-          {/* 3 OFERTAS */}
-          <section className="border-t border-emerald-500/20 px-4 py-10 sm:px-6 lg:px-10 lg:py-14">
-            <div className="mb-8 flex flex-col gap-2">
-              <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400">
-                3 formatos de trabalho
-              </span>
-              <h2 className="text-2xl font-bold uppercase tracking-tight text-white lg:text-3xl">
-                Escolhe o nível de envolvimento.
-              </h2>
+          {/* ════════════════════════════════════════════════════════════ */}
+          {/* DOBRA 3 — A VIRADA */}
+          {/* ════════════════════════════════════════════════════════════ */}
+          <section className="border-t border-emerald-500/20 px-4 py-14 sm:px-6 lg:px-10 lg:py-20">
+            <SectionHeader
+              eyebrow="A Virada"
+              title={
+                <>
+                  Construí 4 produtos e 8 sistemas internos pra Kaleidos em
+                  6 meses. Aprendi qual é o caminho.
+                </>
+              }
+            />
+
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-5">
+              <div className="flex flex-col gap-4 lg:col-span-3">
+                <p className="text-base leading-relaxed text-neutral-300 lg:text-lg">
+                  IA não é prompt. É sistema. Quem trata como prompt fica
+                  preso copiando texto de Notion. Quem trata como sistema
+                  desenha contexto, integração, versionamento e custo, e
+                  destrava o time inteiro.
+                </p>
+                <p className="text-base leading-relaxed text-neutral-300 lg:text-lg">
+                  A diferença entre rodar uma agência com IA e usar IA na
+                  agência mora exatamente aqui. Um agente bem desenhado
+                  substitui 4 horas de trabalho repetitivo por dia. Um prompt
+                  solto substitui 0.
+                </p>
+                <p className="text-base leading-relaxed text-neutral-300 lg:text-lg">
+                  Meu papel é desenhar essa camada — entre a IA, o time e o
+                  cliente — pra teu negócio sair de demo bonito pra operação
+                  que escala.
+                </p>
+              </div>
+
+              <aside className="flex flex-col justify-between gap-6 border border-emerald-500/30 bg-emerald-500/[0.04] p-6 lg:col-span-2 lg:p-8">
+                <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400">
+                  Em números
+                </span>
+                <div className="flex flex-col gap-5">
+                  <div>
+                    <p className="font-mono text-3xl font-bold text-emerald-400 lg:text-4xl">
+                      4
+                    </p>
+                    <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.18em] text-neutral-400">
+                      produtos shipados em 6 meses
+                    </p>
+                  </div>
+                  <div>
+                    <p className="font-mono text-3xl font-bold text-emerald-400 lg:text-4xl">
+                      8
+                    </p>
+                    <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.18em] text-neutral-400">
+                      sistemas internos rodando na Kaleidos
+                    </p>
+                  </div>
+                  <div>
+                    <p className="font-mono text-3xl font-bold text-emerald-400 lg:text-4xl">
+                      8+
+                    </p>
+                    <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.18em] text-neutral-400">
+                      clientes ativos cripto, web3 e fintech
+                    </p>
+                  </div>
+                </div>
+              </aside>
             </div>
+          </section>
+
+          {/* ════════════════════════════════════════════════════════════ */}
+          {/* DOBRA 4 — OFERTAS */}
+          {/* ════════════════════════════════════════════════════════════ */}
+          <section className="border-t border-emerald-500/20 px-4 py-14 sm:px-6 lg:px-10 lg:py-20">
+            <SectionHeader
+              eyebrow="O Que Eu Entrego"
+              title="Escolhe o nível de envolvimento."
+              intro="Três formatos. Mesma filosofia: IA como sistema, não como atalho. Cada um com escopo claro, deliverable concreto e zero PDF de 80 páginas."
+            />
 
             <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
               <OfferCard
@@ -310,8 +493,13 @@ export default function LandingPage() {
                 bullets={[
                   "6h de workshop ao vivo (presencial ou remoto)",
                   "Materiais e prompts customizados pro time",
+                  "Templates de agentes pra teu fluxo editorial",
                   "1 sessão de follow-up 2 semanas depois",
+                  "Gravação completa + repositório de prompts",
                 ]}
+                deliverable="Time saindo do dia já operando com 3 agentes prontos no fluxo real."
+                fitFor="tu quer destravar 4-8 pessoas em 1 dia"
+                notFor="tu precisa de sistema custom rodando em produção"
               />
               <OfferCard
                 label="Recorrente"
@@ -322,7 +510,12 @@ export default function LandingPage() {
                   "1 call semanal de 1h focada em problema real",
                   "Review de prompts, agentes e automações",
                   "Acesso direto via WhatsApp/Slack pra dúvidas",
+                  "Mapa mensal de onde IA pode entrar no fluxo",
+                  "Relatório curto de uso e custo de tokens",
                 ]}
+                deliverable="Agenda mensal com 4 entregas concretas — agente, automação, fluxo ou doc — versionadas."
+                fitFor="tu opera time de 1-10 pessoas e quer evolução contínua"
+                notFor="tu quer entrega única e pronta"
                 badge="3 vagas"
               />
               <OfferCard
@@ -333,28 +526,32 @@ export default function LandingPage() {
                 bullets={[
                   "Discovery + design + build + deploy",
                   "Stack moderno (Next, Supabase, Claude/Gemini)",
+                  "Integrações com Notion, Slack, Airtable, n8n",
                   "Handoff com docs e treinamento do time",
+                  "30 dias de suporte pós-launch incluso",
                 ]}
+                deliverable="Sistema rodando em produção, código no teu GitHub, time treinado pra manter."
+                fitFor="tu tem problema específico e quer ferramenta tua"
+                notFor="tu não tem clareza do problema ainda"
               />
             </div>
           </section>
 
-          {/* COMO FUNCIONA */}
-          <section className="border-t border-emerald-500/20 px-4 py-10 sm:px-6 lg:px-10 lg:py-14">
-            <div className="mb-8 flex flex-col gap-2">
-              <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400">
-                Processo
-              </span>
-              <h2 className="text-2xl font-bold uppercase tracking-tight text-white lg:text-3xl">
-                Como funciona.
-              </h2>
-            </div>
+          {/* ════════════════════════════════════════════════════════════ */}
+          {/* DOBRA 5 — COMO FUNCIONA */}
+          {/* ════════════════════════════════════════════════════════════ */}
+          <section className="border-t border-emerald-500/20 px-4 py-14 sm:px-6 lg:px-10 lg:py-20">
+            <SectionHeader
+              eyebrow="Processo"
+              title="Como funciona."
+              intro="4 etapas iguais pra qualquer formato. Tudo curto, documentado e focado em fluxo real, não em entregar pacote bonito que ninguém usa."
+            />
 
             <ol className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
               {steps.map((s) => (
                 <li
                   key={s.n}
-                  className="flex flex-col gap-3 border border-emerald-500/20 p-5"
+                  className="flex flex-col gap-3 border border-emerald-500/20 p-5 transition-colors hover:border-emerald-500/45 hover:bg-emerald-500/[0.02]"
                 >
                   <span className="font-mono text-3xl font-bold text-emerald-400">
                     {s.n}
@@ -370,16 +567,119 @@ export default function LandingPage() {
             </ol>
           </section>
 
-          {/* FAQ */}
-          <section className="border-t border-emerald-500/20 px-4 py-10 sm:px-6 lg:px-10 lg:py-14">
-            <div className="mb-8 flex flex-col gap-2">
-              <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400">
-                Dúvidas comuns
-              </span>
-              <h2 className="text-2xl font-bold uppercase tracking-tight text-white lg:text-3xl">
-                FAQ.
-              </h2>
+          {/* ════════════════════════════════════════════════════════════ */}
+          {/* DOBRA 6 — PROVA / O QUE EU JÁ CONSTRUÍ */}
+          {/* ════════════════════════════════════════════════════════════ */}
+          <section className="border-t border-emerald-500/20 px-4 py-14 sm:px-6 lg:px-10 lg:py-20">
+            <SectionHeader
+              eyebrow="O Que Eu Já Construí"
+              title="4 produtos shipados em 6 meses. Cada um virou aprendizado que vira sistema pros clientes."
+              intro="Não falo de IA por teoria. Cada produto abaixo está em produção, com criadores reais usando — e cada um deixou um aprendizado que aplico em todo brief novo."
+            />
+
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {builtProducts.map((p) => (
+                <a
+                  key={p.name}
+                  href={p.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-col gap-4 border border-emerald-500/25 p-6 transition-colors hover:border-emerald-500/55 hover:bg-emerald-500/[0.03] lg:p-7"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400">
+                      Live
+                    </span>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-emerald-400 transition-transform group-hover:translate-x-0.5">
+                      Abrir ↗
+                    </span>
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <h3 className="text-xl font-bold tracking-tight text-white lg:text-2xl">
+                      {p.name}
+                    </h3>
+                    <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-emerald-400/80">
+                      {p.role}
+                    </p>
+                  </div>
+                  <p className="border-t border-emerald-500/15 pt-4 font-mono text-[11px] leading-relaxed text-neutral-300 lg:text-xs">
+                    <span className="text-emerald-400">→</span> {p.learning}
+                  </p>
+                </a>
+              ))}
             </div>
+          </section>
+
+          {/* ════════════════════════════════════════════════════════════ */}
+          {/* DOBRA 7 — QUEM SOU EU */}
+          {/* ════════════════════════════════════════════════════════════ */}
+          <section className="border-t border-emerald-500/20 px-4 py-14 sm:px-6 lg:px-10 lg:py-20">
+            <SectionHeader
+              eyebrow="Quem"
+              title="Por que comigo."
+            />
+
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-5">
+              <div className="lg:col-span-2">
+                <HalftonePhoto />
+              </div>
+
+              <div className="flex flex-col gap-6 lg:col-span-3">
+                <p className="text-base leading-relaxed text-neutral-300 lg:text-lg">
+                  Sou Gabriel. Fundador da Kaleidos, agência de marketing
+                  digital com foco em cripto, web3 e fintech. Os últimos 6
+                  meses foram inteiros construindo IA aplicada pra resolver
+                  problema real, em produção, pagando salário.
+                </p>
+
+                <ul className="flex flex-col gap-3 border-t border-emerald-500/15 pt-5">
+                  {credibility.map((c, i) => (
+                    <li
+                      key={i}
+                      className="flex items-start gap-3 font-mono text-[11px] leading-relaxed text-neutral-300 lg:text-xs"
+                    >
+                      <span className="mt-0.5 text-emerald-400" aria-hidden>
+                        ▸
+                      </span>
+                      <span>{c}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="border-t border-emerald-500/15 pt-5">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-neutral-500">
+                    Não trabalho com
+                  </span>
+                  <ul className="mt-3 flex flex-col gap-2">
+                    {notForList.map((n, i) => (
+                      <li
+                        key={i}
+                        className="flex items-start gap-3 font-mono text-[11px] leading-relaxed text-neutral-500 lg:text-xs"
+                      >
+                        <span
+                          className="mt-0.5 text-red-400/70"
+                          aria-hidden
+                        >
+                          ×
+                        </span>
+                        <span>{n}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* ════════════════════════════════════════════════════════════ */}
+          {/* DOBRA 8 — FAQ */}
+          {/* ════════════════════════════════════════════════════════════ */}
+          <section className="border-t border-emerald-500/20 px-4 py-14 sm:px-6 lg:px-10 lg:py-20">
+            <SectionHeader
+              eyebrow="Dúvidas Comuns"
+              title="FAQ."
+              intro="As perguntas que mais aparecem antes do brief. Se a tua não estiver aqui, manda no WhatsApp — respondo direto."
+            />
 
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               {faq.map((f, i) => (
@@ -404,19 +704,24 @@ export default function LandingPage() {
             </div>
           </section>
 
-          {/* CTA FINAL */}
-          <section className="border-t border-emerald-500/20 px-4 py-12 sm:px-6 lg:px-10 lg:py-16">
-            <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-center lg:justify-between">
-              <div className="flex flex-col gap-3 max-w-2xl">
+          {/* ════════════════════════════════════════════════════════════ */}
+          {/* DOBRA 9 — CTA FINAL */}
+          {/* ════════════════════════════════════════════════════════════ */}
+          <section className="border-t-2 border-emerald-500/60 bg-emerald-500/[0.03] px-4 py-16 sm:px-6 lg:px-10 lg:py-24">
+            <div className="flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between">
+              <div className="flex flex-col gap-4 max-w-2xl">
                 <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400">
                   Próximo passo
                 </span>
-                <h2 className="text-2xl font-bold uppercase tracking-tight text-white lg:text-4xl">
-                  Bora montar isso pro teu time?
+                <h2 className="text-3xl font-bold uppercase leading-[1.05] tracking-tight text-white lg:text-5xl">
+                  <span className="block">30 minutos</span>
+                  <span className="my-1 block w-fit bg-emerald-500 px-2 text-black">
+                    comigo.
+                  </span>
                 </h2>
-                <p className="font-mono text-xs text-neutral-300">
-                  Brief de 30min, sem compromisso. Se eu não for a pessoa certa
-                  pra esse projeto, te indico alguém que é.
+                <p className="text-base leading-relaxed text-neutral-300 lg:text-lg">
+                  Brief sem compromisso. Se eu não for a pessoa certa pra esse
+                  projeto, te indico alguém que é — sem rodeio.
                 </p>
               </div>
 
@@ -425,7 +730,7 @@ export default function LandingPage() {
                   href={CALENDLY_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-emerald-500 px-6 py-3 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-black transition-colors hover:bg-emerald-400"
+                  className="inline-flex items-center justify-center gap-2 bg-emerald-500 px-8 py-4 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-black transition-colors hover:bg-emerald-400"
                 >
                   Agendar 30min
                   <span aria-hidden>↗</span>
@@ -434,7 +739,7 @@ export default function LandingPage() {
                   href={WA_LP}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 border border-emerald-500/40 px-6 py-3 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-emerald-400 transition-colors hover:bg-emerald-500/10"
+                  className="inline-flex items-center justify-center gap-2 border border-emerald-500/40 px-8 py-4 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-emerald-400 transition-colors hover:bg-emerald-500/10"
                 >
                   WhatsApp
                 </a>
