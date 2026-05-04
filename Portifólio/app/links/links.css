@@ -1,0 +1,116 @@
+/* Linktree-only styles — escopo isolado pra rota /links via layout.tsx */
+
+@keyframes links-gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes links-float {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.05);
+  }
+}
+
+.links-page {
+  background: #0a0a0a;
+  color: #ededed;
+  min-height: 100vh;
+}
+
+.bg-animated {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bg-animated::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+      ellipse 600px 600px at 20% 30%,
+      rgba(236, 96, 0, 0.08) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 400px 400px at 80% 70%,
+      rgba(236, 96, 0, 0.05) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 500px 500px at 50% 50%,
+      rgba(236, 96, 0, 0.03) 0%,
+      transparent 70%
+    );
+  animation: links-gradient-shift 15s ease infinite;
+  background-size: 200% 200%;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: links-float 8s ease-in-out infinite;
+}
+
+.orb-1 {
+  width: 300px;
+  height: 300px;
+  background: rgba(236, 96, 0, 0.06);
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.orb-2 {
+  width: 200px;
+  height: 200px;
+  background: rgba(236, 96, 0, 0.04);
+  bottom: 20%;
+  right: 10%;
+  animation-delay: -3s;
+}
+
+.orb-3 {
+  width: 250px;
+  height: 250px;
+  background: rgba(236, 96, 0, 0.03);
+  top: 60%;
+  left: 50%;
+  animation-delay: -5s;
+}
+
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+.grid-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(236, 96, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(236, 96, 0, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, black 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, black 20%, transparent 70%);
+}
