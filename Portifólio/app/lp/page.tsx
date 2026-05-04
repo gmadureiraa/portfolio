@@ -319,22 +319,30 @@ export default function LandingPage() {
           {/* DOBRA 1 — HERO */}
           {/* ════════════════════════════════════════════════════════════ */}
           <section className="grid grid-cols-1 lg:grid-cols-5 lg:divide-x lg:divide-emerald-500/20">
-            <div className="flex flex-col gap-8 px-4 py-8 sm:px-6 sm:py-10 lg:col-span-3 lg:px-10 lg:py-12">
-              <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400">
-                Pra agências e founders
-              </span>
-              <h1 className="font-bold uppercase leading-[1.05] tracking-tight text-white text-2xl sm:text-3xl lg:text-4xl xl:text-[44px]">
-                <span className="block">Eu construí 4 produtos</span>
-                <span className="block">de IA do zero em 6 meses.</span>
-                <span className="my-1 block w-fit bg-emerald-500 px-2 text-black">
-                  Posso ensinar tua agência
+            <div className="flex flex-col gap-7 px-4 py-8 sm:px-6 sm:py-10 lg:col-span-3 lg:px-10 lg:py-12">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400">
+                  Pra founders, heads e agências
                 </span>
-                <span className="block">ou time a fazer o mesmo.</span>
+                <span className="hidden h-1 w-1 rounded-full bg-emerald-500/40 sm:block" />
+                <span className="hidden font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-300/70 sm:block">
+                  3 vagas em consultoria mensal
+                </span>
+              </div>
+
+              <h1 className="font-bold uppercase leading-[1.05] tracking-tight text-white text-2xl sm:text-3xl lg:text-4xl xl:text-[44px]">
+                <span className="block">Sequência Viral, Reels Viral,</span>
+                <span className="block">Radar Viral e Kaleidos Pay.</span>
+                <span className="my-1 block w-fit bg-emerald-500 px-2 text-black">
+                  4 produtos de IA em 6 meses.
+                </span>
+                <span className="block">Posso ensinar teu time a fazer igual.</span>
               </h1>
 
               <p className="max-w-2xl text-base leading-relaxed text-neutral-300 lg:text-lg">
-                Consultoria 1-1 + workshops + sistemas customizados pra
-                integrar IA no teu negócio sem virar fábrica de prompt vazio.
+                Consultoria 1-1, workshops e sistemas customizados pra integrar
+                Claude e Gemini no teu negócio sem virar fábrica de prompt em
+                Notion bagunçado.
               </p>
 
               <div className="flex flex-col gap-3 sm:flex-row">
@@ -344,7 +352,7 @@ export default function LandingPage() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 bg-emerald-500 px-6 py-3 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-black transition-colors hover:bg-emerald-400"
                 >
-                  Agendar conversa de 30min
+                  Agendar 30min
                   <span aria-hidden>↗</span>
                 </a>
                 <a
@@ -356,6 +364,25 @@ export default function LandingPage() {
                   WhatsApp direto
                 </a>
               </div>
+
+              {/* Stat bar */}
+              <dl className="grid grid-cols-2 gap-4 border-t border-emerald-500/15 pt-5 sm:grid-cols-4">
+                {[
+                  { v: "5+", l: "anos founder" },
+                  { v: "8", l: "clientes ativos" },
+                  { v: "4", l: "produtos shipados" },
+                  { v: "100%", l: "código teu" },
+                ].map((s) => (
+                  <div key={s.l} className="flex flex-col gap-1">
+                    <dt className="font-mono text-xl font-bold text-emerald-400 lg:text-2xl">
+                      {s.v}
+                    </dt>
+                    <dd className="font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-400">
+                      {s.l}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
             </div>
 
             {/* Foto halftone */}
