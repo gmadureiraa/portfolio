@@ -68,7 +68,7 @@ export default function LeadForm() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Como te chamo?"
-          className="border border-emerald-500/25 bg-transparent px-3 py-2.5 font-mono text-sm text-white placeholder:text-neutral-600 focus:border-emerald-500/60 focus:outline-none"
+          className="border border-emerald-500/25 bg-transparent px-3 py-3 font-mono text-sm min-h-[44px] text-white placeholder:text-neutral-600 focus:border-emerald-500/60 focus:outline-none"
         />
       </label>
 
@@ -82,7 +82,7 @@ export default function LeadForm() {
           value={contact}
           onChange={(e) => setContact(e.target.value)}
           placeholder="exemplo@dominio.com ou +55..."
-          className="border border-emerald-500/25 bg-transparent px-3 py-2.5 font-mono text-sm text-white placeholder:text-neutral-600 focus:border-emerald-500/60 focus:outline-none"
+          className="border border-emerald-500/25 bg-transparent px-3 py-3 font-mono text-sm min-h-[44px] text-white placeholder:text-neutral-600 focus:border-emerald-500/60 focus:outline-none"
         />
       </label>
 
@@ -121,7 +121,7 @@ export default function LeadForm() {
           value={problem}
           onChange={(e) => setProblem(e.target.value)}
           placeholder="Em 2-3 linhas, qual é o gargalo? (ex: time de 4 pessoas, 2h/dia perdidas em copy)"
-          className="resize-none border border-emerald-500/25 bg-transparent px-3 py-2.5 font-mono text-sm text-white placeholder:text-neutral-600 focus:border-emerald-500/60 focus:outline-none"
+          className="resize-none border border-emerald-500/25 bg-transparent px-3 py-3 font-mono text-sm min-h-[44px] text-white placeholder:text-neutral-600 focus:border-emerald-500/60 focus:outline-none"
         />
       </label>
 
