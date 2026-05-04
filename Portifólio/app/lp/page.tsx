@@ -201,7 +201,7 @@ const credibility = [
   "Fundador da Kaleidos há 5+ anos — agência focada em cripto, web3 e fintech",
   "8 clientes ativos rodando estratégia de conteúdo + IA na operação",
   "4 produtos shipados em 6 meses — todos em produção, gerando uso real",
-  "Construo em público no X (@madureira0x) e LinkedIn — processo aberto, não promessa",
+  "Construo em público no X (@ogmadureira) e LinkedIn — processo aberto, não promessa",
 ];
 
 const notForList = [
