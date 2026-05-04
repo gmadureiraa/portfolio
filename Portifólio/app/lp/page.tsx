@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import HalftonePhoto from "@/components/eu/halftone-photo";
+import LeadForm from "@/components/lp/lead-form";
 import { profile, socialLinks } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -751,6 +752,13 @@ export default function LandingPage() {
                 </details>
               ))}
             </div>
+          </section>
+
+          {/* ════════════════════════════════════════════════════════════ */}
+          {/* DOBRA 8.5 — LEAD FORM (alternativa ao agendamento direto) */}
+          {/* ════════════════════════════════════════════════════════════ */}
+          <section className="border-t border-emerald-500/20 px-4 py-14 sm:px-6 lg:px-10 lg:py-20">
+            <LeadForm />
           </section>
 
           {/* ════════════════════════════════════════════════════════════ */}
