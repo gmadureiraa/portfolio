@@ -757,47 +757,86 @@ export default function LandingPage() {
           {/* DOBRA 9 — CTA FINAL */}
           {/* ════════════════════════════════════════════════════════════ */}
           <section className="border-t-2 border-emerald-500/60 bg-emerald-500/[0.03] px-4 py-16 sm:px-6 lg:px-10 lg:py-24">
-            <div className="flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between">
-              <div className="flex flex-col gap-4 max-w-2xl">
-                <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400">
-                  Próximo passo
-                </span>
-                <h2 className="text-3xl font-bold uppercase leading-[1.05] tracking-tight text-white lg:text-5xl">
-                  <span className="block">30 minutos</span>
-                  <span className="my-1 block w-fit bg-emerald-500 px-2 text-black">
-                    comigo.
+            <div className="flex flex-col gap-10">
+              <div className="flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between">
+                <div className="flex flex-col gap-4 max-w-2xl">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400">
+                    Próximo passo · 3 vagas em consultoria mensal
                   </span>
-                </h2>
-                <p className="text-base leading-relaxed text-neutral-300 lg:text-lg">
-                  Brief sem compromisso. Se eu não for a pessoa certa pra esse
-                  projeto, te indico alguém que é — sem rodeio.
-                </p>
+                  <h2 className="text-3xl font-bold uppercase leading-[1.05] tracking-tight text-white lg:text-5xl">
+                    <span className="block">30 minutos</span>
+                    <span className="my-1 block w-fit bg-emerald-500 px-2 text-black">
+                      comigo.
+                    </span>
+                  </h2>
+                  <p className="text-base leading-relaxed text-neutral-300 lg:text-lg">
+                    Brief sem compromisso. Saio do call ou com proposta clara
+                    ou indicando outro consultor melhor pro caso. Sem rodeio,
+                    sem PDF de 80 páginas.
+                  </p>
+                </div>
+
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <a
+                    href={CALENDLY_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 bg-emerald-500 px-8 py-4 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-black transition-colors hover:bg-emerald-400"
+                  >
+                    Agendar 30min
+                    <span aria-hidden>↗</span>
+                  </a>
+                  <a
+                    href={WA_LP}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 border border-emerald-500/40 px-8 py-4 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-emerald-400 transition-colors hover:bg-emerald-500/10"
+                  >
+                    WhatsApp
+                  </a>
+                </div>
               </div>
 
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <a
-                  href={CALENDLY_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-emerald-500 px-8 py-4 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-black transition-colors hover:bg-emerald-400"
-                >
-                  Agendar 30min
-                  <span aria-hidden>↗</span>
-                </a>
-                <a
-                  href={WA_LP}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 border border-emerald-500/40 px-8 py-4 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-emerald-400 transition-colors hover:bg-emerald-500/10"
-                >
-                  WhatsApp
-                </a>
+              {/* Garantias / o que esperar */}
+              <div className="grid grid-cols-1 gap-3 border-t border-emerald-500/20 pt-8 sm:grid-cols-3">
+                {[
+                  {
+                    n: "01",
+                    title: "Resposta em 24h",
+                    body: "Eu mesmo respondo. Sem SDR, sem qualificador, sem CRM no meio.",
+                  },
+                  {
+                    n: "02",
+                    title: "Brief é gratuito",
+                    body: "30min sem compromisso. Cobro só quando o escopo fecha e você assina.",
+                  },
+                  {
+                    n: "03",
+                    title: "Indicação se não encaixar",
+                    body: "Não sou pra todo caso. Se não for fit, indico quem é. Tenho rede.",
+                  },
+                ].map((g) => (
+                  <div
+                    key={g.n}
+                    className="flex flex-col gap-2 border border-emerald-500/15 p-4 lg:p-5"
+                  >
+                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400">
+                      {g.n}
+                    </span>
+                    <h3 className="text-sm font-bold uppercase tracking-tight text-white lg:text-base">
+                      {g.title}
+                    </h3>
+                    <p className="font-mono text-[10px] leading-relaxed text-neutral-400 lg:text-[11px]">
+                      {g.body}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
           </section>
 
           {/* Footer */}
-          <div className="flex flex-col items-start justify-between gap-3 border-t border-emerald-500/20 px-4 py-4 sm:flex-row sm:items-center sm:px-6">
+          <div className="flex flex-col items-start justify-between gap-3 border-t border-emerald-500/20 px-4 pb-20 pt-4 sm:flex-row sm:items-center sm:px-6 sm:pb-4">
             <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-neutral-400 sm:text-xs">
               São Paulo, BR · {profile.twitterHandle}
             </span>
@@ -834,6 +873,36 @@ export default function LandingPage() {
               </a>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* ──────────────────────────────────────────────────────────────── */}
+      {/* STICKY MOBILE CTA BAR — só aparece em telas <sm */}
+      {/* ──────────────────────────────────────────────────────────────── */}
+      <div
+        aria-label="Ações rápidas"
+        className="fixed inset-x-0 bottom-0 z-40 border-t border-emerald-500/40 bg-black/95 px-3 py-2.5 backdrop-blur-md sm:hidden"
+        style={{ paddingBottom: "calc(0.625rem + env(safe-area-inset-bottom))" }}
+      >
+        <div className="mx-auto flex max-w-md items-stretch gap-2">
+          <a
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 inline-flex items-center justify-center gap-1.5 bg-emerald-500 px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-black transition-colors active:bg-emerald-400"
+          >
+            Agendar 30min
+            <span aria-hidden>↗</span>
+          </a>
+          <a
+            href={WA_LP}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Falar no WhatsApp"
+            className="inline-flex items-center justify-center border border-emerald-500/50 px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-emerald-400 transition-colors active:bg-emerald-500/10"
+          >
+            WhatsApp
+          </a>
         </div>
       </div>
     </main>
