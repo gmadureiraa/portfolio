@@ -38,19 +38,19 @@ const WA_LP = `${WHATSAPP_BASE}?text=${encodeURIComponent(
 const painPoints = [
   {
     title: "2h/dia copy-pasting prompts",
-    body: "Time perde tempo todo dia procurando o prompt certo num Notion bagunçado. Em 30 dias, ninguém lembra mais qual era a versão boa.",
+    body: "Cada criativo perde 10h/sem procurando o prompt certo num Notion com 80 páginas. Em 30 dias ninguém lembra qual era a versão que funcionava.",
   },
   {
     title: "Cada projeto vira pesquisa de ferramenta",
-    body: "Em vez de executar, o time abre 4 abas pra decidir qual IA usar. Sai cara, sai lento, sai sem padrão.",
+    body: "Em vez de executar, o time abre 4 abas: Claude, ChatGPT, Gemini, Perplexity. Decide pelo gosto da hora. Sai cara, sai lento, sai sem padrão.",
   },
   {
     title: "Cliente paga estratégia, recebe rascunho",
-    body: "IA entrega o primeiro draft, mas a entrega final precisa de curadoria humana — e isso some no orçamento se ninguém desenhar o fluxo.",
+    body: "IA entrega o primeiro draft em 30s. Mas a curadoria humana que transforma rascunho em entrega come 6h do PM e some no orçamento.",
   },
   {
     title: "Tooling viral no Twitter, zero pipeline",
-    body: "Aquele agente que viralizou virou demo de stand. Não tem retenção, não tem versionamento, não tem custo controlado.",
+    body: "Aquele agente que viralizou virou demo de stand. Sem retenção, sem versionamento, sem custo controlado. 3 meses depois ninguém usa.",
   },
 ];
 
@@ -440,8 +440,8 @@ export default function LandingPage() {
               eyebrow="A Virada"
               title={
                 <>
-                  Construí 4 produtos e 8 sistemas internos pra Kaleidos em
-                  6 meses. Aprendi qual é o caminho.
+                  IA não é prompt. É sistema. E eu mostro qual é o desenho
+                  certo pra cada caso.
                 </>
               }
             />
@@ -449,21 +449,23 @@ export default function LandingPage() {
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-5">
               <div className="flex flex-col gap-4 lg:col-span-3">
                 <p className="text-base leading-relaxed text-neutral-300 lg:text-lg">
-                  IA não é prompt. É sistema. Quem trata como prompt fica
-                  preso copiando texto de Notion. Quem trata como sistema
-                  desenha contexto, integração, versionamento e custo, e
-                  destrava o time inteiro.
+                  Quem trata IA como prompt fica preso copiando texto de
+                  Notion. Quem trata como sistema desenha contexto, integração,
+                  versionamento e custo, e destrava o time inteiro.
                 </p>
                 <p className="text-base leading-relaxed text-neutral-300 lg:text-lg">
-                  A diferença entre rodar uma agência com IA e usar IA na
-                  agência mora exatamente aqui. Um agente bem desenhado
-                  substitui 4 horas de trabalho repetitivo por dia. Um prompt
-                  solto substitui 0.
+                  Na Kaleidos eu construí 8 sistemas internos pra resolver isso
+                  na nossa operação: KAI (planning multi-cliente), AutoBlogger
+                  (SEO em escala), Radar Viral (cross-platform), pipeline
+                  editorial Defiverso, automação ManyChat, Kaleidos Pay,
+                  agentes de pesquisa e cobrança Asaas. Cada um virou
+                  aprendizado de onde IA cabe e onde IA atrapalha.
                 </p>
                 <p className="text-base leading-relaxed text-neutral-300 lg:text-lg">
-                  Meu papel é desenhar essa camada — entre a IA, o time e o
-                  cliente — pra teu negócio sair de demo bonito pra operação
-                  que escala.
+                  Um agente bem desenhado substitui 4h de trabalho repetitivo
+                  por dia. Um prompt solto substitui zero. Meu papel é
+                  desenhar essa camada entre a IA, o time e o cliente pra teu
+                  negócio sair de demo bonito pra operação que escala.
                 </p>
               </div>
 
@@ -477,7 +479,7 @@ export default function LandingPage() {
                       4
                     </p>
                     <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.18em] text-neutral-400">
-                      produtos shipados em 6 meses
+                      produtos públicos shipados em 6 meses
                     </p>
                   </div>
                   <div>
@@ -485,15 +487,15 @@ export default function LandingPage() {
                       8
                     </p>
                     <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.18em] text-neutral-400">
-                      sistemas internos rodando na Kaleidos
+                      sistemas internos rodando na agência
                     </p>
                   </div>
                   <div>
                     <p className="font-mono text-3xl font-bold text-emerald-400 lg:text-4xl">
-                      8+
+                      4h
                     </p>
                     <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.18em] text-neutral-400">
-                      clientes ativos cripto, web3 e fintech
+                      por dia que um agente bem desenhado libera
                     </p>
                   </div>
                 </div>
