@@ -204,8 +204,9 @@ const steps = [
 const credibility = [
   "Fundador da Kaleidos há 5+ anos — agência focada em cripto, web3 e fintech",
   "8 clientes ativos rodando estratégia de conteúdo + IA na operação",
-  "4 produtos shipados em 6 meses — todos em produção, gerando uso real",
-  "Construo em público no X (@ogmadureira) e LinkedIn — processo aberto, não promessa",
+  "4 produtos shipados em 6 meses (Sequência Viral, Reels Viral, Radar Viral, Kaleidos Pay) — todos em produção",
+  "Construo em público no X e LinkedIn (@ogmadureira) — processo aberto, não promessa",
+  "Stack rodando em produção: Next.js 16, Claude Code, Gemini 2.5, Supabase, Vercel",
 ];
 
 const notForList = [
@@ -246,6 +247,14 @@ const faq = [
   {
     q: "Atende fora do Brasil?",
     a: "Sim, em PT-BR ou EN. Consultoria mensal funciona melhor com gente do mesmo fuso (Américas), mas workshop e sistemas custom não têm restrição.",
+  },
+  {
+    q: "E o custo de tokens? Vai estourar a conta?",
+    a: "Mapeamento de custo entra no escopo. Setup padrão usa cache, batching e roteamento entre providers (Claude pra raciocínio, Gemini Flash pra volume). A conta de IA típica de cliente da Kaleidos fica entre US$ 30 e US$ 200/mês — nunca entrega surpresa.",
+  },
+  {
+    q: "Meus dados ficam expostos pros LLMs?",
+    a: "Não, com setup correto. Uso APIs com flag de no-training ativada (Claude API, Gemini Vertex), processamento em região (Brasil/EUA) e separação de dados sensíveis. Configuração de privacidade é parte do brief, não opcional.",
   },
 ];
 
