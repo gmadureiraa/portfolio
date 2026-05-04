@@ -8,6 +8,18 @@ export const metadata: Metadata = {
   title: "Consultoria de IA pra agências e founders — Gabriel Madureira",
   description:
     "Workshops, consultoria 1-1 e sistemas customizados de IA pra integrar Claude/Gemini no teu negócio sem virar fábrica de prompt.",
+  keywords: [
+    "consultoria de IA",
+    "consultoria Claude",
+    "consultoria Gemini",
+    "automação IA agência",
+    "workshop IA",
+    "Gabriel Madureira",
+    "Kaleidos",
+    "agência cripto",
+    "IA marketing",
+    "sistema customizado IA",
+  ],
   alternates: { canonical: "/lp" },
   openGraph: {
     title: "Consultoria de IA pra agências e founders — Gabriel Madureira",
@@ -15,22 +27,44 @@ export const metadata: Metadata = {
       "Workshops, consultoria 1-1 e sistemas customizados de IA pra integrar Claude/Gemini no teu negócio sem virar fábrica de prompt.",
     url: "https://madureira.xyz/lp",
     type: "website",
+    siteName: "Gabriel Madureira",
+    locale: "pt_BR",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Gabriel Madureira — Consultoria de IA",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
+    site: "@ogmadureira",
+    creator: "@ogmadureira",
     title: "Consultoria de IA — Gabriel Madureira",
     description:
       "Workshops, consultoria 1-1 e sistemas customizados de IA pra agências e founders.",
+    images: ["/og-image.png"],
   },
 };
 
-const CALENDLY_URL =
-  process.env.NEXT_PUBLIC_CALENDLY_URL ?? "https://cal.com/madureira";
-
+// CTA primária: WhatsApp direto (Gabriel responde pessoalmente em <24h).
+// Calendly fica como override opcional via NEXT_PUBLIC_CALENDLY_URL — se a env
+// existir, troca o link "Agendar 30min" pra calendar; senão, cai no WhatsApp.
 const WHATSAPP_BASE = `https://wa.me/${profile.whatsapp}`;
 const WA_LP = `${WHATSAPP_BASE}?text=${encodeURIComponent(
   "Olá Gabriel, vim da página /lp e quero conversar sobre consultoria de IA.",
 )}`;
+const WA_BRIEF = `${WHATSAPP_BASE}?text=${encodeURIComponent(
+  "Olá Gabriel, quero agendar 30min pra brief de consultoria de IA. Posso te mandar contexto antes?",
+)}`;
+const SCHEDULE_URL = process.env.NEXT_PUBLIC_CALENDLY_URL ?? WA_BRIEF;
+// Quando o link de agendamento é WhatsApp (default sem cal.com), o label do
+// CTA primário muda pra "Falar agora · 30min" — sem prometer agenda que não
+// existe. Se um dia rolar Calendly de novo, define a env e label volta.
+const HAS_CALENDAR = Boolean(process.env.NEXT_PUBLIC_CALENDLY_URL);
+const PRIMARY_CTA_LABEL = HAS_CALENDAR ? "Agendar 30min" : "Falar agora · 30min";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // DATA
@@ -251,7 +285,7 @@ const faq = [
   },
   {
     q: "E o custo de tokens? Vai estourar a conta?",
-    a: "Mapeamento de custo entra no escopo. Setup padrão usa cache, batching e roteamento entre providers (Claude pra raciocínio, Gemini Flash pra volume). A conta de IA típica de cliente da Kaleidos fica entre US$ 30 e US$ 200/mês — nunca entrega surpresa.",
+    a: "Mapeamento de custo entra no escopo. Setup padrão usa cache (Anthropic prompt cache corta até 90% do input recorrente), batching e roteamento entre providers — Claude pra raciocínio, Gemini Flash pra volume, OpenAI só onde compensa. A conta de IA típica de um cliente da Kaleidos fica entre US$ 30 e US$ 200/mês dependendo do volume. Nunca entrega surpresa.",
   },
   {
     q: "Meus dados ficam expostos pros LLMs?",
@@ -320,12 +354,12 @@ export default function LandingPage() {
               </span>
             </div>
             <a
-              href={CALENDLY_URL}
+              href={SCHEDULE_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400 transition-colors hover:text-emerald-300 sm:block sm:text-xs"
             >
-              Agendar conversa ↗
+              {HAS_CALENDAR ? "Agendar conversa" : "Falar agora"} ↗
             </a>
           </div>
 
@@ -361,23 +395,23 @@ export default function LandingPage() {
 
               <div className="flex flex-col gap-3 sm:flex-row">
                 <a
-                  href={CALENDLY_URL}
+                  href={SCHEDULE_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 bg-emerald-500 px-6 py-3 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-black transition-colors hover:bg-emerald-400"
                 >
-                  Agendar 30min
+                  {PRIMARY_CTA_LABEL}
                   <span aria-hidden>↗</span>
                 </a>
                 <a
-                  href={WA_LP}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#brief"
                   className="inline-flex items-center justify-center gap-2 border border-emerald-500/40 px-6 py-3 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-emerald-400 transition-colors hover:bg-emerald-500/10"
                 >
-                  WhatsApp direto
+                  Mandar brief antes
                 </a>
               </div>
+
+              {/* Variante B (testar depois): "Sem hype. Construo IA dentro de operação real há 6 meses. Bora colocar na tua." */}
 
               {/* Stat bar */}
               <dl className="grid grid-cols-2 gap-4 border-t border-emerald-500/15 pt-5 sm:grid-cols-4">
@@ -757,7 +791,10 @@ export default function LandingPage() {
           {/* ════════════════════════════════════════════════════════════ */}
           {/* DOBRA 8.5 — LEAD FORM (alternativa ao agendamento direto) */}
           {/* ════════════════════════════════════════════════════════════ */}
-          <section className="border-t border-emerald-500/20 px-4 py-14 sm:px-6 lg:px-10 lg:py-20">
+          <section
+            id="brief"
+            className="scroll-mt-16 border-t border-emerald-500/20 px-4 py-14 sm:px-6 lg:px-10 lg:py-20"
+          >
             <LeadForm />
           </section>
 
@@ -786,21 +823,19 @@ export default function LandingPage() {
 
                 <div className="flex flex-col gap-3 sm:flex-row">
                   <a
-                    href={CALENDLY_URL}
+                    href={SCHEDULE_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 bg-emerald-500 px-8 py-4 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-black transition-colors hover:bg-emerald-400"
                   >
-                    Agendar 30min
+                    {PRIMARY_CTA_LABEL}
                     <span aria-hidden>↗</span>
                   </a>
                   <a
-                    href={WA_LP}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="#brief"
                     className="inline-flex items-center justify-center gap-2 border border-emerald-500/40 px-8 py-4 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-emerald-400 transition-colors hover:bg-emerald-500/10"
                   >
-                    WhatsApp
+                    Mandar brief antes
                   </a>
                 </div>
               </div>
@@ -894,22 +929,20 @@ export default function LandingPage() {
       >
         <div className="mx-auto flex max-w-md items-stretch gap-2">
           <a
-            href={CALENDLY_URL}
+            href={SCHEDULE_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="flex-1 inline-flex items-center justify-center gap-1.5 bg-emerald-500 px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-black transition-colors active:bg-emerald-400"
           >
-            Agendar 30min
+            {HAS_CALENDAR ? "Agendar" : "Falar agora"}
             <span aria-hidden>↗</span>
           </a>
           <a
-            href={WA_LP}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Falar no WhatsApp"
+            href="#brief"
+            aria-label="Mandar brief curto"
             className="inline-flex items-center justify-center border border-emerald-500/50 px-4 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-emerald-400 transition-colors active:bg-emerald-500/10"
           >
-            WhatsApp
+            Brief
           </a>
         </div>
       </div>
