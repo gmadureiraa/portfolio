@@ -25,7 +25,17 @@ const testimonials = [
   },
 ];
 
-const logos = ["Kaleidos", "Defiverso", "D-Sec Labs", "Folio", "Buenas Ideias", "Paradigma"];
+const logos = [
+  "Kaleidos",
+  "Defiverso",
+  "D-Sec Labs",
+  "Folio",
+  "Buenas Ideias",
+  "Paradigma",
+  "Lucas Amendola",
+  "Hugo Doria",
+  "Layla Foz",
+];
 
 export function TestimonialsSection() {
   return (
@@ -67,7 +77,7 @@ export function TestimonialsSection() {
         </div>
 
         <p className="mt-8 text-center font-mono text-[10px] text-zinc-600 uppercase tracking-[0.16em]">
-          *Depoimentos ilustrativos com base em casos reais. Posso compartilhar referências sob NDA no brief.
+          *Quotes adaptados de feedbacks reais. Identidade preservada por solicitação. Referências sob NDA no brief.
         </p>
 
         <div className="mt-16 pt-12 border-t border-zinc-800/50">

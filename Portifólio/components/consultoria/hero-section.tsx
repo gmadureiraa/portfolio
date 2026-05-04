@@ -61,18 +61,28 @@ export function HeroSection({ primaryCta }: HeroSectionProps) {
         </p>
 
         {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
           <CtaButton href={primaryCta.href}>{primaryCta.label}</CtaButton>
           <CtaButton href="#gargalos" variant="ghost">
             Ver gargalos comuns
           </CtaButton>
         </div>
 
+        {/* Validação social inline */}
+        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-zinc-500 mb-16">
+          já passaram por aqui ·{" "}
+          <span className="text-zinc-300">Defiverso</span> ·{" "}
+          <span className="text-zinc-300">D-Sec Labs</span> ·{" "}
+          <span className="text-zinc-300">Buenas Ideias</span> ·{" "}
+          <span className="text-zinc-300">Paradigma</span> ·{" "}
+          <span className="text-zinc-300">Folio</span>
+        </p>
+
         {/* Stat bar */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto pt-10 border-t border-zinc-800/60">
           {[
             { v: "5+", l: "Anos operando IA" },
-            { v: "8", l: "Clientes ativos" },
+            { v: "Dezenas", l: "De clientes atendidos" },
             { v: "4", l: "Produtos em produção" },
             { v: "70%", l: "Tempo médio recuperado" },
           ].map((s) => (

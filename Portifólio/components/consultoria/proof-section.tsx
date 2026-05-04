@@ -50,7 +50,8 @@ export function ProofSection() {
           </h2>
           <p className="text-zinc-400 max-w-2xl mx-auto leading-relaxed">
             Não vendo IA de academia. Cada coisa que ensino tá rodando em
-            produção — pra mim, pra Kaleidos e pros 8 clientes ativos.
+            produção — pra mim, pra Kaleidos e pras dezenas de clientes que
+            já passaram pelo brief.
           </p>
         </div>
 
