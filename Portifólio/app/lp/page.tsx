@@ -58,14 +58,16 @@ const builtProducts = [
   {
     name: "Sequência Viral",
     href: "https://viral.kaleidos.com.br",
-    role: "Carrosséis IA com voz",
+    role: "Cola link viral, sai carrossel",
+    stack: "Next 16 · Gemini 2.5 · Imagen 4 · Stripe",
     learning:
-      "Template vence prompt. IA precisa de contexto fixo, não de criatividade infinita.",
+      "Template vence prompt. IA precisa de contexto fixo, não criatividade infinita.",
   },
   {
     name: "Reels Viral",
     href: "https://reels.kaleidos.com.br",
-    role: "Engenharia reversa de viral",
+    role: "Engenharia reversa de reel",
+    stack: "Next 16 · Apify · Gemini Flash · Neon",
     learning:
       "Estrutura é replicável, copy é único. Engenharia reversa entrega esqueleto, não atalho.",
   },
@@ -73,15 +75,17 @@ const builtProducts = [
     name: "Radar Viral",
     href: "https://radar.kaleidos.com.br",
     role: "Brief diário cross-platform",
+    stack: "Next 16 · Cron · Gemini OCR · Postgres",
     learning:
       "Tendência sem síntese é só ruído. Cruzar 4 fontes filtra o que vira pauta.",
   },
   {
     name: "Kaleidos Pay",
     href: "https://pay.kaleidos.com.br",
-    role: "Cobrança Asaas + IA",
+    role: "Cobrança Asaas + WhatsApp",
+    stack: "Next · Asaas · whatsapp-web.js · Supabase",
     learning:
-      "Infra interna libera mais tempo da equipe que SaaS pago. Construir é mais barato que se imagina.",
+      "Infra interna libera mais tempo do time que SaaS pago. Construir é mais barato do que parece.",
   },
 ];
 
@@ -178,22 +182,22 @@ const steps = [
   {
     n: "01",
     title: "Brief 30min",
-    body: "Call rápida pra entender o gargalo, time, stack e onde IA pode dar alavanca real.",
+    body: "Call rápida pra mapear gargalo, time, stack e onde IA dá alavanca real. Sem questionário de 40 perguntas.",
   },
   {
     n: "02",
-    title: "Mapeamento",
-    body: "Documento curto com hipóteses, sistema proposto e estimativa. Sem PDF de 80 páginas.",
+    title: "Mapa de 1 página",
+    body: "Documento curto com hipótese, sistema proposto, escopo e estimativa. Sem PDF de 80 slides que ninguém abre.",
   },
   {
     n: "03",
-    title: "Entrega",
-    body: "Workshop, mentoria ou sistema rodando — dependendo do escopo. Tudo aplicado no teu fluxo real.",
+    title: "Build no teu fluxo",
+    body: "Workshop, consultoria ou sistema rodando. Aplicado no teu trabalho real, não em sandbox bonito.",
   },
   {
     n: "04",
-    title: "Iteração",
-    body: "2 a 4 semanas de ajuste pós-entrega. IA muda toda semana, então o sistema também muda.",
+    title: "Iteração 2-4 sem",
+    body: "IA muda toda semana. Ajuste pós-entrega vem incluso pra adaptar quando o modelo muda ou o time pede troca.",
   },
 ];
 
@@ -515,53 +519,53 @@ export default function LandingPage() {
 
             <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
               <OfferCard
-                label="Pontual"
+                label="Pontual · 1 dia"
                 title="Workshop 1-day"
-                price="R$ 3-5k · 1 dia"
-                description="Time aprende a usar Claude Code, Cursor e Gemini pra automação editorial e dev. Hands-on com casos reais do teu negócio."
+                price="R$ 3-5k"
+                description="Time aprende Claude Code, Cursor e Gemini hands-on com casos reais do teu negócio. Saída do dia já com agente rodando."
                 bullets={[
-                  "6h de workshop ao vivo (presencial ou remoto)",
-                  "Materiais e prompts customizados pro time",
-                  "Templates de agentes pra teu fluxo editorial",
+                  "6h ao vivo (presencial em SP ou remoto)",
+                  "Prompts e agentes customizados pro teu fluxo",
+                  "Templates de planning, copy e dev pra usar segunda",
                   "1 sessão de follow-up 2 semanas depois",
-                  "Gravação completa + repositório de prompts",
+                  "Gravação completa + repositório no GitHub teu",
                 ]}
-                deliverable="Time saindo do dia já operando com 3 agentes prontos no fluxo real."
+                deliverable="Time saindo do dia operando com 3 agentes prontos integrados no fluxo real."
                 fitFor="tu quer destravar 4-8 pessoas em 1 dia"
                 notFor="tu precisa de sistema custom rodando em produção"
               />
               <OfferCard
-                label="Recorrente"
+                label="Recorrente · 1 mês"
                 title="Consultoria mensal"
-                price="R$ 4-6k · /mês"
-                description="6 horas/mês 1-1, review semanal e design de sistemas IA pra teu fluxo. Sem fidelidade."
+                price="R$ 4-6k/mês"
+                description="6h/mês 1-1, review semanal e design de sistemas IA pro teu fluxo. Sem fidelidade, cancela quando quiser."
                 bullets={[
                   "1 call semanal de 1h focada em problema real",
                   "Review de prompts, agentes e automações",
                   "Acesso direto via WhatsApp/Slack pra dúvidas",
-                  "Mapa mensal de onde IA pode entrar no fluxo",
+                  "Mapa mensal de onde IA cabe no fluxo",
                   "Relatório curto de uso e custo de tokens",
                 ]}
-                deliverable="Agenda mensal com 4 entregas concretas — agente, automação, fluxo ou doc — versionadas."
+                deliverable="4 entregas concretas/mês — agente, automação, fluxo ou doc — versionadas no Git."
                 fitFor="tu opera time de 1-10 pessoas e quer evolução contínua"
                 notFor="tu quer entrega única e pronta"
                 badge="3 vagas"
               />
               <OfferCard
-                label="Implementação"
-                title="Sistemas customizados"
-                price="Sob orçamento"
-                description="Construo o pipeline IA completo (scraper → IA → CMS/redes) pra teu caso. Entrega rodando, código teu."
+                label="Implementação · 4-8 sem"
+                title="Sistema customizado"
+                price="A partir de R$ 15k"
+                description="Construo pipeline IA completo (scraper → IA → CMS/redes) pro teu caso específico. Entrega rodando, código teu."
                 bullets={[
                   "Discovery + design + build + deploy",
-                  "Stack moderno (Next, Supabase, Claude/Gemini)",
-                  "Integrações com Notion, Slack, Airtable, n8n",
+                  "Stack moderno (Next 16, Supabase, Claude/Gemini)",
+                  "Integrações Notion, Slack, Airtable, n8n",
                   "Handoff com docs e treinamento do time",
                   "30 dias de suporte pós-launch incluso",
                 ]}
-                deliverable="Sistema rodando em produção, código no teu GitHub, time treinado pra manter."
+                deliverable="Sistema rodando em produção no teu GitHub, time treinado pra manter sem dependência."
                 fitFor="tu tem problema específico e quer ferramenta tua"
-                notFor="tu não tem clareza do problema ainda"
+                notFor="tu ainda não tem clareza do problema concreto"
               />
             </div>
           </section>
@@ -616,7 +620,11 @@ export default function LandingPage() {
                   className="group flex flex-col gap-4 border border-emerald-500/25 p-6 transition-colors hover:border-emerald-500/55 hover:bg-emerald-500/[0.03] lg:p-7"
                 >
                   <div className="flex items-start justify-between gap-3">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400">
+                    <span className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-400">
+                      <span
+                        aria-hidden
+                        className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400"
+                      />
                       Live
                     </span>
                     <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-emerald-400 transition-transform group-hover:translate-x-0.5">
@@ -631,6 +639,9 @@ export default function LandingPage() {
                       {p.role}
                     </p>
                   </div>
+                  <p className="font-mono text-[10px] leading-relaxed text-neutral-500">
+                    {p.stack}
+                  </p>
                   <p className="border-t border-emerald-500/15 pt-4 font-mono text-[11px] leading-relaxed text-neutral-300 lg:text-xs">
                     <span className="text-emerald-400">→</span> {p.learning}
                   </p>
