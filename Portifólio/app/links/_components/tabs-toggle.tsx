@@ -27,11 +27,15 @@ export function TabsToggle({ value, onChange }: TabsToggleProps) {
 
   useLayoutEffect(() => {
     const btn = buttonsRef.current[value];
-    const container = containerRef.current;
-    if (!btn || !container) return;
-    const cRect = container.getBoundingClientRect();
-    const bRect = btn.getBoundingClientRect();
-    setIndicator({ x: bRect.left - cRect.left, w: bRect.width });
+    if (!btn) return;
+    const measure = () => {
+      setIndicator({ x: btn.offsetLeft, w: btn.offsetWidth });
+    };
+    measure();
+    // re-mede quando fontes carregam (Newsletter pode mudar largura ao swap font)
+    const ro = new ResizeObserver(measure);
+    ro.observe(btn);
+    return () => ro.disconnect();
   }, [value]);
 
   const handleClick = (tab: TabId, e: React.MouseEvent) => {

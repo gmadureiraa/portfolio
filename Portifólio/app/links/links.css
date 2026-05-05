@@ -141,9 +141,11 @@
 
 .tab-segment-indicator {
   position: absolute;
-  top: 4px;
-  bottom: 4px;
+  left: 0;
+  top: 0;
+  bottom: 0;
   background: #c5ff4a;
   border-radius: 999px;
   box-shadow: 0 0 16px rgba(197, 255, 74, 0.35);
+  pointer-events: none;
 }
