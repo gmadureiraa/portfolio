@@ -10,7 +10,7 @@ export function Footer() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.8 }}
-      className="mt-10 pb-8 flex flex-col items-center gap-4"
+      className="mt-12 pb-8 flex flex-col items-center gap-5"
     >
       <div className="flex items-center gap-3">
         {socials.map((social) => {
@@ -23,7 +23,7 @@ export function Footer() {
               rel="noopener noreferrer"
               aria-label={social.label}
               onClick={() => trackClick(`social-${social.id}`)}
-              className="glass-pill flex items-center justify-center w-10 h-10 rounded-xl text-white/60 hover:text-[#FFB089] hover:border-[#FF7A4A]/40 hover:bg-[#FF7A4A]/10 transition-all duration-200"
+              className="glass-pill flex items-center justify-center w-10 h-10 rounded-xl text-white/55 hover:text-white"
             >
               <Icon className="w-[15px] h-[15px]" />
             </a>
@@ -31,7 +31,7 @@ export function Footer() {
         })}
       </div>
 
-      <p className="text-[11px] text-white/35 tracking-wide font-mono">
+      <p className="text-[10.5px] text-white/30 tracking-[0.15em] font-mono uppercase">
         madureira.xyz · 2026
       </p>
     </motion.footer>
