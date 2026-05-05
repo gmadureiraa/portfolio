@@ -74,3 +74,76 @@
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.18);
 }
+
+/* ---- View Transitions API — circular reveal estilo theme-toggle ---- */
+@supports (view-transition-name: a) {
+  ::view-transition-old(links-tabs),
+  ::view-transition-new(links-tabs) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
+  ::view-transition-old(links-tabs) {
+    z-index: 1;
+  }
+
+  ::view-transition-new(links-tabs) {
+    z-index: 2;
+    animation: links-circle-reveal 560ms cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .links-tab-pane {
+    view-transition-name: links-tabs;
+  }
+}
+
+@keyframes links-circle-reveal {
+  from {
+    clip-path: circle(0% at var(--vt-x, 50%) var(--vt-y, 50%));
+  }
+  to {
+    clip-path: circle(140% at var(--vt-x, 50%) var(--vt-y, 50%));
+  }
+}
+
+/* Segmented tab toggle */
+.tab-segment {
+  position: relative;
+  display: inline-flex;
+  padding: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.tab-segment-button {
+  position: relative;
+  z-index: 1;
+  padding: 7px 18px;
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.55);
+  border-radius: 999px;
+  transition: color 240ms ease;
+}
+
+.tab-segment-button[data-active="true"] {
+  color: #08080a;
+}
+
+.tab-segment-button:not([data-active="true"]):hover {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.tab-segment-indicator {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  background: #c5ff4a;
+  border-radius: 999px;
+  box-shadow: 0 0 16px rgba(197, 255, 74, 0.35);
+}
