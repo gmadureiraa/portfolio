@@ -36,32 +36,31 @@ export function LinkCard({ link, index }: LinkCardProps) {
     >
       <div
         className={`
-          relative overflow-hidden rounded-2xl border transition-all duration-300
-          ${
-            link.accent
-              ? "border-[#EC6000]/20 bg-[#EC6000]/[0.04] hover:border-[#EC6000]/40 hover:bg-[#EC6000]/[0.08]"
-              : "border-[#222] bg-[#141414] hover:border-[#333] hover:bg-[#1a1a1a]"
-          }
+          relative overflow-hidden rounded-2xl transition-all duration-300
+          ${link.accent ? "glass-card-accent" : "glass-card"}
         `}
       >
         {link.accent && (
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-            <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-[radial-gradient(circle_at_50%_80%,rgba(236,96,0,0.06),transparent_50%)]" />
-          </div>
+          <>
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+              <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-[radial-gradient(circle_at_50%_50%,rgba(255,122,74,0.18),transparent_55%)]" />
+            </div>
+            <div className="absolute -inset-px rounded-2xl pointer-events-none opacity-60 group-hover:opacity-100 transition-opacity duration-500 [background:linear-gradient(135deg,rgba(255,122,74,0.45),transparent_45%,rgba(255,122,74,0.25))] [mask:linear-gradient(white,white)_content-box,linear-gradient(white,white)] [mask-composite:exclude] [-webkit-mask-composite:xor] p-px" />
+          </>
         )}
 
-        <div className="relative flex items-center gap-4 px-5 py-4">
+        <div className="relative flex items-center gap-4 px-6 py-5 min-h-[80px]">
           <div
             className={`
-              flex items-center justify-center w-10 h-10 rounded-xl shrink-0 transition-colors duration-300
+              flex items-center justify-center w-12 h-12 rounded-xl shrink-0 transition-all duration-300
               ${
                 link.accent
-                  ? "bg-[#EC6000]/10 text-[#EC6000] group-hover:bg-[#EC6000]/20"
-                  : "bg-white/5 text-[#888] group-hover:text-white group-hover:bg-white/10"
+                  ? "bg-[#FF7A4A]/20 text-[#FFB089] group-hover:bg-[#FF7A4A]/30 group-hover:text-[#FFD0B0] shadow-[0_0_24px_rgba(255,122,74,0.25)]"
+                  : "bg-white/5 text-white/60 group-hover:text-white group-hover:bg-white/10"
               }
             `}
           >
-            <Icon className="w-5 h-5" />
+            <Icon className="w-[22px] h-[22px]" />
           </div>
 
           <div className="flex-1 min-w-0">
@@ -73,16 +72,21 @@ export function LinkCard({ link, index }: LinkCardProps) {
             >
               {link.title}
             </h3>
-            <p className="text-[13px] text-[#888] mt-0.5 truncate">
+            <p
+              className={`
+                text-[13px] mt-1 truncate transition-colors duration-300
+                ${link.accent ? "text-white/70" : "text-white/50"}
+              `}
+            >
               {link.description}
             </p>
           </div>
 
           <ArrowUpRight
             className={`
-              w-4 h-4 shrink-0 transition-all duration-300 opacity-0 group-hover:opacity-100
+              w-4 h-4 shrink-0 transition-all duration-300 opacity-50 group-hover:opacity-100
               -translate-x-1 group-hover:translate-x-0
-              ${link.accent ? "text-[#EC6000]" : "text-[#888]"}
+              ${link.accent ? "text-[#FFB089] group-hover:text-[#FFD0B0]" : "text-white/60"}
             `}
           />
         </div>
