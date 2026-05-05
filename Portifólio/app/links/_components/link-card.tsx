@@ -36,18 +36,48 @@ export function LinkCard({ link, index }: LinkCardProps) {
     >
       <div className="glass-card relative overflow-hidden rounded-2xl">
         <div className="relative flex items-center gap-4 px-5 py-5 min-h-[84px]">
-          <div
+          <motion.div
             className={`
-              flex items-center justify-center w-11 h-11 rounded-xl shrink-0 transition-all duration-300
+              relative flex items-center justify-center w-11 h-11 rounded-xl shrink-0
               ${
                 link.accent
-                  ? "bg-[#C5FF4A]/12 text-[#C5FF4A] ring-1 ring-[#C5FF4A]/25 group-hover:bg-[#C5FF4A]/20 group-hover:ring-[#C5FF4A]/40"
+                  ? "bg-[#C5FF4A]/12 text-[#C5FF4A] ring-1 ring-[#C5FF4A]/25"
                   : "bg-white/6 text-white/70 ring-1 ring-white/10 group-hover:bg-white/10 group-hover:text-white"
               }
             `}
+            animate={
+              link.accent
+                ? {
+                    boxShadow: [
+                      "0 0 0px rgba(197,255,74,0)",
+                      "0 0 16px rgba(197,255,74,0.25)",
+                      "0 0 0px rgba(197,255,74,0)",
+                    ],
+                  }
+                : undefined
+            }
+            transition={
+              link.accent
+                ? {
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: index * 0.4,
+                  }
+                : undefined
+            }
+            whileHover={{
+              scale: 1.08,
+              rotate: link.accent ? 360 : -8,
+              transition: { type: "spring", stiffness: 260, damping: 18 },
+            }}
           >
-            <Icon className="w-[20px] h-[20px]" />
-          </div>
+            {/* aura suave por trás dos lime accent */}
+            {link.accent && (
+              <span className="pointer-events-none absolute inset-0 rounded-xl bg-[#C5FF4A]/20 blur-md opacity-0 group-hover:opacity-60 transition-opacity duration-500" />
+            )}
+            <Icon className="relative w-[20px] h-[20px]" />
+          </motion.div>
 
           <div className="flex-1 min-w-0">
             <h3 className="font-semibold text-[15px] leading-tight text-white tracking-tight">
@@ -58,13 +88,16 @@ export function LinkCard({ link, index }: LinkCardProps) {
             </p>
           </div>
 
-          <ArrowUpRight
+          <motion.div
             className={`
-              w-4 h-4 shrink-0 transition-all duration-300 opacity-40 group-hover:opacity-100
-              -translate-x-1 group-hover:translate-x-0 -translate-y-0 group-hover:-translate-y-0.5
+              shrink-0 transition-opacity duration-300 opacity-40 group-hover:opacity-100
               ${link.accent ? "text-[#C5FF4A]" : "text-white/70"}
             `}
-          />
+            initial={false}
+            whileHover={{ x: 2, y: -2 }}
+          >
+            <ArrowUpRight className="w-4 h-4" />
+          </motion.div>
         </div>
       </div>
     </motion.a>
