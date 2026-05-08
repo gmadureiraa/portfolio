@@ -205,6 +205,13 @@ export async function notifyOwner(
     );
     return { ok: true, skipped: true };
   }
+  if (!cfg.ownerEmail) {
+    console.log(
+      `[resend:${product}:notifyOwner] OWNER_EMAIL não configurado, pulando notificação`,
+      JSON.stringify({ leadEmail, source }),
+    );
+    return { ok: true, skipped: true };
+  }
 
   const ts = brTimestamp();
   const text = `Email: ${leadEmail}\nSource: ${source}\nProduct: ${product}\nHora: ${ts}\n`;

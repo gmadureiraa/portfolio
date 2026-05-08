@@ -32,7 +32,8 @@ export interface ResendConfig {
   apiKey: string;
   audienceId: string;
   fromEmail: string;
-  ownerEmail: string;
+  /** Pode ser `null` quando `OWNER_EMAIL` não está setado — caller deve checar antes de enviar. */
+  ownerEmail: string | null;
   product: ResendProduct;
 }
 
@@ -66,7 +67,14 @@ export function getResendConfig(product: ResendProduct): ResendConfig | null {
   const audienceId = process.env[`RESEND_${prefix}_AUDIENCE_ID`] || "";
   const fromEmail =
     process.env[`RESEND_${prefix}_FROM_EMAIL`] || DEFAULT_FROM_EMAIL[product];
-  const ownerEmail = process.env.OWNER_EMAIL || "gf.madureiraa@gmail.com";
+
+  const ownerEmailRaw = process.env.OWNER_EMAIL || "";
+  const ownerEmail = ownerEmailRaw.trim() || null;
+  if (!ownerEmail) {
+    console.warn(
+      `[resend/config] OWNER_EMAIL não setado — notificações ao dono ficarão desativadas para product=${product}`,
+    );
+  }
 
   return {
     apiKey,

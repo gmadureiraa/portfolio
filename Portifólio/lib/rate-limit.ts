@@ -65,10 +65,30 @@ export async function rateLimit(
   };
 }
 
+/**
+ * Resolve o IP do cliente confiando apenas em headers setados pelo proxy
+ * (não user-controllable). Em dev/local usa fallback `x-forwarded-for` apenas
+ * se nenhum header confiável estiver presente.
+ *
+ * Vercel sobrescreve `x-real-ip` e `x-vercel-forwarded-for` com o IP real;
+ * `x-forwarded-for` pode ser injetado pelo cliente, então só usamos como
+ * último recurso (em dev local). Sem headers confiáveis, retorna "anonymous"
+ * (rate limit cai num bucket compartilhado, mantendo proteção mínima).
+ */
 export function getClientIp(req: Request): string {
-  const fwd = req.headers.get("x-forwarded-for");
-  if (fwd) return fwd.split(",")[0].trim();
+  // Vercel-set: IP real do cliente, headers proibidos de override pelo runtime.
+  const vercelFwd = req.headers.get("x-vercel-forwarded-for");
+  if (vercelFwd) return vercelFwd.split(",")[0].trim();
+
   const real = req.headers.get("x-real-ip");
-  if (real) return real;
+  if (real) return real.trim();
+
+  // Fallback de dev/local: aceita x-forwarded-for somente quando os headers
+  // confiáveis estão ausentes (ambiente sem proxy reverso).
+  if (process.env.NODE_ENV !== "production") {
+    const fwd = req.headers.get("x-forwarded-for");
+    if (fwd) return fwd.split(",")[0].trim();
+  }
+
   return "anonymous";
 }
