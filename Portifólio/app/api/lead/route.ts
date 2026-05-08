@@ -28,6 +28,7 @@ import {
 } from "@/lib/integrations/resend";
 import { profile } from "@/lib/constants";
 import { rateLimit, getClientIp } from "@/lib/rate-limit";
+import { isBot, silentSuccess } from "@/lib/honeypot";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -73,6 +74,12 @@ export async function POST(request: NextRequest) {
   }
 
   const body = (await request.json().catch(() => ({}))) as Partial<LeadPayload>;
+
+  // Honeypot anti-bot: campo `_hp` preenchido = bot, 200 silencioso.
+  if (isBot(body)) {
+    return silentSuccess({ waUrl: "" });
+  }
+
   const name = (body.name || "").trim().slice(0, 120);
   const contact = (body.contact || "").trim().slice(0, 200);
   const teamSize = (body.teamSize || "").trim().slice(0, 40);

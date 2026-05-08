@@ -66,6 +66,7 @@ export const FormNewsletter = ({
   submit: (props: React.ComponentProps<"button">) => React.ReactNode
 }) => {
   const [submissionState, setSubmissionState] = useState<ActionResult<string> | null>(null)
+  const [hp, setHp] = useState("")
 
   const form = useForm<NewsletterSchema>({
     resolver: zodResolver(newsletterSchema),
@@ -83,7 +84,7 @@ export const FormNewsletter = ({
   }, [form])
 
   async function onSubmit(values: NewsletterSchema) {
-    const state = await subscribe(values.email)
+    const state = await subscribe(values.email, "madureira_unknown", hp)
 
     setSubmissionState(state)
 
@@ -100,6 +101,24 @@ export const FormNewsletter = ({
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="relative pt-10 lg:pt-12">
         <SubmissionStateMessage value={submissionState} reset={() => setSubmissionState(null)} />
+
+        <input
+          type="text"
+          name="_hp"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          value={hp}
+          onChange={(e) => setHp(e.target.value)}
+          style={{
+            position: "absolute",
+            left: "-9999px",
+            width: 1,
+            height: 1,
+            opacity: 0,
+            pointerEvents: "none",
+          }}
+        />
 
         <FormField
           control={form.control}

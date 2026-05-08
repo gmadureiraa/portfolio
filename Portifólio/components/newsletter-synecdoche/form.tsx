@@ -83,6 +83,7 @@ export const FormNewsletter = ({
 }) => {
   const [submissionState, setSubmissionState] =
     useState<ActionResult<string> | null>(null);
+  const [hp, setHp] = useState("");
 
   const form = useForm<NewsletterSchema>({
     resolver: zodResolver(newsletterSchema),
@@ -100,7 +101,11 @@ export const FormNewsletter = ({
   }, [form]);
 
   async function onSubmit(values: NewsletterSchema) {
-    const state = await subscribe(values.email, "madureira_newsletter_page");
+    const state = await subscribe(
+      values.email,
+      "madureira_newsletter_page",
+      hp,
+    );
 
     setSubmissionState(state);
 
@@ -122,6 +127,24 @@ export const FormNewsletter = ({
         <SubmissionStateMessage
           value={submissionState}
           reset={() => setSubmissionState(null)}
+        />
+
+        <input
+          type="text"
+          name="_hp"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          value={hp}
+          onChange={(e) => setHp(e.target.value)}
+          style={{
+            position: "absolute",
+            left: "-9999px",
+            width: 1,
+            height: 1,
+            opacity: 0,
+            pointerEvents: "none",
+          }}
         />
 
         <FormField

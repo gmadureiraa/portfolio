@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { marked } from "marked";
+import sanitizeHtml from "sanitize-html";
 
 const POSTS_DIR = path.join(process.cwd(), "content", "posts");
 
@@ -61,6 +62,17 @@ export function getLocalPostBySlug(slug: string): PostData | null {
       date: data.date || "2024-01-01",
       image: data.image || "/images/thumbnail.png",
     },
-    content: marked(content) as string,
+    content: sanitizeHtml(marked(content) as string, {
+      allowedTags: sanitizeHtml.defaults.allowedTags.concat([
+        "img",
+        "h1",
+        "h2",
+      ]),
+      allowedAttributes: {
+        ...sanitizeHtml.defaults.allowedAttributes,
+        img: ["src", "alt", "title", "loading", "width", "height"],
+        a: ["href", "name", "target", "rel"],
+      },
+    }),
   };
 }

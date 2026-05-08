@@ -21,6 +21,7 @@ export function CtaSection() {
   const [teamSize, setTeamSize] = useState<(typeof TEAM_SIZES)[number]>(
     TEAM_SIZES[0],
   );
+  const [hp, setHp] = useState("");
   const [status, setStatus] = useState<Status>({ kind: "idle" });
 
   const trimmedName = name.trim();
@@ -43,6 +44,7 @@ export function CtaSection() {
           teamSize,
           bottleneck: bottleneck.trim(),
           source: "madureira_consultoria",
+          _hp: hp,
         }),
       });
 
@@ -143,6 +145,23 @@ export function CtaSection() {
           onSubmit={handleSubmit}
           className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-6 lg:p-8 rounded-3xl border border-emerald-500/30 bg-zinc-900/60 backdrop-blur-sm"
         >
+          <input
+            type="text"
+            name="_hp"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            value={hp}
+            onChange={(e) => setHp(e.target.value)}
+            style={{
+              position: "absolute",
+              left: "-9999px",
+              width: 1,
+              height: 1,
+              opacity: 0,
+              pointerEvents: "none",
+            }}
+          />
           <label className="flex flex-col gap-1.5">
             <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-emerald-400">
               Nome

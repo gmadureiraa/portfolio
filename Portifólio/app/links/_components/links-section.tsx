@@ -23,9 +23,9 @@ const NEWSLETTER_BG_SRC =
   "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/alt-g7Cv2QzqL3k6ey3igjNYkM32d8Fld7.mp4";
 const NEWSLETTER_BG_PLACEHOLDER = "/newsletter/alt-placeholder.png";
 
-interface ViewTransitionDoc extends Document {
+type ViewTransitionDoc = Document & {
   startViewTransition?: (cb: () => void) => { finished: Promise<void> };
-}
+};
 
 export function LinksSection() {
   const [tab, setTab] = useState<TabId>("links");

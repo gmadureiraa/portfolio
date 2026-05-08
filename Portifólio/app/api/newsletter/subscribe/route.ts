@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { Redis } from "@upstash/redis";
 import { newsletterSchema } from "@/lib/schema";
 import { rateLimit, getClientIp } from "@/lib/rate-limit";
+import { isBot } from "@/lib/honeypot";
 import {
   addContactToAudience,
   sendWelcomeEmail,
@@ -68,6 +69,15 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json().catch(() => ({}));
+
+    // Honeypot anti-bot: campo `_hp` preenchido = bot, 200 silencioso.
+    if (isBot(body)) {
+      return NextResponse.json({
+        ok: true,
+        message: "Inscrição recebida! Em breve você recebe novidades.",
+      });
+    }
+
     const parsed = newsletterSchema.safeParse({ email: body?.email });
 
     if (!parsed.success) {

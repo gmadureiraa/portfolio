@@ -23,6 +23,7 @@ export function NewsletterSignup({
   className,
 }: NewsletterSignupProps) {
   const [email, setEmail] = useState("");
+  const [hp, setHp] = useState("");
   const [state, setState] = useState<
     | { status: "idle" }
     | { status: "loading" }
@@ -43,7 +44,7 @@ export function NewsletterSignup({
     }
 
     setState({ status: "loading" });
-    const result = await subscribe(parsed.data.email);
+    const result = await subscribe(parsed.data.email, "madureira_unknown", hp);
 
     if (result.success) {
       setState({ status: "success", message: result.data });
@@ -90,6 +91,23 @@ export function NewsletterSignup({
         onSubmit={handleSubmit}
         className={cn("mt-4 flex gap-2", isCompact && "mt-3")}
       >
+        <input
+          type="text"
+          name="_hp"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          value={hp}
+          onChange={(e) => setHp(e.target.value)}
+          style={{
+            position: "absolute",
+            left: "-9999px",
+            width: 1,
+            height: 1,
+            opacity: 0,
+            pointerEvents: "none",
+          }}
+        />
         <input
           type="email"
           inputMode="email"
