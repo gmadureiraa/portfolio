@@ -115,7 +115,7 @@ export async function POST(request: NextRequest) {
 
   // 2. Notifica Gabriel com payload completo via Resend.
   const cfg = getResendConfig("madureira");
-  if (cfg) {
+  if (cfg && cfg.ownerEmail) {
     try {
       const resend = new Resend(cfg.apiKey);
       const ts = brTimestamp();

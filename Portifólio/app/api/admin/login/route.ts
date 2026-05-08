@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
   ADMIN_COOKIE,
-  expectedCookieValue,
+  createSessionCookie,
   verifySecret,
 } from "@/lib/server/admin";
 import { rateLimit, getClientIp } from "@/lib/rate-limit";
@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const cookieValue = expectedCookieValue();
+  const cookieValue = createSessionCookie();
   if (!cookieValue) {
     return NextResponse.json(
       { ok: false, message: "ADMIN_SECRET não configurado no servidor." },
@@ -45,7 +45,9 @@ export async function POST(request: NextRequest) {
     secure: true,
     sameSite: "strict",
     path: "/",
-    maxAge: 60 * 60 * 24 * 30, // 30 dias
+    // Server cap server-side é 24h via `MAX_SESSION_AGE_SEC` em admin.ts —
+    // alinhamos o maxAge do cookie pra evitar cookies "vivos" inválidos.
+    maxAge: 60 * 60 * 24,
   });
   return res;
 }
