@@ -1,6 +1,7 @@
 import { NextRequest } from 'next/server';
 import nodemailer from 'nodemailer';
 import { rateLimit, getClientIp } from '@/lib/rate-limit';
+import { isBot, silentSuccess } from '@/lib/honeypot';
 
 const PHONE_REGEX = /^[+\d\s().-]{8,20}$/;
 
@@ -15,6 +16,12 @@ export async function POST(request: NextRequest) {
   }
 
   const body = await request.json().catch(() => ({}));
+
+  // Honeypot anti-bot: campo `_hp` preenchido = bot, 200 silencioso.
+  if (isBot(body)) {
+    return silentSuccess({ success: true });
+  }
+
   const whatsapp = typeof body?.whatsapp === 'string' ? body.whatsapp.trim() : '';
 
   if (!whatsapp || !PHONE_REGEX.test(whatsapp)) {

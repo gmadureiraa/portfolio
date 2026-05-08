@@ -13,6 +13,7 @@
 import { Resend } from "resend";
 import { getResendConfig } from "@/lib/integrations/resend";
 import { marked } from "marked";
+import sanitizeHtml from "sanitize-html";
 import type { Newsletter, Subscriber } from "@/lib/db/newsletter";
 
 const PRODUCT = "madureira" as const;
@@ -128,7 +129,21 @@ function renderNewsletterHtml(
   unsubscribeUrl: string,
   webUrl: string,
 ): string {
-  const bodyHtml = marked.parse(post.content_md, { async: false }) as string;
+  const bodyHtml = sanitizeHtml(
+    marked.parse(post.content_md, { async: false }) as string,
+    {
+      allowedTags: sanitizeHtml.defaults.allowedTags.concat([
+        "img",
+        "h1",
+        "h2",
+      ]),
+      allowedAttributes: {
+        ...sanitizeHtml.defaults.allowedAttributes,
+        img: ["src", "alt", "title", "loading", "width", "height"],
+        a: ["href", "name", "target", "rel"],
+      },
+    },
+  );
   const heroImg = post.hero_image_url
     ? `<tr><td style="padding:0 0 24px 0;">
          <img src="${post.hero_image_url}" alt="${escapeHtml(post.title)}" style="width:100%;border-radius:8px;display:block;" />

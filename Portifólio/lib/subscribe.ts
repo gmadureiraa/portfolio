@@ -3,12 +3,13 @@ import type { ActionResult } from "./utils";
 export async function subscribe(
   email: string,
   source: string = "madureira_unknown",
+  hp: string = "",
 ): Promise<ActionResult<string>> {
   try {
     const res = await fetch("/api/newsletter/subscribe", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, source }),
+      body: JSON.stringify({ email, source, _hp: hp }),
     });
 
     const data = await res.json();

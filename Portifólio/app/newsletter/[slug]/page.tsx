@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Instrument_Serif } from "next/font/google";
 import { marked } from "marked";
+import sanitizeHtml from "sanitize-html";
 import {
   getNewsletterBySlug,
   listPublishedNewsletters,
@@ -86,7 +87,21 @@ export default async function NewsletterPostPage({
   const post = await getNewsletterBySlug(slug).catch(() => null);
   if (!post || !post.published_at) notFound();
 
-  const html = marked.parse(post.content_md, { async: false }) as string;
+  const html = sanitizeHtml(
+    marked.parse(post.content_md, { async: false }) as string,
+    {
+      allowedTags: sanitizeHtml.defaults.allowedTags.concat([
+        "img",
+        "h1",
+        "h2",
+      ]),
+      allowedAttributes: {
+        ...sanitizeHtml.defaults.allowedAttributes,
+        img: ["src", "alt", "title", "loading", "width", "height"],
+        a: ["href", "name", "target", "rel"],
+      },
+    },
+  );
 
   return (
     <main className={`${instrumentSerif.variable} bg-background w-full`}>

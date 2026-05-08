@@ -5,6 +5,7 @@ import { subscribe } from "@/lib/subscribe";
 
 export function NewsletterPostFooterForm() {
   const [email, setEmail] = useState("");
+  const [hp, setHp] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">(
     "idle",
   );
@@ -14,7 +15,7 @@ export function NewsletterPostFooterForm() {
     e.preventDefault();
     if (!email.trim()) return;
     setStatus("loading");
-    const res = await subscribe(email.trim(), "madureira_post_footer");
+    const res = await subscribe(email.trim(), "madureira_post_footer", hp);
     if (res.success) {
       setStatus("ok");
       setMessage(res.data || "Inscrito.");
@@ -30,6 +31,23 @@ export function NewsletterPostFooterForm() {
       onSubmit={onSubmit}
       className="flex flex-col gap-3 sm:flex-row sm:items-center"
     >
+      <input
+        type="text"
+        name="_hp"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        value={hp}
+        onChange={(e) => setHp(e.target.value)}
+        style={{
+          position: "absolute",
+          left: "-9999px",
+          width: 1,
+          height: 1,
+          opacity: 0,
+          pointerEvents: "none",
+        }}
+      />
       <input
         type="email"
         required

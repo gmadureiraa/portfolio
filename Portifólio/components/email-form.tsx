@@ -33,6 +33,7 @@ const FormSchema = z.object({
 
 export function EmailForm() {
   const [isLoading, setIsLoading] = useState(false);
+  const [hp, setHp] = useState("");
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -48,7 +49,7 @@ export function EmailForm() {
       const res = await fetch("/api/send-telegram-contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ contato: data.contato }),
+        body: JSON.stringify({ contato: data.contato, _hp: hp }),
       });
       if (res.ok) {
         toast({
@@ -86,6 +87,23 @@ export function EmailForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
+        <input
+          type="text"
+          name="_hp"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          value={hp}
+          onChange={(e) => setHp(e.target.value)}
+          style={{
+            position: "absolute",
+            left: "-9999px",
+            width: 1,
+            height: 1,
+            opacity: 0,
+            pointerEvents: "none",
+          }}
+        />
         <div className="flex items-center gap-2 w-full">
           <FormField
             control={form.control}

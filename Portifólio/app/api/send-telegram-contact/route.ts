@@ -1,5 +1,6 @@
 import { NextRequest } from 'next/server';
 import { rateLimit, getClientIp } from '@/lib/rate-limit';
+import { isBot, silentSuccess } from '@/lib/honeypot';
 
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_USER_ID = process.env.TELEGRAM_USER_ID || '1568212499';
@@ -17,6 +18,12 @@ export async function POST(request: NextRequest) {
   }
 
   const body = await request.json().catch(() => ({}));
+
+  // Honeypot anti-bot: campo `_hp` preenchido = bot, 200 silencioso.
+  if (isBot(body)) {
+    return silentSuccess({ success: true });
+  }
+
   const contato = typeof body?.contato === 'string' ? body.contato.trim() : '';
 
   if (!TELEGRAM_BOT_TOKEN) {
