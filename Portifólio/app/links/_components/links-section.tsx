@@ -7,6 +7,7 @@ import { ProfileHeader } from "./profile-header";
 import { Footer } from "./footer";
 import { LinksPane } from "./links-pane";
 import { TabsToggle, type TabId } from "./tabs-toggle";
+import { AnimatedThemeToggler } from "@/components/magicui/animated-theme-toggler";
 import { Background as NewsletterBg } from "@/components/newsletter-synecdoche/background";
 import { NewsletterHero } from "@/components/newsletter-synecdoche/hero";
 import { NewsletterFooter as NewsletterPageFooter } from "@/components/newsletter-synecdoche/footer";
@@ -53,8 +54,9 @@ export function LinksSection() {
   return (
     <div className={instrumentSerif.variable}>
       {/* Tabs floating at top center — sempre visível, fora do view-transition pra ficar estável */}
-      <div className="fixed top-5 left-1/2 -translate-x-1/2 z-[100]">
+      <div className="fixed top-5 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-2">
         <TabsToggle value={tab} onChange={handleTabChange} />
+        <AnimatedThemeToggler />
       </div>
 
       {tab === "links" ? (

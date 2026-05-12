@@ -1,17 +1,63 @@
 /* Linktree — escopo isolado pra rota /links via layout.tsx */
 
+/* Default = dark (mantém visual original) */
 .links-page {
-  /* Pure near-black + warm vignette no topo, sutil */
+  --links-bg: #08080a;
+  --links-fg: #ededed;
+  --links-vignette-top: rgba(255, 255, 255, 0.05);
+  --links-vignette-bottom: rgba(0, 0, 0, 0.6);
+  --links-accent: #7cf067; /* Verde Kaleidos */
+  --links-tab-bg: rgba(255, 255, 255, 0.04);
+  --links-tab-border: rgba(255, 255, 255, 0.08);
+  --links-tab-shadow-inset: rgba(255, 255, 255, 0.06);
+  --links-tab-active-fg: #08080a;
+  --links-tab-idle-fg: rgba(255, 255, 255, 0.55);
+  --links-tab-idle-hover-fg: rgba(255, 255, 255, 0.85);
+  --links-glass-bg: rgba(255, 255, 255, 0.035);
+  --links-glass-bg-hover: rgba(255, 255, 255, 0.06);
+  --links-glass-border: rgba(255, 255, 255, 0.07);
+  --links-glass-border-hover: rgba(255, 255, 255, 0.14);
+  --links-pill-bg: rgba(255, 255, 255, 0.04);
+  --links-pill-bg-hover: rgba(255, 255, 255, 0.08);
+  --links-pill-border: rgba(255, 255, 255, 0.08);
+  --links-pill-border-hover: rgba(255, 255, 255, 0.18);
+  --links-noise-blend: overlay;
+  --links-noise-opacity: 0.025;
+
   background:
     radial-gradient(
       ellipse 70% 50% at 50% 0%,
-      rgba(255, 255, 255, 0.05) 0%,
+      var(--links-vignette-top) 0%,
       transparent 60%
     ),
-    #08080a;
-  color: #ededed;
+    var(--links-bg);
+  color: var(--links-fg);
   min-height: 100vh;
   position: relative;
+}
+
+/* Light mode — paper cream warm */
+html:not(.dark) .links-page {
+  --links-bg: #f5f1e8;
+  --links-fg: #0a0908;
+  --links-vignette-top: rgba(10, 9, 8, 0.04);
+  --links-vignette-bottom: rgba(10, 9, 8, 0.08);
+  --links-tab-bg: rgba(10, 9, 8, 0.05);
+  --links-tab-border: rgba(10, 9, 8, 0.12);
+  --links-tab-shadow-inset: rgba(255, 255, 255, 0.6);
+  --links-tab-active-fg: #0a0908;
+  --links-tab-idle-fg: rgba(10, 9, 8, 0.55);
+  --links-tab-idle-hover-fg: rgba(10, 9, 8, 0.85);
+  --links-glass-bg: rgba(255, 255, 255, 0.55);
+  --links-glass-bg-hover: rgba(255, 255, 255, 0.75);
+  --links-glass-border: rgba(10, 9, 8, 0.10);
+  --links-glass-border-hover: rgba(10, 9, 8, 0.18);
+  --links-pill-bg: rgba(255, 255, 255, 0.5);
+  --links-pill-bg-hover: rgba(255, 255, 255, 0.75);
+  --links-pill-border: rgba(10, 9, 8, 0.10);
+  --links-pill-border-hover: rgba(10, 9, 8, 0.22);
+  --links-noise-blend: multiply;
+  --links-noise-opacity: 0.05;
 }
 
 /* Vignette inferior pra dar profundidade */
@@ -24,7 +70,7 @@
   background:
     radial-gradient(
       ellipse 100% 60% at 50% 100%,
-      rgba(0, 0, 0, 0.6) 0%,
+      var(--links-vignette-bottom) 0%,
       transparent 70%
     );
 }
@@ -35,18 +81,18 @@
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  opacity: 0.025;
+  opacity: var(--links-noise-opacity, 0.025);
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-repeat: repeat;
-  mix-blend-mode: overlay;
+  mix-blend-mode: var(--links-noise-blend, overlay);
 }
 
 /* Glass card — uniform across all items, subtle hover */
 .glass-card {
-  background: rgba(255, 255, 255, 0.035);
+  background: var(--links-glass-bg, rgba(255, 255, 255, 0.035));
   backdrop-filter: blur(20px) saturate(140%);
   -webkit-backdrop-filter: blur(20px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--links-glass-border, rgba(255, 255, 255, 0.07));
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.06),
     0 4px 24px rgba(0, 0, 0, 0.25);
@@ -54,8 +100,8 @@
 }
 
 .glass-card:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.14);
+  background: var(--links-glass-bg-hover, rgba(255, 255, 255, 0.06));
+  border-color: var(--links-glass-border-hover, rgba(255, 255, 255, 0.14));
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.10),
     0 8px 32px rgba(0, 0, 0, 0.35);
@@ -63,20 +109,21 @@
 
 /* Glass pill — pra socials */
 .glass-pill {
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--links-pill-bg, rgba(255, 255, 255, 0.04));
   backdrop-filter: blur(16px) saturate(140%);
   -webkit-backdrop-filter: blur(16px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--links-pill-border, rgba(255, 255, 255, 0.08));
   transition: all 240ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .glass-pill:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.18);
+  background: var(--links-pill-bg-hover, rgba(255, 255, 255, 0.08));
+  border-color: var(--links-pill-border-hover, rgba(255, 255, 255, 0.18));
 }
 
-/* ---- View Transitions API — circular reveal estilo theme-toggle ---- */
+/* ---- View Transitions API — circular reveal compartilhado tab+theme ---- */
 @supports (view-transition-name: a) {
+  /* Tab change (Links <> Newsletter) — escopa pra .links-tab-pane */
   ::view-transition-old(links-tabs),
   ::view-transition-new(links-tabs) {
     animation: none;
@@ -95,6 +142,22 @@
   .links-tab-pane {
     view-transition-name: links-tabs;
   }
+
+  /* Theme toggle (dark <> light) — anima o root inteiro com a mesma curva */
+  html.vt-theme-toggling::view-transition-old(root),
+  html.vt-theme-toggling::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
+  html.vt-theme-toggling::view-transition-old(root) {
+    z-index: 1;
+  }
+
+  html.vt-theme-toggling::view-transition-new(root) {
+    z-index: 2;
+    animation: links-circle-reveal 560ms cubic-bezier(0.65, 0, 0.35, 1);
+  }
 }
 
 @keyframes links-circle-reveal {
@@ -111,12 +174,12 @@
   position: relative;
   display: inline-flex;
   padding: 4px;
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--links-tab-bg, rgba(255, 255, 255, 0.04));
   backdrop-filter: blur(20px) saturate(140%);
   -webkit-backdrop-filter: blur(20px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--links-tab-border, rgba(255, 255, 255, 0.08));
   border-radius: 999px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 1px 0 var(--links-tab-shadow-inset, rgba(255, 255, 255, 0.06));
 }
 
 .tab-segment-button {
@@ -126,17 +189,41 @@
   font-size: 12.5px;
   font-weight: 500;
   letter-spacing: 0.01em;
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--links-tab-idle-fg, rgba(255, 255, 255, 0.55));
   border-radius: 999px;
   transition: color 240ms ease;
 }
 
 .tab-segment-button[data-active="true"] {
-  color: #08080a;
+  color: var(--links-tab-active-fg, #08080a);
 }
 
 .tab-segment-button:not([data-active="true"]):hover {
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--links-tab-idle-hover-fg, rgba(255, 255, 255, 0.85));
+}
+
+/* Theme toggle button — glass pill ao lado do tabs */
+.theme-toggle-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: var(--links-tab-bg, rgba(255, 255, 255, 0.04));
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid var(--links-tab-border, rgba(255, 255, 255, 0.08));
+  box-shadow: inset 0 1px 0 var(--links-tab-shadow-inset, rgba(255, 255, 255, 0.06));
+  color: var(--links-tab-idle-hover-fg, rgba(255, 255, 255, 0.85));
+  cursor: pointer;
+  transition: transform 240ms ease, background 240ms ease, border-color 240ms ease;
+}
+
+.theme-toggle-pill:hover {
+  transform: translateY(-1px);
+  background: var(--links-pill-bg-hover);
+  border-color: var(--links-pill-border-hover);
 }
 
 .tab-segment-indicator {
@@ -144,8 +231,8 @@
   left: 0;
   top: 0;
   bottom: 0;
-  background: #c5ff4a;
+  background: var(--links-accent, #7cf067);
   border-radius: 999px;
-  box-shadow: 0 0 16px rgba(197, 255, 74, 0.35);
+  box-shadow: 0 0 16px rgba(124, 240, 103, 0.35);
   pointer-events: none;
 }
