@@ -37,21 +37,27 @@ export function LinkCard({ link, index }: LinkCardProps) {
       <div className="glass-card relative overflow-hidden rounded-2xl">
         <div className="relative flex items-center gap-4 px-5 py-5 min-h-[84px]">
           <motion.div
-            className={`
-              relative flex items-center justify-center w-11 h-11 rounded-xl shrink-0
-              ${
-                link.accent
-                  ? "bg-[#C5FF4A]/12 text-[#C5FF4A] ring-1 ring-[#C5FF4A]/25"
-                  : "bg-white/6 text-white/70 ring-1 ring-white/10 group-hover:bg-white/10 group-hover:text-white"
-              }
-            `}
+            className="relative flex items-center justify-center w-11 h-11 rounded-xl shrink-0 ring-1"
+            style={
+              link.accent
+                ? {
+                    background: "rgba(var(--links-accent-rgb), 0.12)",
+                    color: "var(--links-accent)",
+                    boxShadow: "inset 0 0 0 1px rgba(var(--links-accent-rgb), 0.25)",
+                  }
+                : {
+                    background: "var(--links-icon-bg)",
+                    color: "var(--links-icon-fg)",
+                    boxShadow: "inset 0 0 0 1px var(--links-icon-ring)",
+                  }
+            }
             animate={
               link.accent
                 ? {
-                    boxShadow: [
-                      "0 0 0px rgba(197,255,74,0)",
-                      "0 0 16px rgba(197,255,74,0.25)",
-                      "0 0 0px rgba(197,255,74,0)",
+                    filter: [
+                      "drop-shadow(0 0 0px rgba(var(--links-accent-rgb),0))",
+                      "drop-shadow(0 0 16px rgba(var(--links-accent-rgb),0.25))",
+                      "drop-shadow(0 0 0px rgba(var(--links-accent-rgb),0))",
                     ],
                   }
                 : undefined
@@ -72,27 +78,34 @@ export function LinkCard({ link, index }: LinkCardProps) {
               transition: { type: "spring", stiffness: 260, damping: 18 },
             }}
           >
-            {/* aura suave por trás dos lime accent */}
+            {/* aura suave por trás dos accent */}
             {link.accent && (
-              <span className="pointer-events-none absolute inset-0 rounded-xl bg-[#C5FF4A]/20 blur-md opacity-0 group-hover:opacity-60 transition-opacity duration-500" />
+              <span
+                className="pointer-events-none absolute inset-0 rounded-xl blur-md opacity-0 group-hover:opacity-60 transition-opacity duration-500"
+                style={{ background: "rgba(var(--links-accent-rgb), 0.20)" }}
+              />
             )}
             <Icon className="relative w-[20px] h-[20px]" />
           </motion.div>
 
           <div className="flex-1 min-w-0">
-            <h3 className="font-semibold text-[15px] leading-tight text-white tracking-tight">
+            <h3
+              className="font-semibold text-[15px] leading-tight tracking-tight"
+              style={{ color: "var(--links-fg-strong)" }}
+            >
               {link.title}
             </h3>
-            <p className="text-[12.5px] mt-1 text-white/55 truncate font-light">
+            <p
+              className="text-[12.5px] mt-1 truncate font-light"
+              style={{ color: "var(--links-fg-muted)" }}
+            >
               {link.description}
             </p>
           </div>
 
           <motion.div
-            className={`
-              shrink-0 transition-opacity duration-300 opacity-40 group-hover:opacity-100
-              ${link.accent ? "text-[#C5FF4A]" : "text-white/70"}
-            `}
+            className="shrink-0 transition-opacity duration-300 opacity-40 group-hover:opacity-100"
+            style={{ color: link.accent ? "var(--links-accent)" : "var(--links-icon-fg)" }}
             initial={false}
             whileHover={{ x: 2, y: -2 }}
           >

@@ -32,7 +32,8 @@ export function Footer() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.85 + i * 0.06 }}
-              className="glass-pill flex items-center justify-center w-10 h-10 rounded-xl text-white/55 hover:text-[#C5FF4A]"
+              className="glass-pill social-pill flex items-center justify-center w-10 h-10 rounded-xl"
+              style={{ color: "var(--links-fg-faint)" }}
             >
               <Icon className="w-[15px] h-[15px]" />
             </motion.a>
@@ -40,7 +41,10 @@ export function Footer() {
         })}
       </div>
 
-      <p className="text-[10.5px] text-white/30 tracking-[0.15em] font-mono uppercase">
+      <p
+        className="text-[10.5px] tracking-[0.15em] font-mono uppercase"
+        style={{ color: "var(--links-fg-dim)" }}
+      >
         madureira.xyz · 2026
       </p>
     </motion.footer>

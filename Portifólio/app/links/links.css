@@ -4,9 +4,24 @@
 .links-page {
   --links-bg: #08080a;
   --links-fg: #ededed;
+  --links-fg-strong: #ffffff;
+  --links-fg-muted: rgba(255, 255, 255, 0.65);
+  --links-fg-faint: rgba(255, 255, 255, 0.45);
+  --links-fg-dim: rgba(255, 255, 255, 0.30);
+  --links-fg-divider: rgba(255, 255, 255, 0.20);
   --links-vignette-top: rgba(255, 255, 255, 0.05);
   --links-vignette-bottom: rgba(0, 0, 0, 0.6);
   --links-accent: #7cf067; /* Verde Kaleidos */
+  --links-accent-rgb: 124, 240, 103;
+  --links-accent-fg: #08080a; /* texto sobre o accent */
+  --links-icon-bg: rgba(255, 255, 255, 0.06);
+  --links-icon-bg-hover: rgba(255, 255, 255, 0.10);
+  --links-icon-fg: rgba(255, 255, 255, 0.70);
+  --links-icon-fg-hover: #ffffff;
+  --links-icon-ring: rgba(255, 255, 255, 0.10);
+  --links-avatar-ring: rgba(255, 255, 255, 0.15);
+  --links-avatar-glow: rgba(255, 255, 255, 0.10);
+  --links-avatar-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.10);
   --links-tab-bg: rgba(255, 255, 255, 0.04);
   --links-tab-border: rgba(255, 255, 255, 0.08);
   --links-tab-shadow-inset: rgba(255, 255, 255, 0.06);
@@ -40,8 +55,22 @@
 html:not(.dark) .links-page {
   --links-bg: #f5f1e8;
   --links-fg: #0a0908;
+  --links-fg-strong: #0a0908;
+  --links-fg-muted: rgba(10, 9, 8, 0.72);
+  --links-fg-faint: rgba(10, 9, 8, 0.50);
+  --links-fg-dim: rgba(10, 9, 8, 0.32);
+  --links-fg-divider: rgba(10, 9, 8, 0.18);
   --links-vignette-top: rgba(10, 9, 8, 0.04);
   --links-vignette-bottom: rgba(10, 9, 8, 0.08);
+  --links-accent-fg: #ffffff;
+  --links-icon-bg: rgba(10, 9, 8, 0.05);
+  --links-icon-bg-hover: rgba(10, 9, 8, 0.10);
+  --links-icon-fg: rgba(10, 9, 8, 0.70);
+  --links-icon-fg-hover: #0a0908;
+  --links-icon-ring: rgba(10, 9, 8, 0.12);
+  --links-avatar-ring: rgba(10, 9, 8, 0.18);
+  --links-avatar-glow: rgba(10, 9, 8, 0.06);
+  --links-avatar-shadow: 0 8px 32px rgba(10, 9, 8, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.5);
   --links-tab-bg: rgba(10, 9, 8, 0.05);
   --links-tab-border: rgba(10, 9, 8, 0.12);
   --links-tab-shadow-inset: rgba(255, 255, 255, 0.6);
@@ -224,6 +253,11 @@ html:not(.dark) .links-page {
   transform: translateY(-1px);
   background: var(--links-pill-bg-hover);
   border-color: var(--links-pill-border-hover);
+}
+
+/* Social pill hover — vira accent */
+.social-pill:hover {
+  color: var(--links-accent) !important;
 }
 
 .tab-segment-indicator {
