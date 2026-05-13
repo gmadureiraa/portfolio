@@ -54,17 +54,17 @@ export function ProfileHeader() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
-        className="text-2xl font-bold tracking-tight"
+        className="ds-display text-[42px] sm:text-[48px]"
         style={{ color: "var(--links-fg-strong)" }}
       >
-        Gabriel Madureira
+        Gabriel <em style={{ color: "var(--links-accent)" }}>Madureira</em>
       </motion.h1>
 
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.25 }}
-        className="mt-1.5 text-[12.5px] font-mono tracking-wide"
+        className="ds-mono mt-2 text-[11px]"
         style={{ color: "var(--links-fg-faint)" }}
       >
         @ogmadureira
@@ -74,23 +74,19 @@ export function ProfileHeader() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
-        className="mt-4 text-[14px] max-w-xs leading-relaxed font-light"
+        className="ds-sans mt-5 text-[15px] max-w-[28ch] leading-relaxed font-normal"
         style={{ color: "var(--links-fg-muted)" }}
       >
-        construo IA dentro de operação de marketing.
+        founder kaleidos. construo ia dentro de operação de marketing.
         <br />
-        dezenas de clientes, 4 produtos. cripto, web3, fintech.
+        cripto, web3, fintech.
       </motion.p>
 
       <motion.div
         initial={{ scaleX: 0, opacity: 0 }}
         animate={{ scaleX: 1, opacity: 1 }}
         transition={{ delay: 0.4, duration: 0.5 }}
-        className="mt-6 w-12 h-px"
-        style={{
-          background:
-            "linear-gradient(90deg, transparent 0%, var(--links-fg-divider) 50%, transparent 100%)",
-        }}
+        className="ds-rule mt-7"
       />
     </motion.div>
   );

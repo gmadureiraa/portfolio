@@ -46,7 +46,7 @@ export const links: LinkItem[] = [
   {
     id: "kaleidos",
     title: "Kaleidos",
-    description: "Agência de IA pra cripto, web3 e fintech",
+    description: "Minha agência de criação de conteúdo",
     url: "https://kaleidos.com.br",
     icon: Building2,
     accent: true,
@@ -54,7 +54,7 @@ export const links: LinkItem[] = [
   {
     id: "ia-kaleidos",
     title: "Economize até 50% do seu tempo com IA",
-    description: "Diagnóstico gratuito · sem compromisso",
+    description: "Consultoria grátis · 15 min",
     url: "https://kaleidos.com.br/servicos/ia-automacoes-completa",
     icon: Sparkles,
     accent: true,

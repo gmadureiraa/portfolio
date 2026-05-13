@@ -1,9 +1,9 @@
 /* Linktree — escopo isolado pra rota /links via layout.tsx */
 
-/* Default = dark (mantém visual original) */
+/* Default = dark — DS Madureira (ink-10 soft black + cream fg) */
 .links-page {
-  --links-bg: #08080a;
-  --links-fg: #ededed;
+  --links-bg: #0a0908;
+  --links-fg: #f4f1ea;
   --links-fg-strong: #ffffff;
   --links-fg-muted: rgba(255, 255, 255, 0.65);
   --links-fg-faint: rgba(255, 255, 255, 0.45);
@@ -11,9 +11,9 @@
   --links-fg-divider: rgba(255, 255, 255, 0.20);
   --links-vignette-top: rgba(255, 255, 255, 0.05);
   --links-vignette-bottom: rgba(0, 0, 0, 0.6);
-  --links-accent: #7cf067; /* Verde Kaleidos */
-  --links-accent-rgb: 124, 240, 103;
-  --links-accent-fg: #08080a; /* texto sobre o accent */
+  --links-accent: #e63a1f; /* Signal Vermilion — DS Madureira */
+  --links-accent-rgb: 230, 58, 31;
+  --links-accent-fg: #ffffff; /* texto sobre o accent */
   --links-icon-bg: rgba(255, 255, 255, 0.06);
   --links-icon-bg-hover: rgba(255, 255, 255, 0.10);
   --links-icon-fg: rgba(255, 255, 255, 0.70);
@@ -265,8 +265,30 @@ html:not(.dark) .links-page {
   left: 0;
   top: 0;
   bottom: 0;
-  background: var(--links-accent, #7cf067);
+  background: var(--links-accent, #e63a1f);
   border-radius: 999px;
-  box-shadow: 0 0 16px rgba(124, 240, 103, 0.35);
+  box-shadow: 0 0 16px rgba(230, 58, 31, 0.40);
   pointer-events: none;
+}
+
+/* === DS Madureira typography helpers (escopo .links-page) === */
+.links-page .ds-display {
+  font-family: "Fraunces", "Cormorant Garamond", "Times New Roman", Georgia, serif;
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+.links-page .ds-mono {
+  font-family: "Geist Mono", "JetBrains Mono", ui-monospace, monospace;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.links-page .ds-sans {
+  font-family: "Geist", "Inter", system-ui, -apple-system, sans-serif;
+}
+.links-page .ds-rule {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--links-fg-divider) 50%, transparent 100%);
 }
