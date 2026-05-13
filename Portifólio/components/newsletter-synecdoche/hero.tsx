@@ -3,6 +3,7 @@
 import type React from "react";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { Button, buttonVariants } from "./internal/button";
 import { FormNewsletter } from "./form";
 import { AnimatePresence, motion } from "framer-motion";
@@ -163,7 +164,10 @@ export const NewsletterHero = () => {
             layout="position"
             transition={SPRING}
             key="button"
-            className={isOpen ? "my-6" : "mt-6"}
+            className={cn(
+              "flex items-center gap-3",
+              isOpen ? "my-6" : "mt-6",
+            )}
           >
             <Button
               className={cn("relative px-8")}
@@ -196,6 +200,22 @@ export const NewsletterHero = () => {
                 </motion.div>
               )}
             </Button>
+
+            {/* Botão "Ler news" — aparece ao lado quando manifesto está fechado.
+                Some quando manifesto está aberto pra não competir visualmente
+                com o card de texto que se expande. */}
+            {!isOpen && (
+              <Link
+                href="/newsletter"
+                className={cn(
+                  buttonVariants({ variant: "ghost" }),
+                  "relative px-8 inline-flex items-center gap-2 border border-border",
+                )}
+              >
+                Ler news
+                <ArrowRightIcon className="size-4" />
+              </Link>
+            )}
           </motion.div>
 
           {isOpen && (
