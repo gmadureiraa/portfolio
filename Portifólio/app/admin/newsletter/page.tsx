@@ -62,15 +62,18 @@ export default async function AdminNewsletterPage() {
 
   return (
     <main className="bg-background min-h-screen w-full px-6 py-12 md:px-12">
-      <div className="mx-auto max-w-5xl">
-        <header className="mb-10 flex items-center justify-between border-b border-neutral-800 pb-6">
+      <div className="mx-auto max-w-6xl">
+        <header className="mb-10 flex items-end justify-between border-b border-border pb-6">
           <div>
-            <p className="text-xs uppercase tracking-widest text-neutral-500">
-              Admin
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+              ● Admin · Madureira®
             </p>
-            <h1 className="mt-1 text-3xl font-semibold text-foreground">
-              Newsletter
+            <h1 className="mt-3 font-serif text-5xl font-light italic leading-none text-foreground">
+              A Carta
             </h1>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Editor de newsletter, agendamento e envio pra base confirmada.
+            </p>
           </div>
         </header>
 
