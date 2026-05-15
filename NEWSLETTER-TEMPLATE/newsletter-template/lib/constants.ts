@@ -19,11 +19,18 @@ export const siteMeta = {
 };
 
 export const navTabs = [
-  { label: "Marketing", href: "/marketing" },
-  { label: "IA & Automação", href: "/ia-automacao" },
-  { label: "Cases & Bastidor", href: "/cases" },
-  { label: "Carrosséis", href: "/carrosseis" },
+  { label: "Início", href: "/" },
   { label: "Newsletter", href: "/newsletter" },
+  { label: "Links", href: "/links" },
+];
+
+// Categorias usadas como filtros secundários na seção "Cartas do Madureira"
+export const newsletterCategories = [
+  "Todas",
+  "Marketing",
+  "IA & Automação",
+  "Cases & Bastidor",
+  "Carrosséis",
 ];
 
 export type Issue = {

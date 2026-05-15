@@ -97,19 +97,20 @@ export function Header({ onSubscribe }: { onSubscribe?: () => void }) {
       {/* Nav tabs */}
       <nav className="border-t border-ink-20">
         <div className="mx-auto max-w-page px-4 sm:px-6 lg:px-8">
-          <ul className="flex items-center gap-1 overflow-x-auto no-scrollbar -mx-2 md:mx-0">
-            <li>
-              <NavLink href="/" active={pathname === "/"}>
-                Home
-              </NavLink>
-            </li>
-            {navTabs.map((tab) => (
-              <li key={tab.href}>
-                <NavLink href={tab.href} active={pathname === tab.href}>
-                  {tab.label}
-                </NavLink>
-              </li>
-            ))}
+          <ul className="flex items-center justify-center gap-1 overflow-x-auto no-scrollbar -mx-2 md:mx-0">
+            {navTabs.map((tab) => {
+              const isActive =
+                tab.href === "/"
+                  ? pathname === "/"
+                  : pathname === tab.href || pathname.startsWith(`${tab.href}/`);
+              return (
+                <li key={tab.href}>
+                  <NavLink href={tab.href} active={isActive}>
+                    {tab.label}
+                  </NavLink>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </nav>
@@ -118,15 +119,6 @@ export function Header({ onSubscribe }: { onSubscribe?: () => void }) {
       {open && (
         <div className="md:hidden border-t border-ink-20 bg-ink-10">
           <ul className="px-4 py-3 space-y-1">
-            <li>
-              <Link
-                href="/"
-                onClick={() => setOpen(false)}
-                className="block py-2 text-ink-95 font-medium"
-              >
-                Home
-              </Link>
-            </li>
             {navTabs.map((t) => (
               <li key={t.href}>
                 <Link
@@ -158,15 +150,15 @@ function NavLink({
     <Link
       href={href}
       className={cn(
-        "relative inline-flex items-center px-3 py-3 text-sm transition-colors whitespace-nowrap",
+        "relative inline-flex items-center px-4 py-3 font-mono text-[11px] uppercase tracking-[0.12em] transition-colors whitespace-nowrap",
         active
-          ? "text-ink-95 font-medium"
-          : "text-ink-70 hover:text-ink-95 font-medium"
+          ? "text-ink-95"
+          : "text-ink-70 hover:text-ink-95"
       )}
     >
       {children}
       {active && (
-        <span className="absolute left-3 right-3 bottom-0 h-px bg-ink-95" />
+        <span className="absolute left-4 right-4 bottom-0 h-px bg-ink-95" />
       )}
     </Link>
   );

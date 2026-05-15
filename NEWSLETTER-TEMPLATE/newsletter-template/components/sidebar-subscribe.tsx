@@ -108,23 +108,6 @@ export function SidebarSubscribe() {
           <SocialLink href={socialLinks.linkedin} label="LinkedIn" />
         </ul>
       </div>
-
-      {/* Recommendations */}
-      <div>
-        <p className="eyebrow text-ink-50 mb-3">recomendações</p>
-        <ul className="space-y-3">
-          <Recommendation
-            name="Defiverso"
-            tagline="cripto pra quem entende de marketing"
-            href="https://defiverso.com.br"
-          />
-          <Recommendation
-            name="Kaleidos"
-            tagline="agência de marketing digital"
-            href="https://kaleidos.com.br"
-          />
-        </ul>
-      </div>
     </aside>
   );
 }
@@ -145,26 +128,3 @@ function SocialLink({ href, label }: { href: string; label: string }) {
   );
 }
 
-function Recommendation({
-  name,
-  tagline,
-  href,
-}: {
-  name: string;
-  tagline: string;
-  href: string;
-}) {
-  return (
-    <li>
-      <Link
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block py-2 border-l border-ink-30 pl-3 hover:border-ink-50 transition-colors"
-      >
-        <p className="text-sm text-ink-95 font-medium">{name}</p>
-        <p className="meta text-ink-70 mt-0.5">{tagline}</p>
-      </Link>
-    </li>
-  );
-}
