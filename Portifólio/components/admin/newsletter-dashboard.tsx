@@ -5,8 +5,24 @@ import { marked } from "marked";
 import sanitizeHtml from "sanitize-html";
 import slugify from "slugify";
 import Link from "next/link";
+import {
+  Bold,
+  Italic,
+  Link2,
+  Image as ImageIcon,
+  Heading2,
+  Heading3,
+  Quote,
+  List as ListIcon,
+  Code,
+  Code2,
+  Upload,
+  X,
+} from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import type { Newsletter } from "@/lib/db/newsletter";
+
+const UPLOAD_ENDPOINT = "/api/admin/newsletter/upload-image";
 
 interface Props {
   initialPosts: Newsletter[];
@@ -111,6 +127,159 @@ export function AdminNewsletterDashboard({ initialPosts }: Props) {
   const DRAFT_KEY = "madureira_newsletter_draft_v1";
   const editingRef = useRef(editing);
   editingRef.current = editing;
+
+  // ----- editor refs + estado de upload -----
+  const bodyTextareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const bodyFileInputRef = useRef<HTMLInputElement | null>(null);
+  const [uploading, setUploading] = useState<null | "body" | "hero" | "og">(null);
+  const [dragOverBody, setDragOverBody] = useState(false);
+
+  // ----- upload helper (compartilhado entre toolbar, drop, paste, hero/og) -----
+  async function uploadImage(file: File): Promise<string | null> {
+    if (!file.type.startsWith("image/")) {
+      toast({
+        title: "Arquivo inválido",
+        description: "Só imagens (JPG/PNG/WEBP/GIF).",
+        variant: "destructive",
+      });
+      return null;
+    }
+    const fd = new FormData();
+    fd.append("file", file);
+    try {
+      const res = await fetch(UPLOAD_ENDPOINT, {
+        method: "POST",
+        body: fd,
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) {
+        toast({
+          title: "Upload falhou",
+          description: data.error || `HTTP ${res.status}`,
+          variant: "destructive",
+        });
+        return null;
+      }
+      return data.url as string;
+    } catch (err) {
+      toast({
+        title: "Falha de rede",
+        description: err instanceof Error ? err.message : "Tente de novo.",
+        variant: "destructive",
+      });
+      return null;
+    }
+  }
+
+  // ----- insert text at cursor (toolbar markdown) -----
+  function insertAtCursor(snippet: string, opts: { wrap?: boolean; placeholder?: string } = {}) {
+    const ta = bodyTextareaRef.current;
+    if (!ta || !editingRef.current) return;
+    const cur = editingRef.current.content_md;
+    const start = ta.selectionStart;
+    const end = ta.selectionEnd;
+    const before = cur.substring(0, start);
+    const selected = cur.substring(start, end);
+    const after = cur.substring(end);
+
+    let inserted: string;
+    let cursorStart: number;
+    let cursorEnd: number;
+
+    if (opts.wrap && snippet.includes("$1")) {
+      const fill = selected || opts.placeholder || "";
+      inserted = snippet.replace("$1", fill);
+      // Posicionar cursor: se havia seleção, mantém ela selecionada wrappada.
+      // Se não havia, cursor no meio do snippet (onde $1 estava).
+      if (selected) {
+        cursorStart = before.length;
+        cursorEnd = before.length + inserted.length;
+      } else {
+        const pos = snippet.indexOf("$1");
+        cursorStart = before.length + pos;
+        cursorEnd = cursorStart + fill.length;
+      }
+    } else {
+      inserted = snippet;
+      cursorStart = before.length + inserted.length;
+      cursorEnd = cursorStart;
+    }
+
+    const next = before + inserted + after;
+    updateField("content_md", next);
+    setTimeout(() => {
+      ta.focus();
+      ta.setSelectionRange(cursorStart, cursorEnd);
+    }, 0);
+  }
+
+  async function handleBodyImageUpload(file: File) {
+    setUploading("body");
+    try {
+      const url = await uploadImage(file);
+      if (url) {
+        const alt = file.name.replace(/\.[^.]+$/, "");
+        insertAtCursor(`![${alt}](${url})\n\n`);
+        toast({ title: "Imagem enviada", description: file.name });
+      }
+    } finally {
+      setUploading(null);
+    }
+  }
+
+  async function handleHeroUpload(file: File) {
+    setUploading("hero");
+    try {
+      const url = await uploadImage(file);
+      if (url) {
+        updateField("hero_image_url", url);
+        toast({ title: "Hero atualizada" });
+      }
+    } finally {
+      setUploading(null);
+    }
+  }
+
+  async function handleOgUpload(file: File) {
+    setUploading("og");
+    try {
+      const url = await uploadImage(file);
+      if (url) {
+        updateField("og_image_url", url);
+        toast({ title: "OG atualizada" });
+      }
+    } finally {
+      setUploading(null);
+    }
+  }
+
+  function onBodyDrop(e: React.DragEvent<HTMLTextAreaElement>) {
+    e.preventDefault();
+    setDragOverBody(false);
+    const files = Array.from(e.dataTransfer.files).filter((f) =>
+      f.type.startsWith("image/"),
+    );
+    if (files.length === 0) return;
+    // Sobe sequencial pra preservar ordem de inserção no texto.
+    (async () => {
+      for (const f of files) {
+        await handleBodyImageUpload(f);
+      }
+    })();
+  }
+
+  function onBodyPaste(e: React.ClipboardEvent<HTMLTextAreaElement>) {
+    const items = Array.from(e.clipboardData.items);
+    const imageItems = items.filter((it) => it.type.startsWith("image/"));
+    if (imageItems.length === 0) return;
+    e.preventDefault();
+    (async () => {
+      for (const item of imageItems) {
+        const f = item.getAsFile();
+        if (f) await handleBodyImageUpload(f);
+      }
+    })();
+  }
 
   useEffect(() => {
     if (!editing) return;
@@ -491,33 +660,155 @@ export function AdminNewsletterDashboard({ initialPosts }: Props) {
               placeholder="Resumo da edição — frase curta, direta, com tese clara."
             />
 
-            <Field
-              label="Conteúdo (Markdown)"
-              required
-              value={editing.content_md}
-              onChange={(v) => updateField("content_md", v)}
-              textarea
-              rows={22}
-              mono
-              error={bodyEmpty ? "Obrigatório." : undefined}
-              placeholder={"# Heading opcional\n\nSeu primeiro parágrafo vira a drop-cap.\n\n## Subtítulo\n\n- bullet\n- bullet"}
-              hint={`${editorWords} palavras · ${editorReadMin} min de leitura`}
-            />
+            {/* Conteúdo (Markdown) com toolbar */}
+            <div className="flex flex-col gap-1.5">
+              <span className="flex items-center justify-between">
+                <span className={`${MONO_CLASS} text-foreground`}>
+                  Conteúdo (Markdown)
+                  <span className="ml-1 text-destructive">*</span>
+                </span>
+              </span>
+
+              {/* Toolbar */}
+              <div
+                className="flex flex-wrap items-center gap-1 rounded-t-md border border-input border-b-0 bg-muted/40 px-2 py-1.5"
+                role="toolbar"
+                aria-label="Markdown toolbar"
+              >
+                <ToolbarBtn
+                  title="Negrito (Ctrl/Cmd+B)"
+                  onClick={() => insertAtCursor("**$1**", { wrap: true, placeholder: "texto" })}
+                >
+                  <Bold className="h-3.5 w-3.5" />
+                </ToolbarBtn>
+                <ToolbarBtn
+                  title="Itálico (Ctrl/Cmd+I)"
+                  onClick={() => insertAtCursor("_$1_", { wrap: true, placeholder: "texto" })}
+                >
+                  <Italic className="h-3.5 w-3.5" />
+                </ToolbarBtn>
+                <ToolbarBtn
+                  title="Link (Ctrl/Cmd+K)"
+                  onClick={() => {
+                    const url = window.prompt("URL do link:", "https://");
+                    if (!url) return;
+                    insertAtCursor(`[$1](${url})`, { wrap: true, placeholder: "texto" });
+                  }}
+                >
+                  <Link2 className="h-3.5 w-3.5" />
+                </ToolbarBtn>
+                <ToolbarBtn
+                  title="Inserir imagem (upload)"
+                  onClick={() => bodyFileInputRef.current?.click()}
+                  loading={uploading === "body"}
+                >
+                  <ImageIcon className="h-3.5 w-3.5" />
+                </ToolbarBtn>
+
+                <ToolbarSep />
+
+                <ToolbarBtn
+                  title="Subtítulo H2"
+                  onClick={() => insertAtCursor("\n## ")}
+                >
+                  <Heading2 className="h-3.5 w-3.5" />
+                </ToolbarBtn>
+                <ToolbarBtn
+                  title="Subtítulo H3"
+                  onClick={() => insertAtCursor("\n### ")}
+                >
+                  <Heading3 className="h-3.5 w-3.5" />
+                </ToolbarBtn>
+                <ToolbarBtn
+                  title="Citação"
+                  onClick={() => insertAtCursor("\n> ")}
+                >
+                  <Quote className="h-3.5 w-3.5" />
+                </ToolbarBtn>
+                <ToolbarBtn
+                  title="Lista"
+                  onClick={() => insertAtCursor("\n- ")}
+                >
+                  <ListIcon className="h-3.5 w-3.5" />
+                </ToolbarBtn>
+
+                <ToolbarSep />
+
+                <ToolbarBtn
+                  title="Código inline"
+                  onClick={() => insertAtCursor("`$1`", { wrap: true, placeholder: "code" })}
+                >
+                  <Code className="h-3.5 w-3.5" />
+                </ToolbarBtn>
+                <ToolbarBtn
+                  title="Bloco de código"
+                  onClick={() => insertAtCursor("\n```\n$1\n```\n", { wrap: true, placeholder: "" })}
+                >
+                  <Code2 className="h-3.5 w-3.5" />
+                </ToolbarBtn>
+              </div>
+
+              {/* Hidden file input para botão imagem da toolbar */}
+              <input
+                ref={bodyFileInputRef}
+                type="file"
+                accept="image/jpeg,image/png,image/webp,image/gif"
+                className="hidden"
+                onChange={(e) => {
+                  const f = e.target.files?.[0];
+                  if (f) handleBodyImageUpload(f);
+                  // permite reupload do mesmo arquivo depois
+                  e.target.value = "";
+                }}
+              />
+
+              <textarea
+                ref={bodyTextareaRef}
+                value={editing.content_md}
+                onChange={(e) => updateField("content_md", e.target.value)}
+                onDrop={onBodyDrop}
+                onDragOver={(e) => {
+                  if (Array.from(e.dataTransfer.types).includes("Files")) {
+                    e.preventDefault();
+                    setDragOverBody(true);
+                  }
+                }}
+                onDragLeave={() => setDragOverBody(false)}
+                onPaste={onBodyPaste}
+                rows={22}
+                placeholder={
+                  "# Heading opcional\n\nSeu primeiro parágrafo vira a drop-cap.\n\n## Subtítulo\n\n- bullet\n- bullet\n\nDica: arrasta ou cola uma imagem direto no editor."
+                }
+                className={`rounded-b-md border border-input border-t-0 bg-background px-3 py-2 font-mono text-[13px] leading-relaxed text-foreground placeholder:text-muted-foreground focus:border-foreground focus:outline-none ${
+                  bodyEmpty ? "border-destructive" : ""
+                } ${dragOverBody ? "ring-2 ring-foreground ring-offset-1" : ""}`}
+              />
+              {bodyEmpty ? (
+                <span className="text-xs text-destructive">Obrigatório.</span>
+              ) : (
+                <span className="text-xs text-muted-foreground">
+                  {editorWords} palavras · {editorReadMin} min de leitura · arrasta/cola imagem
+                  {uploading === "body" ? " · enviando…" : ""}
+                </span>
+              )}
+            </div>
 
             <div className="grid gap-4 md:grid-cols-2">
-              <Field
-                label="Hero image URL"
+              <ImageUploadField
+                label="Hero image"
+                hint="Aparece no topo do post."
                 value={editing.hero_image_url}
                 onChange={(v) => updateField("hero_image_url", v)}
-                hint="Aparece no topo do post."
-                placeholder="https://…"
+                onUpload={handleHeroUpload}
+                uploading={uploading === "hero"}
               />
-              <Field
-                label="OG image URL"
+              <ImageUploadField
+                label="OG image"
+                hint="Imagem em links sociais. Default: hero."
                 value={editing.og_image_url}
                 onChange={(v) => updateField("og_image_url", v)}
-                hint="Imagem em links sociais. Default: hero."
-                placeholder="https://…"
+                onUpload={handleOgUpload}
+                uploading={uploading === "og"}
               />
             </div>
 
@@ -946,5 +1237,165 @@ function Td({ children, align }: { children: React.ReactNode; align?: "right" })
     >
       {children}
     </td>
+  );
+}
+
+// ---------- Toolbar markdown ----------
+
+function ToolbarBtn({
+  title,
+  onClick,
+  children,
+  loading,
+}: {
+  title: string;
+  onClick: () => void;
+  children: React.ReactNode;
+  loading?: boolean;
+}) {
+  return (
+    <button
+      type="button"
+      title={title}
+      aria-label={title}
+      onClick={onClick}
+      disabled={loading}
+      className="inline-flex h-7 w-7 items-center justify-center rounded border border-transparent text-muted-foreground transition-colors hover:border-border hover:bg-background hover:text-foreground disabled:opacity-50"
+    >
+      {loading ? (
+        <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-current" />
+      ) : (
+        children
+      )}
+    </button>
+  );
+}
+
+function ToolbarSep() {
+  return <span className="mx-1 h-4 w-px bg-border" aria-hidden />;
+}
+
+// ---------- Image upload field (hero / og) ----------
+
+function ImageUploadField({
+  label,
+  hint,
+  value,
+  onChange,
+  onUpload,
+  uploading,
+}: {
+  label: string;
+  hint?: string;
+  value: string;
+  onChange: (v: string) => void;
+  onUpload: (file: File) => void | Promise<void>;
+  uploading?: boolean;
+}) {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [dragOver, setDragOver] = useState(false);
+
+  function onDrop(e: React.DragEvent<HTMLDivElement>) {
+    e.preventDefault();
+    setDragOver(false);
+    const f = Array.from(e.dataTransfer.files).find((x) =>
+      x.type.startsWith("image/"),
+    );
+    if (f) onUpload(f);
+  }
+
+  return (
+    <div className="flex flex-col gap-1.5">
+      <span className={`${MONO_CLASS} text-foreground`}>{label}</span>
+
+      <div
+        onDrop={onDrop}
+        onDragOver={(e) => {
+          if (Array.from(e.dataTransfer.types).includes("Files")) {
+            e.preventDefault();
+            setDragOver(true);
+          }
+        }}
+        onDragLeave={() => setDragOver(false)}
+        className={`flex flex-col gap-2 rounded-md border border-dashed bg-card p-3 transition-colors ${
+          dragOver ? "border-foreground bg-muted/40" : "border-border"
+        }`}
+      >
+        {value ? (
+          <div className="flex items-start gap-3">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={value}
+              alt=""
+              className="h-20 w-32 flex-shrink-0 rounded border border-border object-cover"
+            />
+            <div className="flex flex-1 flex-col gap-2 min-w-0">
+              <input
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+                placeholder="https://…"
+                className="h-9 w-full rounded-md border border-input bg-background px-2 font-mono text-xs text-foreground placeholder:text-muted-foreground focus:border-foreground focus:outline-none"
+              />
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => inputRef.current?.click()}
+                  disabled={uploading}
+                  className={`${MONO_CLASS} inline-flex h-8 items-center gap-1.5 rounded-md border border-border bg-background px-2 text-foreground hover:bg-muted disabled:opacity-60`}
+                >
+                  <Upload className="h-3 w-3" />
+                  {uploading ? "Enviando…" : "Trocar"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onChange("")}
+                  className={`${MONO_CLASS} inline-flex h-8 items-center gap-1.5 rounded-md border border-border bg-background px-2 text-muted-foreground hover:bg-muted hover:text-foreground`}
+                >
+                  <X className="h-3 w-3" />
+                  Limpar
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="flex flex-col items-center gap-2 py-4 text-center">
+            <button
+              type="button"
+              onClick={() => inputRef.current?.click()}
+              disabled={uploading}
+              className={`${MONO_CLASS} inline-flex h-9 items-center gap-1.5 rounded-md border border-border bg-background px-3 text-foreground hover:bg-muted disabled:opacity-60`}
+            >
+              <Upload className="h-3.5 w-3.5" />
+              {uploading ? "Enviando…" : "Upload"}
+            </button>
+            <p className="text-xs text-muted-foreground">
+              ou arraste · JPG/PNG/WEBP, máx 8MB
+            </p>
+            <input
+              value={value}
+              onChange={(e) => onChange(e.target.value)}
+              placeholder="ou cole URL: https://…"
+              className="mt-1 h-8 w-full rounded-md border border-input bg-background px-2 font-mono text-xs text-foreground placeholder:text-muted-foreground focus:border-foreground focus:outline-none"
+            />
+          </div>
+        )}
+      </div>
+
+      <input
+        ref={inputRef}
+        type="file"
+        accept="image/jpeg,image/png,image/webp,image/gif"
+        className="hidden"
+        onChange={(e) => {
+          const f = e.target.files?.[0];
+          if (f) onUpload(f);
+          e.target.value = "";
+        }}
+      />
+
+      {hint ? (
+        <span className="text-xs text-muted-foreground">{hint}</span>
+      ) : null}
+    </div>
   );
 }

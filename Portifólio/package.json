@@ -24,6 +24,7 @@
     "@radix-ui/react-toast": "^1.2.15",
     "@types/sanitize-html": "^2.16.1",
     "@upstash/redis": "^1.38.0",
+    "@vercel/blob": "^2.3.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
