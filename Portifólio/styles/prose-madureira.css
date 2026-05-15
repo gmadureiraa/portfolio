@@ -1,0 +1,172 @@
+/* ============================================================
+ * Madureira Prose — look editorial canônico (carta)
+ *
+ * Extraído de app/newsletter/[slug]/page.tsx (era classe `.nl-prose`
+ * inline em <style jsx>). Renomeado pra `.madureira-prose` pra ficar
+ * genérico — não amarra à newsletter.
+ *
+ * Características:
+ * - Inter 16px / line-height 1.78
+ * - Drop-cap Fraunces italic 4.4em no primeiro parágrafo
+ * - Headings h2/h3 Fraunces italic 300, clamp responsivo
+ * - Blockquote Fraunces italic 1.22em com border-left
+ * - Links underline sutil, hover muda cor (sem accent vermelho)
+ * - Code inline mono pequeno + bg muted
+ * - Pre block bg muted + border + overflow-x-auto
+ *
+ * Theme-aware: usa CSS vars do design system (--foreground,
+ * --background, --muted-foreground, --border, --muted) — funciona
+ * em light e dark automaticamente.
+ *
+ * Aplicado em:
+ *   - /newsletter/[slug]
+ *   - /posts/[slug]
+ * ============================================================ */
+
+.madureira-prose {
+  font-size: 16px;
+  line-height: 1.78;
+  color: hsl(var(--foreground) / 0.86);
+  font-family: var(--font-inter), "Inter", system-ui, -apple-system, sans-serif;
+  font-feature-settings: "ss01", "cv11";
+}
+
+.madureira-prose > p:first-of-type::first-letter {
+  float: left;
+  font-family: var(--font-fraunces), "Fraunces", Georgia, serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 4.4em;
+  line-height: 0.82;
+  padding: 6px 12px 0 0;
+  color: hsl(var(--foreground));
+}
+
+.madureira-prose p {
+  margin: 0 0 1.5em;
+}
+
+.madureira-prose h2 {
+  font-family: var(--font-fraunces), "Fraunces", Georgia, serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(25px, 3.5vw, 33px);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: hsl(var(--foreground));
+  margin: 2.4em 0 0.7em;
+}
+
+.madureira-prose h3 {
+  font-family: var(--font-fraunces), "Fraunces", Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(19px, 2.6vw, 24px);
+  line-height: 1.2;
+  color: hsl(var(--foreground));
+  margin: 2em 0 0.6em;
+}
+
+.madureira-prose a {
+  color: hsl(var(--foreground));
+  text-decoration: underline;
+  text-decoration-color: hsl(var(--foreground));
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+.madureira-prose a:hover {
+  color: hsl(var(--foreground));
+  opacity: 0.7;
+}
+
+.madureira-prose strong {
+  color: hsl(var(--foreground));
+  font-weight: 600;
+}
+
+.madureira-prose em {
+  font-style: italic;
+}
+
+.madureira-prose ul,
+.madureira-prose ol {
+  margin: 0 0 1.5em;
+  padding-left: 1.4em;
+}
+
+.madureira-prose li {
+  margin: 0.4em 0;
+}
+
+.madureira-prose li::marker {
+  color: hsl(var(--foreground));
+}
+
+.madureira-prose blockquote {
+  margin: 1.8em 0;
+  padding: 4px 0 4px 24px;
+  border-left: 2px solid hsl(var(--foreground));
+  font-family: var(--font-fraunces), "Fraunces", Georgia, serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1.22em;
+  line-height: 1.5;
+  color: hsl(var(--foreground));
+}
+
+.madureira-prose blockquote p {
+  margin: 0;
+}
+
+.madureira-prose img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid hsl(var(--border));
+  margin: 2em 0;
+}
+
+.madureira-prose hr {
+  border: none;
+  border-top: 1px solid hsl(var(--border));
+  margin: 3em 0;
+}
+
+.madureira-prose code {
+  font-family: "Geist Mono", "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.86em;
+  background: hsl(var(--muted));
+  border: 1px solid hsl(var(--border));
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: hsl(var(--foreground));
+}
+
+.madureira-prose pre {
+  background: hsl(var(--muted));
+  border: 1px solid hsl(var(--border));
+  border-radius: 10px;
+  padding: 20px;
+  overflow-x: auto;
+  margin: 1.8em 0;
+}
+
+.madureira-prose pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.84em;
+  line-height: 1.6;
+}
+
+/* Variante sem drop-cap — útil em headers curtos onde o drop-cap
+ * fica esteticamente estranho (ex: cards de case com 2-3 frases). */
+.madureira-prose-compact {
+  font-size: 16px;
+  line-height: 1.7;
+  color: hsl(var(--foreground) / 0.86);
+}
+
+.madureira-prose-compact p {
+  margin: 0 0 1.2em;
+}

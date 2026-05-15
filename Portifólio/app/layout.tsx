@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Fraunces, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "@/styles/prose-madureira.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { Umami } from "@/components/umami";

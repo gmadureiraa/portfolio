@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { ReadingProgress } from "@/components/reading-progress";
 
 interface PostPageProps {
   params: {
@@ -66,18 +67,19 @@ export default function PostPage({ params }: PostPageProps) {
   const postContent = isLocalPost ? post.content : null;
 
   return (
-    <main className="min-h-screen w-full flex flex-col items-center justify-center p-4 lg:p-8">
+    <main className="min-h-screen w-full flex flex-col items-center px-4 py-6 sm:p-6 lg:p-8">
+      <ReadingProgress />
       <div className="max-w-4xl w-full">
         {/* Back Button */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="mb-8"
+          className="mb-6 sm:mb-8"
         >
           <Link
             href="/posts"
-            className="inline-flex items-center gap-2 text-neutral-400 hover:text-neutral-200 transition-colors"
+            className="inline-flex items-center gap-2 min-h-[44px] text-neutral-400 hover:text-neutral-200 transition-colors"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -91,13 +93,13 @@ export default function PostPage({ params }: PostPageProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-10"
+          className="mb-8 sm:mb-10"
         >
-          <div className="flex items-center gap-3 mb-6">
-            <span className="px-3 py-1 bg-neutral-800 text-neutral-300 text-sm rounded-full border border-neutral-700">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+            <span className="px-3 py-1 bg-neutral-800 text-neutral-300 text-xs sm:text-sm rounded-full border border-neutral-700">
               {postData?.category || "Geral"}
             </span>
-            <span className="text-neutral-500 text-sm">
+            <span className="text-neutral-500 text-xs sm:text-sm">
               {new Date(postData?.date || "2024-01-01").toLocaleDateString("pt-BR", {
                 day: "numeric",
                 month: "long",
@@ -106,11 +108,11 @@ export default function PostPage({ params }: PostPageProps) {
             </span>
           </div>
 
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-100 mb-6 leading-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-100 mb-4 sm:mb-6 leading-tight break-words">
             {postData?.title}
           </h1>
 
-          <p className="text-xl text-neutral-400 leading-relaxed border-l-2 border-neutral-700 pl-4">
+          <p className="text-base sm:text-lg lg:text-xl text-neutral-400 leading-relaxed border-l-2 border-neutral-700 pl-3 sm:pl-4">
             {postData?.description}
           </p>
         </motion.div>
@@ -135,21 +137,7 @@ export default function PostPage({ params }: PostPageProps) {
         >
           {postContent ? (
             <div
-              className="prose prose-invert prose-lg max-w-none
-                prose-headings:text-neutral-100 prose-headings:font-bold
-                prose-h1:text-3xl prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
-                prose-h3:text-xl prose-h3:mt-8
-                prose-p:text-neutral-300 prose-p:leading-relaxed prose-p:mb-6
-                prose-strong:text-neutral-100 prose-strong:font-semibold
-                prose-em:text-neutral-300
-                prose-ul:text-neutral-300 prose-ul:space-y-2
-                prose-ol:text-neutral-300 prose-ol:space-y-2
-                prose-li:text-neutral-300
-                prose-code:text-green-400 prose-code:bg-neutral-900 prose-code:px-1 prose-code:rounded prose-code:text-sm
-                prose-pre:bg-neutral-900 prose-pre:border prose-pre:border-neutral-800 prose-pre:rounded-lg
-                prose-blockquote:border-l-neutral-700 prose-blockquote:text-neutral-400
-                prose-hr:border-neutral-800
-                prose-a:text-blue-400 prose-a:no-underline hover:prose-a:text-blue-300"
+              className="madureira-prose max-w-none break-words"
               dangerouslySetInnerHTML={{ __html: postContent }}
             />
           ) : (

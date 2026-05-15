@@ -288,7 +288,7 @@ export default async function NewsletterPostPage({
 
         {/* Body */}
         <div
-          className="nl-prose"
+          className="madureira-prose"
           dangerouslySetInnerHTML={{ __html: html }}
         />
 
@@ -465,105 +465,12 @@ export default async function NewsletterPostPage({
         </footer>
       </article>
 
-      {/* Estilos do corpo (markdown renderizado) — segue o design system */}
+      {/* Hover dos links auxiliares (back + more) — mantido inline porque
+       * usam classes locais do markup (.nl-back, .nl-more, .nl-more-title).
+       * O body editorial (markdown renderizado) usa `.madureira-prose`
+       * definido em styles/prose-madureira.css. */}
       <style>{`
-        .nl-back:hover, .nl-more:hover .nl-more-title { color: ${ACCENT} !important; }
-
-        .nl-prose {
-          font-size: 16px;
-          line-height: 1.78;
-          color: hsl(var(--foreground) / 0.86);
-        }
-        .nl-prose > p:first-of-type::first-letter {
-          float: left;
-          font-family: ${SERIF};
-          font-style: italic;
-          font-weight: 300;
-          font-size: 4.4em;
-          line-height: 0.82;
-          padding: 6px 12px 0 0;
-          color: ${ACCENT};
-        }
-        .nl-prose p { margin: 0 0 1.5em; }
-        .nl-prose h2 {
-          font-family: ${SERIF};
-          font-style: italic;
-          font-weight: 300;
-          font-size: clamp(25px, 3.5vw, 33px);
-          line-height: 1.12;
-          letter-spacing: -0.02em;
-          color: ${PAPER};
-          margin: 2.4em 0 0.7em;
-        }
-        .nl-prose h3 {
-          font-family: ${SERIF};
-          font-weight: 400;
-          font-size: clamp(19px, 2.6vw, 24px);
-          line-height: 1.2;
-          color: ${PAPER};
-          margin: 2em 0 0.6em;
-        }
-        .nl-prose a {
-          color: ${PAPER};
-          text-decoration: underline;
-          text-decoration-color: ${ACCENT};
-          text-underline-offset: 3px;
-          transition: color 0.15s ease;
-        }
-        .nl-prose a:hover { color: ${ACCENT}; }
-        .nl-prose strong { color: ${PAPER}; font-weight: 600; }
-        .nl-prose em { font-style: italic; }
-        .nl-prose ul, .nl-prose ol { margin: 0 0 1.5em; padding-left: 1.4em; }
-        .nl-prose li { margin: 0.4em 0; }
-        .nl-prose li::marker { color: ${ACCENT}; }
-        .nl-prose blockquote {
-          margin: 1.8em 0;
-          padding: 4px 0 4px 24px;
-          border-left: 2px solid ${ACCENT};
-          font-family: ${SERIF};
-          font-style: italic;
-          font-weight: 300;
-          font-size: 1.22em;
-          line-height: 1.5;
-          color: ${PAPER};
-        }
-        .nl-prose blockquote p { margin: 0; }
-        .nl-prose img {
-          width: 100%;
-          height: auto;
-          border-radius: 10px;
-          border: 1px solid ${HAIRLINE};
-          margin: 2em 0;
-        }
-        .nl-prose hr {
-          border: none;
-          border-top: 1px solid ${HAIRLINE};
-          margin: 3em 0;
-        }
-        .nl-prose code {
-          font-family: ${MONO};
-          font-size: 0.86em;
-          background: hsl(var(--muted));
-          border: 1px solid ${HAIRLINE};
-          padding: 2px 6px;
-          border-radius: 4px;
-          color: ${PAPER};
-        }
-        .nl-prose pre {
-          background: hsl(var(--muted));
-          border: 1px solid ${HAIRLINE};
-          border-radius: 10px;
-          padding: 20px;
-          overflow-x: auto;
-          margin: 1.8em 0;
-        }
-        .nl-prose pre code {
-          background: none;
-          border: none;
-          padding: 0;
-          font-size: 0.84em;
-          line-height: 1.6;
-        }
+        .nl-back:hover, .nl-more:hover .nl-more-title { color: ${ACCENT} !important; opacity: 0.7; }
       `}</style>
     </main>
   );
