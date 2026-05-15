@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Menu, X, Search } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { AnimatedThemeToggler } from "@/components/magicui/animated-theme-toggler";
 
 const PAPER = "#f4f1ea";
 const INK = "#0a0908";
@@ -103,8 +104,9 @@ export function SiteHeader() {
           madureira
         </Link>
 
-        {/* Right: search (desktop) + Assinar + burger (mobile) */}
+        {/* Right: theme toggle + search (desktop) + Assinar + burger (mobile) */}
         <div className="flex items-center gap-2">
+          <AnimatedThemeToggler />
           <button
             type="button"
             onClick={() => setSearchOpen((v) => !v)}

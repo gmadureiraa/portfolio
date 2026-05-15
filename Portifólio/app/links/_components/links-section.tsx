@@ -53,8 +53,8 @@ export function LinksSection() {
 
   return (
     <div className={instrumentSerif.variable}>
-      {/* Tabs floating at top center — sempre visível, fora do view-transition pra ficar estável */}
-      <div className="fixed top-5 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-2">
+      {/* Tabs floating — posicionado abaixo do SiteHeader sticky (h-16 row + nav row ~44px = ~108px) */}
+      <div className="fixed top-[124px] sm:top-[120px] left-1/2 -translate-x-1/2 z-[100] flex items-center gap-2">
         <TabsToggle value={tab} onChange={handleTabChange} />
         <AnimatedThemeToggler />
       </div>
@@ -62,7 +62,7 @@ export function LinksSection() {
       {tab === "links" ? (
         <div className="links-tab-pane links-page">
           <AnimatedBackground />
-          <main className="relative z-10 flex flex-col items-center min-h-screen px-4 pt-24 pb-12 sm:pt-28">
+          <main className="relative z-10 flex flex-col items-center min-h-screen px-4 pt-40 pb-12 sm:pt-44">
             <div className="w-full max-w-md mx-auto">
               <ProfileHeader />
               <div className="mt-8">
