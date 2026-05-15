@@ -2,8 +2,6 @@
 
 import { NewsletterHeroForm } from "@/components/newsletter-synecdoche/hero-form";
 
-const CORAL = "#e63a1f";
-
 const MONO = '"Geist Mono", "JetBrains Mono", ui-monospace, monospace';
 const SERIF = 'var(--font-fraunces), "Fraunces", Georgia, serif';
 
@@ -35,7 +33,7 @@ export function NewsletterManifestoBlock() {
             marginBottom: 28,
           }}
         >
-          <span style={{ color: CORAL }}>●</span>&nbsp;&nbsp;Manifesto&nbsp;&nbsp;·&nbsp;&nbsp;Newsletter
+          <span className="text-foreground/50">●</span>&nbsp;&nbsp;Manifesto&nbsp;&nbsp;·&nbsp;&nbsp;Newsletter
         </p>
 
         <h2

@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Fraunces, Inter } from "next/font/google";
-import Link from "next/link";
+import Image from "next/image";
 import { listPublishedNewsletters } from "@/lib/db/newsletter";
+import { NewsletterHeroForm } from "@/components/newsletter-synecdoche/hero-form";
+import { NewsletterList } from "@/components/newsletter-list";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -19,22 +21,22 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Newsletter — Gabriel Madureira",
+  title: "Cartas do Madureira — Newsletter",
   description:
-    "Cartas semanais sobre marketing real, IA aplicada e bastidor de produto. Texto curto, números reais, zero hype.",
+    "Cartas semanais sobre marketing direto, IA aplicada e bastidor real de quem constrói. Texto curto, números reais, zero hype.",
   alternates: { canonical: "/newsletter" },
   openGraph: {
-    title: "Newsletter — Gabriel Madureira",
+    title: "Cartas do Madureira — Newsletter",
     description:
-      "Cartas semanais sobre marketing real, IA aplicada e bastidor de produto.",
+      "Cartas semanais sobre marketing direto, IA aplicada e bastidor real de quem constrói.",
     url: "https://madureira.xyz/newsletter",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Newsletter — Gabriel Madureira",
+    title: "Cartas do Madureira — Newsletter",
     description:
-      "Cartas semanais sobre marketing real, IA aplicada e bastidor de produto.",
+      "Cartas semanais sobre marketing direto, IA aplicada e bastidor real de quem constrói.",
     creator: "@ogmadureira",
   },
 };
@@ -42,363 +44,275 @@ export const metadata: Metadata = {
 // Revalida a cada 60s (server-side).
 export const revalidate = 60;
 
-function formatDate(d: Date | string | null) {
-  if (!d) return "";
-  const date = typeof d === "string" ? new Date(d) : d;
-  return date.toLocaleDateString("pt-BR", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-  });
-}
+const MONO = '"Geist Mono", "JetBrains Mono", ui-monospace, monospace';
+const SERIF = 'var(--font-fraunces), "Fraunces", Georgia, serif';
 
 export default async function NewsletterPage() {
   const posts = await listPublishedNewsletters().catch(() => []);
 
   return (
     <main
-      className={`${fraunces.variable} ${inter.variable}`}
+      className={`${fraunces.variable} ${inter.variable} bg-background text-foreground`}
       style={{
-        background: "#0a0908",
-        color: "#f4f1ea",
         minHeight: "100vh",
-        fontFamily: 'var(--font-inter), "Inter", system-ui, -apple-system, sans-serif',
+        fontFamily:
+          'var(--font-inter), "Inter", system-ui, -apple-system, sans-serif',
         fontFeatureSettings: '"ss01", "cv11"',
       }}
     >
-      <div
+      {/* ════════════════════════ MANIFESTO ════════════════════════ */}
+      <section
+        className="border-b border-border"
         style={{
-          maxWidth: 760,
-          margin: "0 auto",
-          padding: "120px 24px 96px",
+          paddingTop: "clamp(80px, 12vw, 144px)",
+          paddingBottom: "clamp(56px, 9vw, 96px)",
+          paddingLeft: "clamp(20px, 4vw, 56px)",
+          paddingRight: "clamp(20px, 4vw, 56px)",
         }}
       >
-        {/* Eyebrow mono */}
-        <p
-          style={{
-            fontFamily: '"Geist Mono", "JetBrains Mono", ui-monospace, monospace',
-            fontSize: 11,
-            letterSpacing: "0.22em",
-            textTransform: "uppercase",
-            color: "rgba(244, 241, 234, 0.45)",
-            marginBottom: 24,
-          }}
-        >
-          <span style={{ color: "#e63a1f" }}>●</span>&nbsp;&nbsp;Newsletter
-          do Madureira&nbsp;&nbsp;·&nbsp;&nbsp;Toda semana
-        </p>
-
-        {/* Hero título Fraunces italic */}
-        <h1
-          style={{
-            fontFamily: 'var(--font-fraunces), "Fraunces", Georgia, serif',
-            fontStyle: "italic",
-            fontWeight: 300,
-            fontSize: "clamp(56px, 8vw, 96px)",
-            lineHeight: 0.98,
-            letterSpacing: "-0.025em",
-            margin: 0,
-            color: "#f4f1ea",
-          }}
-        >
-          O que estou{" "}
-          <span style={{ color: "#e63a1f" }}>aprendendo</span>
-          ,
-          <br />
-          em primeira mão.
-        </h1>
-
-        {/* Lede */}
-        <p
-          style={{
-            marginTop: 28,
-            maxWidth: 540,
-            fontSize: 18,
-            lineHeight: 1.55,
-            color: "rgba(244, 241, 234, 0.78)",
-          }}
-        >
-          Cartas semanais sobre marketing real, IA aplicada e bastidor de
-          produto. Texto curto, números reais, zero hype. Sai toda quinta,
-          direto na sua caixa.
-        </p>
-
-        {/* Form de assinatura */}
-        <form
-          action="/api/newsletter/subscribe"
-          method="post"
-          style={{
-            marginTop: 40,
-            display: "flex",
-            gap: 8,
-            flexWrap: "wrap",
-            alignItems: "stretch",
-          }}
-        >
-          <input
-            type="email"
-            name="email"
-            placeholder="seu melhor email"
-            required
-            style={{
-              flex: "1 1 240px",
-              minWidth: 200,
-              padding: "14px 18px",
-              background: "#111110",
-              border: "1px solid rgba(244, 241, 234, 0.14)",
-              color: "#f4f1ea",
-              fontFamily: "inherit",
-              fontSize: 15,
-              outline: "none",
-              borderRadius: 4,
-            }}
-          />
-          <button
-            type="submit"
-            style={{
-              padding: "14px 24px",
-              background: "#e63a1f",
-              color: "#fff",
-              fontFamily: '"Geist Mono", "JetBrains Mono", ui-monospace, monospace',
-              fontSize: 12,
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
-              fontWeight: 600,
-              border: "none",
-              cursor: "pointer",
-              borderRadius: 4,
-            }}
-          >
-            Assinar →
-          </button>
-        </form>
-
-        <p
-          style={{
-            marginTop: 12,
-            fontSize: 12,
-            color: "rgba(244, 241, 234, 0.40)",
-            fontFamily: '"Geist Mono", ui-monospace, monospace',
-            letterSpacing: "0.08em",
-          }}
-        >
-          Sem spam. Cancela quando quiser.
-        </p>
-
-        {/* Divisor editorial */}
-        <div
-          style={{
-            margin: "96px 0 48px",
-            display: "flex",
-            alignItems: "center",
-            gap: 24,
-          }}
-        >
-          <span
-            style={{
-              fontFamily: '"Geist Mono", ui-monospace, monospace',
-              fontSize: 11,
-              letterSpacing: "0.22em",
-              textTransform: "uppercase",
-              color: "rgba(244, 241, 234, 0.50)",
-              whiteSpace: "nowrap",
-            }}
-          >
-            Edições anteriores
-          </span>
-          <span
-            style={{
-              flex: 1,
-              height: 1,
-              background: "rgba(244, 241, 234, 0.10)",
-            }}
-          />
-          <span
-            style={{
-              fontFamily: '"Geist Mono", ui-monospace, monospace',
-              fontSize: 11,
-              letterSpacing: "0.22em",
-              color: "rgba(244, 241, 234, 0.35)",
-            }}
-          >
-            {String(posts.length).padStart(2, "0")} ·{" "}
-            {String(posts.length).padStart(2, "0")}
-          </span>
-        </div>
-
-        {/* Lista editorial */}
-        {posts.length === 0 ? (
+        <div style={{ maxWidth: 880, margin: "0 auto", textAlign: "center" }}>
           <p
+            className="text-muted-foreground"
             style={{
-              fontSize: 16,
-              color: "rgba(244, 241, 234, 0.50)",
-              fontStyle: "italic",
-              fontFamily: 'var(--font-fraunces), "Fraunces", Georgia, serif',
+              fontFamily: MONO,
+              fontSize: 11,
+              letterSpacing: "0.22em",
+              textTransform: "uppercase",
+              margin: 0,
+              marginBottom: 28,
             }}
           >
-            A primeira edição sai em breve. Entra na lista pra receber.
+            <span className="text-foreground/50">●</span>
+            &nbsp;&nbsp;Manifesto&nbsp;&nbsp;·&nbsp;&nbsp;Toda quinta
           </p>
-        ) : (
-          <ul
+
+          <h1
             style={{
-              listStyle: "none",
-              padding: 0,
+              fontFamily: SERIF,
+              fontStyle: "italic",
+              fontWeight: 300,
+              fontSize: "clamp(44px, 7vw, 84px)",
+              lineHeight: 1.02,
+              letterSpacing: "-0.025em",
               margin: 0,
             }}
           >
-            {posts.map((p, idx) => (
-              <li
-                key={p.id}
-                style={{
-                  borderTop:
-                    idx === 0 ? "none" : "1px solid rgba(244, 241, 234, 0.08)",
-                  padding: "32px 0",
-                }}
-              >
-                <Link
-                  href={`/newsletter/${p.slug}`}
-                  className="newsletter-item"
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr",
-                    gap: 12,
-                    color: "inherit",
-                    textDecoration: "none",
-                  }}
-                >
-                  {/* Meta linha (data · tempo) */}
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: 16,
-                      alignItems: "center",
-                      fontFamily: '"Geist Mono", ui-monospace, monospace',
-                      fontSize: 11,
-                      letterSpacing: "0.18em",
-                      textTransform: "uppercase",
-                      color: "rgba(244, 241, 234, 0.45)",
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontWeight: 500,
-                        color: "rgba(244, 241, 234, 0.62)",
-                      }}
-                    >
-                      Nº {String(posts.length - idx).padStart(2, "0")}
-                    </span>
-                    <span style={{ opacity: 0.4 }}>·</span>
-                    <span>{formatDate(p.published_at)}</span>
-                    {p.reading_time_min ? (
-                      <>
-                        <span style={{ opacity: 0.4 }}>·</span>
-                        <span>{p.reading_time_min} min</span>
-                      </>
-                    ) : null}
-                  </div>
+            marketing direto.
+            <br />
+            IA aplicada.
+            <br />
+            bastidor real de
+            <br />
+            quem constrói.
+          </h1>
 
-                  {/* Título serif italic */}
-                  <h2
+          <p
+            className="text-foreground/75 mx-auto"
+            style={{
+              marginTop: 32,
+              maxWidth: 580,
+              fontSize: 17,
+              lineHeight: 1.65,
+            }}
+          >
+            Cartas semanais com o que funcionou, o que quebrou e os números por
+            trás. Texto curto, zero hype, números reais. Sai toda quinta direto
+            na sua caixa.
+          </p>
+
+          <p
+            className="text-muted-foreground"
+            style={{
+              marginTop: 24,
+              fontFamily: MONO,
+              fontSize: 11,
+              letterSpacing: "0.16em",
+              textTransform: "uppercase",
+            }}
+          >
+            uma por semana&nbsp;&nbsp;·&nbsp;&nbsp;zero spam&nbsp;&nbsp;·&nbsp;&nbsp;cancela quando quiser
+          </p>
+        </div>
+      </section>
+
+      {/* ════════════════════════ LISTA + SIDEBAR ════════════════════════ */}
+      <section
+        style={{
+          maxWidth: 1200,
+          margin: "0 auto",
+          padding: "clamp(56px, 8vw, 96px) clamp(20px, 4vw, 56px)",
+        }}
+      >
+        {/* Título da seção */}
+        <header style={{ marginBottom: 48, maxWidth: 720 }}>
+          <p
+            className="text-muted-foreground"
+            style={{
+              fontFamily: MONO,
+              fontSize: 11,
+              letterSpacing: "0.22em",
+              textTransform: "uppercase",
+              marginBottom: 16,
+            }}
+          >
+            Arquivo completo
+          </p>
+          <h2
+            style={{
+              fontFamily: SERIF,
+              fontStyle: "italic",
+              fontWeight: 300,
+              fontSize: "clamp(40px, 5.4vw, 64px)",
+              lineHeight: 1.04,
+              letterSpacing: "-0.022em",
+              margin: 0,
+            }}
+          >
+            Cartas do Madureira
+          </h2>
+        </header>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-12 lg:gap-16">
+          {/* Coluna esquerda — filtros + lista */}
+          <div>
+            <NewsletterList posts={posts} />
+          </div>
+
+          {/* Sidebar direita */}
+          <aside className="space-y-10 lg:sticky lg:top-32 self-start">
+            {/* Identity card */}
+            <div
+              className="border border-border rounded-lg p-7"
+              style={{
+                background: "transparent",
+              }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <Image
+                  src="/avatar.png"
+                  alt="Gabriel Madureira"
+                  width={48}
+                  height={48}
+                  className="rounded-full border border-border"
+                />
+                <div>
+                  <p
                     style={{
-                      fontFamily:
-                        'var(--font-fraunces), "Fraunces", Georgia, serif',
+                      fontFamily: SERIF,
                       fontStyle: "italic",
                       fontWeight: 300,
-                      fontSize: "clamp(28px, 4.4vw, 40px)",
-                      lineHeight: 1.08,
-                      letterSpacing: "-0.02em",
+                      fontSize: 20,
+                      lineHeight: 1.1,
                       margin: 0,
-                      color: "#f4f1ea",
                     }}
                   >
-                    {p.title}
-                  </h2>
-
-                  {/* Excerpt */}
-                  {p.excerpt ? (
-                    <p
-                      style={{
-                        margin: 0,
-                        fontSize: 16,
-                        lineHeight: 1.55,
-                        color: "rgba(244, 241, 234, 0.65)",
-                        display: "-webkit-box",
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: "vertical",
-                        overflow: "hidden",
-                      }}
-                    >
-                      {p.excerpt}
-                    </p>
-                  ) : null}
-
-                  {/* CTA discreto */}
-                  <span
+                    Gabriel Madureira
+                  </p>
+                  <p
+                    className="text-muted-foreground"
                     style={{
-                      fontFamily: '"Geist Mono", ui-monospace, monospace',
+                      fontFamily: MONO,
                       fontSize: 11,
-                      letterSpacing: "0.22em",
-                      textTransform: "uppercase",
-                      color: "#e63a1f",
-                      marginTop: 4,
+                      letterSpacing: "0.12em",
+                      margin: "4px 0 0",
                     }}
                   >
-                    Ler edição →
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
+                    @ogmadureira
+                  </p>
+                </div>
+              </div>
+              <p
+                className="text-foreground/75"
+                style={{
+                  fontSize: 14,
+                  lineHeight: 1.55,
+                  margin: 0,
+                }}
+              >
+                Fundador da Kaleidos. Construo produtos e sistemas de marketing
+                com IA e automação. Aqui eu divido o que funcionou, o que
+                quebrou, e os números por trás — sem teoria de palco.
+              </p>
+              <div className="flex gap-3 mt-4">
+                {[
+                  { label: "X", href: "https://x.com/ogmadureira" },
+                  {
+                    label: "LinkedIn",
+                    href: "https://www.linkedin.com/in/gabriel-madureira/",
+                  },
+                  {
+                    label: "IG",
+                    href: "https://www.instagram.com/ogmadureira/",
+                  },
+                ].map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    style={{
+                      fontFamily: MONO,
+                      fontSize: 11,
+                      letterSpacing: "0.14em",
+                      textTransform: "uppercase",
+                      textDecoration: "none",
+                    }}
+                  >
+                    {s.label} ↗
+                  </a>
+                ))}
+              </div>
+            </div>
 
-        {/* Footer minimalista */}
-        <footer
-          style={{
-            marginTop: 120,
-            paddingTop: 32,
-            borderTop: "1px solid rgba(244, 241, 234, 0.08)",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            flexWrap: "wrap",
-            gap: 16,
-          }}
-        >
-          <span
-            style={{
-              fontFamily: '"Geist Mono", ui-monospace, monospace',
-              fontSize: 11,
-              letterSpacing: "0.22em",
-              textTransform: "uppercase",
-              color: "rgba(244, 241, 234, 0.40)",
-            }}
-          >
-            madureira.xyz · 2026
-          </span>
-          <Link
-            href="/links"
-            style={{
-              fontFamily: '"Geist Mono", ui-monospace, monospace',
-              fontSize: 11,
-              letterSpacing: "0.22em",
-              textTransform: "uppercase",
-              color: "rgba(244, 241, 234, 0.60)",
-              textDecoration: "none",
-            }}
-          >
-            ← Todos os links
-          </Link>
-        </footer>
-      </div>
-
-      <style>{`
-        .newsletter-item:hover h2 {
-          color: #e63a1f !important;
-        }
-        .newsletter-item:hover span:last-child {
-          letter-spacing: 0.26em;
-        }
-      `}</style>
+            {/* Email signup */}
+            <div
+              className="border border-border rounded-lg p-7"
+              style={{
+                background: "transparent",
+              }}
+            >
+              <p
+                className="text-muted-foreground"
+                style={{
+                  fontFamily: MONO,
+                  fontSize: 11,
+                  letterSpacing: "0.22em",
+                  textTransform: "uppercase",
+                  margin: 0,
+                  marginBottom: 12,
+                }}
+              >
+                Assina a carta
+              </p>
+              <h3
+                style={{
+                  fontFamily: SERIF,
+                  fontStyle: "italic",
+                  fontWeight: 300,
+                  fontSize: 26,
+                  lineHeight: 1.15,
+                  letterSpacing: "-0.018em",
+                  margin: "0 0 8px",
+                }}
+              >
+                Quinta na sua caixa.
+              </h3>
+              <p
+                className="text-foreground/70"
+                style={{
+                  fontSize: 13.5,
+                  lineHeight: 1.55,
+                  margin: "0 0 18px",
+                }}
+              >
+                Sem spam, cancela quando quiser.
+              </p>
+              <NewsletterHeroForm />
+            </div>
+          </aside>
+        </div>
+      </section>
     </main>
   );
 }

@@ -11,9 +11,10 @@
   --links-fg-divider: rgba(255, 255, 255, 0.20);
   --links-vignette-top: rgba(255, 255, 255, 0.05);
   --links-vignette-bottom: rgba(0, 0, 0, 0.6);
-  --links-accent: #e63a1f; /* Signal Vermilion — DS Madureira */
-  --links-accent-rgb: 230, 58, 31;
-  --links-accent-fg: #ffffff; /* texto sobre o accent */
+  /* P&B mode — accent = fg-strong (sem cor, só preto/branco) */
+  --links-accent: #ffffff;
+  --links-accent-rgb: 255, 255, 255;
+  --links-accent-fg: #0a0908;
   --links-icon-bg: rgba(255, 255, 255, 0.06);
   --links-icon-bg-hover: rgba(255, 255, 255, 0.10);
   --links-icon-fg: rgba(255, 255, 255, 0.70);
@@ -62,7 +63,10 @@ html:not(.dark) .links-page {
   --links-fg-divider: rgba(10, 9, 8, 0.18);
   --links-vignette-top: rgba(10, 9, 8, 0.04);
   --links-vignette-bottom: rgba(10, 9, 8, 0.08);
-  --links-accent-fg: #ffffff;
+  /* P&B light mode — accent = ink */
+  --links-accent: #0a0908;
+  --links-accent-rgb: 10, 9, 8;
+  --links-accent-fg: #f5f1e8;
   --links-icon-bg: rgba(10, 9, 8, 0.05);
   --links-icon-bg-hover: rgba(10, 9, 8, 0.10);
   --links-icon-fg: rgba(10, 9, 8, 0.70);
@@ -265,9 +269,9 @@ html:not(.dark) .links-page {
   left: 0;
   top: 0;
   bottom: 0;
-  background: var(--links-accent, #e63a1f);
+  background: var(--links-accent);
   border-radius: 999px;
-  box-shadow: 0 0 16px rgba(230, 58, 31, 0.40);
+  box-shadow: 0 0 16px rgba(var(--links-accent-rgb), 0.25);
   pointer-events: none;
 }
 

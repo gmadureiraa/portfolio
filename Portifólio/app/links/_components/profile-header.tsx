@@ -43,9 +43,9 @@ export function ProfileHeader() {
         <div
           className="absolute bottom-1 right-1 w-3.5 h-3.5 rounded-full border-2"
           style={{
-            background: "var(--links-accent)",
+            background: "var(--links-fg-strong)",
             borderColor: "var(--links-bg)",
-            boxShadow: "0 0 12px rgba(var(--links-accent-rgb), 0.5)",
+            boxShadow: "0 0 10px rgba(var(--links-accent-rgb), 0.35)",
           }}
         />
       </motion.div>
@@ -57,7 +57,7 @@ export function ProfileHeader() {
         className="ds-display text-[42px] sm:text-[48px]"
         style={{ color: "var(--links-fg-strong)" }}
       >
-        Gabriel <em style={{ color: "var(--links-accent)" }}>Madureira</em>
+        Gabriel <em style={{ color: "var(--links-fg-strong)" }}>Madureira</em>
       </motion.h1>
 
       <motion.p
