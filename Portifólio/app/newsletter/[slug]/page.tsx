@@ -29,7 +29,8 @@ const inter = Inter({
 const BASE = process.env.NEXT_PUBLIC_BASE_URL || "https://madureira.xyz";
 
 /* Theme-aware tokens — usam CSS vars do design system (light/dark via next-themes).
- * Antes eram hardcoded (#f4f1ea/#0a0908) — quebrava Sun/Moon toggle nessa rota. */
+ * Antes eram hardcoded (cream paper / ink soft black) — quebrava Sun/Moon toggle nessa rota.
+ * Agora full black/white via tokens HSL. */
 const PAPER = "hsl(var(--foreground))"; // texto principal
 const INK = "hsl(var(--background))"; // fundo
 const ACCENT = "hsl(var(--foreground))"; // drop-cap, dot, blockquote bar (P&B)

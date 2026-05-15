@@ -1,9 +1,9 @@
 /* Linktree — escopo isolado pra rota /links via layout.tsx */
 
-/* Default = dark — DS Madureira (ink-10 soft black + cream fg) */
+/* Default = dark — full black + full white (sem cream) */
 .links-page {
-  --links-bg: #0a0908;
-  --links-fg: #f4f1ea;
+  --links-bg: #000000;
+  --links-fg: #ffffff;
   --links-fg-strong: #ffffff;
   --links-fg-muted: rgba(255, 255, 255, 0.65);
   --links-fg-faint: rgba(255, 255, 255, 0.45);
@@ -14,7 +14,7 @@
   /* P&B mode — accent = fg-strong (sem cor, só preto/branco) */
   --links-accent: #ffffff;
   --links-accent-rgb: 255, 255, 255;
-  --links-accent-fg: #0a0908;
+  --links-accent-fg: #000000;
   --links-icon-bg: rgba(255, 255, 255, 0.06);
   --links-icon-bg-hover: rgba(255, 255, 255, 0.10);
   --links-icon-fg: rgba(255, 255, 255, 0.70);
@@ -26,7 +26,7 @@
   --links-tab-bg: rgba(255, 255, 255, 0.04);
   --links-tab-border: rgba(255, 255, 255, 0.08);
   --links-tab-shadow-inset: rgba(255, 255, 255, 0.06);
-  --links-tab-active-fg: #08080a;
+  --links-tab-active-fg: #000000;
   --links-tab-idle-fg: rgba(255, 255, 255, 0.55);
   --links-tab-idle-hover-fg: rgba(255, 255, 255, 0.85);
   --links-glass-bg: rgba(255, 255, 255, 0.035);
@@ -52,43 +52,43 @@
   position: relative;
 }
 
-/* Light mode — paper cream warm */
+/* Light mode — full white + full black (sem cream) */
 html:not(.dark) .links-page {
-  --links-bg: #f5f1e8;
-  --links-fg: #0a0908;
-  --links-fg-strong: #0a0908;
-  --links-fg-muted: rgba(10, 9, 8, 0.72);
-  --links-fg-faint: rgba(10, 9, 8, 0.50);
-  --links-fg-dim: rgba(10, 9, 8, 0.32);
-  --links-fg-divider: rgba(10, 9, 8, 0.18);
-  --links-vignette-top: rgba(10, 9, 8, 0.04);
-  --links-vignette-bottom: rgba(10, 9, 8, 0.08);
+  --links-bg: #ffffff;
+  --links-fg: #000000;
+  --links-fg-strong: #000000;
+  --links-fg-muted: rgba(0, 0, 0, 0.72);
+  --links-fg-faint: rgba(0, 0, 0, 0.50);
+  --links-fg-dim: rgba(0, 0, 0, 0.32);
+  --links-fg-divider: rgba(0, 0, 0, 0.18);
+  --links-vignette-top: rgba(0, 0, 0, 0.04);
+  --links-vignette-bottom: rgba(0, 0, 0, 0.08);
   /* P&B light mode — accent = ink */
-  --links-accent: #0a0908;
-  --links-accent-rgb: 10, 9, 8;
-  --links-accent-fg: #f5f1e8;
-  --links-icon-bg: rgba(10, 9, 8, 0.05);
-  --links-icon-bg-hover: rgba(10, 9, 8, 0.10);
-  --links-icon-fg: rgba(10, 9, 8, 0.70);
-  --links-icon-fg-hover: #0a0908;
-  --links-icon-ring: rgba(10, 9, 8, 0.12);
-  --links-avatar-ring: rgba(10, 9, 8, 0.18);
-  --links-avatar-glow: rgba(10, 9, 8, 0.06);
-  --links-avatar-shadow: 0 8px 32px rgba(10, 9, 8, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  --links-tab-bg: rgba(10, 9, 8, 0.05);
-  --links-tab-border: rgba(10, 9, 8, 0.12);
+  --links-accent: #000000;
+  --links-accent-rgb: 0, 0, 0;
+  --links-accent-fg: #ffffff;
+  --links-icon-bg: rgba(0, 0, 0, 0.05);
+  --links-icon-bg-hover: rgba(0, 0, 0, 0.10);
+  --links-icon-fg: rgba(0, 0, 0, 0.70);
+  --links-icon-fg-hover: #000000;
+  --links-icon-ring: rgba(0, 0, 0, 0.12);
+  --links-avatar-ring: rgba(0, 0, 0, 0.18);
+  --links-avatar-glow: rgba(0, 0, 0, 0.06);
+  --links-avatar-shadow: 0 8px 32px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  --links-tab-bg: rgba(0, 0, 0, 0.05);
+  --links-tab-border: rgba(0, 0, 0, 0.12);
   --links-tab-shadow-inset: rgba(255, 255, 255, 0.6);
-  --links-tab-active-fg: #0a0908;
-  --links-tab-idle-fg: rgba(10, 9, 8, 0.55);
-  --links-tab-idle-hover-fg: rgba(10, 9, 8, 0.85);
+  --links-tab-active-fg: #000000;
+  --links-tab-idle-fg: rgba(0, 0, 0, 0.55);
+  --links-tab-idle-hover-fg: rgba(0, 0, 0, 0.85);
   --links-glass-bg: rgba(255, 255, 255, 0.55);
   --links-glass-bg-hover: rgba(255, 255, 255, 0.75);
-  --links-glass-border: rgba(10, 9, 8, 0.10);
-  --links-glass-border-hover: rgba(10, 9, 8, 0.18);
+  --links-glass-border: rgba(0, 0, 0, 0.10);
+  --links-glass-border-hover: rgba(0, 0, 0, 0.18);
   --links-pill-bg: rgba(255, 255, 255, 0.5);
   --links-pill-bg-hover: rgba(255, 255, 255, 0.75);
-  --links-pill-border: rgba(10, 9, 8, 0.10);
-  --links-pill-border-hover: rgba(10, 9, 8, 0.22);
+  --links-pill-border: rgba(0, 0, 0, 0.10);
+  --links-pill-border-hover: rgba(0, 0, 0, 0.22);
   --links-noise-blend: multiply;
   --links-noise-opacity: 0.05;
 }
@@ -228,7 +228,7 @@ html:not(.dark) .links-page {
 }
 
 .tab-segment-button[data-active="true"] {
-  color: var(--links-tab-active-fg, #08080a);
+  color: var(--links-tab-active-fg, #000000);
 }
 
 .tab-segment-button:not([data-active="true"]):hover {

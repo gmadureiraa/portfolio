@@ -205,10 +205,10 @@ function ProjectsContent() {
   const GridCard = ({ item }: { item: ContentItem }) => (
     <div className={cn(
       "group flex flex-col overflow-hidden rounded-xl border bg-background hover:shadow-xl transition-all duration-300",
-      "border-neutral-800 hover:border-neutral-700"
+      "border-border hover:border-border"
     )}>
       {item.image && (
-        <div className="relative w-full aspect-[500/360] overflow-hidden border-b border-neutral-800 bg-neutral-950">
+        <div className="relative w-full aspect-[500/360] overflow-hidden border-b border-border bg-card">
           <Image
             src={item.image}
             alt={item.title}
@@ -229,31 +229,31 @@ function ProjectsContent() {
               )}
               {item.type}
             </span>
-            <span className="text-xs text-neutral-500 bg-neutral-800/50 px-2 py-1 rounded-full">
+            <span className="text-xs text-muted-foreground bg-muted/50 px-2 py-1 rounded-full">
               {getFirstArea(item)}
             </span>
           </div>
-          <span className="text-xs text-neutral-600 shrink-0">
+          <span className="text-xs text-muted-foreground shrink-0">
             {item.date
               ? new Date(item.date).toLocaleDateString("pt-BR", { month: "short", year: "numeric" })
               : item.status}
           </span>
         </div>
-        <h3 className="text-lg font-bold text-neutral-100 mb-3 group-hover:text-neutral-200 transition-colors leading-snug">
+        <h3 className="text-lg font-bold text-foreground mb-3 group-hover:text-foreground transition-colors leading-snug">
           {item.title}
         </h3>
-        <p className="text-neutral-400 text-sm mb-4 line-clamp-3 flex-1">{item.description}</p>
+        <p className="text-muted-foreground text-sm mb-4 line-clamp-3 flex-1">{item.description}</p>
         <div className="flex flex-wrap gap-1 mb-4 mt-auto">
           {item.technologies.slice(0, 3).map((tech) => (
-            <span key={tech} className="text-xs bg-neutral-800/50 text-neutral-400 px-2 py-1 rounded border border-neutral-700/50">
+            <span key={tech} className="text-xs bg-muted/50 text-muted-foreground px-2 py-1 rounded border border-border/50">
               {tech}
             </span>
           ))}
           {item.technologies.length > 3 && (
-            <span className="text-xs text-neutral-600 px-2 py-1">+{item.technologies.length - 3}</span>
+            <span className="text-xs text-muted-foreground px-2 py-1">+{item.technologies.length - 3}</span>
           )}
         </div>
-        <a href={getItemHref(item)} target={getItemTarget(item)} rel={getItemRel(item)} className="inline-flex items-center gap-1.5 text-sm text-neutral-400 hover:text-neutral-200 transition-colors font-medium mt-2">
+        <a href={getItemHref(item)} target={getItemTarget(item)} rel={getItemRel(item)} className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors font-medium mt-2">
           {item.externalUrl ? "Abrir link" : "Ler artigo"}
           <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             {item.externalUrl ? (
@@ -275,7 +275,7 @@ function ProjectsContent() {
       rel={getItemRel(item)}
       className={cn(
         "group flex items-center gap-3 px-4 py-3 rounded-lg border transition-all duration-200",
-        "border-neutral-800/60 hover:border-neutral-700 hover:bg-neutral-900/30 bg-transparent"
+        "border-border/60 hover:border-border hover:bg-card/30 bg-transparent"
       )}
     >
       <div className={cn(
@@ -283,7 +283,7 @@ function ProjectsContent() {
         "bg-green-500/50"
       )} />
 
-      <h3 className="flex-1 text-sm font-medium text-neutral-300 group-hover:text-neutral-100 transition-colors truncate">
+      <h3 className="flex-1 text-sm font-medium text-foreground/80 group-hover:text-foreground transition-colors truncate">
         {item.title}
       </h3>
 
@@ -291,15 +291,15 @@ function ProjectsContent() {
         <span className={cn("text-xs px-2 py-0.5 rounded-full border", TYPE_COLORS[item.type])}>
           {item.type}
         </span>
-        <span className="text-xs text-neutral-600 hidden sm:block">{getFirstArea(item)}</span>
-        <span className="text-xs text-neutral-600 w-20 text-right">
+        <span className="text-xs text-muted-foreground hidden sm:block">{getFirstArea(item)}</span>
+        <span className="text-xs text-muted-foreground w-20 text-right">
           {item.date
             ? new Date(item.date).toLocaleDateString("pt-BR", { month: "short", year: "numeric" })
             : item.status}
         </span>
       </div>
 
-      <svg className="shrink-0 w-3.5 h-3.5 text-neutral-700 group-hover:text-neutral-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="shrink-0 w-3.5 h-3.5 text-muted-foreground group-hover:text-muted-foreground transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
       </svg>
     </a>
@@ -314,7 +314,7 @@ function ProjectsContent() {
 
           {/* Back */}
           <FadeIn direction="down" className="mb-8">
-            <Link href="/" className="inline-flex items-center gap-2 text-neutral-400 hover:text-neutral-200 transition-colors">
+            <Link href="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
@@ -323,9 +323,9 @@ function ProjectsContent() {
           </FadeIn>
 
           {/* Header */}
-          <FadeIn direction="down" className="text-center mb-10">
-            <h1 className="text-4xl md:text-5xl font-bold text-neutral-100 mb-4">Produtos que construí. Todos em produção.</h1>
-            <p className="text-lg text-neutral-400 max-w-2xl mx-auto">
+          <FadeIn direction="down" className="text-center mb-8 sm:mb-10 px-2">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-3 sm:mb-4 leading-tight">Produtos que construí. Todos em produção.</h1>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
               De SaaS com IA a scanners DeFi — cada projeto tem demo ao vivo ou está em soft launch.
             </p>
           </FadeIn>
@@ -345,14 +345,14 @@ function ProjectsContent() {
                   className={cn(
                     "px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 border flex items-center gap-1.5",
                     selectedType === value
-                      ? "bg-white text-neutral-900 border-white shadow font-semibold"
-                      : "bg-neutral-900/50 text-neutral-400 border-neutral-700 hover:border-neutral-600 hover:text-neutral-300"
+                      ? "bg-white text-background border-white shadow font-semibold"
+                      : "bg-card/50 text-muted-foreground border-border hover:border-border hover:text-foreground/80"
                   )}
                 >
                   {label}
                   <span className={cn(
                     "text-xs px-1.5 py-0.5 rounded-full",
-                    selectedType === value ? "bg-neutral-200 text-neutral-700" : "bg-neutral-800 text-neutral-500"
+                    selectedType === value ? "bg-muted text-muted-foreground" : "bg-muted text-muted-foreground"
                   )}>
                     {count}
                   </span>
@@ -361,14 +361,14 @@ function ProjectsContent() {
             </div>
 
             {/* View toggle */}
-            <div className="flex items-center gap-1 p-1 bg-neutral-900 border border-neutral-800 rounded-lg">
+            <div className="flex items-center gap-1 p-1 bg-card border border-border rounded-lg">
               <button
                 onClick={() => setViewMode("grid")}
                 className={cn(
                   "p-1.5 rounded-md transition-all duration-200",
                   viewMode === "grid"
-                    ? "bg-neutral-700 text-neutral-100"
-                    : "text-neutral-500 hover:text-neutral-300"
+                    ? "bg-muted-foreground/20 text-foreground"
+                    : "text-muted-foreground hover:text-foreground/80"
                 )}
                 title="Visualização em grade"
               >
@@ -379,8 +379,8 @@ function ProjectsContent() {
                 className={cn(
                   "p-1.5 rounded-md transition-all duration-200",
                   viewMode === "list"
-                    ? "bg-neutral-700 text-neutral-100"
-                    : "text-neutral-500 hover:text-neutral-300"
+                    ? "bg-muted-foreground/20 text-foreground"
+                    : "text-muted-foreground hover:text-foreground/80"
                 )}
                 title="Visualização em lista"
               >
@@ -390,7 +390,7 @@ function ProjectsContent() {
           </FadeIn>
 
           {/* Area filter */}
-          <FadeIn direction="up" className="flex flex-wrap gap-2 mb-8">
+          <FadeIn direction="up" className="flex flex-wrap gap-2 mb-6 sm:mb-8">
             {areas.map((area) => (
               <button
                 key={area}
@@ -400,10 +400,10 @@ function ProjectsContent() {
                   )
                 }
                 className={cn(
-                  "px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 border",
+                  "px-3 sm:px-4 py-2 rounded-full text-xs font-medium transition-all duration-200 border min-h-[36px]",
                   selectedAreas.includes(area)
-                    ? "bg-neutral-700 text-neutral-100 border-neutral-600"
-                    : "bg-transparent text-neutral-500 border-neutral-800 hover:border-neutral-700 hover:text-neutral-400"
+                    ? "bg-muted-foreground/20 text-foreground border-border"
+                    : "bg-transparent text-muted-foreground border-border hover:border-border hover:text-muted-foreground"
                 )}
               >
                 {area}
@@ -430,11 +430,11 @@ function ProjectsContent() {
 
           {filteredItems.length === 0 && (
             <FadeIn direction="up" className="text-center py-16">
-              <div className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-8 max-w-md mx-auto">
-                <p className="text-neutral-400 mb-4">Nenhum item encontrado.</p>
+              <div className="bg-card/50 border border-border rounded-xl p-8 max-w-md mx-auto">
+                <p className="text-muted-foreground mb-4">Nenhum item encontrado.</p>
                 <button
                   onClick={() => { setSelectedAreas([]); setSelectedType("Todos"); }}
-                  className="text-neutral-300 hover:text-neutral-200 transition-colors text-sm"
+                  className="text-foreground/80 hover:text-foreground transition-colors text-sm"
                 >
                   Ver tudo
                 </button>
@@ -451,7 +451,7 @@ export default function ProjectsPage() {
   return (
     <Suspense fallback={
       <div className="w-full flex items-center justify-center py-20">
-        <div className="animate-pulse text-neutral-600">Carregando...</div>
+        <div className="animate-pulse text-muted-foreground">Carregando...</div>
       </div>
     }>
       <ProjectsContent />

@@ -72,7 +72,7 @@ const features = [
             show: { transition: { delay: 1.5 } },
           }}
         >
-          <div className="absolute top-2 right-2 bg-background rounded-lg px-4 py-2 text-xs text-neutral-500 dark:text-neutral-300 max-w-3/4 w-fit">
+          <div className="absolute top-2 right-2 bg-background rounded-lg px-4 py-2 text-xs text-muted-foreground max-w-3/4 w-fit">
             <div className="flex items-center gap-2">
               <div
                 className={`w-3 h-3 rounded-full animate-pulse ${
@@ -148,7 +148,7 @@ const features = [
                 <figcaption className="text-sm font-semibold dark:text-white leading-tight">
                   {item.name}
                 </figcaption>
-                <blockquote className="mt-1 text-xs text-neutral-500 dark:text-neutral-400 line-clamp-2">{item.body}</blockquote>
+                <blockquote className="mt-1 text-xs text-muted-foreground line-clamp-2">{item.body}</blockquote>
               </a>
             ))}
           </Marquee>
@@ -216,9 +216,6 @@ const features = [
 
 
 
-  // ↳ Card "Projetos ao Vivo" removido — substituído pelo bloco
-  //   <NewsletterManifestoBlock /> renderizado abaixo do bento na home.
-
   {
     Icon: "",
     name: "",
@@ -231,14 +228,14 @@ const features = [
         id="contact-form"
         className="absolute h-full w-full left-0 top-0 origin-top rounded-md transition-all duration-300 ease-out [mask-image:linear-gradient(to_top,transparent_0%,#000_0%)]"
       >
-        <div className="absolute inset-0 z-50 flex justify-center items-center gap-5 p-5">
+        <div className="absolute inset-0 z-50 flex justify-center items-center gap-5 p-4 sm:p-5">
           <div className="max-w-sm w-full flex flex-col gap-2 overflow-y-auto">
-            <div className="text-5xl md:text-6xl font-semibold text-neutral-700 dark:text-neutral-300 w-full flex justify-start">
+            <div className="text-4xl sm:text-5xl md:text-6xl font-semibold text-foreground w-full flex justify-start leading-[1.05]">
               <BlurIn duration={0.5} className="h-full">
                 Vamos conversar.
               </BlurIn>
             </div>
-            <div className="w-full flex flex-col items-start gap-4 text-neutral-500 dark:text-neutral-400 text-sm mt-4">
+            <div className="w-full flex flex-col items-start gap-3 sm:gap-4 text-muted-foreground text-sm mt-3 sm:mt-4">
               <p>Tem um projeto em mente ou quer escalar seus resultados?</p>
               
               <a
@@ -255,8 +252,8 @@ const features = [
             </div>
             
             {/* Redes Sociais */}
-            <div className="mt-4 pt-4 border-t border-neutral-700">
-              <div className="text-xs text-neutral-400 mb-2 text-center">
+            <div className="mt-4 pt-4 border-t border-border">
+              <div className="text-xs text-muted-foreground mb-2 text-center">
                 Ou conecte-se diretamente:
               </div>
               <div className="flex justify-center gap-4">
@@ -264,7 +261,7 @@ const features = [
                   href="https://instagram.com/madureira0x"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-neutral-400 hover:text-neutral-200 transition-colors duration-200"
+                  className="text-muted-foreground hover:text-foreground transition-colors duration-200"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
@@ -274,7 +271,7 @@ const features = [
                   href="https://x.com/madureira0x"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-neutral-400 hover:text-neutral-200 transition-colors duration-200"
+                  className="text-muted-foreground hover:text-foreground transition-colors duration-200"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
@@ -284,7 +281,7 @@ const features = [
                   href="https://www.linkedin.com/in/gabriel-madureira/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-neutral-400 hover:text-neutral-200 transition-colors duration-200"
+                  className="text-muted-foreground hover:text-foreground transition-colors duration-200"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
@@ -331,7 +328,7 @@ const TECH_ROW_BOTTOM: Tech[] = [
 
 function TechBadge({ tech }: { tech: Tech }) {
   return (
-    <div className="flex shrink-0 items-center gap-2 rounded-full border border-neutral-700/60 bg-neutral-900/80 px-3 py-2 backdrop-blur-sm">
+    <div className="flex shrink-0 items-center gap-2 rounded-full border border-border bg-card px-3 py-2 backdrop-blur-sm">
       <span className="grid h-6 w-6 place-items-center rounded-full bg-white/95">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -343,7 +340,7 @@ function TechBadge({ tech }: { tech: Tech }) {
           className="h-3.5 w-3.5"
         />
       </span>
-      <span className="text-xs font-medium text-neutral-300 whitespace-nowrap">
+      <span className="text-xs font-medium text-foreground whitespace-nowrap">
         {tech.label}
       </span>
     </div>
