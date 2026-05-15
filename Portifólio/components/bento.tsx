@@ -8,7 +8,6 @@ import { FadeIn } from "@/components/magicui/fade-in";
 // Globe removido junto com o card "Projetos ao Vivo" (movido pra bloco newsletter).
 import Hero from "@/components/hero";
 import Marquee from "@/components/magicui/marquee";
-import ThemeToggle from "@/components/theme-toggle";
 import Orbit from "@/components/orbit";
 import RetroGrid from "@/components/magicui/retro-grid";
 
@@ -35,11 +34,6 @@ const features = [
           <Hero />
         </div>
 
-        <div className="absolute right-0 top-0 z-50">
-          <FadeIn direction="down">
-            <ThemeToggle />
-          </FadeIn>
-        </div>
       </>
     ),
   },

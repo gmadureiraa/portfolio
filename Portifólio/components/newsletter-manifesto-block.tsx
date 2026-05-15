@@ -2,11 +2,7 @@
 
 import { NewsletterHeroForm } from "@/components/newsletter-synecdoche/hero-form";
 
-const PAPER = "#f4f1ea";
 const CORAL = "#e63a1f";
-const MUTED = "rgba(244, 241, 234, 0.78)";
-const FAINT = "rgba(244, 241, 234, 0.42)";
-const HAIRLINE = "rgba(244, 241, 234, 0.10)";
 
 const MONO = '"Geist Mono", "JetBrains Mono", ui-monospace, monospace';
 const SERIF = 'var(--font-fraunces), "Fraunces", Georgia, serif';
@@ -16,27 +12,25 @@ const SERIF = 'var(--font-fraunces), "Fraunces", Georgia, serif';
  * Mesmo manifesto da página /newsletter, formato largo e generoso,
  * pra substituir o card "Projetos ao Vivo" do bento da home.
  * Reusa <NewsletterHeroForm /> (mesmo subscribe + honeypot).
+ * Theme-aware: usa vars do DS (foreground/muted-foreground/border).
  */
 export function NewsletterManifestoBlock() {
   return (
     <section
+      className="border-t border-b border-border bg-background"
       style={{
         width: "100%",
         padding: "clamp(56px, 9vw, 112px) clamp(20px, 4vw, 56px)",
-        borderTop: `1px solid ${HAIRLINE}`,
-        borderBottom: `1px solid ${HAIRLINE}`,
-        background:
-          "linear-gradient(180deg, rgba(255,255,255,0.018), transparent 60%)",
       }}
     >
       <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "left" }}>
         <p
+          className="text-muted-foreground"
           style={{
             fontFamily: MONO,
             fontSize: 11,
             letterSpacing: "0.22em",
             textTransform: "uppercase",
-            color: FAINT,
             margin: 0,
             marginBottom: 28,
           }}
@@ -45,6 +39,7 @@ export function NewsletterManifestoBlock() {
         </p>
 
         <h2
+          className="text-foreground"
           style={{
             fontFamily: SERIF,
             fontStyle: "italic",
@@ -53,7 +48,6 @@ export function NewsletterManifestoBlock() {
             lineHeight: 1.02,
             letterSpacing: "-0.025em",
             margin: 0,
-            color: PAPER,
           }}
         >
           marketing direto.
@@ -66,12 +60,12 @@ export function NewsletterManifestoBlock() {
         </h2>
 
         <p
+          className="text-foreground/75"
           style={{
             marginTop: 28,
             maxWidth: 580,
             fontSize: 17,
             lineHeight: 1.65,
-            color: MUTED,
           }}
         >
           Cartas semanais com o que funcionou, o que quebrou e os números por
@@ -84,13 +78,13 @@ export function NewsletterManifestoBlock() {
         </div>
 
         <p
+          className="text-muted-foreground"
           style={{
             marginTop: 24,
             fontFamily: MONO,
             fontSize: 11,
             letterSpacing: "0.16em",
             textTransform: "uppercase",
-            color: FAINT,
           }}
         >
           uma por semana&nbsp;&nbsp;·&nbsp;&nbsp;zero spam&nbsp;&nbsp;·&nbsp;&nbsp;cancela quando quiser

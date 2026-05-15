@@ -8,13 +8,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { AnimatedThemeToggler } from "@/components/magicui/animated-theme-toggler";
 
-const PAPER = "#f4f1ea";
-const INK = "#0a0908";
 const CORAL = "#e63a1f";
-const MUTED = "rgba(244, 241, 234, 0.62)";
-const FAINT = "rgba(244, 241, 234, 0.42)";
-const HAIRLINE = "rgba(244, 241, 234, 0.10)";
-const HAIRLINE_STRONG = "rgba(244, 241, 234, 0.18)";
 
 const MONO = '"Geist Mono", "JetBrains Mono", ui-monospace, monospace';
 const SERIF = 'var(--font-fraunces), "Fraunces", Georgia, serif';
@@ -28,8 +22,9 @@ const navTabs = [
 /**
  * Header global do site Madureira. Padrão validado no newsletter-template:
  * avatar à esquerda, wordmark "madureira" Fraunces italic centralizado,
- * CTA "Assinar" cream à direita. Nav inferior com 3 tabs mono uppercase.
- * Dark-first, paleta paper/ink/coral inline (não depende de globals.css).
+ * CTA "Assinar" à direita. Nav inferior com 3 tabs mono uppercase.
+ * Theme-aware: usa CSS vars do design system (bg-background/foreground/border)
+ * pra responder ao toggle Sun/Moon (mesma cor da página).
  */
 // Rotas onde o header global NÃO deve aparecer.
 // /lp = landing de consultoria (tem ConsultoriaNavbar próprio)
@@ -47,22 +42,13 @@ export function SiteHeader() {
   if (hidden) return null;
 
   return (
-    <header
-      className="sticky top-0 z-40 w-full backdrop-blur-md"
-      style={{
-        background: "rgba(10, 9, 8, 0.92)",
-        borderBottom: `1px solid ${HAIRLINE}`,
-      }}
-    >
+    <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-background/85 border-b border-border">
       {/* Top row */}
       <div className="mx-auto flex h-16 max-w-[1280px] items-center justify-between px-4 sm:px-6 lg:px-8 relative">
         {/* Left: avatar + handle */}
         <div className="flex items-center gap-3">
           <Link href="/" className="flex items-center gap-2.5 group">
-            <span
-              className="relative inline-block size-9 overflow-hidden rounded-full transition-colors"
-              style={{ boxShadow: `0 0 0 1px ${HAIRLINE_STRONG}` }}
-            >
+            <span className="relative inline-block size-9 overflow-hidden rounded-full ring-1 ring-border transition-colors">
               <Image
                 src="/avatar.png"
                 alt="Madureira"
@@ -73,12 +59,11 @@ export function SiteHeader() {
               />
             </span>
             <span
-              className="hidden sm:inline"
+              className="hidden sm:inline text-foreground"
               style={{
                 fontFamily: MONO,
                 fontSize: 12,
                 letterSpacing: "0.04em",
-                color: PAPER,
               }}
             >
               @ogmadureira
@@ -90,7 +75,7 @@ export function SiteHeader() {
         <Link
           href="/"
           aria-label="madureira home"
-          className="absolute left-1/2 -translate-x-1/2 transition-opacity hover:opacity-90"
+          className="absolute left-1/2 -translate-x-1/2 transition-opacity hover:opacity-90 text-foreground"
           style={{
             fontFamily: SERIF,
             fontStyle: "italic",
@@ -98,7 +83,6 @@ export function SiteHeader() {
             fontSize: 26,
             lineHeight: 1,
             letterSpacing: "-0.025em",
-            color: PAPER,
           }}
         >
           madureira
@@ -111,35 +95,22 @@ export function SiteHeader() {
             type="button"
             onClick={() => setSearchOpen((v) => !v)}
             aria-label="buscar"
-            className="hidden md:inline-flex size-9 items-center justify-center rounded-full transition-colors"
-            style={{
-              border: `1px solid ${HAIRLINE_STRONG}`,
-              color: PAPER,
-              background: "transparent",
-            }}
+            className="hidden md:inline-flex size-9 items-center justify-center rounded-full border border-border text-foreground bg-transparent transition-colors hover:bg-accent"
           >
             <Search className="size-4" />
           </button>
           <Link
             href="/newsletter"
+            className="inline-flex items-center gap-2 rounded-full bg-foreground text-background hover:-translate-y-px transition-transform"
             style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
               padding: "10px 18px",
-              borderRadius: 999,
-              background: PAPER,
-              color: INK,
               fontFamily: "var(--font-inter), Inter, system-ui, sans-serif",
               fontWeight: 600,
               fontSize: 12,
               letterSpacing: "0.04em",
               textTransform: "uppercase",
-              border: `1px solid ${PAPER}`,
               textDecoration: "none",
-              transition: "transform 200ms cubic-bezier(.2,.7,.2,1)",
             }}
-            className="hover:-translate-y-px"
           >
             Assinar
           </Link>
@@ -147,8 +118,7 @@ export function SiteHeader() {
             type="button"
             onClick={() => setOpen((v) => !v)}
             aria-label="menu"
-            className="md:hidden inline-flex size-9 items-center justify-center rounded-full"
-            style={{ border: `1px solid ${HAIRLINE_STRONG}`, color: PAPER }}
+            className="md:hidden inline-flex size-9 items-center justify-center rounded-full border border-border text-foreground"
           >
             {open ? <X className="size-4" /> : <Menu className="size-4" />}
           </button>
@@ -157,17 +127,16 @@ export function SiteHeader() {
 
       {/* Search bar (collapsible, desktop) */}
       {searchOpen && (
-        <div style={{ borderTop: `1px solid ${HAIRLINE}`, background: INK }}>
+        <div className="border-t border-border bg-background">
           <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 py-3">
             <div className="flex items-center gap-3">
-              <Search className="size-4" style={{ color: FAINT }} />
+              <Search className="size-4 text-muted-foreground" />
               <input
                 autoFocus
                 type="text"
                 placeholder="buscar..."
-                className="flex-1 bg-transparent border-0 outline-none"
+                className="flex-1 bg-transparent border-0 outline-none text-foreground placeholder:text-muted-foreground"
                 style={{
-                  color: PAPER,
                   fontFamily: MONO,
                   fontSize: 13,
                   caretColor: CORAL,
@@ -175,14 +144,13 @@ export function SiteHeader() {
               />
               <button
                 onClick={() => setSearchOpen(false)}
+                className="text-muted-foreground hover:opacity-80"
                 style={{
                   fontFamily: MONO,
                   fontSize: 11,
                   letterSpacing: "0.12em",
                   textTransform: "uppercase",
-                  color: MUTED,
                 }}
-                className="hover:opacity-80"
               >
                 esc
               </button>
@@ -192,7 +160,7 @@ export function SiteHeader() {
       )}
 
       {/* Nav tabs (desktop + tablet) */}
-      <nav style={{ borderTop: `1px solid ${HAIRLINE}` }} className="hidden sm:block">
+      <nav className="hidden sm:block border-t border-border">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
           <ul className="flex items-center justify-center gap-1 overflow-x-auto">
             {navTabs.map((tab) => {
@@ -214,10 +182,7 @@ export function SiteHeader() {
 
       {/* Mobile menu */}
       {open && (
-        <div
-          className="sm:hidden"
-          style={{ borderTop: `1px solid ${HAIRLINE}`, background: INK }}
-        >
+        <div className="sm:hidden border-t border-border bg-background">
           <ul className="px-4 py-3 space-y-1">
             {navTabs.map((t) => {
               const isActive =
@@ -229,15 +194,16 @@ export function SiteHeader() {
                   <Link
                     href={t.href}
                     onClick={() => setOpen(false)}
+                    className={cn(
+                      "block no-underline",
+                      isActive ? "text-foreground" : "text-muted-foreground",
+                    )}
                     style={{
-                      display: "block",
                       padding: "10px 4px",
                       fontFamily: MONO,
                       fontSize: 12,
                       letterSpacing: "0.12em",
                       textTransform: "uppercase",
-                      color: isActive ? PAPER : MUTED,
-                      textDecoration: "none",
                     }}
                   >
                     {t.label}
@@ -265,7 +231,8 @@ function NavLink({
     <Link
       href={href}
       className={cn(
-        "relative inline-flex items-center whitespace-nowrap transition-colors",
+        "relative inline-flex items-center whitespace-nowrap no-underline transition-colors",
+        active ? "text-foreground" : "text-muted-foreground hover:text-foreground",
       )}
       style={{
         padding: "12px 16px",
@@ -273,22 +240,13 @@ function NavLink({
         fontSize: 11,
         letterSpacing: "0.12em",
         textTransform: "uppercase",
-        color: active ? PAPER : MUTED,
-        textDecoration: "none",
       }}
     >
       {children}
       {active && (
         <span
           aria-hidden
-          style={{
-            position: "absolute",
-            left: 16,
-            right: 16,
-            bottom: 0,
-            height: 1,
-            background: PAPER,
-          }}
+          className="absolute left-4 right-4 bottom-0 h-px bg-foreground"
         />
       )}
     </Link>

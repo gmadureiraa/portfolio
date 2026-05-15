@@ -12,7 +12,6 @@ import Marquee from "@/components/magicui/marquee";
 import RetroGrid from "@/components/magicui/retro-grid";
 import Orbit from "@/components/orbit";
 import Technologies from "@/components/technologies";
-import ThemeToggle from "@/components/theme-toggle";
 import NumberTicker from "@/components/magicui/number-ticker";
 import NewsletterSignup from "@/components/newsletter-signup";
 
@@ -113,11 +112,6 @@ const features = [
           </FadeIn>
         </div>
 
-        <div className="absolute right-3 top-3 z-50">
-          <FadeIn direction="down">
-            <ThemeToggle />
-          </FadeIn>
-        </div>
       </>
     ),
   },
