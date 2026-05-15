@@ -1,11 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: "media",
+  darkMode: "class", // disabled — single dark theme via :root
   content: [
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-      "*.{js,ts,jsx,tsx,mdx}"
-],
+    "*.{js,ts,jsx,tsx,mdx}",
+  ],
   theme: {
     extend: {
       screens: {
@@ -16,14 +16,14 @@ module.exports = {
         sides: "var(--sides)",
         "footer-safe-area": "var(--footer-safe-area)",
       },
-      backgroundImage: {
-        "gradient-primary":
-          "linear-gradient(90deg,rgba(255,255,255, 0.1) 0%,rgba(255,255,255, 0.4) 100%),rgba(85,85,85,0.1)",
+      maxWidth: {
+        page: "var(--max-page)",
+        prose: "68ch",
       },
       borderRadius: {
         lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        md: "calc(var(--radius) - 0px)",
+        sm: "calc(var(--radius) - 0px)",
       },
       transitionProperty: {
         "colors-and-shadows":
@@ -31,15 +31,33 @@ module.exports = {
       },
       animation: {
         shine: "shine 2s ease-in-out infinite",
+        blink: "blink 1.1s steps(2, start) infinite",
       },
       fontFamily: {
-        serif: ["var(--font-instrument-serif)", "serif"],
+        display: ["var(--font-fraunces)", "Cormorant Garamond", "Georgia", "serif"],
+        serif: ["var(--font-fraunces)", "Cormorant Garamond", "Georgia", "serif"],
+        sans: ["var(--font-geist)", "Inter", "system-ui", "sans-serif"],
+        mono: ["var(--font-geist-mono)", "ui-monospace", "monospace"],
+      },
+      fontSize: {
+        // Madureira DS scale
+        xs: ["11px", { lineHeight: "1.4" }],
+        sm: ["13px", { lineHeight: "1.45" }],
+        base: ["15px", { lineHeight: "1.55" }],
+        md: ["18px", { lineHeight: "1.6" }],
+        lg: ["22px", { lineHeight: "1.4" }],
+        xl: ["28px", { lineHeight: "1.2" }],
+        "2xl": ["38px", { lineHeight: "1.1" }],
+        "3xl": ["52px", { lineHeight: "1.05" }],
+        "4xl": ["72px", { lineHeight: "1" }],
+        "5xl": ["104px", { lineHeight: "0.95" }],
+        "6xl": ["144px", { lineHeight: "0.9" }],
       },
       boxShadow: {
         button:
-          "inset 0 0 1px 1px rgba(255, 255, 255, 0.05), inset 0 0 2px 1px rgba(255, 255, 255, 0.2), inset -1px -1px 1px 0px rgba(0, 0, 0, 0.0), 0 0 10px 0 rgba(255, 255, 255, 0.1)",
+          "inset 0 0 1px 1px rgba(244,241,234,0.05), inset 0 0 2px 1px rgba(244,241,234,0.15)",
         "button-hover":
-          "inset 0 0 5px 1px rgba(255, 255, 255, 0.2), inset 0.5px 0.5px 1px 0.5px rgba(255, 255, 255, 0.5), inset -0.5px -0.5px 0.5px 0.5px rgba(0, 0, 0, 0.2), 0 0 12px 4px rgba(255, 255, 255, 0.5)",
+          "inset 0 0 4px 1px rgba(244,241,234,0.15), 0 0 0 1px rgba(230,58,31,0.1)",
       },
       colors: {
         background: "hsl(var(--background))",
@@ -79,15 +97,26 @@ module.exports = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        chart: {
-          1: "hsl(var(--chart-1))",
-          2: "hsl(var(--chart-2))",
-          3: "hsl(var(--chart-3))",
-          4: "hsl(var(--chart-4))",
-          5: "hsl(var(--chart-5))",
+        // Direct Madureira tokens (use sparingly, prefer semantic)
+        ink: {
+          0: "hsl(var(--ink-0))",
+          10: "hsl(var(--ink-10))",
+          15: "hsl(var(--ink-15))",
+          20: "hsl(var(--ink-20))",
+          30: "hsl(var(--ink-30))",
+          50: "hsl(var(--ink-50))",
+          70: "hsl(var(--ink-70))",
+          85: "hsl(var(--ink-85))",
+          95: "hsl(var(--ink-95))",
+          100: "hsl(var(--ink-100))",
+        },
+        vermilion: {
+          DEFAULT: "hsl(var(--accent-h))",
+          soft: "hsl(var(--accent-soft-h))",
+          deep: "hsl(var(--accent-deep-h))",
         },
       },
     },
   },
-  plugins: [import("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate")],
 };
