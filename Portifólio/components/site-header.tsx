@@ -46,11 +46,11 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-background/85 border-b border-border">
       {/* Top row */}
-      <div className="mx-auto flex h-16 max-w-[1280px] items-center justify-between px-4 sm:px-6 lg:px-8 relative">
-        {/* Left: avatar + handle */}
-        <div className="flex items-center gap-3">
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <span className="relative inline-block size-9 overflow-hidden rounded-full ring-1 ring-border transition-colors">
+      <div className="mx-auto flex h-14 sm:h-16 max-w-[1280px] items-center justify-between px-3 sm:px-6 lg:px-8 relative">
+        {/* Left: avatar + handle (handle só >= sm) */}
+        <div className="flex items-center gap-3 min-w-0">
+          <Link href="/" className="flex items-center gap-2.5 group shrink-0">
+            <span className="relative inline-block size-8 sm:size-9 overflow-hidden rounded-full ring-1 ring-border transition-colors">
               <Image
                 src="/avatar.png"
                 alt="Madureira"
@@ -73,16 +73,16 @@ export function SiteHeader() {
           </Link>
         </div>
 
-        {/* Center: wordmark */}
+        {/* Center: wordmark — tamanho reduzido no mobile pra não bater nos lados */}
         <Link
           href="/"
           aria-label="madureira home"
-          className="absolute left-1/2 -translate-x-1/2 transition-opacity hover:opacity-90 text-foreground"
+          className="absolute left-1/2 -translate-x-1/2 transition-opacity hover:opacity-90 text-foreground pointer-events-auto"
           style={{
             fontFamily: SERIF,
             fontStyle: "italic",
             fontWeight: 300,
-            fontSize: 26,
+            fontSize: "clamp(18px, 5.6vw, 26px)",
             lineHeight: 1,
             letterSpacing: "-0.025em",
           }}
@@ -91,7 +91,7 @@ export function SiteHeader() {
         </Link>
 
         {/* Right: theme toggle + search (desktop) + Assinar + burger (mobile) */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           <AnimatedThemeToggler />
           <button
             type="button"
@@ -101,9 +101,11 @@ export function SiteHeader() {
           >
             <Search className="size-4" />
           </button>
+          {/* Assinar — desktop completo, mobile ícone-only pra economizar espaço */}
           <Link
             href="/newsletter"
-            className="inline-flex items-center gap-2 rounded-full bg-foreground text-background hover:-translate-y-px transition-transform"
+            aria-label="assinar newsletter"
+            className="hidden sm:inline-flex items-center gap-2 rounded-full bg-foreground text-background hover:-translate-y-px transition-transform"
             style={{
               padding: "10px 18px",
               fontFamily: "var(--font-inter), Inter, system-ui, sans-serif",
@@ -119,8 +121,9 @@ export function SiteHeader() {
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            aria-label="menu"
-            className="md:hidden inline-flex size-9 items-center justify-center rounded-full border border-border text-foreground"
+            aria-label={open ? "fechar menu" : "abrir menu"}
+            aria-expanded={open}
+            className="sm:hidden inline-flex size-9 items-center justify-center rounded-full border border-border text-foreground"
           >
             {open ? <X className="size-4" /> : <Menu className="size-4" />}
           </button>
@@ -197,13 +200,13 @@ export function SiteHeader() {
                     href={t.href}
                     onClick={() => setOpen(false)}
                     className={cn(
-                      "block no-underline",
+                      "block no-underline min-h-[44px] flex items-center",
                       isActive ? "text-foreground" : "text-muted-foreground",
                     )}
                     style={{
                       padding: "10px 4px",
                       fontFamily: MONO,
-                      fontSize: 12,
+                      fontSize: 13,
                       letterSpacing: "0.12em",
                       textTransform: "uppercase",
                     }}
@@ -213,6 +216,25 @@ export function SiteHeader() {
                 </li>
               );
             })}
+            {/* CTA Assinar — substitui o botão escondido no mobile */}
+            <li className="pt-2">
+              <Link
+                href="/newsletter"
+                onClick={() => setOpen(false)}
+                className="flex items-center justify-center rounded-full bg-foreground text-background no-underline w-full"
+                style={{
+                  padding: "14px 18px",
+                  fontFamily:
+                    "var(--font-inter), Inter, system-ui, sans-serif",
+                  fontWeight: 600,
+                  fontSize: 12,
+                  letterSpacing: "0.04em",
+                  textTransform: "uppercase",
+                }}
+              >
+                Assinar newsletter
+              </Link>
+            </li>
           </ul>
         </div>
       )}

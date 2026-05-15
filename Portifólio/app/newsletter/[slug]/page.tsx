@@ -28,13 +28,14 @@ const inter = Inter({
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL || "https://madureira.xyz";
 
-const PAPER = "#f4f1ea";
-const INK = "#0a0908";
-/* P&B mode — accent (drop-cap, dot, blockquote bar) usa o próprio PAPER */
-const ACCENT = PAPER;
-const MUTED = "rgba(244, 241, 234, 0.62)";
-const FAINT = "rgba(244, 241, 234, 0.42)";
-const HAIRLINE = "rgba(244, 241, 234, 0.10)";
+/* Theme-aware tokens — usam CSS vars do design system (light/dark via next-themes).
+ * Antes eram hardcoded (#f4f1ea/#0a0908) — quebrava Sun/Moon toggle nessa rota. */
+const PAPER = "hsl(var(--foreground))"; // texto principal
+const INK = "hsl(var(--background))"; // fundo
+const ACCENT = "hsl(var(--foreground))"; // drop-cap, dot, blockquote bar (P&B)
+const MUTED = "hsl(var(--muted-foreground))"; // texto secundário
+const FAINT = "hsl(var(--muted-foreground) / 0.7)"; // labels, datas
+const HAIRLINE = "hsl(var(--border))"; // bordas finas
 const MONO = '"Geist Mono", "JetBrains Mono", ui-monospace, monospace';
 const SERIF = 'var(--font-fraunces), "Fraunces", Georgia, serif';
 
@@ -295,7 +296,7 @@ export default async function NewsletterPostPage({
               border: `1px solid ${HAIRLINE}`,
               borderRadius: 12,
               background:
-                "linear-gradient(135deg, rgba(244,241,234,0.04), transparent 60%)",
+                "linear-gradient(135deg, hsl(var(--foreground) / 0.04), transparent 60%)",
               padding: "36px clamp(24px, 5vw, 44px)",
             }}
           >
@@ -359,7 +360,7 @@ export default async function NewsletterPostPage({
                     fontSize: 11,
                     letterSpacing: "0.22em",
                     textTransform: "uppercase",
-                    color: "rgba(244, 241, 234, 0.55)",
+                    color: "hsl(var(--muted-foreground))",
                     whiteSpace: "nowrap",
                   }}
                 >
@@ -468,7 +469,7 @@ export default async function NewsletterPostPage({
         .nl-prose {
           font-size: 18px;
           line-height: 1.78;
-          color: rgba(244, 241, 234, 0.86);
+          color: hsl(var(--foreground) / 0.86);
         }
         .nl-prose > p:first-of-type::first-letter {
           float: left;
@@ -539,14 +540,14 @@ export default async function NewsletterPostPage({
         .nl-prose code {
           font-family: ${MONO};
           font-size: 0.86em;
-          background: #1a1917;
+          background: hsl(var(--muted));
           border: 1px solid ${HAIRLINE};
           padding: 2px 6px;
           border-radius: 4px;
           color: ${PAPER};
         }
         .nl-prose pre {
-          background: #111110;
+          background: hsl(var(--muted));
           border: 1px solid ${HAIRLINE};
           border-radius: 10px;
           padding: 20px;

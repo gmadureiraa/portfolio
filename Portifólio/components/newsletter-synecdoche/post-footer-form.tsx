@@ -55,19 +55,19 @@ export function NewsletterPostFooterForm() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="seu@email.com"
-        className="h-12 flex-1 rounded-md border border-neutral-700 bg-neutral-900 px-4 text-sm text-foreground placeholder:text-neutral-500 focus:border-neutral-500 focus:outline-none"
+        className="h-12 flex-1 rounded-md border border-border bg-background px-4 text-sm text-foreground placeholder:text-muted-foreground focus:border-foreground/40 focus:outline-none"
       />
       <button
         type="submit"
         disabled={status === "loading"}
-        className="h-12 rounded-md bg-foreground px-6 text-sm font-semibold text-background transition-colors hover:bg-neutral-200 disabled:opacity-60"
+        className="h-12 rounded-md bg-foreground px-6 text-sm font-semibold text-background transition-opacity hover:opacity-90 disabled:opacity-60"
       >
         {status === "loading" ? "Enviando..." : "Inscrever"}
       </button>
       {message ? (
         <p
           className={`mt-2 text-xs sm:mt-0 sm:ml-3 ${
-            status === "ok" ? "text-green-400" : "text-red-400"
+            status === "ok" ? "text-foreground" : "text-foreground/80"
           }`}
         >
           {message}
