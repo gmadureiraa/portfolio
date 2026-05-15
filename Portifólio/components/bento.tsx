@@ -1,12 +1,11 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import { AnimatedBeamMultipleOutputs } from "@/components/animated-beam-multiple-outputs";
 import { BentoCard, BentoGrid } from "@/components/magicui/bento-grid";
 import BlurIn from "@/components/magicui/blur-in";
 import { FadeIn } from "@/components/magicui/fade-in";
-const Globe = dynamic(() => import("@/components/magicui/globe"), { ssr: false });
+// Globe removido junto com o card "Projetos ao Vivo" (movido pra bloco newsletter).
 import Hero from "@/components/hero";
 import Marquee from "@/components/magicui/marquee";
 import ThemeToggle from "@/components/theme-toggle";
@@ -223,22 +222,8 @@ const features = [
 
 
 
-  {
-    Icon: "",
-    name: "Projetos ao Vivo",
-    description:
-      "15+ produtos com demo funcional. Dashboards DeFi, gateways de pagamento, ferramentas de analytics — tudo construído e rodando.",
-    className: "col-span-3 md:col-span-3",
-    href: "/projects",
-    cta: "Ver tudo",
-    background: (
-      <div className="absolute h-full w-full overflow-hidden rounded-md transition-all duration-300 ease-out group-hover:scale-105">
-        <div className="absolute inset-x-0 bottom-[-150px] sm:bottom-[-200px] h-[400px] sm:h-[600px] w-full [mask-image:linear-gradient(to_bottom,transparent_0%,#000_100%)] opacity-60">
-           <Globe />
-        </div>
-      </div>
-    ),
-  },
+  // ↳ Card "Projetos ao Vivo" removido — substituído pelo bloco
+  //   <NewsletterManifestoBlock /> renderizado abaixo do bento na home.
 
   {
     Icon: "",
