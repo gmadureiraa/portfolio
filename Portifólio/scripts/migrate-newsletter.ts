@@ -76,7 +76,7 @@ async function main() {
     const tables = await sql<{ table_name: string }[]>`
       SELECT table_name FROM information_schema.tables
       WHERE table_schema = 'public'
-        AND table_name IN ('newsletters', 'newsletter_subscribers')
+        AND table_name IN ('newsletters', 'newsletter_subscribers', 'newsletter_events')
       ORDER BY table_name
     `;
     console.log(

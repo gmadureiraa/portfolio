@@ -275,4 +275,173 @@ export async function countConfirmedActiveSubscribers(): Promise<number> {
   return Number(rows[0]?.c || 0);
 }
 
+// ----------------------------------------------------------------------------
+// Events / Analytics
+// ----------------------------------------------------------------------------
+
+export interface RecordEventInput {
+  slug: string;
+  eventType?: string;
+  ipHash?: string | null;
+  referrer?: string | null;
+  utmSource?: string | null;
+  utmMedium?: string | null;
+  utmCampaign?: string | null;
+}
+
+export async function recordNewsletterEvent(
+  input: RecordEventInput,
+): Promise<void> {
+  if (!sql) return;
+  const clamp = (v: string | null | undefined, n = 512) =>
+    typeof v === "string" && v.trim() ? v.trim().slice(0, n) : null;
+  await sql`
+    INSERT INTO newsletter_events (
+      slug, event_type, ip_hash, referrer, utm_source, utm_medium, utm_campaign
+    ) VALUES (
+      ${input.slug},
+      ${input.eventType || "view"},
+      ${clamp(input.ipHash, 64)},
+      ${clamp(input.referrer)},
+      ${clamp(input.utmSource, 128)},
+      ${clamp(input.utmMedium, 128)},
+      ${clamp(input.utmCampaign, 128)}
+    )
+  `;
+}
+
+export interface PostViewStat {
+  slug: string;
+  title: string;
+  published_at: Date | null;
+  view_count: number;
+  events_total: number;
+  events_30d: number;
+  events_7d: number;
+}
+
+export interface DailyPoint {
+  day: string; // YYYY-MM-DD
+  count: number;
+}
+
+export interface ReferrerStat {
+  referrer: string;
+  count: number;
+}
+
+export interface SourceStat {
+  source: string;
+  count: number;
+}
+
+export interface AnalyticsBundle {
+  posts: PostViewStat[];
+  daily30d: DailyPoint[];
+  topReferrers: ReferrerStat[];
+  subscriberSources: SourceStat[];
+  totals: {
+    views_all: number;
+    views_30d: number;
+    subscribers_confirmed: number;
+    subscribers_pending: number;
+  };
+}
+
+export async function getAnalyticsBundle(): Promise<AnalyticsBundle | null> {
+  if (!sql) return null;
+
+  const [posts, daily30d, topReferrers, subscriberSources, totalsRow] =
+    await Promise.all([
+      sql<PostViewStat[]>`
+        SELECT
+          n.slug,
+          n.title,
+          n.published_at,
+          n.view_count,
+          COALESCE(e.events_total, 0)::int AS events_total,
+          COALESCE(e.events_30d, 0)::int   AS events_30d,
+          COALESCE(e.events_7d, 0)::int    AS events_7d
+        FROM newsletters n
+        LEFT JOIN (
+          SELECT
+            slug,
+            COUNT(*) AS events_total,
+            COUNT(*) FILTER (WHERE created_at > NOW() - INTERVAL '30 days') AS events_30d,
+            COUNT(*) FILTER (WHERE created_at > NOW() - INTERVAL '7 days')  AS events_7d
+          FROM newsletter_events
+          WHERE event_type = 'view'
+          GROUP BY slug
+        ) e ON e.slug = n.slug
+        ORDER BY COALESCE(n.published_at, n.created_at) DESC
+      `,
+      sql<DailyPoint[]>`
+        SELECT
+          to_char(d.day, 'YYYY-MM-DD') AS day,
+          COALESCE(COUNT(ev.id), 0)::int AS count
+        FROM generate_series(
+          (CURRENT_DATE - INTERVAL '29 days'),
+          CURRENT_DATE,
+          INTERVAL '1 day'
+        ) AS d(day)
+        LEFT JOIN newsletter_events ev
+          ON ev.event_type = 'view'
+          AND ev.created_at::date = d.day
+        GROUP BY d.day
+        ORDER BY d.day ASC
+      `,
+      sql<ReferrerStat[]>`
+        SELECT
+          COALESCE(NULLIF(referrer, ''), 'direto') AS referrer,
+          COUNT(*)::int AS count
+        FROM newsletter_events
+        WHERE event_type = 'view'
+          AND created_at > NOW() - INTERVAL '30 days'
+        GROUP BY 1
+        ORDER BY count DESC
+        LIMIT 10
+      `,
+      sql<SourceStat[]>`
+        SELECT
+          COALESCE(NULLIF(source, ''), 'desconhecido') AS source,
+          COUNT(*)::int AS count
+        FROM newsletter_subscribers
+        WHERE unsubscribed_at IS NULL
+        GROUP BY 1
+        ORDER BY count DESC
+      `,
+      sql<
+        {
+          views_all: number;
+          views_30d: number;
+          subs_confirmed: number;
+          subs_pending: number;
+        }[]
+      >`
+        SELECT
+          (SELECT COUNT(*) FROM newsletter_events WHERE event_type = 'view')::int AS views_all,
+          (SELECT COUNT(*) FROM newsletter_events WHERE event_type = 'view'
+             AND created_at > NOW() - INTERVAL '30 days')::int AS views_30d,
+          (SELECT COUNT(*) FROM newsletter_subscribers
+             WHERE confirmed = TRUE AND unsubscribed_at IS NULL)::int AS subs_confirmed,
+          (SELECT COUNT(*) FROM newsletter_subscribers
+             WHERE confirmed = FALSE AND unsubscribed_at IS NULL)::int AS subs_pending
+      `,
+    ]);
+
+  const t = totalsRow[0];
+  return {
+    posts,
+    daily30d,
+    topReferrers,
+    subscriberSources,
+    totals: {
+      views_all: t?.views_all ?? 0,
+      views_30d: t?.views_30d ?? 0,
+      subscribers_confirmed: t?.subs_confirmed ?? 0,
+      subscribers_pending: t?.subs_pending ?? 0,
+    },
+  };
+}
+
 export { isDbConfigured };

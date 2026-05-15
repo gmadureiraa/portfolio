@@ -57,6 +57,33 @@ CREATE INDEX IF NOT EXISTS idx_subs_unsub_token
   WHERE unsubscribe_token IS NOT NULL;
 
 -- ============================================================================
+-- newsletter_events — telemetria de leitura (1 linha por view não-deduplicada)
+-- ============================================================================
+-- ip_hash: SHA256(ip + slug) truncado — não reversível, só pra dedupe/contagem.
+-- referrer + utm_*: de onde a pessoa veio (mapeamento de origem do tráfego).
+
+CREATE TABLE IF NOT EXISTS newsletter_events (
+  id            BIGSERIAL PRIMARY KEY,
+  slug          TEXT NOT NULL,
+  event_type    TEXT NOT NULL DEFAULT 'view',
+  ip_hash       TEXT,
+  referrer      TEXT,
+  utm_source    TEXT,
+  utm_medium    TEXT,
+  utm_campaign  TEXT,
+  created_at    TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_events_slug
+  ON newsletter_events(slug);
+
+CREATE INDEX IF NOT EXISTS idx_events_created
+  ON newsletter_events(created_at DESC);
+
+CREATE INDEX IF NOT EXISTS idx_events_slug_created
+  ON newsletter_events(slug, created_at DESC);
+
+-- ============================================================================
 -- Trigger pra updated_at automático em newsletters
 -- ============================================================================
 
