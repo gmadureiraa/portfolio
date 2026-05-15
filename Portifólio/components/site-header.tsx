@@ -15,7 +15,9 @@ const SERIF = 'var(--font-fraunces), "Fraunces", Georgia, serif';
 
 const navTabs = [
   { label: "Início", href: "/" },
+  { label: "Projetos", href: "/projects" },
   { label: "Newsletter", href: "/newsletter" },
+  { label: "Sobre", href: "/eu" },
   { label: "Links", href: "/links" },
 ];
 
