@@ -10,6 +10,7 @@ import {
 } from "@/lib/db/newsletter";
 import { NewsletterPostFooterForm } from "@/components/newsletter-synecdoche/post-footer-form";
 import { ViewPing } from "@/components/newsletter-synecdoche/view-ping";
+import { ReadingProgress } from "@/components/reading-progress";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -138,6 +139,7 @@ export default async function NewsletterPostPage({
         fontFeatureSettings: '"ss01", "cv11"',
       }}
     >
+      <ReadingProgress />
       <ViewPing slug={post.slug} />
 
       <article
@@ -194,7 +196,7 @@ export default async function NewsletterPostPage({
               fontFamily: SERIF,
               fontStyle: "italic",
               fontWeight: 300,
-              fontSize: "clamp(40px, 6.4vw, 68px)",
+              fontSize: "clamp(35px, 5.6vw, 60px)",
               lineHeight: 1.02,
               letterSpacing: "-0.025em",
               margin: "20px 0 0",
@@ -208,7 +210,7 @@ export default async function NewsletterPostPage({
             <p
               style={{
                 margin: "20px 0 0",
-                fontSize: 19,
+                fontSize: 17,
                 lineHeight: 1.55,
                 color: MUTED,
                 fontFamily: SERIF,
@@ -319,7 +321,7 @@ export default async function NewsletterPostPage({
                 fontFamily: SERIF,
                 fontStyle: "italic",
                 fontWeight: 300,
-                fontSize: "clamp(28px, 4vw, 38px)",
+                fontSize: "clamp(25px, 3.5vw, 33px)",
                 lineHeight: 1.08,
                 letterSpacing: "-0.02em",
                 margin: "12px 0 0",
@@ -331,7 +333,7 @@ export default async function NewsletterPostPage({
             <p
               style={{
                 margin: "10px 0 0",
-                fontSize: 15,
+                fontSize: 13,
                 lineHeight: 1.6,
                 color: MUTED,
               }}
@@ -407,7 +409,7 @@ export default async function NewsletterPostPage({
                           fontFamily: SERIF,
                           fontStyle: "italic",
                           fontWeight: 300,
-                          fontSize: "clamp(20px, 3vw, 26px)",
+                          fontSize: "clamp(18px, 2.6vw, 23px)",
                           lineHeight: 1.12,
                           margin: 0,
                           color: PAPER,
@@ -468,7 +470,7 @@ export default async function NewsletterPostPage({
         .nl-back:hover, .nl-more:hover .nl-more-title { color: ${ACCENT} !important; }
 
         .nl-prose {
-          font-size: 18px;
+          font-size: 16px;
           line-height: 1.78;
           color: hsl(var(--foreground) / 0.86);
         }
@@ -487,7 +489,7 @@ export default async function NewsletterPostPage({
           font-family: ${SERIF};
           font-style: italic;
           font-weight: 300;
-          font-size: clamp(28px, 4vw, 38px);
+          font-size: clamp(25px, 3.5vw, 33px);
           line-height: 1.12;
           letter-spacing: -0.02em;
           color: ${PAPER};
@@ -496,7 +498,7 @@ export default async function NewsletterPostPage({
         .nl-prose h3 {
           font-family: ${SERIF};
           font-weight: 400;
-          font-size: clamp(22px, 3vw, 27px);
+          font-size: clamp(19px, 2.6vw, 24px);
           line-height: 1.2;
           color: ${PAPER};
           margin: 2em 0 0.6em;
