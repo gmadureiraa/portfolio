@@ -11,26 +11,26 @@ import Image from "next/image";
 export default function Hero() {
   return (
     <div className="relative flex h-full w-full mx-auto items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
-      <div className="flex flex-col items-start justify-center h-full overflow-hidden p-6 z-50">
+      <div className="flex flex-col items-start justify-center h-full overflow-hidden p-4 sm:p-6 z-50 w-full">
         <WordPullUp
           words="Do código ao conteúdo."
           className="!text-2xl sm:!text-3xl md:!text-4xl lg:!text-5xl !leading-[1.1] !text-left w-full break-words"
         />
 
-        <div className="text-lg text-neutral-500 dark:text-neutral-400 lg:px-1 w-full ">
-          <BlurIn className="w-3/4 sm:w-2/3">
+        <div className="text-base sm:text-lg text-neutral-500 dark:text-neutral-400 lg:px-1 w-full">
+          <BlurIn className="w-full sm:w-2/3">
             Fundador da Kaleidos. 15+ produtos digitais construídos para o mercado cripto — de dashboards DeFi a gateways de pagamento. Marketing, desenvolvimento e estratégia em um só lugar.
           </BlurIn>
 
           <FadeIn direction="down" className="my-class">
-            <div className="flex items-center gap-2 w-full lg:w-2/3 mt-4">
-              <div className="flex items-center gap-4 text-sm text-neutral-400 dark:text-neutral-500">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 w-full lg:w-2/3 mt-4">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs sm:text-sm text-neutral-400 dark:text-neutral-500">
                 <span className="font-semibold text-neutral-200">15+ produtos</span>
-                <span className="text-neutral-600">|</span>
-                <span className="font-semibold text-neutral-200">Cripto, IA & Marketing</span>
+                <span className="text-neutral-600 hidden sm:inline">|</span>
+                <span className="font-semibold text-neutral-200">Cripto, IA &amp; Marketing</span>
               </div>
             </div>
-            <div className="flex items-center gap-2 w-full lg:w-2/3 mt-4">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full lg:w-2/3 mt-4">
               <a
                 href="https://wa.me/5512997796835?text=Ol%C3%A1%20Gabriel,%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar%20sobre..."
                 target="_blank"
@@ -39,10 +39,10 @@ export default function Hero() {
                 <Button
                   variant="default"
                   size="lg"
-                  className="flex items-center gap-2 w-full group/Mail"
+                  className="flex items-center justify-center gap-2 w-full min-h-[44px] group/Mail"
                 >
-                  <div>Falar sobre seu projeto</div>
-                  <Mail className="h-5 w-5 lg:group-hover/Mail:translate-x-1 transition-all duration-300" />
+                  <span className="truncate">Falar sobre seu projeto</span>
+                  <Mail className="h-5 w-5 shrink-0 lg:group-hover/Mail:translate-x-1 transition-all duration-300" />
                 </Button>
               </a>
 
@@ -53,10 +53,10 @@ export default function Hero() {
                 <Button
                   variant="default"
                   size="lg"
-                  className="flex items-center gap-2 w-full group/Github"
+                  className="flex items-center justify-center gap-2 w-full min-h-[44px] group/Github"
                 >
-                  <div>Ver projetos</div>
-                  <Image src="/Logos-10.svg" alt="Kaleidos logo" width={24} height={24} className="h-5 w-5" />
+                  <span className="truncate">Ver projetos</span>
+                  <Image src="/Logos-10.svg" alt="Kaleidos logo" width={24} height={24} className="h-5 w-5 shrink-0" />
                 </Button>
               </a>
             </div>

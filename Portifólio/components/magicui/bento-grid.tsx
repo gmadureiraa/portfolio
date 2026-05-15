@@ -14,7 +14,8 @@ const BentoGrid = ({
   return (
     <div
       className={cn(
-        "grid w-full auto-rows-[22rem] grid-cols-3 gap-2 lg:gap-4",
+        // mobile: rows mais baixas pra não criar scroll gigante com cards verticais full-width
+        "grid w-full auto-rows-[18rem] sm:auto-rows-[20rem] lg:auto-rows-[22rem] grid-cols-3 gap-2 lg:gap-4",
         className
       )}
     >
@@ -53,7 +54,7 @@ const BentoCard = ({
     )}
   >
     <div>{background}</div>
-    <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 p-6 transition-all duration-300 group-hover:-translate-y-10">
+    <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 p-4 sm:p-6 transition-all duration-300 group-hover:-translate-y-10">
       <div className="flex flex-col gap-2">
         <div>
           {Icon !== "" ? (
@@ -63,11 +64,11 @@ const BentoCard = ({
           )}
         </div>
 
-        <div className="text-3xl font-semibold text-neutral-700 dark:text-neutral-300">
+        <div className="text-2xl sm:text-3xl font-semibold text-neutral-700 dark:text-neutral-300 leading-tight">
           {name}
         </div>
       </div>
-      <p className="w-full text-neutral-500 dark:text-neutral-400 dark:drop-shadow">
+      <p className="w-full text-sm sm:text-base text-neutral-500 dark:text-neutral-400 dark:drop-shadow">
         {description}
       </p>
     </div>
