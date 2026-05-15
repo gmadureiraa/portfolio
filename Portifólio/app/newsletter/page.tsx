@@ -64,22 +64,22 @@ export default async function NewsletterPage() {
       <section
         className="border-b border-border"
         style={{
-          paddingTop: "clamp(80px, 12vw, 144px)",
-          paddingBottom: "clamp(56px, 9vw, 96px)",
+          paddingTop: "clamp(64px, 8vw, 104px)",
+          paddingBottom: "clamp(40px, 6vw, 72px)",
           paddingLeft: "clamp(20px, 4vw, 56px)",
           paddingRight: "clamp(20px, 4vw, 56px)",
         }}
       >
-        <div style={{ maxWidth: 880, margin: "0 auto", textAlign: "center" }}>
+        <div style={{ maxWidth: 720, margin: "0 auto", textAlign: "center" }}>
           <p
             className="text-muted-foreground"
             style={{
               fontFamily: MONO,
-              fontSize: 11,
+              fontSize: 10,
               letterSpacing: "0.22em",
               textTransform: "uppercase",
               margin: 0,
-              marginBottom: 28,
+              marginBottom: 20,
             }}
           >
             <span className="text-foreground/50">●</span>
@@ -91,9 +91,9 @@ export default async function NewsletterPage() {
               fontFamily: SERIF,
               fontStyle: "italic",
               fontWeight: 300,
-              fontSize: "clamp(44px, 7vw, 84px)",
-              lineHeight: 1.02,
-              letterSpacing: "-0.025em",
+              fontSize: "clamp(28px, 4.5vw, 48px)",
+              lineHeight: 1.1,
+              letterSpacing: "-0.02em",
               margin: 0,
             }}
           >
