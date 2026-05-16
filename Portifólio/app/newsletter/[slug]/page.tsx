@@ -11,6 +11,7 @@ import {
 import { NewsletterPostFooterForm } from "@/components/newsletter-synecdoche/post-footer-form";
 import { ViewPing } from "@/components/newsletter-synecdoche/view-ping";
 import { ReadingProgress } from "@/components/reading-progress";
+import { NewsletterMidScrollModal } from "@/components/newsletter-mid-scroll-modal";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -141,6 +142,7 @@ export default async function NewsletterPostPage({
     >
       <ReadingProgress />
       <ViewPing slug={post.slug} />
+      <NewsletterMidScrollModal />
 
       <article
         style={{
