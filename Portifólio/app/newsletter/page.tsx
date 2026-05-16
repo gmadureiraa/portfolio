@@ -97,13 +97,9 @@ export default async function NewsletterPage() {
               margin: 0,
             }}
           >
-            marketing direto.
+            marketing direto, IA aplicada.
             <br />
-            IA aplicada.
-            <br />
-            bastidor real de
-            <br />
-            quem constrói.
+            bastidor real de quem constrói.
           </h1>
 
           <p
