@@ -71,21 +71,6 @@ export default async function NewsletterPage() {
         }}
       >
         <div style={{ maxWidth: 720, margin: "0 auto", textAlign: "center" }}>
-          <p
-            className="text-muted-foreground"
-            style={{
-              fontFamily: MONO,
-              fontSize: 10,
-              letterSpacing: "0.22em",
-              textTransform: "uppercase",
-              margin: 0,
-              marginBottom: 20,
-            }}
-          >
-            <span className="text-foreground/50">●</span>
-            &nbsp;&nbsp;Manifesto&nbsp;&nbsp;·&nbsp;&nbsp;Toda quinta
-          </p>
-
           <h1
             style={{
               fontFamily: SERIF,

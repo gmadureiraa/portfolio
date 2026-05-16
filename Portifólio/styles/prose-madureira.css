@@ -31,17 +31,6 @@
   font-feature-settings: "ss01", "cv11";
 }
 
-.madureira-prose > p:first-of-type::first-letter {
-  float: left;
-  font-family: var(--font-fraunces), "Fraunces", Georgia, serif;
-  font-style: italic;
-  font-weight: 300;
-  font-size: 4.4em;
-  line-height: 0.82;
-  padding: 6px 12px 0 0;
-  color: hsl(var(--foreground));
-}
-
 .madureira-prose p {
   margin: 0 0 1.5em;
 }

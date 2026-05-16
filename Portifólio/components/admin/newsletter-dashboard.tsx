@@ -777,7 +777,7 @@ export function AdminNewsletterDashboard({ initialPosts }: Props) {
                 onPaste={onBodyPaste}
                 rows={22}
                 placeholder={
-                  "# Heading opcional\n\nSeu primeiro parágrafo vira a drop-cap.\n\n## Subtítulo\n\n- bullet\n- bullet\n\nDica: arrasta ou cola uma imagem direto no editor."
+                  "# Heading opcional\n\nPrimeiro parágrafo do post.\n\n## Subtítulo\n\n- bullet\n- bullet\n\nDica: arrasta ou cola uma imagem direto no editor."
                 }
                 className={`rounded-b-md border border-input border-t-0 bg-background px-3 py-2 font-mono text-[13px] leading-relaxed text-foreground placeholder:text-muted-foreground focus:border-foreground focus:outline-none ${
                   bodyEmpty ? "border-destructive" : ""
