@@ -9,6 +9,7 @@ import { useSearchParams } from "next/navigation";
 
 type ItemType = "Projeto" | "Artigo";
 type ViewMode = "grid" | "list";
+type LifecycleStatus = "live" | "coming_soon";
 
 interface ContentItem {
   id: number;
@@ -17,6 +18,7 @@ interface ContentItem {
   technologies: string[];
   area: string | string[];
   status?: string;
+  lifecycle: LifecycleStatus;
   slug: string;
   image: string;
   type: ItemType;
@@ -32,6 +34,7 @@ const projects: ContentItem[] = [
     technologies: ["Marketing", "IA", "Growth", "Copywriting"],
     area: ["Marketing", "Crypto"],
     status: "Ativo",
+    lifecycle: "live",
     slug: "kaleidos-digital",
     image: "/images/projects/kaleidos-digital.png",
     type: "Projeto",
@@ -45,6 +48,7 @@ const projects: ContentItem[] = [
     technologies: ["Next.js", "SEO", "Email Marketing", "n8n"],
     area: ["Crypto", "Marketing"],
     status: "Ativo",
+    lifecycle: "live",
     slug: "jornal-cripto",
     image: "/images/projects/jornal-cripto.png",
     type: "Projeto",
@@ -58,6 +62,7 @@ const projects: ContentItem[] = [
     technologies: ["React", "TypeScript", "CoinGecko", "DeFiLlama"],
     area: ["Programação e Dev", "Crypto"],
     status: "Soft launch",
+    lifecycle: "live",
     slug: "folio",
     image: "/images/projects/folio.png",
     type: "Projeto",
@@ -71,6 +76,7 @@ const projects: ContentItem[] = [
     technologies: ["Next.js 16", "Gemini 2.5 Pro", "Imagen 4", "Supabase", "Stripe"],
     area: ["Programação e Dev", "IA e Automações", "Marketing"],
     status: "Ativo",
+    lifecycle: "live",
     slug: "sequencia-viral",
     image: "/images/projects/sequencia-viral.png",
     type: "Projeto",
@@ -83,12 +89,12 @@ const projects: ContentItem[] = [
     description: "Investidores cripto precisam de dados em tempo real para tomar decisões rápidas. DeFi Radar consolida preços, gas, movimentação de baleias e alertas em um dashboard único.",
     technologies: ["React", "Three.js", "CoinGecko", "Recharts"],
     area: ["Programação e Dev", "Crypto"],
-    status: "Ativo",
+    status: "Em breve",
+    lifecycle: "coming_soon",
     slug: "defi-radar",
     image: "/images/projects/defi-radar.png",
     type: "Projeto",
     date: "2026-03-25",
-    externalUrl: "https://radar.kaleidos.com.br",
   },
   {
     id: 17,
@@ -97,6 +103,7 @@ const projects: ContentItem[] = [
     technologies: ["Next.js 16", "Neon", "Gemini 2.5 Flash", "Apify"],
     area: ["Programação e Dev", "IA e Automações", "Marketing"],
     status: "Ativo",
+    lifecycle: "live",
     slug: "reels-viral",
     image: "/images/projects/sequencia-viral.png",
     type: "Projeto",
@@ -109,12 +116,12 @@ const projects: ContentItem[] = [
     description: "Blog engine com IA para publicar em escala. Gera artigos com Gemini 2.5, valida SEO, agenda e publica. Ideal para quem precisa de volume com qualidade editorial.",
     technologies: ["Next.js", "Gemini 2.5 Flash", "Supabase", "SEO"],
     area: ["Programação e Dev", "IA e Automações", "Marketing"],
-    status: "Ativo",
+    status: "Em breve",
+    lifecycle: "coming_soon",
     slug: "autoblogger",
     image: "/images/projects/autoblogger.png",
     type: "Projeto",
     date: "2026-04-08",
-    externalUrl: "https://autoblogger-rosy.vercel.app",
   },
   {
     id: 11,
@@ -122,12 +129,12 @@ const projects: ContentItem[] = [
     description: "Automação de criativos estáticos pra anúncios Meta/IG. URL da marca + fotos de produto viram 40 variações de anúncio em cerca de 10 minutos, com copy e layout prontos pra publicar.",
     technologies: ["Next.js", "IA", "Meta Ads", "Google Ads"],
     area: ["Programação e Dev", "IA e Automações", "Marketing"],
-    status: "Soft launch",
+    status: "Em breve",
+    lifecycle: "coming_soon",
     slug: "adflow",
     image: "/images/projects/adflow.png",
     type: "Projeto",
     date: "2026-04-10",
-    externalUrl: "https://app-alpha-jet-10.vercel.app",
   },
 ];
 
@@ -153,8 +160,14 @@ function ListIcon() {
   );
 }
 
+const sortByLifecycle = (items: ContentItem[]) =>
+  [...items].sort((a, b) => {
+    if (a.lifecycle === b.lifecycle) return 0;
+    return a.lifecycle === "live" ? -1 : 1;
+  });
+
 function ProjectsContent() {
-  const [filteredItems, setFilteredItems] = useState<ContentItem[]>(projects);
+  const [filteredItems, setFilteredItems] = useState<ContentItem[]>(() => sortByLifecycle(projects));
   const [selectedAreas, setSelectedAreas] = useState<string[]>([]);
   const [selectedType, setSelectedType] = useState<string>("Todos");
   const [viewMode, setViewMode] = useState<ViewMode>("grid");
@@ -179,7 +192,8 @@ function ProjectsContent() {
         return false;
       });
     }
-    setFilteredItems(filtered);
+    // Live primeiro, coming_soon depois — mantendo ordem interna estável.
+    setFilteredItems(sortByLifecycle(filtered));
   }, [selectedAreas, selectedType]);
 
   const areas = ["Marketing", "IA e Automações", "Crypto", "Programação e Dev"];
@@ -189,14 +203,27 @@ function ProjectsContent() {
   const projetoCount = projects.filter((p) => p.type === "Projeto").length;
   const artigoCount = projects.filter((p) => p.type === "Artigo").length;
 
+  // coming_soon SEMPRE abre página interna de construção, mesmo que tenha externalUrl
   const getItemHref = (item: ContentItem) =>
-    item.externalUrl ? item.externalUrl : `/projects/${item.slug}`;
+    item.lifecycle === "coming_soon"
+      ? `/projects/${item.slug}`
+      : item.externalUrl
+        ? item.externalUrl
+        : `/projects/${item.slug}`;
 
   const getItemTarget = (item: ContentItem) =>
-    item.externalUrl ? "_blank" : undefined;
+    item.lifecycle === "coming_soon"
+      ? undefined
+      : item.externalUrl
+        ? "_blank"
+        : undefined;
 
   const getItemRel = (item: ContentItem) =>
-    item.externalUrl ? "noopener noreferrer" : undefined;
+    item.lifecycle === "coming_soon"
+      ? undefined
+      : item.externalUrl
+        ? "noopener noreferrer"
+        : undefined;
 
   const getFirstArea = (item: ContentItem) =>
     Array.isArray(item.area) ? item.area[0] : item.area;
@@ -204,9 +231,15 @@ function ProjectsContent() {
   // ── Grid card ──────────────────────────────────────────────────
   const GridCard = ({ item }: { item: ContentItem }) => (
     <div className={cn(
-      "group flex flex-col overflow-hidden rounded-xl border bg-background hover:shadow-xl transition-all duration-300",
-      "border-border hover:border-border"
+      "group relative flex flex-col overflow-hidden rounded-xl border bg-background hover:shadow-xl transition-all duration-300",
+      "border-border hover:border-border",
+      item.lifecycle === "coming_soon" && "opacity-70 hover:opacity-100"
     )}>
+      {item.lifecycle === "coming_soon" && (
+        <span className="absolute top-3 right-3 z-20 font-mono text-[10px] uppercase tracking-[0.18em] bg-background/85 backdrop-blur text-foreground/75 px-2 py-1 rounded-full border border-border">
+          Em breve
+        </span>
+      )}
       {item.image && (
         <div className="relative w-full aspect-[500/360] overflow-hidden border-b border-border bg-card">
           <Image
@@ -214,7 +247,10 @@ function ProjectsContent() {
             alt={item.title}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-            className="object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
+            className={cn(
+              "object-cover object-top group-hover:scale-[1.03] transition-transform duration-500",
+              item.lifecycle === "coming_soon" && "grayscale-[35%] group-hover:grayscale-0"
+            )}
           />
         </div>
       )}
@@ -254,9 +290,13 @@ function ProjectsContent() {
           )}
         </div>
         <a href={getItemHref(item)} target={getItemTarget(item)} rel={getItemRel(item)} className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors font-medium mt-2">
-          {item.externalUrl ? "Abrir link" : "Ler artigo"}
+          {item.lifecycle === "coming_soon"
+            ? "Ver prévia"
+            : item.externalUrl
+              ? "Abrir link"
+              : "Ler artigo"}
           <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            {item.externalUrl ? (
+            {item.lifecycle !== "coming_soon" && item.externalUrl ? (
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             ) : (
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -275,12 +315,13 @@ function ProjectsContent() {
       rel={getItemRel(item)}
       className={cn(
         "group flex items-center gap-3 px-4 py-3 rounded-lg border transition-all duration-200",
-        "border-border/60 hover:border-border hover:bg-card/30 bg-transparent"
+        "border-border/60 hover:border-border hover:bg-card/30 bg-transparent",
+        item.lifecycle === "coming_soon" && "opacity-65 hover:opacity-100"
       )}
     >
       <div className={cn(
         "shrink-0 w-0.5 self-stretch rounded-full",
-        "bg-green-500/50"
+        item.lifecycle === "coming_soon" ? "bg-muted-foreground/40" : "bg-green-500/50"
       )} />
 
       <h3 className="flex-1 text-sm font-medium text-foreground/80 group-hover:text-foreground transition-colors truncate">
@@ -288,6 +329,11 @@ function ProjectsContent() {
       </h3>
 
       <div className="flex items-center gap-2 shrink-0">
+        {item.lifecycle === "coming_soon" && (
+          <span className="font-mono text-[10px] uppercase tracking-[0.16em] bg-foreground/8 text-foreground/65 px-2 py-0.5 rounded-full border border-border">
+            Em breve
+          </span>
+        )}
         <span className={cn("text-xs px-2 py-0.5 rounded-full border", TYPE_COLORS[item.type])}>
           {item.type}
         </span>
