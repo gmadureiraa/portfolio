@@ -109,12 +109,9 @@ export function NewsletterMidScrollModal() {
         res.data || "Inscrição feita. Confere seu email pra confirmar.",
       );
       setEmail("");
-      // Marca como assinante — não mostra modal de novo
-      if (typeof window !== "undefined") {
-        window.localStorage.setItem(STORAGE_SUBSCRIBED, "true");
-      }
-      // Auto-fecha após 3s
-      setTimeout(() => setOpen(false), 3000);
+      // subscribe() já seta nl_subscribed=true. Fecha rápido pra liberar a
+      // leitura — meio segundo só pra o usuário ver o "Pronto ✓".
+      setTimeout(() => setOpen(false), 600);
     } else {
       setStatus("error");
       setMessage(res.message || "Erro ao inscrever.");

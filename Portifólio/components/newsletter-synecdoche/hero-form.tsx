@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { subscribe } from "@/lib/subscribe";
 
 const MONO = '"Geist Mono", "JetBrains Mono", ui-monospace, monospace';
@@ -10,6 +10,9 @@ const MONO = '"Geist Mono", "JetBrains Mono", ui-monospace, monospace';
  * Source fixa `madureira_newsletter_page` — o backend usa isso pra mapear
  * de onde o lead veio (ver /api/newsletter/subscribe + painel admin).
  * Feedback inline, sem reload de página. Honeypot anti-bot via campo `_hp`.
+ *
+ * Se o usuário já é assinante (localStorage `nl_subscribed=true`), o form
+ * é substituído por uma pílula "Você já assina ✓" — evita poluir a leitura.
  */
 export function NewsletterHeroForm() {
   const [email, setEmail] = useState("");
@@ -18,6 +21,19 @@ export function NewsletterHeroForm() {
     "idle",
   );
   const [message, setMessage] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.localStorage.getItem("nl_subscribed") === "true") {
+      setSubscribed(true);
+    }
+    function onSub() {
+      setSubscribed(true);
+    }
+    window.addEventListener("newsletter:subscribed", onSub);
+    return () => window.removeEventListener("newsletter:subscribed", onSub);
+  }, []);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -33,6 +49,30 @@ export function NewsletterHeroForm() {
       setStatus("error");
       setMessage(res.message || "Erro ao inscrever.");
     }
+  }
+
+  if (subscribed) {
+    return (
+      <div
+        className="border-border text-foreground/80"
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          gap: 10,
+          padding: "12px 16px",
+          border: "1px solid",
+          borderRadius: 6,
+          fontFamily: MONO,
+          fontSize: 12,
+          letterSpacing: "0.14em",
+          textTransform: "uppercase",
+        }}
+        role="status"
+      >
+        <span aria-hidden="true">✓</span>
+        Você já assina · obrigado
+      </div>
+    );
   }
 
   return (

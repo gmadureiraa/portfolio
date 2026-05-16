@@ -42,18 +42,32 @@ const projects: ContentItem[] = [
     externalUrl: "https://kaleidos.com.br",
   },
   {
-    id: 4,
-    title: "Jornal Cripto",
-    description: "Portal de análise cripto que atingiu 10k visitas/mês organicamente. Newsletter 2x/semana com insights em tempo real. O projeto que me colocou no mapa do mercado cripto.",
-    technologies: ["Next.js", "SEO", "Email Marketing", "n8n"],
-    area: ["Crypto", "Marketing"],
+    id: 7,
+    title: "Sequência Viral",
+    description: "SaaS de carrosséis com IA para Instagram, LinkedIn e X. Gera conceito, copy e imagens em dois cliques, integrando Content Machine 5.4 para manter voz e marca consistentes.",
+    technologies: ["Next.js 16", "Gemini 2.5 Pro", "Imagen 4", "Supabase", "Stripe"],
+    area: ["Programação e Dev", "IA e Automações", "Marketing"],
     status: "Ativo",
     lifecycle: "live",
-    slug: "jornal-cripto",
-    image: "/images/projects/jornal-cripto.png",
+    slug: "sequencia-viral",
+    image: "/images/projects/sequencia-viral.png",
     type: "Projeto",
-    date: "2023-10-01",
-    externalUrl: "https://jornal-cripto.vercel.app",
+    date: "2026-04-15",
+    externalUrl: "https://viral.kaleidos.com.br",
+  },
+  {
+    id: 17,
+    title: "Reels Viral",
+    description: "Cole o link de um reel que viralizou e a IA extrai a estrutura — hook, ritmo, gatilhos, storyboard cena por cena. Você recebe um roteiro adaptado pro seu perfil, pronto pra gravar.",
+    technologies: ["Next.js 16", "Neon", "Gemini 2.5 Flash", "Apify"],
+    area: ["Programação e Dev", "IA e Automações", "Marketing"],
+    status: "Ativo",
+    lifecycle: "live",
+    slug: "reels-viral",
+    image: "/images/projects/reels-viral.png",
+    type: "Projeto",
+    date: "2026-04-28",
+    externalUrl: "https://reels.kaleidos.com.br",
   },
   {
     id: 5,
@@ -70,45 +84,31 @@ const projects: ContentItem[] = [
     externalUrl: "https://folio-landing.vercel.app/app",
   },
   {
-    id: 7,
-    title: "Sequência Viral",
-    description: "SaaS de carrosséis com IA para Instagram, LinkedIn e X. Gera conceito, copy e imagens em dois cliques, integrando Content Machine 5.4 para manter voz e marca consistentes.",
-    technologies: ["Next.js 16", "Gemini 2.5 Pro", "Imagen 4", "Supabase", "Stripe"],
-    area: ["Programação e Dev", "IA e Automações", "Marketing"],
+    id: 4,
+    title: "Jornal Cripto",
+    description: "Portal de análise cripto que atingiu 10k visitas/mês organicamente. Newsletter 2x/semana com insights em tempo real. O projeto que me colocou no mapa do mercado cripto.",
+    technologies: ["Next.js", "SEO", "Email Marketing", "n8n"],
+    area: ["Crypto", "Marketing"],
     status: "Ativo",
     lifecycle: "live",
-    slug: "sequencia-viral",
-    image: "/images/projects/sequencia-viral.png",
+    slug: "jornal-cripto",
+    image: "/images/projects/jornal-cripto.png",
     type: "Projeto",
-    date: "2026-04-15",
-    externalUrl: "https://viral.kaleidos.com.br",
+    date: "2023-10-01",
+    externalUrl: "https://jornal-cripto.vercel.app",
   },
   {
     id: 8,
-    title: "DeFi Radar",
-    description: "Investidores cripto precisam de dados em tempo real para tomar decisões rápidas. DeFi Radar consolida preços, gas, movimentação de baleias e alertas em um dashboard único.",
-    technologies: ["React", "Three.js", "CoinGecko", "Recharts"],
-    area: ["Programação e Dev", "Crypto"],
+    title: "Radar Viral",
+    description: "Monitora creators no Instagram, TikTok, YouTube e Threads. Detecta conteúdo viral antes de explodir, transcreve e gera briefings de uso. Roda em cron 24/7.",
+    technologies: ["Next.js 16", "Tailwind v4", "Supabase", "Apify", "Gemini"],
+    area: ["Programação e Dev", "IA e Automações", "Marketing"],
     status: "Em breve",
     lifecycle: "coming_soon",
     slug: "defi-radar",
     image: "/images/projects/defi-radar.png",
     type: "Projeto",
-    date: "2026-03-25",
-  },
-  {
-    id: 17,
-    title: "Reels Viral",
-    description: "Cole o link de um reel que viralizou e a IA extrai a estrutura — hook, ritmo, gatilhos, storyboard cena por cena. Você recebe um roteiro adaptado pro seu perfil, pronto pra gravar.",
-    technologies: ["Next.js 16", "Neon", "Gemini 2.5 Flash", "Apify"],
-    area: ["Programação e Dev", "IA e Automações", "Marketing"],
-    status: "Ativo",
-    lifecycle: "live",
-    slug: "reels-viral",
-    image: "/images/projects/sequencia-viral.png",
-    type: "Projeto",
-    date: "2026-04-28",
-    externalUrl: "https://reels.kaleidos.com.br",
+    date: "2026-05-08",
   },
   {
     id: 10,
@@ -160,11 +160,8 @@ function ListIcon() {
   );
 }
 
-const sortByLifecycle = (items: ContentItem[]) =>
-  [...items].sort((a, b) => {
-    if (a.lifecycle === b.lifecycle) return 0;
-    return a.lifecycle === "live" ? -1 : 1;
-  });
+// Mantém ordem manual do array (destaques curados primeiro, coming_soon depois).
+const sortByLifecycle = (items: ContentItem[]) => [...items];
 
 function ProjectsContent() {
   const [filteredItems, setFilteredItems] = useState<ContentItem[]>(() => sortByLifecycle(projects));
@@ -201,7 +198,6 @@ function ProjectsContent() {
   // Count updated dynamically based on the projects array
   const totalCount = projects.length;
   const projetoCount = projects.filter((p) => p.type === "Projeto").length;
-  const artigoCount = projects.filter((p) => p.type === "Artigo").length;
 
   // coming_soon SEMPRE abre página interna de construção, mesmo que tenha externalUrl
   const getItemHref = (item: ContentItem) =>
@@ -383,7 +379,6 @@ function ProjectsContent() {
               {[
                 { label: "Tudo", value: "Todos", count: totalCount },
                 { label: "Projetos", value: "Projeto", count: projetoCount },
-                { label: "Artigos", value: "Artigo", count: artigoCount },
               ].map(({ label, value, count }) => (
                 <button
                   key={value}

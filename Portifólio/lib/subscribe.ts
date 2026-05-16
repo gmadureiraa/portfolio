@@ -22,6 +22,17 @@ export async function subscribe(
       };
     }
 
+    // Marca como assinante — todos os boxes de inscrição (modal, sidebar,
+    // hero) checam essa flag e somem após sucesso. Centralizado aqui pra que
+    // qualquer entry point (hero, sidebar, modal, footer) tenha o mesmo
+    // comportamento sem cada form ter que lembrar de setar.
+    if (typeof window !== "undefined") {
+      try {
+        window.localStorage.setItem("nl_subscribed", "true");
+        window.dispatchEvent(new CustomEvent("newsletter:subscribed"));
+      } catch {}
+    }
+
     return {
       success: true,
       data: data?.message || "Inscricao realizada com sucesso!",

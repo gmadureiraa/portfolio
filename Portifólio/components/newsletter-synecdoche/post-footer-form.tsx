@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { subscribe } from "@/lib/subscribe";
 
 export function NewsletterPostFooterForm() {
@@ -10,6 +10,19 @@ export function NewsletterPostFooterForm() {
     "idle",
   );
   const [message, setMessage] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.localStorage.getItem("nl_subscribed") === "true") {
+      setSubscribed(true);
+    }
+    function onSub() {
+      setSubscribed(true);
+    }
+    window.addEventListener("newsletter:subscribed", onSub);
+    return () => window.removeEventListener("newsletter:subscribed", onSub);
+  }, []);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -24,6 +37,18 @@ export function NewsletterPostFooterForm() {
       setStatus("error");
       setMessage(res.message || "Erro.");
     }
+  }
+
+  if (subscribed) {
+    return (
+      <p
+        role="status"
+        className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-3 text-xs font-mono uppercase tracking-[0.14em] text-foreground/75"
+      >
+        <span aria-hidden="true">✓</span>
+        Você já assina · obrigado
+      </p>
+    );
   }
 
   return (
