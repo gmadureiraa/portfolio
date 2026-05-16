@@ -92,6 +92,10 @@ export function NewsletterMidScrollModal() {
 
   function handleDismiss() {
     setOpen(false);
+    // Mata o armed pra o scroll listener não re-anexar e reabrir o modal
+    // logo em seguida (o body desbloqueia overflow, dispara scroll event,
+    // pct ainda > 50 → setOpen(true) de novo). Bug do f5-resolve.
+    setArmed(false);
     if (typeof window !== "undefined") {
       window.localStorage.setItem(STORAGE_DISMISSED_AT, String(Date.now()));
     }
@@ -111,7 +115,13 @@ export function NewsletterMidScrollModal() {
       setEmail("");
       // subscribe() já seta nl_subscribed=true. Fecha rápido pra liberar a
       // leitura — meio segundo só pra o usuário ver o "Pronto ✓".
-      setTimeout(() => setOpen(false), 600);
+      // setArmed(false) impede o scroll listener de re-abrir o modal
+      // depois do close (bug: body desbloqueia overflow → scroll event →
+      // pct > 50 → setOpen(true) de novo).
+      setTimeout(() => {
+        setArmed(false);
+        setOpen(false);
+      }, 600);
     } else {
       setStatus("error");
       setMessage(res.message || "Erro ao inscrever.");
