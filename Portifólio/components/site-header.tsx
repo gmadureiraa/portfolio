@@ -7,6 +7,7 @@ import { Menu, X, Search } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { AnimatedThemeToggler } from "@/components/magicui/animated-theme-toggler";
+import { NewsletterDialog } from "@/components/newsletter-dialog";
 
 const CORAL = "#e63a1f";
 
@@ -100,23 +101,25 @@ export function SiteHeader() {
           >
             <Search className="size-4" />
           </button>
-          {/* Assinar — desktop completo, mobile ícone-only pra economizar espaço */}
-          <Link
-            href="/newsletter"
-            aria-label="assinar newsletter"
-            className="hidden sm:inline-flex items-center gap-2 rounded-full bg-foreground text-background hover:-translate-y-px transition-transform"
-            style={{
-              padding: "10px 18px",
-              fontFamily: "var(--font-inter), Inter, system-ui, sans-serif",
-              fontWeight: 600,
-              fontSize: 12,
-              letterSpacing: "0.04em",
-              textTransform: "uppercase",
-              textDecoration: "none",
-            }}
-          >
-            Assinar
-          </Link>
+          {/* Assinar — abre dialog de inscrição (newsletter-dialog) */}
+          <NewsletterDialog source="header_assinar_desktop">
+            <button
+              type="button"
+              aria-label="assinar newsletter"
+              className="hidden sm:inline-flex items-center gap-2 rounded-full bg-foreground text-background hover:-translate-y-px transition-transform cursor-pointer"
+              style={{
+                padding: "10px 18px",
+                fontFamily: "var(--font-inter), Inter, system-ui, sans-serif",
+                fontWeight: 600,
+                fontSize: 12,
+                letterSpacing: "0.04em",
+                textTransform: "uppercase",
+                border: "none",
+              }}
+            >
+              Assinar
+            </button>
+          </NewsletterDialog>
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
@@ -215,24 +218,28 @@ export function SiteHeader() {
                 </li>
               );
             })}
-            {/* CTA Assinar — substitui o botão escondido no mobile */}
+            {/* CTA Assinar — abre dialog. Fecha o menu mobile primeiro pra
+                não ter overlay duplo. */}
             <li className="pt-2">
-              <Link
-                href="/newsletter"
-                onClick={() => setOpen(false)}
-                className="flex items-center justify-center rounded-full bg-foreground text-background no-underline w-full"
-                style={{
-                  padding: "14px 18px",
-                  fontFamily:
-                    "var(--font-inter), Inter, system-ui, sans-serif",
-                  fontWeight: 600,
-                  fontSize: 12,
-                  letterSpacing: "0.04em",
-                  textTransform: "uppercase",
-                }}
-              >
-                Assinar newsletter
-              </Link>
+              <NewsletterDialog source="header_assinar_mobile">
+                <button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-center rounded-full bg-foreground text-background w-full cursor-pointer"
+                  style={{
+                    padding: "14px 18px",
+                    fontFamily:
+                      "var(--font-inter), Inter, system-ui, sans-serif",
+                    fontWeight: 600,
+                    fontSize: 12,
+                    letterSpacing: "0.04em",
+                    textTransform: "uppercase",
+                    border: "none",
+                  }}
+                >
+                  Assinar newsletter
+                </button>
+              </NewsletterDialog>
             </li>
           </ul>
         </div>
