@@ -2,6 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import type { Ga4Bundle } from "@/lib/analytics/ga4";
+import type { PostHogBundle } from "@/lib/analytics/posthog";
 import type { AnalyticsBundle } from "@/lib/db/newsletter";
 
 const MONO = "font-mono text-[11px] uppercase tracking-[0.18em]";
@@ -9,17 +10,21 @@ const SERIF = "font-serif italic font-light";
 
 interface Props {
   ga4: Ga4Bundle;
+  posthog: PostHogBundle;
   nl: AnalyticsBundle | null;
   rangeDays: number;
   ga4Configured: boolean;
+  posthogConfigured: boolean;
   dbConfigured: boolean;
 }
 
 export function AnalyticsDashboard({
   ga4,
+  posthog,
   nl,
   rangeDays,
   ga4Configured,
+  posthogConfigured,
   dbConfigured,
 }: Props) {
   const router = useRouter();
@@ -154,6 +159,98 @@ export function AnalyticsDashboard({
                 }))}
                 empty="—"
                 hint="Tip: dispara eventos GA4 em signups e cliques pra rastrear conversão."
+              />
+            </div>
+          </>
+        )}
+      </section>
+
+      {/* POSTHOG SECTION */}
+      <section>
+        <SectionHeader
+          eyebrow="PostHog · Kaleidos Group"
+          title="Comportamento + sessions"
+          subtitle={
+            posthogConfigured
+              ? "Pageviews, eventos custom e top referrers — madureira.xyz no project unificado da Kaleidos."
+              : "PostHog Personal API Key ainda não setada — instruções abaixo."
+          }
+        />
+
+        {!posthogConfigured ? (
+          <PostHogSetupCard />
+        ) : !posthog.totals ? (
+          <div className="rounded-md border border-border bg-card p-6">
+            <p className={`${SERIF} text-xl text-foreground`}>
+              Sem dados ainda.
+            </p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              PostHog está conectado mas a query retornou vazio pro período.
+              Confira se o token Personal API Key tem scope{" "}
+              <code className="rounded bg-muted px-1 font-mono">
+                query:read
+              </code>{" "}
+              e se o POSTHOG_PROJECT_ID está correto.
+            </p>
+          </div>
+        ) : (
+          <>
+            <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+              <StatCard
+                label="Pageviews"
+                value={fmtInt(posthog.totals.pageviews)}
+              />
+              <StatCard
+                label="Visitantes únicos"
+                value={fmtInt(posthog.totals.uniqueVisitors)}
+              />
+              <StatCard
+                label="Sessões"
+                value={fmtInt(posthog.totals.sessions)}
+              />
+            </div>
+
+            <div className="mt-6 rounded-md border border-border bg-card p-6">
+              <p className={`${MONO} text-muted-foreground`}>
+                Pageviews PostHog · {rangeDays} dias
+              </p>
+              <SparkArea
+                data={posthog.daily.map((d) => ({
+                  x: d.date,
+                  y: d.pageviews,
+                }))}
+              />
+            </div>
+
+            <div className="mt-6 grid gap-6 lg:grid-cols-2">
+              <TopList
+                title="Páginas mais vistas"
+                items={posthog.topPaths.map((p) => ({
+                  primary: p.path,
+                  value: fmtInt(p.views),
+                  href: p.path.startsWith("/") ? p.path : undefined,
+                }))}
+                empty="Sem páginas ainda."
+              />
+              <TopList
+                title="Referrers"
+                items={posthog.topReferrers.map((r) => ({
+                  primary: r.referrer,
+                  value: fmtInt(r.visits),
+                }))}
+                empty="Sem referrers (todo tráfego direto)."
+              />
+            </div>
+
+            <div className="mt-6">
+              <TopList
+                title="Eventos custom (top 10)"
+                items={posthog.topEvents.map((e) => ({
+                  primary: e.event,
+                  value: fmtInt(e.count),
+                }))}
+                empty="Nenhum evento custom ainda. Dispare via posthog.capture()."
+                hint="Eventos $pageview/$autocapture filtrados — só custom."
               />
             </div>
           </>
@@ -466,6 +563,80 @@ function Ga4SetupCard() {
         />
         <SetupStep
           n={5}
+          title="Redeploy"
+          body="Refresh dessa página depois e os cards acendem."
+        />
+      </div>
+    </div>
+  );
+}
+
+function PostHogSetupCard() {
+  return (
+    <div className="rounded-md border border-border bg-card p-6">
+      <p className={`${SERIF} text-2xl text-foreground`}>
+        PostHog não conectado.
+      </p>
+      <p className="mt-2 text-sm text-muted-foreground">
+        O SDK já está rodando em produção e capturando — falta só a Personal
+        API Key pra puxar os dados pra cá via Query API (HogQL).
+      </p>
+
+      <div className="mt-5 space-y-3">
+        <SetupStep
+          n={1}
+          title="Criar Personal API Key no PostHog"
+          body={
+            <>
+              Acesse{" "}
+              <a
+                className="underline"
+                href="https://us.posthog.com/settings/user-api-keys"
+                target="_blank"
+                rel="noopener"
+              >
+                Settings · Personal API Keys
+              </a>{" "}
+              e cria uma key com scopes <strong>query:read</strong>,{" "}
+              <strong>event:read</strong>, <strong>insight:read</strong>,{" "}
+              <strong>dashboard:read</strong>.
+            </>
+          }
+        />
+        <SetupStep
+          n={2}
+          title="Setar env vars no Vercel"
+          body={
+            <ul className="ml-1 mt-1 space-y-1.5 text-sm">
+              <li>
+                <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[11px]">
+                  POSTHOG_PERSONAL_API_KEY
+                </code>{" "}
+                — a key criada no passo 1 (começa com{" "}
+                <code className="rounded bg-muted px-1 font-mono">phx_</code>).
+              </li>
+              <li>
+                <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[11px]">
+                  POSTHOG_PROJECT_ID
+                </code>{" "}
+                = <code className="rounded bg-muted px-1 font-mono">387434</code>{" "}
+                (Kaleidos Group).
+              </li>
+              <li>
+                <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[11px]">
+                  POSTHOG_HOST
+                </code>{" "}
+                — opcional, default{" "}
+                <code className="rounded bg-muted px-1 font-mono">
+                  https://us.posthog.com
+                </code>
+                .
+              </li>
+            </ul>
+          }
+        />
+        <SetupStep
+          n={3}
           title="Redeploy"
           body="Refresh dessa página depois e os cards acendem."
         />

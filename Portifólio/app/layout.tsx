@@ -5,8 +5,8 @@ import "./globals.css";
 import "@/styles/prose-madureira.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
-import { Umami } from "@/components/umami";
 import { SiteHeader } from "@/components/site-header";
+import { PostHogProvider } from "./providers";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
@@ -116,17 +116,18 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <SiteHeader />
-          {children}
-        </ThemeProvider>
-        <Toaster />
-        <Umami />
+        <PostHogProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <SiteHeader />
+            {children}
+          </ThemeProvider>
+          <Toaster />
+        </PostHogProvider>
       </body>
       {GA_ID ? <GoogleAnalytics gaId={GA_ID} /> : null}
     </html>

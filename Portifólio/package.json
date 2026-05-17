@@ -41,6 +41,8 @@
     "nodemailer": "^8.0.7",
     "picomatch": "^4.0.4",
     "postgres": "^3.4.9",
+    "posthog-js": "^1.373.5",
+    "posthog-node": "^5.34.2",
     "react": "^19.2.6",
     "react-day-picker": "^8.10.2",
     "react-dom": "^19.2.6",

@@ -16,6 +16,7 @@ import { motion } from "framer-motion";
 import GitHubStars from "@/components/github-stars";
 import ProjectPosts from "@/components/project-posts";
 import Link from "next/link";
+import { track } from "@/lib/analytics";
 
 const features = [
   {
@@ -123,6 +124,13 @@ const features = [
               <a
                 href={item.href}
                 key={idx}
+                onClick={() =>
+                  track("project_click", {
+                    project_name: item.name,
+                    project_url: item.href,
+                    source: "bento_marquee",
+                  })
+                }
                 className={cn(
                   "relative w-44 cursor-pointer overflow-hidden rounded-xl border p-4 hover:-translate-y-1",
                   "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
@@ -242,6 +250,9 @@ const features = [
                 href="https://wa.me/5512997796835?text=Ol%C3%A1%20Gabriel,%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar%20sobre..."
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  track("whatsapp_click", { source: "bento_contact" })
+                }
                 className="inline-flex items-center gap-2 bg-green-500/10 text-green-600 dark:text-green-500 border border-green-500/20 px-6 py-3 rounded-full font-medium hover:bg-green-500/20 hover:scale-105 transition-all duration-300"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -261,6 +272,12 @@ const features = [
                   href="https://instagram.com/madureira0x"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() =>
+                    track("social_click", {
+                      platform: "instagram",
+                      source: "bento_contact",
+                    })
+                  }
                   className="text-muted-foreground hover:text-foreground transition-colors duration-200"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -271,6 +288,12 @@ const features = [
                   href="https://x.com/madureira0x"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() =>
+                    track("social_click", {
+                      platform: "x",
+                      source: "bento_contact",
+                    })
+                  }
                   className="text-muted-foreground hover:text-foreground transition-colors duration-200"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -281,6 +304,12 @@ const features = [
                   href="https://www.linkedin.com/in/gabriel-madureira/"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() =>
+                    track("social_click", {
+                      platform: "linkedin",
+                      source: "bento_contact",
+                    })
+                  }
                   className="text-muted-foreground hover:text-foreground transition-colors duration-200"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">

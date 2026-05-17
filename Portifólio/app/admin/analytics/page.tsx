@@ -8,6 +8,11 @@ import {
   type AnalyticsBundle,
 } from "@/lib/db/newsletter";
 import { getGa4Bundle, isGa4Configured } from "@/lib/analytics/ga4";
+import {
+  getPostHogBundle,
+  isPosthogConfigured,
+  emptyBundle as emptyPosthogBundle,
+} from "@/lib/analytics/posthog";
 import { AnalyticsDashboard } from "@/components/admin/analytics/dashboard";
 
 export const metadata: Metadata = {
@@ -76,6 +81,12 @@ export default async function AdminAnalyticsPage({
     };
   });
 
+  // PostHog (Query API HogQL — graceful fallback)
+  const posthog = await getPostHogBundle(rangeDays).catch((err) => {
+    console.error("[admin/analytics] posthog fetch failed:", err);
+    return emptyPosthogBundle(rangeDays);
+  });
+
   // Newsletter internal analytics (sempre disponível se DB configurado)
   let nl: AnalyticsBundle | null = null;
   if (isDbConfigured) {
@@ -107,9 +118,11 @@ export default async function AdminAnalyticsPage({
 
         <AnalyticsDashboard
           ga4={ga4}
+          posthog={posthog}
           nl={nl}
           rangeDays={rangeDays}
           ga4Configured={ga4.configured}
+          posthogConfigured={isPosthogConfigured()}
           dbConfigured={isDbConfigured}
         />
       </div>

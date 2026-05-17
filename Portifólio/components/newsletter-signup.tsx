@@ -6,6 +6,7 @@ import { Mail, ArrowRight, CheckCircle2, XCircle } from "lucide-react";
 import { subscribe } from "@/lib/subscribe";
 import { newsletterSchema } from "@/lib/schema";
 import { cn } from "@/lib/utils";
+import { track } from "@/lib/analytics";
 
 type Variant = "compact" | "card";
 
@@ -48,9 +49,17 @@ export function NewsletterSignup({
 
     if (result.success) {
       setState({ status: "success", message: result.data });
+      track("newsletter_signup", {
+        source: "newsletter_signup_component",
+        variant,
+      });
       setEmail("");
     } else {
       setState({ status: "error", message: result.message });
+      track("newsletter_signup_error", {
+        source: "newsletter_signup_component",
+        reason: result.message,
+      });
     }
   }
 
