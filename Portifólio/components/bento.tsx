@@ -40,62 +40,6 @@ const features = [
   },
   {
     Icon: "",
-    name: "Gabriel Madureira",
-    description:
-      "Fundador da Kaleidos. Construo produtos digitais e estratégias de marketing para empresas cripto.",
-    className: "col-span-3 md:col-span-1",
-    href: "/eu",
-    cta: "Mentoria, consultoria & newsletter →",
-    background: (
-      <div>
-        <div className="absolute right-0 top-0 h-3/4 w-full border-none transition-all duration-300 ease-out [mask-image:linear-gradient(to_top,transparent_5%,#000_50%)] group-hover:scale-105">
-          <BlurIn duration={0.5} className="h-full">
-            <Image
-              className="object-cover object-center h-full w-full"
-              src={
-                process.env.AVATAR_URL ||
-                "https://avatars.githubusercontent.com/u/129111669?v=4"
-              }
-              alt="Foto de Gabriel Madureira"
-              width={200}
-              height={200}
-              priority // Load image immediately
-              quality={75} // Adjust quality for optimization
-              placeholder="blur" // Placeholder to improve perceived performance
-              blurDataURL="data:image/svg+xml;base64,..." // Use a small base64-encoded placeholder image
-            />
-          </BlurIn>
-        </div>
-
-        <FadeIn
-          direction="right"
-          framerProps={{
-            show: { transition: { delay: 1.5 } },
-          }}
-        >
-          <div className="absolute top-2 right-2 bg-background rounded-lg px-4 py-2 text-xs text-muted-foreground max-w-3/4 w-fit">
-            <div className="flex items-center gap-2">
-              <div
-                className={`w-3 h-3 rounded-full animate-pulse ${
-                  process.env.NEXT_PUBLIC_AVAILABLE_FOR_FREELANCE == "true"
-                    ? "bg-emerald-400"
-                    : "bg-yellow-400"
-                }`}
-              ></div>
-              <div className="">
-                {process.env.NEXT_PUBLIC_AVAILABLE_FOR_FREELANCE == "true"
-                  ? "disponível"
-                  : "em projeto"}
-              </div>
-            </div>
-          </div>
-        </FadeIn>
-      </div>
-    ),
-  },
-
-  {
-    Icon: "",
     name: "Projetos & Ideias",
     description: "",
     href: "/projects",
