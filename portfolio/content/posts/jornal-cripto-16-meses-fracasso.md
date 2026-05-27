@@ -66,7 +66,7 @@ Você pode criar o melhor conteúdo do mundo. Se não tiver distribuição, não
 
 **3. Posicionamento nítido > conteúdo para todos**
 
-"Portal de notícias cripto" é uma commodidade. "Análise profunda para investidores sérios" é um nicho defensável.
+"Portal de notícias cripto" é uma commodity. "Análise profunda para investidores sérios" é um nicho defensável.
 
 **4. 16 meses não são fracasso — são aprendizado pago**
 

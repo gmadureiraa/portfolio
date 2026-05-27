@@ -34,7 +34,7 @@ export default async function OG() {
           }}
         >
           <span>Marketing + IA em produção</span>
-          <span>@madureira0x</span>
+          <span>@ogmadureira</span>
         </div>
 
         <div

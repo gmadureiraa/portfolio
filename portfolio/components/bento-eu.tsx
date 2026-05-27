@@ -404,7 +404,7 @@ const features = [
           </div>
           <div className="flex gap-3">
             <a
-              href="https://x.com/madureira0x"
+              href="https://x.com/ogmadureira"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Twitter"

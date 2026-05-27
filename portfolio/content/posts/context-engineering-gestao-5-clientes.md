@@ -28,7 +28,7 @@ Pensa assim: a IA é um analista brilhante que acabou de entrar na empresa. Ele 
 - O que não pode fazer
 - O que o público espera
 
-Sem esse contexto, ele vai escrever generic. Com contexto, ele escreve melhor que 90% dos freelancers.
+Sem esse contexto, ele vai escrever genérico. Com contexto, ele escreve melhor que 90% dos freelancers.
 
 ---
 
