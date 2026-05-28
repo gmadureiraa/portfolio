@@ -108,6 +108,7 @@ export function NewsletterHeroForm() {
           type="email"
           name="email"
           placeholder="seu melhor email"
+          aria-label="Seu email para assinar a newsletter"
           required
           autoComplete="email"
           value={email}
@@ -147,6 +148,8 @@ export function NewsletterHeroForm() {
       </div>
 
       <p
+        role="status"
+        aria-live="polite"
         className={
           status === "ok"
             ? "text-foreground"

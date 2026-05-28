@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import fs from 'node:fs';
 import path from 'node:path';
+import { listPublishedNewsletters } from '@/lib/db/newsletter';
 
 const baseUrl = 'https://madureira.xyz';
 
@@ -26,18 +27,16 @@ function listMarkdown(absPath: string): string[] {
   }
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: `${baseUrl}/`, lastModified: now, changeFrequency: 'weekly', priority: 1 },
     { url: `${baseUrl}/projects`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${baseUrl}/eu`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
-    { url: `${baseUrl}/sobre-mim`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/newsletter`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
-    { url: `${baseUrl}/technologies`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
-    { url: `${baseUrl}/deployments`, lastModified: now, changeFrequency: 'monthly', priority: 0.4 },
-    { url: `${baseUrl}/worldwide-reach`, lastModified: now, changeFrequency: 'monthly', priority: 0.4 },
+    { url: `${baseUrl}/posts`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
+    { url: `${baseUrl}/links`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
   ];
 
   const projectsDir = path.join(process.cwd(), 'app', 'projects');
@@ -58,5 +57,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...projectPages, ...postPages];
+  const newsletters = await listPublishedNewsletters().catch(() => []);
+  const newsletterPages: MetadataRoute.Sitemap = newsletters.map((n) => ({
+    url: `${baseUrl}/newsletter/${n.slug}`,
+    lastModified: n.published_at ?? now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
+
+  return [...staticPages, ...projectPages, ...postPages, ...newsletterPages];
 }

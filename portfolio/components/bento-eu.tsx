@@ -426,7 +426,7 @@ const features = [
               </svg>
             </a>
             <a
-              href="https://www.instagram.com/ogabrielmadureira/"
+              href="https://www.instagram.com/ogmadureira/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"

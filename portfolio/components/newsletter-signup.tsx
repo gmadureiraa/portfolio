@@ -122,6 +122,7 @@ export function NewsletterSignup({
           inputMode="email"
           autoComplete="email"
           placeholder="seu@email.com"
+          aria-label="Seu email para assinar a newsletter"
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
@@ -145,6 +146,8 @@ export function NewsletterSignup({
       <AnimatePresence>
         {state.status === "success" && (
           <motion.div
+            role="status"
+            aria-live="polite"
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
@@ -156,6 +159,8 @@ export function NewsletterSignup({
         )}
         {state.status === "error" && (
           <motion.div
+            role="alert"
+            aria-live="assertive"
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}

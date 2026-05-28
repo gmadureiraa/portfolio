@@ -213,7 +213,7 @@ const features = [
               </div>
               <div className="flex justify-center gap-4">
                 <a
-                  href="https://www.instagram.com/ogabrielmadureira/"
+                  href="https://www.instagram.com/ogmadureira/"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() =>
