@@ -117,9 +117,26 @@ export function AdminNewsletterDashboard({ initialPosts }: Props) {
   // ----- data -----
 
   async function refresh() {
-    const res = await fetch("/api/admin/newsletter", { cache: "no-store" });
-    const data = await res.json();
-    if (data.ok) setPosts(data.items);
+    try {
+      const res = await fetch("/api/admin/newsletter", { cache: "no-store" });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.ok) {
+        setPosts(data.items);
+      } else {
+        toast({
+          title: "Falha ao atualizar lista",
+          description: data.error || `HTTP ${res.status}`,
+          variant: "destructive",
+        });
+      }
+    } catch (err) {
+      toast({
+        title: "Erro de conexão",
+        description:
+          err instanceof Error ? err.message : "Não foi possível recarregar.",
+        variant: "destructive",
+      });
+    }
   }
 
   // ----- local draft autosave -----

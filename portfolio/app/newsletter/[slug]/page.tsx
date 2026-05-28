@@ -128,6 +128,35 @@ export default async function NewsletterPostPage({
   const all = await listPublishedNewsletters().catch(() => []);
   const more = all.filter((p) => p.slug !== post.slug).slice(0, 2);
 
+  const url = `${BASE}/newsletter/${post.slug}`;
+  const heroImg = post.og_image_url || post.hero_image_url || undefined;
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt || undefined,
+    datePublished: post.published_at.toISOString(),
+    dateModified: (post.updated_at ?? post.published_at).toISOString(),
+    image: heroImg ? [heroImg] : undefined,
+    inLanguage: "pt-BR",
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    author: {
+      "@type": "Person",
+      name: post.author_name,
+      url: BASE,
+      sameAs: [
+        "https://x.com/ogmadureira",
+        "https://www.instagram.com/ogmadureira/",
+        "https://www.linkedin.com/in/gabrielmadureira",
+      ],
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Kaleidos",
+      url: BASE,
+    },
+  };
+
   return (
     <main
       className={`${fraunces.variable} ${inter.variable}`}
@@ -140,6 +169,10 @@ export default async function NewsletterPostPage({
         fontFeatureSettings: '"ss01", "cv11"',
       }}
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <ReadingProgress />
       <ViewPing slug={post.slug} />
       <NewsletterMidScrollModal />

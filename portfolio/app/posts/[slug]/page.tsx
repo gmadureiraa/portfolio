@@ -62,6 +62,34 @@ export default async function PostPage({
   const post = getLocalPostBySlug(slug);
   if (!post) notFound();
 
+  const url = `${BASE}/posts/${post.slug}`;
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.data.title,
+    description: post.data.description,
+    datePublished: post.data.date || undefined,
+    dateModified: post.data.date || undefined,
+    image: post.data.image ? [post.data.image] : undefined,
+    inLanguage: "pt-BR",
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    author: {
+      "@type": "Person",
+      name: "Gabriel Madureira",
+      url: BASE,
+      sameAs: [
+        "https://x.com/ogmadureira",
+        "https://www.instagram.com/ogmadureira/",
+        "https://www.linkedin.com/in/gabrielmadureira",
+      ],
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Kaleidos",
+      url: BASE,
+    },
+  };
+
   const formattedDate = new Date(post.data.date || "2024-01-01").toLocaleDateString(
     "pt-BR",
     {
@@ -73,6 +101,10 @@ export default async function PostPage({
 
   return (
     <main className="min-h-screen w-full flex flex-col items-center px-4 py-6 sm:p-6 lg:p-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <ReadingProgress />
       <div className="max-w-4xl w-full">
         {/* Back Button */}

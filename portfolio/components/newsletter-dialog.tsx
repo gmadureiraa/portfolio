@@ -149,6 +149,7 @@ export function NewsletterDialog({
             type="email"
             name="email"
             placeholder="seu melhor email"
+            aria-label="Seu email para assinar a newsletter"
             required
             autoComplete="email"
             disabled={status === "loading" || status === "ok"}
@@ -192,6 +193,8 @@ export function NewsletterDialog({
 
           {message && (
             <p
+              role={status === "error" ? "alert" : "status"}
+              aria-live={status === "error" ? "assertive" : "polite"}
               className={
                 status === "ok" ? "text-foreground" : "text-foreground/80"
               }

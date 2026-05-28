@@ -109,7 +109,7 @@ export default function RootLayout({
                 "https://github.com/gmadureiraa",
                 "https://www.linkedin.com/in/gabriel-madureira/",
                 "https://x.com/ogmadureira",
-                "https://www.instagram.com/ogabrielmadureira/"
+                "https://www.instagram.com/ogmadureira/"
               ]
             })
           }}
