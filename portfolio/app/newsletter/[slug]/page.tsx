@@ -30,6 +30,10 @@ const inter = Inter({
 
 const BASE = process.env.NEXT_PUBLIC_BASE_URL || "https://madureira.xyz";
 
+// Fallback OG/hero quando a edição não declarou cover própria.
+// Asset gerado via Higgsfield GPT Image 2 (editorial monochrome).
+const DEFAULT_NEWSLETTER_COVER = "/assets/generated/newsletter-cover.jpg";
+
 /* Theme-aware tokens — usam CSS vars do design system (light/dark via next-themes).
  * Antes eram hardcoded (cream paper / ink soft black) — quebrava Sun/Moon toggle nessa rota.
  * Agora full black/white via tokens HSL. */
@@ -64,7 +68,8 @@ export async function generateMetadata({
   }
 
   const url = `${BASE}/newsletter/${post.slug}`;
-  const ogImage = post.og_image_url || post.hero_image_url || undefined;
+  const ogImage =
+    post.og_image_url || post.hero_image_url || `${BASE}${DEFAULT_NEWSLETTER_COVER}`;
 
   return {
     title: `${post.title} — Madureira®`,
@@ -77,14 +82,14 @@ export async function generateMetadata({
       type: "article",
       publishedTime: post.published_at.toISOString(),
       authors: [post.author_name],
-      images: ogImage ? [{ url: ogImage }] : undefined,
+      images: [{ url: ogImage }],
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.excerpt,
       creator: "@ogmadureira",
-      images: ogImage ? [ogImage] : undefined,
+      images: [ogImage],
     },
   };
 }
@@ -129,7 +134,8 @@ export default async function NewsletterPostPage({
   const more = all.filter((p) => p.slug !== post.slug).slice(0, 2);
 
   const url = `${BASE}/newsletter/${post.slug}`;
-  const heroImg = post.og_image_url || post.hero_image_url || undefined;
+  const heroImg =
+    post.og_image_url || post.hero_image_url || `${BASE}${DEFAULT_NEWSLETTER_COVER}`;
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -137,7 +143,7 @@ export default async function NewsletterPostPage({
     description: post.excerpt || undefined,
     datePublished: post.published_at.toISOString(),
     dateModified: (post.updated_at ?? post.published_at).toISOString(),
-    image: heroImg ? [heroImg] : undefined,
+    image: [heroImg],
     inLanguage: "pt-BR",
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
     author: {

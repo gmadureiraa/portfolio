@@ -330,20 +330,26 @@ export function NewsletterList({ posts }: NewsletterListProps) {
                     </div>
                   ) : (
                     <div
-                      className="hidden sm:flex border border-border bg-foreground/[0.03] items-center justify-center"
+                      className="hidden sm:block border border-border overflow-hidden"
                       style={{
                         width: 120,
                         height: 120,
                         borderRadius: 8,
                         flexShrink: 0,
+                        position: "relative",
                       }}
                     >
-                      <Image
-                        src="/avatar.png"
+                      {/* Fallback cover (Higgsfield GPT Image 2 — editorial monochrome) */}
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src="/assets/generated/newsletter-cover.webp"
                         alt=""
-                        width={48}
-                        height={48}
-                        className="rounded-full opacity-60"
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                          display: "block",
+                        }}
                       />
                     </div>
                   )}

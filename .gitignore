@@ -1,3 +1,7 @@
 # Security audits — local-only, contém detalhes de vulnerabilidades
 .security/
 .vercel
+
+# Higgsfield raw outputs (não comitar brutos pesados)
+/tmp/higgs-mad/
+portfolio/public/assets/generated/*-raw.*
