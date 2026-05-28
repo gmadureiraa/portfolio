@@ -17,8 +17,12 @@ import GitHubStars from "@/components/github-stars";
 import ProjectPosts from "@/components/project-posts";
 import Link from "next/link";
 import { track } from "@/lib/analytics";
+import {
+  NewsletterPreviewCard,
+  type NewsletterPreviewItem,
+} from "@/components/newsletter-preview-card";
 
-const features = [
+const buildFeatures = (latestNewsletters: NewsletterPreviewItem[]) => [
   {
     Icon: "",
     name: "",
@@ -168,6 +172,16 @@ const features = [
 
 
 
+  {
+    Icon: "",
+    name: "Cartas do Madureira",
+    description:
+      "Marketing direto, IA aplicada e bastidor real. Quinta na sua caixa.",
+    className: "col-span-3 md:col-span-3",
+    href: "/newsletter",
+    cta: "Ver todas as cartas",
+    background: <NewsletterPreviewCard posts={latestNewsletters} />,
+  },
   {
     Icon: "",
     name: "",
@@ -342,7 +356,12 @@ function TechStackMarquee() {
   );
 }
 
-export function Bento() {
+export function Bento({
+  latestNewsletters = [],
+}: {
+  latestNewsletters?: NewsletterPreviewItem[];
+}) {
+  const features = buildFeatures(latestNewsletters);
   return (
     <>
       <BentoGrid>

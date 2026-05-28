@@ -47,6 +47,7 @@ export interface NewsletterListProps {
 
 export function NewsletterList({ posts }: NewsletterListProps) {
   const [filter, setFilter] = useState<"all" | Category>("all");
+  const [query, setQuery] = useState("");
 
   // Pre-compute categoria de cada post (evita recálculo no render).
   const postsWithCat = useMemo(
@@ -54,15 +55,97 @@ export function NewsletterList({ posts }: NewsletterListProps) {
     [posts],
   );
 
+  // Normaliza string pra busca: lowercase + remove acentos (combining marks U+0300–U+036F).
+  const normalize = (s: string) =>
+    s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+
   const filtered = useMemo(() => {
-    if (filter === "all") return postsWithCat;
-    return postsWithCat.filter((p) => p._cat === filter);
-  }, [postsWithCat, filter]);
+    let base = postsWithCat;
+    if (filter !== "all") {
+      base = base.filter((p) => p._cat === filter);
+    }
+    const q = normalize(query.trim());
+    if (!q) return base;
+    return base.filter((p) =>
+      normalize(`${p.title} ${p.excerpt} ${p.slug}`).includes(q),
+    );
+  }, [postsWithCat, filter, query]);
 
   const total = posts.length;
 
   return (
     <div>
+      {/* Busca por texto */}
+      <div className="mb-6">
+        <label htmlFor="nl-search" className="sr-only">
+          Buscar cartas
+        </label>
+        <div className="relative">
+          <input
+            id="nl-search"
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Buscar nas cartas…"
+            aria-label="Buscar cartas por título, resumo ou slug"
+            className="w-full bg-transparent text-foreground border border-border placeholder:text-muted-foreground focus:border-foreground/50 focus:outline-none"
+            style={{
+              padding: "12px 16px 12px 40px",
+              borderRadius: 8,
+              fontFamily: "inherit",
+              fontSize: 14,
+              transition: "border-color 180ms ease",
+            }}
+          />
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="text-muted-foreground"
+            style={{
+              position: "absolute",
+              left: 14,
+              top: "50%",
+              transform: "translateY(-50%)",
+              width: 16,
+              height: 16,
+              pointerEvents: "none",
+            }}
+          >
+            <circle cx={11} cy={11} r={7} />
+            <line x1={21} y1={21} x2={16.65} y2={16.65} />
+          </svg>
+          {query ? (
+            <button
+              type="button"
+              onClick={() => setQuery("")}
+              aria-label="Limpar busca"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+              style={{
+                position: "absolute",
+                right: 10,
+                top: "50%",
+                transform: "translateY(-50%)",
+                padding: 6,
+                background: "transparent",
+                border: "none",
+                cursor: "pointer",
+                fontFamily: MONO,
+                fontSize: 11,
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+              }}
+            >
+              limpar
+            </button>
+          ) : null}
+        </div>
+      </div>
+
       {/* Filtros chips */}
       <div
         role="tablist"
@@ -131,7 +214,9 @@ export function NewsletterList({ posts }: NewsletterListProps) {
         >
           {total === 0
             ? "A primeira carta sai em breve. Entra na lista pra receber."
-            : "Nenhuma carta dessa categoria por enquanto."}
+            : query.trim()
+              ? `Nada encontrado para "${query.trim()}". Tenta outra busca?`
+              : "Nenhuma carta dessa categoria por enquanto."}
         </p>
       ) : (
         <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
