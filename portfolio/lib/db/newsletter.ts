@@ -91,7 +91,7 @@ export async function listPublishedNewsletters(): Promise<NewsletterListItem[]> 
     SELECT id, slug, title, excerpt, hero_image_url, published_at,
            reading_time_min, view_count
     FROM newsletters
-    WHERE published_at IS NOT NULL
+    WHERE published_at IS NOT NULL AND published_at <= now()
     ORDER BY published_at DESC
   `;
 }

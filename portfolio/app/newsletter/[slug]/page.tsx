@@ -60,7 +60,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const post = await getNewsletterBySlug(slug).catch(() => null);
-  if (!post || !post.published_at) {
+  // Agendadas (data futura) ou sem data: noindex, como se não existissem ainda.
+  if (!post || !post.published_at || new Date(post.published_at) > new Date()) {
     return {
       title: "Newsletter — Madureira®",
       robots: { index: false },
@@ -111,7 +112,9 @@ export default async function NewsletterPostPage({
 }) {
   const { slug } = await params;
   const post = await getNewsletterBySlug(slug).catch(() => null);
-  if (!post || !post.published_at) notFound();
+  // Gate: sem data publicada OU com data no futuro (agendada) → ainda não existe.
+  if (!post || !post.published_at || new Date(post.published_at) > new Date())
+    notFound();
 
   const html = sanitizeHtml(
     marked.parse(post.content_md, { async: false }) as string,
