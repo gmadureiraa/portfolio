@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     template: "%s | Gabriel Madureira",
   },
   description:
-    "Portfolio de Gabriel Madureira. 15+ produtos digitais. Cripto, IA, marketing e automacao.",
+    "Fundador da Kaleidos. Construo produtos digitais em cripto, IA, marketing e automação.",
   metadataBase: new URL("https://madureira.xyz"),
   openGraph: {
     title: "Gabriel Madureira — Portfolio",

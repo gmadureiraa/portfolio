@@ -55,7 +55,7 @@ const buildFeatures = (latestNewsletters: NewsletterPreviewItem[]) => [
         { name: "Reels Viral", body: "Cole um reel viral, IA extrai a estrutura e devolve roteiro.", href: "https://reels.kaleidos.com.br", type: "Projeto" },
         { name: "DeFi Radar", body: "Dashboard cripto com DeFiLlama e on-chain tracker.", href: "https://radar.kaleidos.com.br", type: "Projeto" },
         { name: "Kaleidos Pay", body: "Gateway de pagamentos para agências com PIX e Cripto.", href: "https://pay.kaleidos.com.br", type: "Projeto" },
-        { name: "Folio", body: "Portfolio tracker multi-chain.", href: "https://folio-landing.vercel.app/app", type: "Projeto" },
+        { name: "Folio", body: "Portfolio tracker multi-chain.", href: "https://folio-landing.vercel.app", type: "Projeto" },
         { name: "Rabito", body: "App de hábitos com streak system e gamificação.", href: "https://rabito-ashen.vercel.app/", type: "Projeto" },
       ];
       return (
@@ -67,6 +67,7 @@ const buildFeatures = (latestNewsletters: NewsletterPreviewItem[]) => [
           <Marquee
             className="absolute h-2/3 top-10 [--duration:40s] [mask-image:linear-gradient(to_top,transparent_10%,#000_100%)] w-full"
             pauseOnHover
+            repeat={2}
           >
             {buildingItems.map((item, idx) => (
               <a
@@ -337,7 +338,7 @@ function TechBadge({ tech }: { tech: Tech }) {
 function TechStackMarquee() {
   return (
     <div className="absolute inset-0 flex flex-col justify-center gap-3 [mask-image:linear-gradient(to_right,transparent,#000_15%,#000_85%,transparent)]">
-      <Marquee className="[--duration:35s] [--gap:0.75rem]" pauseOnHover repeat={3}>
+      <Marquee className="[--duration:35s] [--gap:0.75rem]" pauseOnHover repeat={2}>
         {TECH_ROW_TOP.map((tech) => (
           <TechBadge key={tech.slug} tech={tech} />
         ))}
@@ -346,7 +347,7 @@ function TechStackMarquee() {
         className="[--duration:40s] [--gap:0.75rem]"
         pauseOnHover
         reverse
-        repeat={3}
+        repeat={2}
       >
         {TECH_ROW_BOTTOM.map((tech) => (
           <TechBadge key={tech.slug} tech={tech} />

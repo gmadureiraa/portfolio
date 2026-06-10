@@ -16,6 +16,14 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      { source: '/blog', destination: '/newsletter', permanent: true },
+      { source: '/sobre', destination: '/eu', permanent: true },
+      { source: '/contato', destination: '/#contato', permanent: false },
+      { source: '/projetos', destination: '/projects', permanent: true },
+    ];
+  },
   async rewrites() {
     return [
       {
