@@ -15,11 +15,18 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
     posthog.init(key, {
       api_host: "/ingest",
       ui_host: "https://us.posthog.com",
-      capture_pageview: false,
+      capture_pageview: false, // SPA: disparado manual no PostHogPageView
       capture_pageleave: true,
       autocapture: true,
-      capture_performance: { web_vitals: true, network_timing: true },
-      person_profiles: "identified_only",
+      // DADOS DE ACESSO + CLIQUE (sem gravação de sessão — Gabriel não quer replay):
+      // autocapture + heatmaps + dead clicks + exceptions + web vitals.
+      capture_exceptions: true,
+      capture_dead_clicks: true,
+      capture_heatmaps: true,
+      capture_performance: { web_vitals: true, network_timing: false },
+      person_profiles: "always",
+      disable_session_recording: true,
+      disable_surveys: true,
       loaded: (ph) => {
         ph.register({
           site: "madureira",
