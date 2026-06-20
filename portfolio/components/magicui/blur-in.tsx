@@ -1,7 +1,5 @@
-"use client";
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { ReactNode } from "react";
+import { CSSProperties, ReactNode } from "react";
 
 interface BlurIntProps {
   children: ReactNode;
@@ -11,30 +9,44 @@ interface BlurIntProps {
     visible: { filter: string; opacity: number };
   };
   duration?: number;
+  /** Atraso em segundos — útil pra cascatear vários BlurIn. */
+  delay?: number;
 }
 
+/**
+ * BlurIn — entrada com blur+fade, agora 100% CSS (sem framer-motion).
+ *
+ * Era o principal motivo do framer-motion entrar no bundle crítico do home:
+ * envolve todo BentoCard e o headline do hero (LCP). Trocado por uma keyframe
+ * CSS (`bento-blur-in`, definida em globals.css) que produz o mesmo efeito,
+ * respeita `prefers-reduced-motion` e tira ~106KB raw do caminho crítico.
+ *
+ * API preservada (children/className/variant/duration/delay) — nenhum caller
+ * precisa mudar. `variant` customizado vira CSS vars pra honrar blur/opacity.
+ */
 const BlurIn = ({
   children,
   className,
   variant,
   duration = 0.33,
+  delay = 0,
 }: BlurIntProps) => {
-  const defaultVariants = {
-    hidden: { filter: "blur(10px)", opacity: 0 },
-    visible: { filter: "blur(0px)", opacity: 1 },
+  const style: CSSProperties & Record<string, string | number> = {
+    animationDuration: `${duration}s`,
+    animationDelay: `${delay}s`,
   };
-  const combinedVariants = variant || defaultVariants;
+
+  if (variant) {
+    style["--blur-in-from-filter"] = variant.hidden.filter;
+    style["--blur-in-from-opacity"] = variant.hidden.opacity;
+    style["--blur-in-to-filter"] = variant.visible.filter;
+    style["--blur-in-to-opacity"] = variant.visible.opacity;
+  }
 
   return (
-    <motion.h1
-      initial="hidden"
-      animate="visible"
-      transition={{ duration }}
-      variants={combinedVariants}
-      className={cn(className, "")}
-    >
+    <h1 className={cn("bento-blur-in", className)} style={style}>
       {children}
-    </motion.h1>
+    </h1>
   );
 };
 

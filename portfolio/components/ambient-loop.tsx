@@ -26,19 +26,30 @@ export function AmbientLoop({
 }) {
   const ref = useRef<HTMLVideoElement | null>(null);
   const [reducedMotion, setReducedMotion] = useState(false);
+  // Mobile: nunca carrega o vídeo (178KB webm / 364KB mp4). Ele é textura a 18%
+  // de opacidade — invisível na prática no mobile e custa banda + decode no
+  // exato momento crítico do LCP do hero. Mostra só o poster estático (33KB).
+  // `true` por padrão (mobile-first SSR) até o efeito medir o viewport.
+  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const apply = () => setReducedMotion(mq.matches);
+    const motionMq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const widthMq = window.matchMedia("(min-width: 768px)");
+    const apply = () => {
+      setReducedMotion(motionMq.matches);
+      setIsMobile(!widthMq.matches);
+    };
     apply();
-    mq.addEventListener?.("change", apply);
+    motionMq.addEventListener?.("change", apply);
+    widthMq.addEventListener?.("change", apply);
     return () => {
-      mq.removeEventListener?.("change", apply);
+      motionMq.removeEventListener?.("change", apply);
+      widthMq.removeEventListener?.("change", apply);
     };
   }, []);
 
-  if (reducedMotion) {
+  if (reducedMotion || isMobile) {
     return (
       <div
         aria-hidden="true"

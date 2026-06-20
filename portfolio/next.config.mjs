@@ -1,5 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Barrel-file tree-shaking: importa só os ícones/utilitários usados em vez
+  // de puxar o pacote inteiro pro bundle client. Ganho direto em react-icons
+  // (centenas de SVGs) e lucide-react.
+  experimental: {
+    optimizePackageImports: [
+      "react-icons",
+      "lucide-react",
+      "framer-motion",
+      "date-fns",
+    ],
+  },
   images: {
     remotePatterns: [
       {

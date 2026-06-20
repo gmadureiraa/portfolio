@@ -20,6 +20,7 @@ export default function Hero() {
       <div className="flex flex-col items-start justify-center h-full overflow-hidden p-4 sm:p-6 z-50 w-full">
         <WordPullUp
           words="Do código ao conteúdo."
+          eager
           className="!text-2xl sm:!text-3xl md:!text-4xl lg:!text-5xl !leading-[1.1] !text-left w-full break-words"
         />
 

@@ -32,6 +32,7 @@ const BentoCard = ({
   description,
   href,
   cta,
+  index = 0,
 }: {
   name?: string;
   className?: string;
@@ -40,9 +41,11 @@ const BentoCard = ({
   description?: string;
   href?: string;
   cta?: string;
+  index?: number;
 }) => (
   <BlurIn
-    duration={0.1}
+    duration={0.5}
+    delay={index * 0.09}
     key={name}
     className={cn(
       "group relative col-span-3 flex flex-col justify-between overflow-hidden rounded-xl",

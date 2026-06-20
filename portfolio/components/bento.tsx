@@ -1,21 +1,51 @@
 "use client";
 
 import Image from "next/image";
-import { AnimatedBeamMultipleOutputs } from "@/components/animated-beam-multiple-outputs";
+import dynamic from "next/dynamic";
 import { BentoCard, BentoGrid } from "@/components/magicui/bento-grid";
 import BlurIn from "@/components/magicui/blur-in";
 import { FadeIn } from "@/components/magicui/fade-in";
 // Globe removido junto com o card "Projetos ao Vivo" (movido pra bloco newsletter).
 import Hero from "@/components/hero";
 import Marquee from "@/components/magicui/marquee";
-import Orbit from "@/components/orbit";
 import RetroGrid from "@/components/magicui/retro-grid";
 
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
-import GitHubStars from "@/components/github-stars";
-import ProjectPosts from "@/components/project-posts";
-import Link from "next/link";
+import type { IconType } from "react-icons";
+
+// Decorações pesadas (framer-motion + dezenas de ícones) carregadas só no client,
+// fora do caminho crítico de hidratação do hero/LCP. São puramente visuais —
+// nenhum texto de SEO vive aqui, então ssr:false não afeta o conteúdo indexável.
+const AnimatedBeamMultipleOutputs = dynamic(
+  () =>
+    import("@/components/animated-beam-multiple-outputs").then(
+      (m) => m.AnimatedBeamMultipleOutputs
+    ),
+  { ssr: false }
+);
+const Orbit = dynamic(() => import("@/components/orbit"), { ssr: false });
+import {
+  SiBitcoin,
+  SiEthereum,
+  SiSolana,
+  SiOpenai,
+  SiGooglegemini,
+  SiAnthropic,
+  SiN8N,
+  SiSupabase,
+  SiVercel,
+  SiStripe,
+  SiNextdotjs,
+  SiReact,
+  SiTypescript,
+  SiTailwindcss,
+  SiPython,
+  SiNotion,
+  SiSubstack,
+  SiGoogleanalytics,
+  SiX,
+} from "react-icons/si";
+import { FaLinkedin } from "react-icons/fa";
 import { track } from "@/lib/analytics";
 import {
   NewsletterPreviewCard,
@@ -59,11 +89,7 @@ const buildFeatures = (latestNewsletters: NewsletterPreviewItem[]) => [
         { name: "Rabito", body: "App de hábitos com streak system e gamificação.", href: "https://rabito-ashen.vercel.app/", type: "Projeto" },
       ];
       return (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 2.5 }}
-        >
+        <div className="animate-fade-in">
           <Marquee
             className="absolute h-2/3 top-10 [--duration:40s] [mask-image:linear-gradient(to_top,transparent_10%,#000_100%)] w-full"
             pauseOnHover
@@ -109,7 +135,7 @@ const buildFeatures = (latestNewsletters: NewsletterPreviewItem[]) => [
               </a>
             ))}
           </Marquee>
-        </motion.div>
+        </div>
       );
     })(),
   },
@@ -136,13 +162,9 @@ const buildFeatures = (latestNewsletters: NewsletterPreviewItem[]) => [
     cta: "Ver projetos",
     className: "col-span-3 md:col-span-2",
     background: (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.5 }}
-      >
+      <div className="animate-fade-in">
         <AnimatedBeamMultipleOutputs className="absolute right-0 top-4 h-[300px] w-[600px] border-none transition-all duration-300 ease-out [mask-image:linear-gradient(to_top,transparent_10%,#000_100%)] md:[mask-image:linear-gradient(to_top,transparent_0%,#000_100%)] group-hover:scale-105" />
-      </motion.div>
+      </div>
     ),
   },
   {
@@ -286,46 +308,45 @@ const buildFeatures = (latestNewsletters: NewsletterPreviewItem[]) => [
   },
 ];
 
-type Tech = { slug: string; label: string };
+// Ícones locais via react-icons (Simple Icons set) — zero rede em runtime.
+// Cor = hex oficial da marca pra preservar o visual colorido dos badges.
+type Tech = { Icon: IconType; label: string; color: string };
 
 const TECH_ROW_TOP: Tech[] = [
-  { slug: "bitcoin", label: "Bitcoin" },
-  { slug: "ethereum", label: "Ethereum" },
-  { slug: "solana", label: "Solana" },
-  { slug: "openai", label: "OpenAI" },
-  { slug: "googlegemini", label: "Gemini" },
-  { slug: "anthropic", label: "Claude" },
-  { slug: "n8n", label: "n8n" },
-  { slug: "supabase", label: "Supabase" },
-  { slug: "vercel", label: "Vercel" },
-  { slug: "stripe", label: "Stripe" },
+  { Icon: SiBitcoin, label: "Bitcoin", color: "#F7931A" },
+  { Icon: SiEthereum, label: "Ethereum", color: "#3C3C3D" },
+  { Icon: SiSolana, label: "Solana", color: "#9945FF" },
+  { Icon: SiOpenai, label: "OpenAI", color: "#412991" },
+  { Icon: SiGooglegemini, label: "Gemini", color: "#8E75B2" },
+  { Icon: SiAnthropic, label: "Claude", color: "#D97757" },
+  { Icon: SiN8N, label: "n8n", color: "#EA4B71" },
+  { Icon: SiSupabase, label: "Supabase", color: "#3FCF8E" },
+  { Icon: SiVercel, label: "Vercel", color: "#000000" },
+  { Icon: SiStripe, label: "Stripe", color: "#635BFF" },
 ];
 
 const TECH_ROW_BOTTOM: Tech[] = [
-  { slug: "nextdotjs", label: "Next.js" },
-  { slug: "react", label: "React" },
-  { slug: "typescript", label: "TypeScript" },
-  { slug: "tailwindcss", label: "Tailwind" },
-  { slug: "python", label: "Python" },
-  { slug: "notion", label: "Notion" },
-  { slug: "substack", label: "Substack" },
-  { slug: "googleanalytics", label: "GA" },
-  { slug: "linkedin", label: "LinkedIn" },
-  { slug: "x", label: "X" },
+  { Icon: SiNextdotjs, label: "Next.js", color: "#000000" },
+  { Icon: SiReact, label: "React", color: "#61DAFB" },
+  { Icon: SiTypescript, label: "TypeScript", color: "#3178C6" },
+  { Icon: SiTailwindcss, label: "Tailwind", color: "#06B6D4" },
+  { Icon: SiPython, label: "Python", color: "#3776AB" },
+  { Icon: SiNotion, label: "Notion", color: "#000000" },
+  { Icon: SiSubstack, label: "Substack", color: "#FF6719" },
+  { Icon: SiGoogleanalytics, label: "GA", color: "#E37400" },
+  { Icon: FaLinkedin, label: "LinkedIn", color: "#0A66C2" },
+  { Icon: SiX, label: "X", color: "#000000" },
 ];
 
 function TechBadge({ tech }: { tech: Tech }) {
+  const { Icon } = tech;
   return (
-    <div className="flex shrink-0 items-center gap-2 rounded-full border border-border bg-card px-3 py-2 backdrop-blur-sm">
-      <span className="grid h-6 w-6 place-items-center rounded-full bg-white/95">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={`https://cdn.simpleicons.org/${tech.slug}`}
-          alt={tech.label}
-          width={14}
-          height={14}
-          loading="lazy"
+    <div className="group/badge flex shrink-0 items-center gap-2 rounded-full border border-border bg-card px-3 py-2 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:border-foreground/25 hover:bg-card/90 hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_4px_16px_rgba(0,0,0,0.35)]">
+      <span className="grid h-6 w-6 place-items-center rounded-full bg-white/95 transition-transform duration-300 group-hover/badge:scale-110">
+        <Icon
+          aria-label={tech.label}
           className="h-3.5 w-3.5"
+          style={{ color: tech.color }}
         />
       </span>
       <span className="text-xs font-medium text-foreground whitespace-nowrap">
@@ -340,7 +361,7 @@ function TechStackMarquee() {
     <div className="absolute inset-0 flex flex-col justify-center gap-3 [mask-image:linear-gradient(to_right,transparent,#000_15%,#000_85%,transparent)]">
       <Marquee className="[--duration:35s] [--gap:0.75rem]" pauseOnHover repeat={2}>
         {TECH_ROW_TOP.map((tech) => (
-          <TechBadge key={tech.slug} tech={tech} />
+          <TechBadge key={tech.label} tech={tech} />
         ))}
       </Marquee>
       <Marquee
@@ -350,7 +371,7 @@ function TechStackMarquee() {
         repeat={2}
       >
         {TECH_ROW_BOTTOM.map((tech) => (
-          <TechBadge key={tech.slug} tech={tech} />
+          <TechBadge key={tech.label} tech={tech} />
         ))}
       </Marquee>
     </div>
@@ -367,7 +388,7 @@ export function Bento({
     <>
       <BentoGrid>
         {features.map((feature, idx) => (
-          <BentoCard key={idx} {...feature} />
+          <BentoCard key={idx} index={idx} {...feature} />
         ))}
       </BentoGrid>
     </>

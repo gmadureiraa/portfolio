@@ -1,52 +1,58 @@
-"use client";
-
-import { motion, Variants } from "framer-motion";
 import { cn } from "../../lib/utils";
+import { CSSProperties } from "react";
 
 interface WordPullUpProps {
   words: string;
   delayMultiple?: number;
-  wrapperFramerProps?: Variants;
-  framerProps?: Variants;
+  /** Mantidos por compatibilidade de API — ignorados na versão CSS. */
+  wrapperFramerProps?: unknown;
+  framerProps?: unknown;
   className?: string;
+  /**
+   * Quando true, pinta direto no estado final (sem animação de entrada).
+   * Usado no h1 do hero, que é o LCP — garante que o texto pinte no primeiro
+   * frame, sem depender de JS/hidratação.
+   */
+  eager?: boolean;
 }
 
+/**
+ * WordPullUp — entrada palavra-a-palavra, 100% CSS (sem framer-motion).
+ *
+ * No modo `eager` (hero/LCP) renderiza estático: zero animação, texto pintado
+ * no HTML inicial. Sem `eager`, cada palavra sobe com stagger via
+ * `animation-delay` incremental e a keyframe `bento-word-pull` (globals.css).
+ * Respeita `prefers-reduced-motion`.
+ */
 export default function WordPullUp({
   words,
-  wrapperFramerProps = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  },
-  framerProps = {
-    hidden: { y: 20, opacity: 0 },
-    show: { y: 0, opacity: 1 },
-  },
+  delayMultiple = 0.12,
   className,
+  eager = false,
 }: WordPullUpProps) {
   return (
-    <motion.h1
-      variants={wrapperFramerProps}
-      initial="hidden"
-      animate="show"
+    <h1
       className={cn(
         "font-display text-center text-6xl md:text-7xl lg:text-8xl font-bold leading-[5rem] tracking-tighter drop-shadow-sm",
         className
       )}
     >
-      {words.split(" ").map((word, i) => (
-        <motion.span
-          key={i}
-          variants={framerProps}
-          style={{ display: "inline-block", paddingRight: "1rem" }}
-        >
-          {word === "" ? <span>&nbsp;</span> : word}
-        </motion.span>
-      ))}
-    </motion.h1>
+      {words.split(" ").map((word, i) => {
+        const style: CSSProperties = {
+          display: "inline-block",
+          paddingRight: "1rem",
+          ...(eager ? {} : { animationDelay: `${i * delayMultiple}s` }),
+        };
+        return (
+          <span
+            key={i}
+            className={eager ? undefined : "bento-word-pull"}
+            style={style}
+          >
+            {word === "" ? <span>&nbsp;</span> : word}
+          </span>
+        );
+      })}
+    </h1>
   );
 }
