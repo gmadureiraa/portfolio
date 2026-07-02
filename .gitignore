@@ -5,3 +5,5 @@
 # Higgsfield raw outputs (não comitar brutos pesados)
 /tmp/higgs-mad/
 portfolio/public/assets/generated/*-raw.*
+
+.DS_Store

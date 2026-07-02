@@ -12,6 +12,7 @@ const nextConfig = {
     ],
   },
   images: {
+    unoptimized: true, // free tier: evita cache-writes de Image Optimization
     remotePatterns: [
       {
         protocol: 'https',
