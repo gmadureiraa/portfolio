@@ -8,7 +8,7 @@ const fs = require("fs");
 const path = require("path");
 
 const OUT_DIR = path.resolve(
-  "/Users/gabrielmadureira/GOS/code/madureira-site/Portifólio/public/images/projects"
+  "/Users/gabrielmadureira/GOS/code/madureira-site/portfolio/public/images/projects"
 );
 
 const targets = [
