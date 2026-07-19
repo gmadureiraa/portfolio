@@ -47,12 +47,8 @@ import {
 } from "react-icons/si";
 import { FaLinkedin } from "react-icons/fa";
 import { track } from "@/lib/analytics";
-import {
-  NewsletterPreviewCard,
-  type NewsletterPreviewItem,
-} from "@/components/newsletter-preview-card";
 
-const buildFeatures = (latestNewsletters: NewsletterPreviewItem[]) => [
+const features = [
   {
     Icon: "",
     name: "",
@@ -81,8 +77,6 @@ const buildFeatures = (latestNewsletters: NewsletterPreviewItem[]) => [
     className: "col-span-3 md:col-span-1",
     background: (() => {
       const buildingItems = [
-        { name: "Sequência Viral", body: "Carrosséis com IA pra Instagram, LinkedIn e X em 2 cliques.", href: "https://viral.kaleidos.com.br", type: "Projeto" },
-        { name: "Reels Viral", body: "Cole um reel viral, IA extrai a estrutura e devolve roteiro.", href: "https://reels.kaleidos.com.br", type: "Projeto" },
         { name: "DeFi Radar", body: "Dashboard cripto com DeFiLlama e on-chain tracker.", href: "https://radar.kaleidos.com.br", type: "Projeto" },
         { name: "Kaleidos Pay", body: "Gateway de pagamentos para agências com PIX e Cripto.", href: "https://pay.kaleidos.com.br", type: "Projeto" },
         { name: "Folio", body: "Portfolio tracker multi-chain.", href: "https://folio-landing.vercel.app", type: "Projeto" },
@@ -195,16 +189,6 @@ const buildFeatures = (latestNewsletters: NewsletterPreviewItem[]) => [
 
 
 
-  {
-    Icon: "",
-    name: "Cartas do Madureira",
-    description:
-      "Marketing direto, IA aplicada e bastidor real. Quinta na sua caixa.",
-    className: "col-span-3 md:col-span-3",
-    href: "/newsletter",
-    cta: "Ver todas as cartas",
-    background: <NewsletterPreviewCard posts={latestNewsletters} />,
-  },
   {
     Icon: "",
     name: "",
@@ -378,12 +362,7 @@ function TechStackMarquee() {
   );
 }
 
-export function Bento({
-  latestNewsletters = [],
-}: {
-  latestNewsletters?: NewsletterPreviewItem[];
-}) {
-  const features = buildFeatures(latestNewsletters);
+export function Bento() {
   return (
     <>
       <BentoGrid>

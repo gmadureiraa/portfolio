@@ -63,15 +63,17 @@ export function ProjectConstruction({ title, tagline, description }: Props) {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <Link
-            href="/newsletter"
+          <a
+            href="https://kaleidos.com.br"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-full text-sm font-medium bg-foreground text-background hover:bg-foreground/90 transition-colors"
           >
-            Cartas do Madureira
+            Conheça a Kaleidos
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
-          </Link>
+          </a>
           <Link
             href="/projects"
             className="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-full text-sm font-medium border border-border text-foreground/80 hover:text-foreground hover:border-foreground/40 transition-colors"

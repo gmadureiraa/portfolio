@@ -110,7 +110,7 @@ export default async function PostPage({
         {/* Back Button */}
         <div className="mb-6 sm:mb-8">
           <Link
-            href="/newsletter"
+            href="/"
             className="inline-flex items-center gap-2 min-h-[44px] text-neutral-400 hover:text-neutral-200 transition-colors"
           >
             <svg
@@ -126,7 +126,7 @@ export default async function PostPage({
                 d="M15 19l-7-7 7-7"
               />
             </svg>
-            Voltar aos posts
+            Voltar ao início
           </Link>
         </div>
 
@@ -205,10 +205,10 @@ export default async function PostPage({
         {/* Back to posts */}
         <div className="mt-8 text-center">
           <Link
-            href="/newsletter"
+            href="/"
             className="inline-flex items-center gap-2 px-6 py-3 bg-neutral-900 border border-neutral-800 rounded-lg text-neutral-300 hover:border-neutral-700 hover:text-neutral-100 transition-all"
           >
-            ← Ver todos os posts
+            ← Voltar ao início
           </Link>
         </div>
       </div>
