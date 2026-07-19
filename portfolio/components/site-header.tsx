@@ -7,7 +7,6 @@ import { Menu, X, Search } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { AnimatedThemeToggler } from "@/components/magicui/animated-theme-toggler";
-import { NewsletterDialog } from "@/components/newsletter-dialog";
 
 const CORAL = "#e63a1f";
 
@@ -16,14 +15,14 @@ const SERIF = 'var(--font-fraunces), "Fraunces", Georgia, serif';
 
 const navTabs = [
   { label: "Início", href: "/" },
-  { label: "Newsletter", href: "/newsletter" },
+  { label: "Projetos", href: "/projects" },
   { label: "Links", href: "/links" },
 ];
 
 /**
- * Header global do site Madureira. Padrão validado no newsletter-template:
- * avatar à esquerda, wordmark "madureira" Fraunces italic centralizado,
- * CTA "Assinar" à direita. Nav inferior com 3 tabs mono uppercase.
+ * Header global do site Madureira: avatar à esquerda, wordmark "madureira"
+ * Fraunces italic centralizado, theme toggle + busca à direita. Nav inferior
+ * com tabs mono uppercase (Início, Projetos, Links).
  * Theme-aware: usa CSS vars do design system (bg-background/foreground/border)
  * pra responder ao toggle Sun/Moon (mesma cor da página).
  */
@@ -100,25 +99,6 @@ export function SiteHeader() {
           >
             <Search className="size-4" />
           </button>
-          {/* Assinar — abre dialog de inscrição (newsletter-dialog) */}
-          <NewsletterDialog source="header_assinar_desktop">
-            <button
-              type="button"
-              aria-label="assinar newsletter"
-              className="hidden sm:inline-flex items-center gap-2 rounded-full bg-foreground text-background hover:-translate-y-px transition-transform cursor-pointer"
-              style={{
-                padding: "10px 18px",
-                fontFamily: "var(--font-inter), Inter, system-ui, sans-serif",
-                fontWeight: 600,
-                fontSize: 12,
-                letterSpacing: "0.04em",
-                textTransform: "uppercase",
-                border: "none",
-              }}
-            >
-              Assinar
-            </button>
-          </NewsletterDialog>
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
@@ -217,29 +197,6 @@ export function SiteHeader() {
                 </li>
               );
             })}
-            {/* CTA Assinar — abre dialog. Fecha o menu mobile primeiro pra
-                não ter overlay duplo. */}
-            <li className="pt-2">
-              <NewsletterDialog source="header_assinar_mobile">
-                <button
-                  type="button"
-                  onClick={() => setOpen(false)}
-                  className="flex items-center justify-center rounded-full bg-foreground text-background w-full cursor-pointer"
-                  style={{
-                    padding: "14px 18px",
-                    fontFamily:
-                      "var(--font-inter), Inter, system-ui, sans-serif",
-                    fontWeight: 600,
-                    fontSize: 12,
-                    letterSpacing: "0.04em",
-                    textTransform: "uppercase",
-                    border: "none",
-                  }}
-                >
-                  Assinar newsletter
-                </button>
-              </NewsletterDialog>
-            </li>
           </ul>
         </div>
       )}

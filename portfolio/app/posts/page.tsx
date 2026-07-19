@@ -1,9 +1,9 @@
 import { redirect } from "next/navigation";
 
 /**
- * /posts não existe como listing — redireciona pra /newsletter,
- * que já é o índice canônico das cartas (newsletter Synecdoche).
+ * /posts não existe como listing próprio — redireciona pra home,
+ * hub principal do site.
  */
 export default function PostsRedirect() {
-  redirect("/newsletter");
+  redirect("/");
 }

@@ -1,8 +1,8 @@
 import {
   Building2,
   Sparkles,
-  Layers3,
-  Video,
+  BookOpen,
+  CalendarCheck,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
@@ -44,35 +44,37 @@ function InstagramIcon(props: SVGProps<SVGSVGElement>) {
 
 export const links: LinkItem[] = [
   {
+    id: "playbook-bear-market",
+    title: "Playbook de marketing no bear market",
+    description: "Como fazer marketing quando o mercado vira",
+    // TODO(Gabriel): definir URL do playbook. Placeholder até ter o link.
+    url: "#",
+    icon: BookOpen,
+    accent: true,
+  },
+  {
     id: "kaleidos",
-    title: "Kaleidos",
-    description: "Minha agência de criação de conteúdo",
+    title: "Agência Kaleidos",
+    description: "Marketing digital para cripto, web3 e fintech",
     url: "https://kaleidos.com.br",
     icon: Building2,
     accent: true,
   },
   {
-    id: "ia-kaleidos",
-    title: "Economize até 50% do seu tempo com IA",
-    description: "Consultoria grátis · 15 min",
-    url: "https://kaleidos.com.br/servicos/ia-automacoes-completa",
+    id: "consultoria-gratuita",
+    title: "Consultoria gratuita",
+    description: "Call de diagnóstico · sem custo",
+    url: "https://kaleidos.com.br/agendar",
+    icon: CalendarCheck,
+    accent: true,
+  },
+  {
+    id: "economizar-tempo-ia",
+    title: "Economizar tempo com IA",
+    description: "Automações que devolvem horas do seu dia",
+    // TODO(Gabriel): definir URL. Candidato antigo: kaleidos.com.br/servicos/ia-automacoes-completa
+    url: "#",
     icon: Sparkles,
-    accent: true,
-  },
-  {
-    id: "sequencia-viral",
-    title: "Sequência Viral",
-    description: "Carrossel viral em 30 segundos com IA",
-    url: "https://viral.kaleidos.com.br",
-    icon: Layers3,
-    accent: true,
-  },
-  {
-    id: "reels-viral",
-    title: "Reels Viral",
-    description: "Roteiro de reel viral em 12 segundos",
-    url: "https://reels-viral.vercel.app",
-    icon: Video,
     accent: true,
   },
 ];

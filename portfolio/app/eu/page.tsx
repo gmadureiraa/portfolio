@@ -211,10 +211,12 @@ export default function EuPage() {
                 LinkedIn
               </a>
               <a
-                href="/newsletter"
+                href="https://kaleidos.com.br"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-emerald-400 transition-colors hover:text-white"
               >
-                Newsletter
+                Kaleidos
               </a>
             </div>
           </div>
