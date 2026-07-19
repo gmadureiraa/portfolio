@@ -15,14 +15,13 @@ const SERIF = 'var(--font-fraunces), "Fraunces", Georgia, serif';
 
 const navTabs = [
   { label: "Início", href: "/" },
-  { label: "Projetos", href: "/projects" },
   { label: "Links", href: "/links" },
 ];
 
 /**
  * Header global do site Madureira: avatar à esquerda, wordmark "madureira"
  * Fraunces italic centralizado, theme toggle + busca à direita. Nav inferior
- * com tabs mono uppercase (Início, Projetos, Links).
+ * com tabs mono uppercase (Início, Links).
  * Theme-aware: usa CSS vars do design system (bg-background/foreground/border)
  * pra responder ao toggle Sun/Moon (mesma cor da página).
  */

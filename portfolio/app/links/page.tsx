@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./links.css";
 import { LinksSection } from "./_components/links-section";
+import { getLocalPosts } from "@/lib/posts";
 
 export const metadata: Metadata = {
   title: "Gabriel Madureira · @ogmadureira",
@@ -36,5 +37,16 @@ export const metadata: Metadata = {
 };
 
 export default function LinksPage() {
-  return <LinksSection />;
+  // Fonte real dos "últimos posts": content/posts/*.md (mesma dos /posts).
+  const posts = getLocalPosts()
+    .slice(0, 3)
+    .map((p) => ({
+      slug: p.slug,
+      title: p.data.title,
+      category: p.data.category,
+      date: p.data.date,
+      image: p.data.image,
+    }));
+
+  return <LinksSection posts={posts} />;
 }

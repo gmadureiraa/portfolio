@@ -7,20 +7,16 @@ import { FadeIn } from "@/components/magicui/fade-in";
 import { Mail, Github } from "lucide-react";
 import BlurIn from "@/components/magicui/blur-in";
 import Image from "next/image";
-import { AmbientLoop } from "@/components/ambient-loop";
 
 export default function Hero() {
   return (
     <div className="relative flex h-full w-full mx-auto items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
-      {/* Loop atmosférico (Higgsfield Kling 3.0) — textura sutil, respeita reduced-motion */}
-      <AmbientLoop
-        className="absolute inset-0 h-full w-full pointer-events-none mix-blend-screen dark:mix-blend-lighten z-0"
-        opacity={0.18}
-      />
+      {/* AmbientLoop (vídeo AI) removido — visual anterior (meteoros + texto
+          palavra-a-palavra) era melhor. WordPullUp sem `eager` restaura o
+          stagger de entrada do headline. */}
       <div className="flex flex-col items-start justify-center h-full overflow-hidden p-4 sm:p-6 z-50 w-full">
         <WordPullUp
           words="Do código ao conteúdo."
-          eager
           className="!text-2xl sm:!text-3xl md:!text-4xl lg:!text-5xl !leading-[1.1] !text-left w-full break-words"
         />
 
