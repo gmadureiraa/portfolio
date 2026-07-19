@@ -3,6 +3,10 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
+/**
+ * Header do /links — avatar em "medalhão" com anel conic girando (estrutura
+ * vinda do linktree do Felipe M3D), nome, handle, bio e pills de prova.
+ */
 export function ProfileHeader() {
   return (
     <motion.div
@@ -21,12 +25,12 @@ export function ProfileHeader() {
           className="absolute -inset-1 rounded-full blur-xl opacity-60"
           style={{ background: "var(--links-avatar-glow)" }}
         />
+        {/* Anel conic girando — medalhão */}
+        <div className="medallion-ring" aria-hidden="true" />
         <div
           className="relative w-24 h-24 rounded-full overflow-hidden bg-white/5 ring-1"
           style={{
             boxShadow: "var(--links-avatar-shadow)",
-            // ring color via outline-style ring won't pick var — use inline shadow trick
-            // ring-1 cor:
             outline: "1px solid var(--links-avatar-ring)",
             outlineOffset: "-1px",
           }}
@@ -81,6 +85,26 @@ export function ProfileHeader() {
         <br />
         cripto, web3, fintech.
       </motion.p>
+
+      {/* Pills de prova — estrutura do linktree Felipe (.pills) */}
+      <motion.div
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.35, duration: 0.4 }}
+        className="mt-5 flex flex-wrap items-center justify-center gap-2"
+      >
+        {["founder kaleidos", "15+ produtos", "cripto · web3 · fintech"].map(
+          (pill) => (
+            <span
+              key={pill}
+              className="glass-pill ds-mono rounded-full px-3 py-1.5 text-[9px]"
+              style={{ color: "var(--links-fg-faint)" }}
+            >
+              {pill}
+            </span>
+          ),
+        )}
+      </motion.div>
 
       <motion.div
         initial={{ scaleX: 0, opacity: 0 }}

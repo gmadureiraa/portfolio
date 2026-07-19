@@ -4,7 +4,6 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import { BentoCard, BentoGrid } from "@/components/magicui/bento-grid";
 import BlurIn from "@/components/magicui/blur-in";
-import { FadeIn } from "@/components/magicui/fade-in";
 // Globe removido junto com o card "Projetos ao Vivo" (movido pra bloco newsletter).
 import Hero from "@/components/hero";
 import Marquee from "@/components/magicui/marquee";
@@ -135,16 +134,17 @@ const features = [
   },
   {
     Icon: "",
-    name: "Marketing + Código",
-    description: "Estratégia, copy, SEO e desenvolvimento juntos no mesmo lugar.",
+    name: "Marketing + IA",
+    description: "Estratégia, copy e IA aplicada no mesmo lugar — do prompt ao funil.",
     href: "/projects?area=Marketing",
     cta: "Ver projetos",
     className: "col-span-3 md:col-span-2",
     background: (
-      <div className="absolute inset-0 origin-top transition-all duration-300 ease-out [mask-image:linear-gradient(to_top,transparent_15%,#000_70%)] group-hover:scale-105">
-        <FadeIn direction="up">
-          <TechStackMarquee />
-        </FadeIn>
+      // animate-fade-in (opacity-only) em vez de FadeIn: a keyframe com
+      // transform do FadeIn CSS virava containing block de altura zero e
+      // engolia o TechStackMarquee (absolute inset-0) — card ficava vazio.
+      <div className="absolute inset-0 origin-top transition-all duration-300 ease-out [mask-image:linear-gradient(to_top,transparent_15%,#000_70%)] group-hover:scale-105 animate-fade-in">
+        <TechStackMarquee />
       </div>
     ),
   },

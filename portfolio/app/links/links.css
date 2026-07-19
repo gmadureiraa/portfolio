@@ -296,3 +296,88 @@ html:not(.dark) .links-page {
   height: 1px;
   background: linear-gradient(90deg, transparent 0%, var(--links-fg-divider) 50%, transparent 100%);
 }
+
+/* === Medalhão do avatar — anel conic girando (estrutura do linktree Felipe) === */
+.medallion-ring {
+  position: absolute;
+  inset: -5px;
+  border-radius: 999px;
+  padding: 1.5px;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    rgba(var(--links-accent-rgb), 0.55) 18%,
+    transparent 40%,
+    transparent 55%,
+    rgba(var(--links-accent-rgb), 0.30) 72%,
+    transparent 92%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: medallion-spin 9s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes medallion-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* === Capa editorial do playbook (CSS — TODO trocar por asset real) === */
+.playbook-cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 92px;
+  min-height: 124px;
+  padding: 10px 10px 9px;
+  border-radius: 10px;
+  background:
+    radial-gradient(120% 90% at 20% 0%, rgba(255, 255, 255, 0.10) 0%, transparent 55%),
+    #050505;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.14),
+    0 10px 24px rgba(0, 0, 0, 0.45);
+  transform: rotate(-1.5deg);
+  transition: transform 320ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.group:hover .playbook-cover {
+  transform: rotate(0deg) translateY(-2px);
+}
+
+.playbook-cover-kicker {
+  font-family: "Geist Mono", "JetBrains Mono", ui-monospace, monospace;
+  font-size: 7px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.playbook-cover-title {
+  font-family: "Fraunces", "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.playbook-cover-sub {
+  font-family: "Geist Mono", "JetBrains Mono", ui-monospace, monospace;
+  font-size: 6.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .medallion-ring {
+    animation: none;
+  }
+}
