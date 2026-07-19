@@ -47,8 +47,7 @@ export const links: LinkItem[] = [
     id: "playbook-bear-market",
     title: "Playbook de marketing no bear market",
     description: "Como fazer marketing quando o mercado vira",
-    // TODO(Gabriel): definir URL do playbook. Placeholder até ter o link.
-    url: "#",
+    url: "https://kaleidos.com.br/diagnostico",
     icon: BookOpen,
     accent: true,
   },
@@ -72,8 +71,7 @@ export const links: LinkItem[] = [
     id: "economizar-tempo-ia",
     title: "Economizar tempo com IA",
     description: "Automações que devolvem horas do seu dia",
-    // TODO(Gabriel): definir URL. Candidato antigo: kaleidos.com.br/servicos/ia-automacoes-completa
-    url: "#",
+    url: "https://kaleidos.com.br/servicos/ia-automacoes-completa",
     icon: Sparkles,
     accent: true,
   },
