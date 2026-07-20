@@ -6,7 +6,6 @@ import { AnimatedBackground } from "./background";
 import { ProfileHeader } from "./profile-header";
 import { Footer } from "./footer";
 import { LinksPane } from "./links-pane";
-import type { LatestPost } from "../_lib/links";
 
 const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
@@ -16,17 +15,17 @@ const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument-serif",
 });
 
-export function LinksSection({ posts = [] }: { posts?: LatestPost[] }) {
+export function LinksSection() {
   return (
     <MotionConfig reducedMotion="user">
       <div className={instrumentSerif.variable}>
         <div className="links-tab-pane links-page">
           <AnimatedBackground />
-          <main className="relative z-10 flex flex-col items-center min-h-screen px-4 pt-24 pb-12 sm:pt-40">
+          <main className="relative z-10 flex flex-col items-center min-h-screen px-4 pt-[76px] pb-12 sm:pt-24">
             <div className="w-full max-w-md mx-auto">
               <ProfileHeader />
-              <div className="mt-8">
-                <LinksPane posts={posts} />
+              <div className="mt-4">
+                <LinksPane />
               </div>
               <Footer />
             </div>

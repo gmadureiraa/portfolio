@@ -23,15 +23,6 @@ export interface LinkGroup {
   items: LinkItem[];
 }
 
-/** Post resumido pra seção "Últimos posts" (fonte: content/posts via lib/posts). */
-export interface LatestPost {
-  slug: string;
-  title: string;
-  category: string;
-  date: string;
-  image: string;
-}
-
 function XIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" {...props}>

@@ -453,27 +453,6 @@ html:not(.dark) .links-page .cta-card-icon {
   box-shadow: inset 0 0 0 1px var(--links-icon-ring);
 }
 
-/* === Carrossel lateral de "Últimos posts" — padrão .strip do linktree Felipe M3D === */
-.posts-strip {
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  margin: 0 -16px;
-  padding: 4px 16px 14px;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-
-.posts-strip::-webkit-scrollbar {
-  display: none;
-}
-
-.post-card {
-  flex: 0 0 172px;
-  scroll-snap-align: start;
-}
-
 /* === Bio do hero — exatamente 2 linhas, branco, sem quebra extra === */
 .links-bio {
   font-size: clamp(9.5px, 3.05vw, 14.5px);
@@ -481,6 +460,13 @@ html:not(.dark) .links-page .cta-card-icon {
 
 .links-bio-line {
   display: block;
+  white-space: nowrap;
+}
+
+/* Linha única de prova — mono, nunca quebra, encolhe pra caber */
+.links-proof-line {
+  font-size: clamp(6px, 1.85vw, 9px);
+  letter-spacing: 0.08em;
   white-space: nowrap;
 }
 

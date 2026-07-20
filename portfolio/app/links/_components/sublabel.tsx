@@ -12,7 +12,7 @@ export function Sublabel({ children, delay = 0 }: { children: string; delay?: nu
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay, duration: 0.4 }}
-      className="flex items-center gap-3 mt-9 mb-4 first:mt-0"
+      className="flex items-center gap-3 mt-6 mb-3 first:mt-0"
     >
       <span
         className="ds-mono text-[10px] whitespace-nowrap"
