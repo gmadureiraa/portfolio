@@ -59,15 +59,15 @@ export function InstagramIcon(props: SVGProps<SVGSVGElement>) {
 
 /**
  * Card destaque do playbook (grupo "comece por aqui") — renderizado à parte
- * com capa visual. TODO: quando existir asset real da capa do playbook,
- * trocar a capa CSS por <Image> (não inventar/baixar asset).
+ * com a capa real do paper (public/images/cover-bear-market-v4.webp, mesma
+ * arte servida em kaleidos.com.br/papers).
  */
 export const playbook: LinkItem = {
   id: "playbook-bear-market",
-  title: "Playbook grátis",
+  title: "Marketing no bear market",
   description:
-    "Marketing no bear market — o método que a Kaleidos usa nos clientes",
-  url: "https://kaleidos.com.br/diagnostico",
+    "O playbook contra-cíclico que a Kaleidos usa nos clientes · 13 páginas",
+  url: "https://kaleidos.com.br/papers/bear-market-2026",
   icon: BookOpen,
   accent: true,
 };

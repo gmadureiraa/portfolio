@@ -1,17 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { playbook } from "../_lib/links";
 import { trackClick } from "../_lib/tracking";
 
 /**
- * Card destaque do playbook — equivalente ao card primário com mockup do
- * linktree do Felipe M3D, no DS Madureira: capa editorial à esquerda
- * (Fraunces italic sobre preto) + copy + seta.
- *
- * TODO: substituir a capa CSS por <Image> quando existir asset real da capa
- * do playbook (nenhum encontrado no repo — não inventar/baixar).
+ * Card destaque do playbook — capa REAL do paper "Como fazer marketing e
+ * vender no bear market" (mesma arte de kaleidos.com.br/papers) à esquerda,
+ * copy + seta à direita. Estrutura do card primário do linktree M3D.
  */
 export function PlaybookCard() {
   return (
@@ -29,15 +27,15 @@ export function PlaybookCard() {
     >
       <div className="glass-card relative overflow-hidden rounded-2xl">
         <div className="relative flex items-stretch gap-4 p-4 sm:p-5">
-          {/* Capa editorial (CSS) */}
-          <div className="playbook-cover shrink-0" aria-hidden="true">
-            <span className="playbook-cover-kicker">Kaleidos</span>
-            <span className="playbook-cover-title">
-              Play
-              <br />
-              book
-            </span>
-            <span className="playbook-cover-sub">marketing no bear market</span>
+          {/* Capa real do playbook */}
+          <div className="playbook-cover shrink-0">
+            <Image
+              src="/images/cover-bear-market-v4.webp"
+              alt="Capa do playbook: Como fazer marketing e vender no bear market"
+              fill
+              sizes="96px"
+              className="object-cover"
+            />
           </div>
 
           <div className="flex flex-1 min-w-0 flex-col justify-center py-1">
