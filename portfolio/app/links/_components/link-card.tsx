@@ -17,6 +17,58 @@ export function LinkCard({ link, index }: LinkCardProps) {
     trackClick(link.id);
   };
 
+  // CTA principal (ex: Consultoria gratuita) — card invertido, máximo contraste
+  if (link.featured) {
+    return (
+      <motion.a
+        href={link.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={handleClick}
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.4,
+          delay: 0.1 + index * 0.06,
+          ease: [0.25, 0.46, 0.45, 0.94],
+        }}
+        whileHover={{ y: -2, scale: 1.01 }}
+        whileTap={{ scale: 0.985 }}
+        className="group relative block w-full"
+      >
+        <div className="cta-card relative overflow-hidden rounded-2xl">
+          <div className="relative flex items-center gap-4 px-5 py-5 min-h-[92px]">
+            <div className="cta-card-icon shrink-0">
+              <Icon className="w-[20px] h-[20px]" />
+            </div>
+
+            <div className="flex-1 min-w-0">
+              <h3 className="font-semibold text-[16.5px] leading-tight tracking-tight">
+                {link.title}
+              </h3>
+              <p className="cta-card-desc text-[12.5px] mt-1 font-normal">
+                {link.description}
+              </p>
+              {link.cta && (
+                <span className="ds-mono cta-card-cta mt-2 inline-flex items-center text-[9.5px]">
+                  {link.cta}
+                </span>
+              )}
+            </div>
+
+            <motion.div
+              className="shrink-0"
+              initial={false}
+              whileHover={{ x: 2, y: -2 }}
+            >
+              <ArrowUpRight className="w-5 h-5" />
+            </motion.div>
+          </div>
+        </div>
+      </motion.a>
+    );
+  }
+
   return (
     <motion.a
       href={link.url}

@@ -78,12 +78,13 @@ export function ProfileHeader() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
-        className="ds-sans mt-5 text-[15px] max-w-[28ch] leading-relaxed font-normal"
-        style={{ color: "var(--links-fg-muted)" }}
+        className="ds-sans links-bio mt-5 leading-relaxed font-normal"
+        style={{ color: "var(--links-fg-strong)" }}
       >
-        founder kaleidos. construo ia dentro de operação de marketing.
-        <br />
-        cripto, web3, fintech.
+        <span className="links-bio-line">
+          founder kaleidos. construo ia dentro de operação de marketing.
+        </span>
+        <span className="links-bio-line">cripto, web3, fintech.</span>
       </motion.p>
 
       {/* Pills de prova — estrutura do linktree Felipe (.pills) */}

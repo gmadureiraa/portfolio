@@ -1,9 +1,4 @@
-import {
-  Building2,
-  Sparkles,
-  BookOpen,
-  CalendarCheck,
-} from "lucide-react";
+import { Sparkles, BookOpen, CalendarCheck } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
 
@@ -16,6 +11,10 @@ export interface LinkItem {
   url: string;
   icon: IconType;
   accent?: boolean;
+  /** CTA principal — card invertido (fundo accent, texto invertido). */
+  featured?: boolean;
+  /** Micro-CTA mono exibido no rodapé do card featured. */
+  cta?: string;
 }
 
 export interface LinkGroup {
@@ -80,10 +79,12 @@ export const linkGroups: LinkGroup[] = [
       {
         id: "consultoria-gratuita",
         title: "Consultoria gratuita",
-        description: "Call de diagnóstico · sem custo",
+        description: "Call de diagnóstico do seu marketing · 30 min · sem custo",
         url: "https://kaleidos.com.br/agendar",
         icon: CalendarCheck,
         accent: true,
+        featured: true,
+        cta: "agendar minha call →",
       },
       {
         id: "economizar-tempo-ia",
@@ -98,23 +99,10 @@ export const linkGroups: LinkGroup[] = [
   {
     id: "kaleidos",
     label: "Kaleidos",
-    items: [
-      {
-        id: "kaleidos",
-        title: "Agência Kaleidos",
-        description: "Marketing digital para cripto, web3 e fintech",
-        url: "https://kaleidos.com.br",
-        icon: Building2,
-        accent: true,
-      },
-      {
-        id: "kaleidos-instagram",
-        title: "Instagram da Kaleidos",
-        description: "@digitalkaleidos · bastidores e método da agência",
-        url: "https://www.instagram.com/digitalkaleidos",
-        icon: InstagramIcon,
-      },
-    ],
+    // "Agência Kaleidos" virou card dedicado com logo (KaleidosCard);
+    // Instagram da Kaleidos virou bloco visual abaixo dos últimos posts
+    // (InstagramKaleidos). Nenhum item genérico restante neste grupo.
+    items: [],
   },
 ];
 

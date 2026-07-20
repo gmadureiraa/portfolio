@@ -65,7 +65,7 @@ const personJsonLd = {
 export default function LinksPage() {
   // Fonte real dos "últimos posts": content/posts/*.md (mesma dos /posts).
   const posts = getLocalPosts()
-    .slice(0, 3)
+    .slice(0, 6)
     .map((p) => ({
       slug: p.slug,
       title: p.data.title,

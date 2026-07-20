@@ -328,6 +328,162 @@ html:not(.dark) .links-page {
   background: linear-gradient(90deg, transparent 0%, var(--links-fg-divider) 50%, transparent 100%);
 }
 
+/* === CTA principal (Consultoria gratuita) — card invertido, máximo contraste === */
+.cta-card {
+  background: var(--links-accent);
+  color: var(--links-accent-fg);
+  border: 1px solid var(--links-accent);
+  box-shadow:
+    0 0 0 1px rgba(var(--links-accent-rgb), 0.25),
+    0 6px 28px rgba(var(--links-accent-rgb), 0.18),
+    0 12px 40px rgba(0, 0, 0, 0.35);
+  transition: all 320ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.cta-card:hover {
+  box-shadow:
+    0 0 0 1px rgba(var(--links-accent-rgb), 0.4),
+    0 8px 36px rgba(var(--links-accent-rgb), 0.3),
+    0 16px 48px rgba(0, 0, 0, 0.4);
+}
+
+.cta-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
+
+/* light mode: card é preto, ícone precisa de tile claro */
+html:not(.dark) .links-page .cta-card-icon {
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+}
+
+.cta-card-desc {
+  opacity: 0.72;
+}
+
+.cta-card-cta {
+  opacity: 0.85;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+  transition: opacity 240ms ease;
+}
+
+.group:hover .cta-card-cta {
+  opacity: 1;
+}
+
+.links-page a.group:focus-visible .cta-card {
+  box-shadow:
+    0 0 0 3px rgba(var(--links-accent-rgb), 0.35),
+    0 8px 36px rgba(var(--links-accent-rgb), 0.3);
+}
+
+/* === Card Agência Kaleidos — logo oficial sobre tile escuro === */
+.kaleidos-card-glow {
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 160px;
+  height: 160px;
+  border-radius: 999px;
+  background: radial-gradient(
+    circle,
+    rgba(var(--links-accent-rgb), 0.10) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.kaleidos-logo-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  /* fundo sempre escuro — logo branco (Logos-10) legível nos dois temas */
+  background: linear-gradient(145deg, #101010 0%, #050505 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* === Bloco Instagram Kaleidos === */
+.ig-gradient-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  /* gradiente oficial do Instagram — único ponto de cor da página */
+  background: linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 6px 18px rgba(188, 24, 136, 0.35);
+}
+
+.ig-feed-hint {
+  display: grid;
+  grid-template-columns: repeat(3, 12px);
+  gap: 3px;
+}
+
+.ig-feed-hint span {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: var(--links-icon-bg);
+  box-shadow: inset 0 0 0 1px var(--links-icon-ring);
+}
+
+/* === Carrossel lateral de "Últimos posts" — padrão .strip do linktree Felipe M3D === */
+.posts-strip {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  margin: 0 -16px;
+  padding: 4px 16px 14px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.posts-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.post-card {
+  flex: 0 0 172px;
+  scroll-snap-align: start;
+}
+
+/* === Bio do hero — exatamente 2 linhas, branco, sem quebra extra === */
+.links-bio {
+  font-size: clamp(9.5px, 3.05vw, 14.5px);
+}
+
+.links-bio-line {
+  display: block;
+  white-space: nowrap;
+}
+
 /* === Medalhão do avatar — anel conic girando (estrutura do linktree Felipe) === */
 .medallion-ring {
   position: absolute;
@@ -360,7 +516,7 @@ html:not(.dark) .links-page {
 /* === Capa real do playbook (cover-bear-market-v4.webp, 1122×1402) === */
 .playbook-cover {
   position: relative;
-  width: 92px;
+  width: 138px;
   aspect-ratio: 1122 / 1402;
   border-radius: 10px;
   overflow: hidden;

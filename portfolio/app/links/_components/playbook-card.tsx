@@ -26,21 +26,21 @@ export function PlaybookCard() {
       className="group relative block w-full"
     >
       <div className="glass-card relative overflow-hidden rounded-2xl">
-        <div className="relative flex items-stretch gap-4 p-4 sm:p-5">
+        <div className="relative flex items-stretch gap-5 p-5 sm:p-7">
           {/* Capa real do playbook */}
           <div className="playbook-cover shrink-0">
             <Image
               src="/images/cover-bear-market-v4.webp"
               alt="Capa do playbook: Como fazer marketing e vender no bear market"
               fill
-              sizes="96px"
+              sizes="140px"
               className="object-cover"
             />
           </div>
 
           <div className="flex flex-1 min-w-0 flex-col justify-center py-1">
             <span
-              className="ds-mono inline-flex w-fit items-center rounded-full px-2 py-1 text-[9px]"
+              className="ds-mono inline-flex w-fit items-center rounded-full px-2.5 py-1 text-[9.5px]"
               style={{
                 color: "var(--links-accent)",
                 boxShadow:
@@ -50,24 +50,31 @@ export function PlaybookCard() {
               Grátis
             </span>
             <h3
-              className="mt-2.5 font-semibold text-[17px] leading-tight tracking-tight"
+              className="mt-3 font-semibold text-[21px] sm:text-[24px] leading-tight tracking-tight"
               style={{ color: "var(--links-fg-strong)" }}
             >
               {playbook.title}
             </h3>
             <p
-              className="mt-1.5 text-[12.5px] leading-relaxed font-light"
+              className="mt-2 text-[13.5px] sm:text-[14px] leading-relaxed font-light"
               style={{ color: "var(--links-fg-muted)" }}
             >
               {playbook.description}
             </p>
+            <span
+              className="ds-mono mt-3 inline-flex items-center gap-1.5 text-[9.5px]"
+              style={{ color: "var(--links-fg-faint)" }}
+            >
+              baixar o playbook
+              <span aria-hidden>→</span>
+            </span>
           </div>
 
           <div
             className="shrink-0 self-start transition-opacity duration-300 opacity-40 group-hover:opacity-100"
             style={{ color: "var(--links-accent)" }}
           >
-            <ArrowUpRight className="w-4 h-4" />
+            <ArrowUpRight className="w-5 h-5" />
           </div>
         </div>
       </div>
