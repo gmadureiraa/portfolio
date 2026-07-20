@@ -1,6 +1,7 @@
 "use client";
 
 import { Instrument_Serif } from "next/font/google";
+import { MotionConfig } from "framer-motion";
 import { AnimatedBackground } from "./background";
 import { ProfileHeader } from "./profile-header";
 import { Footer } from "./footer";
@@ -17,19 +18,21 @@ const instrumentSerif = Instrument_Serif({
 
 export function LinksSection({ posts = [] }: { posts?: LatestPost[] }) {
   return (
-    <div className={instrumentSerif.variable}>
-      <div className="links-tab-pane links-page">
-        <AnimatedBackground />
-        <main className="relative z-10 flex flex-col items-center min-h-screen px-4 pt-40 pb-12 sm:pt-44">
-          <div className="w-full max-w-md mx-auto">
-            <ProfileHeader />
-            <div className="mt-8">
-              <LinksPane posts={posts} />
+    <MotionConfig reducedMotion="user">
+      <div className={instrumentSerif.variable}>
+        <div className="links-tab-pane links-page">
+          <AnimatedBackground />
+          <main className="relative z-10 flex flex-col items-center min-h-screen px-4 pt-24 pb-12 sm:pt-40">
+            <div className="w-full max-w-md mx-auto">
+              <ProfileHeader />
+              <div className="mt-8">
+                <LinksPane posts={posts} />
+              </div>
+              <Footer />
             </div>
-            <Footer />
-          </div>
-        </main>
+          </main>
+        </div>
       </div>
-    </div>
+    </MotionConfig>
   );
 }

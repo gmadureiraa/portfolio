@@ -5,6 +5,7 @@ import { Sublabel } from "./sublabel";
 import { PlaybookCard } from "./playbook-card";
 import { LatestPosts } from "./latest-posts";
 import { linkGroups, type LatestPost } from "../_lib/links";
+import { trackClick } from "../_lib/tracking";
 
 /**
  * Pane principal — grupos com sublabel (estrutura do linktree Felipe M3D):
@@ -29,6 +30,14 @@ export function LinksPane({ posts }: { posts: LatestPost[] }) {
         <div>
           <Sublabel delay={0.3}>Últimos posts</Sublabel>
           <LatestPosts posts={posts} />
+          <a
+            href="/posts"
+            onClick={() => trackClick("ver-todos-posts")}
+            className="ds-mono links-see-all mt-4 inline-flex items-center gap-1.5 text-[9.5px]"
+          >
+            ver todos os posts
+            <span aria-hidden>→</span>
+          </a>
         </div>
       )}
     </div>

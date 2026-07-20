@@ -36,6 +36,32 @@ export const metadata: Metadata = {
   },
 };
 
+// JSON-LD ProfilePage/Person — SEO estruturado do hub de links.
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  mainEntity: {
+    "@type": "Person",
+    name: "Gabriel Madureira",
+    alternateName: "@ogmadureira",
+    url: "https://madureira.xyz",
+    image: "https://madureira.xyz/avatar.png",
+    jobTitle: "Founder",
+    worksFor: {
+      "@type": "Organization",
+      name: "Kaleidos",
+      url: "https://kaleidos.com.br",
+    },
+    description:
+      "Founder Kaleidos. Construo IA dentro de operação de marketing. Cripto, web3, fintech.",
+    sameAs: [
+      "https://x.com/ogmadureira",
+      "https://www.linkedin.com/in/gabriel-madureira/",
+      "https://instagram.com/ogmadureira",
+    ],
+  },
+};
+
 export default function LinksPage() {
   // Fonte real dos "últimos posts": content/posts/*.md (mesma dos /posts).
   const posts = getLocalPosts()
@@ -48,5 +74,13 @@ export default function LinksPage() {
       image: p.data.image,
     }));
 
-  return <LinksSection posts={posts} />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+      />
+      <LinksSection posts={posts} />
+    </>
+  );
 }

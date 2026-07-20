@@ -1,3 +1,5 @@
+import posthog from "posthog-js";
+
 const STORAGE_KEY = "madureira-links-clicks";
 
 export interface ClickData {
@@ -20,6 +22,14 @@ export function trackClick(linkId: string): void {
     const data = getClicks();
     data[linkId] = (data[linkId] || 0) + 1;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  } catch {
+    // silent fail
+  }
+  // Evento nomeado no PostHog (além do autocapture) — permite funil por link_id.
+  try {
+    if (posthog.__loaded) {
+      posthog.capture("links_click", { link_id: linkId, page: "/links" });
+    }
   } catch {
     // silent fail
   }

@@ -140,6 +140,37 @@ html:not(.dark) .links-page {
     0 8px 32px rgba(0, 0, 0, 0.35);
 }
 
+/* Foco visível por teclado — anel accent no card inteiro (a.group envolve o glass-card) */
+.links-page a:focus-visible {
+  outline: none;
+}
+
+.links-page a.group:focus-visible .glass-card,
+.links-page a.glass-pill:focus-visible {
+  border-color: rgba(var(--links-accent-rgb), 0.55);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.10),
+    0 0 0 3px rgba(var(--links-accent-rgb), 0.18),
+    0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+/* Link "ver todos os posts" — mono discreto que acende no hover */
+.links-see-all {
+  color: var(--links-fg-faint);
+  transition: color 240ms ease, gap 240ms ease;
+}
+
+.links-see-all:hover,
+.links-see-all:focus-visible {
+  color: var(--links-fg-strong);
+}
+
+.links-see-all:focus-visible {
+  outline: 1px solid rgba(var(--links-accent-rgb), 0.45);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
 /* Glass pill — pra socials */
 .glass-pill {
   background: var(--links-pill-bg, rgba(255, 255, 255, 0.04));
